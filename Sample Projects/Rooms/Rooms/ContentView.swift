@@ -8,6 +8,7 @@ struct ContentView: View {
             Image(room.name)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
+                .cornerRadius(8)
             VStack(alignment: .leading) {
                 Text(room.name)
                 Text("\(room.capacity) people")
