@@ -232,7 +232,51 @@ func delete(at offsets: IndexSet) {
     .navigationBarItems(trailing: EditButton())
 ```
 
-![](images/deletion.png)
+![](images/editmode.png)
+
+## Reordering support
+
+```swift
+
+Section {
+    ForEach(store.rooms) { room in
+        RoomCell(room: room)
+    }
+    .onDelete(perform: delete)
+    .onMove(perform: move)
+}
+
+func move(from source: IndexSet, to destination: Int) {
+    store.rooms.move(fromOffsets: source, toOffset: destination)
+}
+```
+
+![](images/reorder.gif)
+
+## Environment
+
+Environment is a way you can set contextual information about your views that flows down the view hierarchy and changes different aspects of any contained views all at once.
+
+Great for making changes to a large set of views and customizing your previews to see your view in different contexts.
+
+For example say you see what you app would look like in Dark Mode, or with larger dynamic type.
+
+Simply create another view, set it's keypath attributes. And voila!
+
+```swift
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView(store: RoomStore(rooms: testData))
+        ContentView(store: RoomStore(rooms: testData))
+            .environment(\.sizeCategory, .extraExtraExtraLarge)
+    }
+}
+```
+
+![](images/environment.png)
+
+
+
 
 ### Renamed properties in video
 

@@ -17,6 +17,7 @@ struct ContentView: View {
                         RoomCell(room: room)
                     }
                     .onDelete(perform: delete)
+                    .onMove(perform: move)
                 }
             }
             .navigationBarTitle(Text("Rooms"))
@@ -32,11 +33,18 @@ struct ContentView: View {
     func delete(at offsets: IndexSet) {
         store.rooms.remove(atOffsets: offsets)
     }
+    
+    func move(from source: IndexSet, to destination: Int) {
+        store.rooms.move(fromOffsets: source, toOffset: destination)
+    }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView(store: RoomStore(rooms: testData))
+        ContentView(store: RoomStore(rooms: testData))
+            .environment(\.sizeCategory, .extraExtraExtraLarge)
+            .environment(\.colorScheme, .dark)
     }
 }
 
