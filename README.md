@@ -4,4 +4,4 @@ A collection of odds and ends and deliberate practice to learn more about SwiftU
 
 # WWDC
 
-- [Rooms - Introducing Swift UI WWDC 2019](WWDC/)
+- [Rooms - Introducing Swift UI WWDC 2019](WWDC/Rooms/README.md)
