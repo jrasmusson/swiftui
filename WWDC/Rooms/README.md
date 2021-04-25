@@ -1,5 +1,7 @@
 # Rooms
 
+![](images/demo.gif)
+
 ## Views
 
 `View` is a type in Swift that represents your app's user interface and provides modifiers that you use to configure views.
@@ -287,4 +289,4 @@ The WWDC video for this app uses from old language. The following properties hav
 - @ObjectBinding > @ObservedObject
 
 ### Links that help
-* [Introducint SwiftUI: Building Your First App](https://developer.apple.com/videos/play/wwdc2019/204/)
+- [Introducint SwiftUI: Building Your First App](https://developer.apple.com/videos/play/wwdc2019/204/)
