@@ -14,6 +14,8 @@
 		710CC7B326346D06003D5B72 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 710CC7B226346D06003D5B72 /* Preview Assets.xcassets */; };
 		710CC7B626346D06003D5B72 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 710CC7B426346D06003D5B72 /* LaunchScreen.storyboard */; };
 		710CC7C126347832003D5B72 /* Room.swift in Sources */ = {isa = PBXBuildFile; fileRef = 710CC7C026347832003D5B72 /* Room.swift */; };
+		710CC7C52634823B003D5B72 /* RoomDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 710CC7C42634823B003D5B72 /* RoomDetail.swift */; };
+		710CC7C826359B8C003D5B72 /* RoomStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 710CC7C726359B8C003D5B72 /* RoomStore.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,8 @@
 		710CC7B526346D06003D5B72 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		710CC7B726346D06003D5B72 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		710CC7C026347832003D5B72 /* Room.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Room.swift; sourceTree = "<group>"; };
+		710CC7C42634823B003D5B72 /* RoomDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomDetail.swift; sourceTree = "<group>"; };
+		710CC7C726359B8C003D5B72 /* RoomStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomStore.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,7 +65,9 @@
 				710CC7B126346D06003D5B72 /* Preview Content */,
 				710CC7BE2634735D003D5B72 /* Files */,
 				710CC7AD26346D05003D5B72 /* ContentView.swift */,
+				710CC7C42634823B003D5B72 /* RoomDetail.swift */,
 				710CC7C026347832003D5B72 /* Room.swift */,
+				710CC7C726359B8C003D5B72 /* RoomStore.swift */,
 			);
 			path = Rooms;
 			sourceTree = "<group>";
@@ -156,9 +162,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				710CC7C52634823B003D5B72 /* RoomDetail.swift in Sources */,
 				710CC7AA26346D05003D5B72 /* AppDelegate.swift in Sources */,
 				710CC7AC26346D05003D5B72 /* SceneDelegate.swift in Sources */,
 				710CC7C126347832003D5B72 /* Room.swift in Sources */,
+				710CC7C826359B8C003D5B72 /* RoomStore.swift in Sources */,
 				710CC7AE26346D05003D5B72 /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

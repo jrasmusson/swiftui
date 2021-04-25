@@ -19,9 +19,9 @@ struct Room: Identifiable { // Necessary for List
 
 #if DEBUG
 let testData = [
-    Room(name: "Observation Deck", capacity: 6, hasVideo: true),
+    Room(name: "Observation Deck", capacity: 6, hasVideo: false),
     Room(name: "Rainbow Room", capacity: 20, hasVideo: true),
     Room(name: "Tron Room", capacity: 3, hasVideo: true),
-    Room(name: "Elephant Room", capacity: 14, hasVideo: true),
+    Room(name: "Elephant Room", capacity: 14, hasVideo: false),
 ]
 #endif
