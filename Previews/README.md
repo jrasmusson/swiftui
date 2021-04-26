@@ -31,7 +31,7 @@ final class ViewController: UIViewController {
     }
 }
 
-#if DEBUG
+#if canImport(SwiftUI) && DEBUG
 import SwiftUI
 
 extension ViewController: UIViewControllerRepresentable {
@@ -41,7 +41,8 @@ extension ViewController: UIViewControllerRepresentable {
     
     func updateUIViewController(_ uiViewController: ViewController, context: Context) {}
 }
-import SwiftUI
+
+@available(iOS 13.0, *)
 struct ViewControllerPreviews: PreviewProvider {
   static var previews: some View {
     ViewController()
