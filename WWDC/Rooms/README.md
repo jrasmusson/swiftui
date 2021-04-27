@@ -278,8 +278,6 @@ struct ContentView_Previews: PreviewProvider {
 ![](images/environment.png)
 
 
-
-
 ### Renamed properties in video
 
 The WWDC video for this app uses from old language. The following properties have been renamed
@@ -287,6 +285,164 @@ The WWDC video for this app uses from old language. The following properties hav
 - NavigationButton > NavigationLink
 - @BindableObject > @ObservableObject
 - @ObjectBinding > @ObservedObject
+
+## Full Source
+
+**ContentView.swift**
+
+```swit
+import SwiftUI
+
+struct ContentView: View {
+    @ObservedObject var store = RoomStore()
+    
+    var body: some View {
+        NavigationView {
+            List {
+                Section {
+                    Button(action: addRoom) {
+                        Text("Add Room")
+                    }
+                }
+                
+                Section {
+                    ForEach(store.rooms) { room in
+                        RoomCell(room: room)
+                    }
+                    .onDelete(perform: delete)
+                    .onMove(perform: move)
+                }
+            }
+            .navigationBarTitle(Text("Rooms"))
+            .navigationBarItems(trailing: EditButton())
+            .listStyle(GroupedListStyle())
+        }
+    }
+    
+    func addRoom() {
+        store.rooms.append(Room(name: "Rainbow Room", capacity: 2000))
+    }
+    
+    func delete(at offsets: IndexSet) {
+        store.rooms.remove(atOffsets: offsets)
+    }
+    
+    func move(from source: IndexSet, to destination: Int) {
+        store.rooms.move(fromOffsets: source, toOffset: destination)
+    }
+}
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView(store: RoomStore(rooms: testData))
+        ContentView(store: RoomStore(rooms: testData))
+            .environment(\.sizeCategory, .extraExtraExtraLarge)
+            .environment(\.colorScheme, .dark)
+    }
+}
+
+struct RoomCell: View {
+    let room: Room
+    
+    var body: some View {
+        NavigationLink(
+            destination: RoomDetail(room: room)) {
+            Image(room.name)
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .cornerRadius(8)
+            VStack(alignment: .leading) {
+                Text(room.name)
+                Text("\(room.capacity) people")
+                    .font(.subheadline)
+                    .foregroundColor(.secondary)
+            }
+        }
+    }
+}
+```
+
+**RoomDetail.swift**
+
+```swift
+import SwiftUI
+
+struct RoomDetail: View {
+    let room: Room
+    @State private var zoomed = false
+    
+    var body: some View {
+        ZStack(alignment: .topLeading) {
+            Image(room.imageName)
+                .resizable()
+                .aspectRatio(contentMode: zoomed ? .fill: .fit)
+                .onTapGesture {
+                    withAnimation(.easeIn(duration: 0.25)) { zoomed.toggle() }
+                }
+                .navigationBarTitle(Text(room.name), displayMode: .inline)
+                .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
+            
+            if room.hasVideo && !zoomed {
+                Image(systemName: "video.fill")
+                    .font(.title)
+                    .padding(.all)
+                    .transition(.move(edge: .leading))
+            }
+        }
+    }
+}
+
+struct RoomDetail_Previews: PreviewProvider {
+    static var previews: some View {
+        Group {
+            NavigationView { RoomDetail(room: testData[1]) }
+            NavigationView { RoomDetail(room: testData[3]) }
+        }
+    }
+}
+```
+
+**Room.swift**
+
+```swift
+import SwiftUI
+
+struct Room: Identifiable { // Necessary for List
+    var id = UUID()
+    var name: String
+    var capacity: Int
+    var hasVideo: Bool = false
+    
+    var imageName: String { return name }
+    var thumbnailName: String { return name + "Thumb" }
+}
+
+#if DEBUG
+let testData = [
+    Room(name: "Observation Deck", capacity: 6, hasVideo: false),
+    Room(name: "Rainbow Room", capacity: 20, hasVideo: true),
+    Room(name: "Tron Room", capacity: 3, hasVideo: true),
+    Room(name: "Elephant Room", capacity: 14, hasVideo: false),
+]
+#endif
+```
+
+**RoomStore.swift**
+
+```swift
+import SwiftUI
+import Combine
+
+class RoomStore: ObservableObject {
+    @Published var rooms: [Room]
+    
+    init(rooms: [Room] = []) {
+        self.rooms = rooms
+    }
+}
+```
+
+
 
 ### Links that help
 - [Introducint SwiftUI: Building Your First App](https://developer.apple.com/videos/play/wwdc2019/204/)

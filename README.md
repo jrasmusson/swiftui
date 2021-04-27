@@ -1,6 +1,6 @@
 ![](images/logo.png)
 
-A collection of odds and ends and deliberate practice to learn more about SwiftUI.
+Deliberate practice with SwiftUI.
 
 ## Previews
 
