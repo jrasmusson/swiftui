@@ -37,6 +37,20 @@ What's different about a `View` compared to a `UIView` is that views:
 
 # Data
 
+![](images/dataflow.png)
+
+Think of data flow in three parts
+
+- derived (let constants)
+- local to view (@State > @Bindable)
+- broadcast (@Observable > @Observed, @Published)
+
+Derived is read-only data passed into the view when created. 
+
+Local or @State is bindable data, that the framework manages, beyond the life cycle of that view. When you use @State, you are saying: "This is a source of truth that will drive that state of other components. Bind to it, and you will be updated".
+
+Every basic control in SwiftUI uses this. Toogle, Text, Stepper are all bindable objects. Pass them data, 
+
 ## @State - view
 
 In SwiftUI data is either a source of truth or derived.
@@ -285,6 +299,8 @@ The WWDC video for this app uses from old language. The following properties hav
 - NavigationButton > NavigationLink
 - @BindableObject > @ObservableObject
 - @ObjectBinding > @ObservedObject
+
+
 
 ## Full Source
 
