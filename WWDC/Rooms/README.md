@@ -37,7 +37,7 @@ What's different about a `View` compared to a `UIView` is that views:
 
 # Data
 
-![](images/dataflow.png)
+![](images/dataflow2.png)
 
 Think of data flow in three parts
 
@@ -49,7 +49,9 @@ Derived is read-only data passed into the view when created.
 
 Local or @State is bindable data, that the framework manages, beyond the life cycle of that view. When you use @State, you are saying: "This is a source of truth that will drive that state of other components. Bind to it, and you will be updated".
 
-Every basic control in SwiftUI uses this. Toogle, Text, Stepper are all bindable objects. Pass them data, 
+Every basic control in SwiftUI uses this. Toogle, Text, Stepper are all bindable objects. Pass them data, and behind the scenes they wrap that in a property wrapper, and update themseleves whenever that data changes.
+
+Broadcast data is like a pub/sub notification service. You use this when you want to create a data store, or a source of truth that can be app wide. Components can observe it, and be notified whenever that data changes.
 
 ## @State - view
 
