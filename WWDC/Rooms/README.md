@@ -308,7 +308,7 @@ The WWDC video for this app uses from old language. The following properties hav
 
 **ContentView.swift**
 
-```swit
+```swift
 import SwiftUI
 
 struct ContentView: View {
