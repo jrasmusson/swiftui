@@ -13,13 +13,13 @@ struct Episode {
 }
 
 struct PlayerView: View {
-    let episode: Episode
+    @EnvironmentObject var store: PodcastPlayerStore
     @State private var isPlaying: Bool = false
     
     var body: some View {
         VStack {
-            Text(episode.title)
-            Text(episode.showTitle).font(.caption).foregroundColor(.gray)
+            Text(store.episode.title)
+            Text(store.episode.showTitle).font(.caption).foregroundColor(.gray)
             
             PlayButton(isPlaying: $isPlaying)
         }
@@ -28,8 +28,7 @@ struct PlayerView: View {
 
 struct PlayerView_Previews: PreviewProvider {
     static var previews: some View {
-        let episode = Episode(title: "The Grid", showTitle: "Rinzler's Return")
-        PlayerView(episode: episode)
+        PlayerView()
     }
 }
 
