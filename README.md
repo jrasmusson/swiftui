@@ -2,10 +2,14 @@
 
 Deliberate practice with SwiftUI.
 
-## Previews
+## Dataflow
+
+- [State](Dataflow/State/README.md)
+
+## How to
 
 - [Xcode previews](Previews/README.md)
 
-# WWDC
+## WWDC
 
 - [Rooms - Introducing Swift UI WWDC 2019](WWDC/Rooms/README.md)
