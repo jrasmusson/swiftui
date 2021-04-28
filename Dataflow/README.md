@@ -1,6 +1,37 @@
 # Data Flow
 
-## Local State
+Something you can't do in SwiftUI is modify a `Views` state.
+
+```swift
+struct ContentView: View {
+    var tapCount = 0
+
+    var body: some View {
+        Button("Tap Count: \(tapCount)") {
+            self.tapCount += 1
+        }
+    }
+}
+```
+
+This is because structs are immutable in Swift. They aren't meant to be modified.
+
+If you want to modify a `View` state you need to use the `@State` property wrapper.
+
+```swift
+struct ContentView: View {
+    @State var tapCount = 0
+
+    var body: some View {
+        Button("Tap Count: \(tapCount)") {
+            self.tapCount += 1
+        }
+    }
+}
+```
+
+This allows us to modify a structs internal state, and SwiftUI manages this for us.
+## @State
 
 `@State` is for when the view acts as the source of truth.
 

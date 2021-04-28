@@ -8,7 +8,7 @@ Deliberate practice with SwiftUI.
 
 ## Dataflow
 
-- [State](Dataflow/State/README.md)
+- [State](Dataflow/README.md)
 
 ## How to
 
