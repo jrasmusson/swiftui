@@ -1,5 +1,7 @@
 # Picker
 
+### ForEach
+
 This example uses a `ForEach` to view within a `Picker`. Nice thing about `ForEach` is it isn't hit that 10-view limit that we would of hit had we typed this by hand.
 
 
@@ -23,7 +25,6 @@ struct ContentView: View {
 
 ![](images/demo1.gif)
 
-## ForEach
 
 Form with 100 rows.
 
@@ -45,7 +46,61 @@ Form {
 }
 ```
 
+### Picker inside a form
 
+If you create a picker outside a form you get the spinning wheel. Inside a form however, you get the master details view.
+
+```swift
+Form {
+    Section {
+        TextField("Amount", text: $checkAmount)
+            .keyboardType(.decimalPad)
+        Picker("Number of people", selection: $numberOfPeople) {
+                ForEach(2 ..< 100) {
+                    Text("\($0) people")
+                }
+            }
+    }
+
+    Section {
+        Text("$\(checkAmount)")
+    }
+}
+```
+
+![](images/insideform.png)
+
+The reason for this, is that in a form, we don't want to take up too much space. Hense the one-liner.
+
+Reason why picker starts with 4 is because initial value was 2, and we started our loop at 2. So the second selection is actually bound to 4.
+
+#### Adding a NavigationBar
+
+To make our picker selectable, we need to embed the form in a NavigationBar.
+
+```swift
+NavigationView {
+    Form {
+        Section {
+            TextField("Amount", text: $checkAmount)
+                .keyboardType(.decimalPad)
+            Picker("Number of people", selection: $numberOfPeople) {
+                ForEach(2 ..< 100) {
+                    Text("\($0) people")
+                }
+            }
+        }
+        
+        Section {
+            Text("$\(checkAmount)")
+        }
+    }.navigationBarTitle("WeSplit")
+}
+```
+
+This will give us the detail view along with it's selected value. This is a good example of *declarative programming*. We say what we want to happen and the framework takes care of it for us. We don't worry about the how, which would be *imperative programming*.
+
+[Creating pickers in a form](https://www.hackingwithswift.com/books/ios-swiftui/creating-pickers-in-a-form)
 
 ### Links that help
 
