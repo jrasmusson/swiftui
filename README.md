@@ -20,5 +20,5 @@ Deliberate practice with SwiftUI.
 
 ## Sample Apps
 
-- [Rooms - Introducing Swift UI WWDC 2019](WWDC/Rooms/README.md)
-- [WeSplit]
+- [Rooms - Introducing Swift UI WWDC 2019](SampleApps/Rooms/README.md)
+- [WeSplit](SampleApps/WeSplit/README.md)
