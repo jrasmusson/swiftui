@@ -9,6 +9,7 @@ Deliberate practice with SwiftUI.
 - [TextField](Controls/TextField/README.md)
 - [NavigationBar](Controls/NavigationBar/README.md)
 - [Picker](Controls/Picker/README.md)
+- [Stacks](Controls/Stacks/README.md)
 
 ## Dataflow
 
