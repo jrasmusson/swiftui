@@ -98,9 +98,28 @@ NavigationView {
 }
 ```
 
+![](images/insideform.gif)
+
 This will give us the detail view along with it's selected value. This is a good example of *declarative programming*. We say what we want to happen and the framework takes care of it for us. We don't worry about the how, which would be *imperative programming*.
 
 [Creating pickers in a form](https://www.hackingwithswift.com/books/ios-swiftui/creating-pickers-in-a-form)
+
+## Segmented control
+
+Special kind of picker showing a handful of options in a horizontal list. Great for when you have only a small selection to choose from.
+
+```swift
+Section {
+    Picker("Tip percentage", selection: $tipPercentage) {
+        ForEach(0 ..< tipPercentages.count) {
+            Text("\(self.tipPercentages[$0])%")
+        }
+    }.pickerStyle(SegmentedPickerStyle())
+}
+```
+
+![](images/segmented.png)
+
 
 ### Links that help
 
