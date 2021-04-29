@@ -1,5 +1,7 @@
 # Data Flow
 
+## You can't directly modify a views state
+
 Something you can't do in SwiftUI is modify a `Views` state.
 
 ```swift
@@ -16,6 +18,8 @@ struct ContentView: View {
 
 This is because structs are immutable in Swift. They aren't meant to be modified.
 
+## Modify a programs state
+
 If you want to modify a `View` state you need to use the `@State` property wrapper.
 
 ```swift
@@ -31,6 +35,27 @@ struct ContentView: View {
 ```
 
 This allows us to modify a structs internal state, and SwiftUI manages this for us.
+
+## Binding state to user interface controls
+
+To bind state to a control, you need to use the *two-way-binding* symbol `$`.
+
+```swift
+struct ContentView: View {
+    @State private var name = ""
+
+    var body: some View {
+        Form {
+            TextField("Enter your name", text: $name)
+            Text("Your name is \(name)")
+        }
+    }
+}
+```
+
+![](images/bindstate.gif)
+
+
 ## @State
 
 `@State` is for when the view acts as the source of truth.

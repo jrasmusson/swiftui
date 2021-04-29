@@ -5,6 +5,9 @@ Deliberate practice with SwiftUI.
 ## Controls
 
 - [Form](Controls/Form/README.md)
+- [TextField](Controls/TextField/README.md)
+- [NavigationBar](Controls/NavigationBar/README.md)
+- [Picker](Controls/Picker/README.md)
 
 ## Dataflow
 
