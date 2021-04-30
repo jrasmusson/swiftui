@@ -129,6 +129,18 @@ Alert(title: Text(scoreTitle)
 scoreTitle = "Correct"
 ```
 
-
-
 - [Showing score with alert](https://www.hackingwithswift.com/books/ios-swiftui/showing-the-players-score-with-an-alert)
+
+## Styling our flags
+
+```swift
+Image(countries[number])
+    .renderingMode(.original)
+    .clipShape(Capsule())
+    .overlay(Capsule().stroke(Color.black, lineWidth: 1))
+    .shadow(color: .black, radius: 2)
+```
+
+![](images/3.png)
+
+- [Styling flags](https://www.hackingwithswift.com/books/ios-swiftui/styling-our-flags)
