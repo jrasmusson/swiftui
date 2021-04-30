@@ -4,6 +4,7 @@ Deliberate practice with SwiftUI.
 
 ## Controls
 
+- [Alert](Controls/Alert/README.md)
 - [Button](Controls/Button/README.md)
 - [Color](Controls/Color/README.md)
 - [Form](Controls/Form/README.md)
