@@ -9,12 +9,9 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        ZStack(alignment: .leading) {
-            Text("Hello World")
-            Text("This is inside a stack")
-        }
+        AngularGradient(gradient: Gradient(colors: [.red, .yellow, .green, .blue, .purple, .red]), center: .center)
     }
-}
+    }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
