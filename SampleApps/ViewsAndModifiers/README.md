@@ -326,7 +326,6 @@ struct GridStack<Content: View>: View {
 - [Environment modifiers](https://www.hackingwithswift.com/books/ios-swiftui/environment-modifiers)
 - [Views as properties](https://www.hackingwithswift.com/books/ios-swiftui/views-as-properties)
 - [Custom modifiers](https://www.hackingwithswift.com/books/ios-swiftui/custom-modifiers)
-- [Custom modifiers](https://www.hackingwithswift.com/books/ios-swiftui/custom-modifiers)
 - [Custom containers](https://www.hackingwithswift.com/books/ios-swiftui/custom-containers)
 
 
