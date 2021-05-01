@@ -13,6 +13,7 @@ Deliberate practice with SwiftUI.
 - [Picker](Controls/Picker/README.md)
 - [Section](Controls/Section/README.md)
 - [Stacks](Controls/Stacks/README.md)
+- [Stepper](Controls/Stepper/README.md)
 - [TextField](Controls/TextField/README.md)
 
 
