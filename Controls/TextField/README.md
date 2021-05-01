@@ -1,5 +1,6 @@
 # TextField
 
+```swift
 struct ContentView: View {
     @State private var checkAmount = ""
     
@@ -16,6 +17,7 @@ struct ContentView: View {
         }
     }
 }
+```
 
 ![](images/1.png)
 

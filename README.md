@@ -7,6 +7,7 @@ Deliberate practice with SwiftUI.
 - [Alert](Controls/Alert/README.md)
 - [Button](Controls/Button/README.md)
 - [Color](Controls/Color/README.md)
+- [DatePicker](Controls/DatePicker/README.md)
 - [Form](Controls/Form/README.md)
 - [Gradient](Controls/Gradient/README.md)
 - [NavigationBar](Controls/NavigationBar/README.md)
