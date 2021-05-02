@@ -2,7 +2,11 @@
 
 ## Implicit animations
 
-Animation is a function of state.
+Implicit animations means we define the animation we want, and let SwiftUI take care of the rest. We can animation views, or we can animation state through a binding.
+
+### Adding animations to a view
+
+We can add animation to a view.
 
 ```swift
 struct ContentView: View {
@@ -28,9 +32,9 @@ struct ContentView: View {
 ![](images/1.gif)
 
 
-## Customizing
+### Adding animations to a binding
 
-### easeOut
+And we can add animation to a binding.
 
 ```swift
 struct ContentView: View {
@@ -39,77 +43,69 @@ struct ContentView: View {
     
     var body: some View {
     
-        Button("Tap Me") {
+        VStack {
+            Stepper("Scale amount", value: $animationAmount.animation(), in: 1...10)
+                        
+            Button("Tap Me") {
                 self.animationAmount += 1
             }
-            .padding(50)
+            .padding(40)
             .background(Color.red)
             .foregroundColor(.white)
             .clipShape(Circle())
             .scaleEffect(animationAmount)
-            .animation(.easeInOut)
-        
+        }
     }
     
 }
 ```
 
-![](images/2.gif)
+![](images/7.gif)
 
-```swift
-.animation(
-    Animation.easeInOut(duration: 2)
-        .delay(1)
-)
-```
+## Explicit animations
 
-![](images/4.gif)
+Explicit animations are where we are explicit about the animation we want when some state change occurs. It
+s not attached to a binding. And it's not attached to a view. It's just us explicitly asking for a particulr animation to occur because of a state change.
 
-```swift
-.animation(
-    Animation.easeInOut(duration: 1)
-        .repeatCount(3, autoreverses: true)
-)
-```
-
-![](images/3.gif)
+And we do that using `withAnimation()`.
 
 ```swift
 struct ContentView: View {
     
-    @State private var animationAmount: CGFloat = 1
+    @State private var animationAmount = 0.0
     
     var body: some View {
         
         Button("Tap Me") {
-            // self.animationAmount += 1
+            withAnimation {
+                self.animationAmount += 360
+            }
         }
-        .padding(40)
+        .padding(50)
         .background(Color.red)
         .foregroundColor(.white)
         .clipShape(Circle())
-        .overlay(
-            Circle()
-                .stroke(Color.red)
-                .scaleEffect(animationAmount)
-                .opacity(Double(2 - animationAmount))
-                .animation(
-                    Animation.easeOut(duration: 1)
-                        .repeatForever(autoreverses: false)
-                )
-        )
-        .onAppear {
-            self.animationAmount = 2
-        }
+        .rotation3DEffect(.degrees(animationAmount), axis: (x: 0, y: 1, z: 0))
     }
-    
+
 }
 ```
 
-![](images/5.gif)
+![](images/8.gif)
+
+```swift
+withAnimation(.interpolatingSpring(stiffness: 5, damping: 1)) {
+    self.animationAmount += 360
+}
+```
+
+![](images/9.gif)
+
 
 
 ### Links that help
 
 - [Implicit animations](https://www.hackingwithswift.com/books/ios-swiftui/creating-implicit-animations)
 - [Customizing animations in SwiftUI](https://www.hackingwithswift.com/books/ios-swiftui/customizing-animations-in-swiftui)
+- [Animating bindings](https://www.hackingwithswift.com/books/ios-swiftui/animating-bindings)
+- [Explicit animations](https://www.hackingwithswift.com/books/ios-swiftui/creating-explicit-animations)
