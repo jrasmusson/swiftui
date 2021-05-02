@@ -212,6 +212,89 @@ struct ContentView: View {
 
 ![](images/14.gif)
 
+## Showing and hiding views with transtions
+
+Here is an example of how to make the red square appear with a scaled transition.
+
+```swift
+struct ContentView: View {
+    
+    @State private var isShowingRed = false
+
+    var body: some View {
+        VStack {
+            Button("Tap Me") {
+                withAnimation {
+                    self.isShowingRed.toggle()
+                }
+            }
+
+            if isShowingRed {
+                Rectangle()
+                    .fill(Color.red)
+                    .frame(width: 200, height: 200)
+                    .transition(.scale)
+            }
+        }
+    }
+}
+```
+
+![](images/15.gif)
+
+Here's another.
+
+```swift
+.transition(.asymmetric(insertion: .scale, removal: .opacity))
+```
+
+![](images/16.gif)
+
+## Building custom transitions with ViewModifier
+
+```swift
+struct CornerRotateModifier: ViewModifier {
+    let amount: Double
+    let anchor: UnitPoint
+
+    func body(content: Content) -> some View {
+        content.rotationEffect(.degrees(amount), anchor: anchor).clipped()
+    }
+}
+
+extension AnyTransition {
+    static var pivot: AnyTransition {
+        .modifier(
+            active: CornerRotateModifier(amount: -90, anchor: .topLeading),
+            identity: CornerRotateModifier(amount: 0, anchor: .topLeading)
+        )
+    }
+}
+
+struct ContentView: View {
+    
+    @State private var isShowingRed = false
+
+    var body: some View {
+        VStack {
+            Button("Tap Me") {
+                withAnimation {
+                    self.isShowingRed.toggle()
+                }
+            }
+
+            if isShowingRed {
+                Rectangle()
+                    .fill(Color.red)
+                    .frame(width: 200, height: 200)
+                    .transition(.pivot)
+            }
+        }
+    }
+}
+```
+
+![](images/17.gif)
 
 ### Links that help
 
@@ -221,3 +304,5 @@ struct ContentView: View {
 - [Explicit animations](https://www.hackingwithswift.com/books/ios-swiftui/creating-explicit-animations)
 - [Controlling the animation stack](https://www.hackingwithswift.com/books/ios-swiftui/controlling-the-animation-stack)
 - [Animating gestures](https://www.hackingwithswift.com/books/ios-swiftui/animating-gestures)
+- [Showing and hiding views with transitions](https://www.hackingwithswift.com/books/ios-swiftui/showing-and-hiding-views-with-transitions)
+- [Custom transitions with view modifier](https://www.hackingwithswift.com/books/ios-swiftui/building-custom-transitions-using-viewmodifier)
