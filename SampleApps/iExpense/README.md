@@ -126,7 +126,9 @@ Then the magic to make the new sheet appear is here.
 
 This is a two-way binding to our state property. It fires when `$showingSheet` changes.
 
-You can pass information to another view by defining a var.
+### Passing data
+
+You can pass information to another view by defining a var in the view.
 
 ```swift
 struct SecondView: View {
@@ -137,6 +139,60 @@ struct SecondView: View {
     }
 }
 ```
+
+And then passing it to the view when constructed.
+
+```swift
+.sheet(isPresented: $showingSheet) {
+    SecondView(name: "@twostraws")
+}
+```
+
+### Dismissing the view
+
+The user can dismiss the view by swiping downwards. But let's look at how to make the view disappear programmatically.
+
+We could use a @State property wrapper. Another is to use an @Environment.
+
+@Environment allows us to provide data to other views externally. We can read our views presentation mode from the environment.
+
+To try it out add this property to the second view.
+
+```swift
+@Environment(\.presentationMode) var presentationMode
+```
+
+The presentation mode of a view contains only two pieces of data, but both are useful: a property storing whether the view is currently presented on screen, and a method to let us dismiss the view immediately.
+
+```swift
+struct SecondView: View {
+    @Environment(\.presentationMode) var presentationMode
+    
+    var name: String
+
+    var body: some View {
+        Button("Dismiss") {
+            presentationMode.wrappedValue.dismiss()
+        }
+    }
+}
+
+struct ContentView: View {
+    @State private var showingSheet = false
+
+    var body: some View {
+        Button("Show Sheet") {
+            self.showingSheet.toggle()
+        }
+        .sheet(isPresented: $showingSheet) {
+            SecondView(name: "Tron")
+        }
+    }
+}
+```
+
+![](images/2.gif)
+
 
 ### Links that help
 
