@@ -16,6 +16,19 @@ struct ContentView: View {
 }
 ```
 
+You can define a `var` in a `struct`. You just can't modify it from within the `struct`. 
+
+```swift
+struct SecondView: View {
+    var name: String
+
+    var body: some View {
+        Text("Hello, \(name)!")
+    }
+}
+```
+
+
 This is because structs are immutable in Swift. They aren't meant to be modified.
 
 ## Modify a programs state

@@ -5,11 +5,13 @@ Deliberate practice with SwiftUI.
 ## Controls
 
 - [Alert](Controls/Alert/README.md)
+- [Animations](Controls/Animations/README.md)
 - [Button](Controls/Button/README.md)
 - [Color](Controls/Color/README.md)
 - [DatePicker](Controls/DatePicker/README.md)
 - [Form](Controls/Form/README.md)
 - [Gradient](Controls/Gradient/README.md)
+- [Lists](Controls/Lists/README.md)
 - [NavigationBar](Controls/NavigationBar/README.md)
 - [Picker](Controls/Picker/README.md)
 - [Section](Controls/Section/README.md)
@@ -29,6 +31,10 @@ Deliberate practice with SwiftUI.
 
 ## Sample Apps
 
-- [Rooms - Introducing Swift UI WWDC 2019](SampleApps/Rooms/README.md)
-- [WeSplit](SampleApps/WeSplit/README.md)
+- [BetterRest](SampleApps/BetterRest/README.md)
 - [GuessTheFlag](SampleApps/GuessTheFlag/README.md)
+- [iExpense](SampleApps/iExpense/README.md)
+- [Rooms](SampleApps/Rooms/README.md)
+- [ViewsAndModifiers](SampleApps/ViewsAndModifiers/README.md)
+- [WeSplit](SampleApps/WeSplit/README.md)
+- [WordScramble](SampleApps/WordScramble/README.md)

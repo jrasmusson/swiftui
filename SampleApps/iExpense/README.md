@@ -73,8 +73,74 @@ struct ContentView: View {
 
 The end result here is that we can have our state stored in an exeternal object, and we can now use that object in multiple views and have them all point to the same values.
 
+## Showing and hiding views
+
+There are several ways of showing views in SwiftUI, and one of the most basic is a sheet: a new view presented on top of our existing one. On iOS this automatically gives us a card-like presentation where the current view slides away into the distance a little and the new view animates in on top.
+
+Sheets work much like alerts, in that we don’t present them directly with code such as `mySheet.present()` or similar. Instead, we define the conditions under which a sheet should be shown, and when those conditions become true or false the sheet will either be presented or dismissed respectively.
+
+Let’s start with a simple example, which will be showing one view from another using a sheet. First, we create the view we want to show inside a sheet, like this:
+
+```swift
+struct SecondView: View {
+    var body: some View {
+        Text("Second View")
+    }
+}
+
+struct ContentView: View {
+    @State private var showingSheet = false
+
+    var body: some View {
+        Button("Show Sheet") {
+            self.showingSheet.toggle()
+        }
+        .sheet(isPresented: $showingSheet) {
+            SecondView()
+        }
+    }
+}
+```
+
+![](images/1.gif)
+
+First we defined some state to track if the sheet is showing.
+
+```swift
+@State private var showingSheet = false
+```
+
+Then we toggle that state in the button.
+
+```swift
+self.showingSheet.toggle()
+```
+
+Then the magic to make the new sheet appear is here.
+
+```swift
+.sheet(isPresented: $showingSheet) {
+    // contents of the sheet
+}
+```
+
+This is a two-way binding to our state property. It fires when `$showingSheet` changes.
+
+You can pass information to another view by defining a var.
+
+```swift
+struct SecondView: View {
+    var name: String
+
+    var body: some View {
+        Text("Hello, \(name)!")
+    }
+}
+```
+
 ### Links that help
 
 - [iExpense Intro](https://www.hackingwithswift.com/books/ios-swiftui/iexpense-introduction)
 - [Why state only works with structs](https://www.hackingwithswift.com/books/ios-swiftui/why-state-only-works-with-structs)
 - [Sharing SwiftUI state with @ObservedObject](https://www.hackingwithswift.com/books/ios-swiftui/sharing-swiftui-state-with-observedobject)
+- [Showing and hiding views](https://www.hackingwithswift.com/books/ios-swiftui/showing-and-hiding-views)
