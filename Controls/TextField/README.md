@@ -48,6 +48,13 @@ TextField("Enter your word", text: $newWord)
 
 ![](images/4.png)
 
+### Turn off autocapitilization
+
+```swift
+.autocapitalization(.none)
+```
+
+
 
 ### Links that help
 
