@@ -11,6 +11,7 @@
 		71E5A439263DA56F003554EE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E5A438263DA56F003554EE /* ContentView.swift */; };
 		71E5A43B263DA570003554EE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 71E5A43A263DA570003554EE /* Assets.xcassets */; };
 		71E5A43E263DA570003554EE /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 71E5A43D263DA570003554EE /* Preview Assets.xcassets */; };
+		71E5A447263ECAB7003554EE /* start.txt in Resources */ = {isa = PBXBuildFile; fileRef = 71E5A446263ECAB7003554EE /* start.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +21,7 @@
 		71E5A43A263DA570003554EE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		71E5A43D263DA570003554EE /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		71E5A43F263DA570003554EE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		71E5A446263ECAB7003554EE /* start.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = start.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -36,6 +38,7 @@
 		71E5A42A263DA56F003554EE = {
 			isa = PBXGroup;
 			children = (
+				71E5A446263ECAB7003554EE /* start.txt */,
 				71E5A435263DA56F003554EE /* WordScramble */,
 				71E5A434263DA56F003554EE /* Products */,
 			);
@@ -127,6 +130,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				71E5A43E263DA570003554EE /* Preview Assets.xcassets in Resources */,
+				71E5A447263ECAB7003554EE /* start.txt in Resources */,
 				71E5A43B263DA570003554EE /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

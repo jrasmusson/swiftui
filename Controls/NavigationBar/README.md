@@ -20,6 +20,11 @@ var body: some View {
 
 ![](images/2.png)
 
+## onAppear
+
+```swift
+.onAppear(perform: startGame)
+```
 
 ### Links that help
 
