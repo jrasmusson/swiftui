@@ -148,6 +148,70 @@ struct ContentView: View {
 
 ![](images/11.gif)
 
+### Implicit animation
+
+Here we add an implicity animation that will animate the drag *and* the release.
+
+```swift
+.gesture(
+    DragGesture()
+        .onChanged { self.dragAmount = $0.translation }
+        .onEnded { _ in self.dragAmount = .zero }
+)
+.animation(.spring())
+```
+
+![](images/12.gif)
+
+### Explicit animation
+
+To explicitly set the animation, remove the `.animation` modifier and explicitly change `.onEnded` to this.
+
+```swift
+.onEnded { _ in
+    withAnimation(.spring()) {
+        self.dragAmount = .zero
+    }
+}
+```
+
+![](images/13.gif)
+
+Now the card will follow your drag immediately (because it is not being animated), but will animate when released.
+
+Can combine these in interesting ways like this.
+
+```swift
+struct ContentView: View {
+    let letters = Array("Hello SwiftUI")
+    @State private var enabled = false
+    @State private var dragAmount = CGSize.zero
+
+    var body: some View {
+        HStack(spacing: 0) {
+            ForEach(0..<letters.count) { num in
+                Text(String(self.letters[num]))
+                    .padding(5)
+                    .font(.title)
+                    .background(self.enabled ? Color.blue : Color.red)
+                    .offset(self.dragAmount)
+                    .animation(Animation.default.delay(Double(num) / 20))
+            }
+        }
+        .gesture(
+            DragGesture()
+                .onChanged { self.dragAmount = $0.translation }
+                .onEnded { _ in
+                    self.dragAmount = .zero
+                    self.enabled.toggle()
+                }
+        )
+    }
+}
+```
+
+![](images/14.gif)
+
 
 ### Links that help
 
