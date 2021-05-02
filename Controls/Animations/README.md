@@ -119,6 +119,36 @@ Button("Tap Me") {
 
 ![](images/10.gif)
 
+## Animating gestures
+
+Dragging a card around the screen and then letting it snap back to its original position.
+
+Here is the card with no animation.
+
+```swift
+struct ContentView: View {
+    
+    @State private var dragAmount = CGSize.zero
+    
+    var body: some View {
+        
+        LinearGradient(gradient: Gradient(colors: [.yellow, .red]), startPoint: .topLeading, endPoint: .bottomTrailing)
+            .frame(width: 300, height: 200)
+            .clipShape(RoundedRectangle(cornerRadius: 10))
+            .offset(dragAmount)
+            .gesture(
+                DragGesture()
+                    .onChanged { self.dragAmount = $0.translation }
+                    .onEnded { _ in self.dragAmount = .zero }
+            )
+        
+    }
+}
+```
+
+![](images/11.gif)
+
+
 ### Links that help
 
 - [Implicit animations](https://www.hackingwithswift.com/books/ios-swiftui/creating-implicit-animations)
@@ -126,3 +156,4 @@ Button("Tap Me") {
 - [Animating bindings](https://www.hackingwithswift.com/books/ios-swiftui/animating-bindings)
 - [Explicit animations](https://www.hackingwithswift.com/books/ios-swiftui/creating-explicit-animations)
 - [Controlling the animation stack](https://www.hackingwithswift.com/books/ios-swiftui/controlling-the-animation-stack)
+- [Animating gestures](https://www.hackingwithswift.com/books/ios-swiftui/animating-gestures)
