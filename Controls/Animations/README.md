@@ -101,7 +101,23 @@ withAnimation(.interpolatingSpring(stiffness: 5, damping: 1)) {
 
 ![](images/9.gif)
 
+## Order matters
 
+If you don't set the view modifer after all the effects changes you want to see, you won't get them. So add the modifier at the end of the view to get them all.
+
+```swift
+Button("Tap Me") {
+    self.enabled.toggle()
+}
+.frame(width: 200, height: 200)
+.background(enabled ? Color.blue : Color.red)
+.animation(.default)
+.foregroundColor(.white)
+.clipShape(RoundedRectangle(cornerRadius: enabled ? 60 : 0))
+.animation(.interpolatingSpring(stiffness: 10, damping: 1))
+```
+
+![](images/10.gif)
 
 ### Links that help
 
@@ -109,3 +125,4 @@ withAnimation(.interpolatingSpring(stiffness: 5, damping: 1)) {
 - [Customizing animations in SwiftUI](https://www.hackingwithswift.com/books/ios-swiftui/customizing-animations-in-swiftui)
 - [Animating bindings](https://www.hackingwithswift.com/books/ios-swiftui/animating-bindings)
 - [Explicit animations](https://www.hackingwithswift.com/books/ios-swiftui/creating-explicit-animations)
+- [Controlling the animation stack](https://www.hackingwithswift.com/books/ios-swiftui/controlling-the-animation-stack)
