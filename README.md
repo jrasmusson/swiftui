@@ -9,6 +9,7 @@ Deliberate practice with SwiftUI.
 - [Button](Controls/Button/README.md)
 - [Color](Controls/Color/README.md)
 - [DatePicker](Controls/DatePicker/README.md)
+- [ForEach](Controls/ForEach/README.md)
 - [Form](Controls/Form/README.md)
 - [Gradient](Controls/Gradient/README.md)
 - [Lists](Controls/Lists/README.md)
@@ -18,7 +19,6 @@ Deliberate practice with SwiftUI.
 - [Stacks](Controls/Stacks/README.md)
 - [Stepper](Controls/Stepper/README.md)
 - [TextField](Controls/TextField/README.md)
-
 
 
 ## Dataflow
