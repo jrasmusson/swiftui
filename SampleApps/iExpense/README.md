@@ -193,6 +193,22 @@ struct ContentView: View {
 
 ![](images/2.gif)
 
+## Working with Identifiable items in SwiftUI
+
+When we create static views (VStack, TextField, Button) SwiftUI can see exactly which views we have and is able to control and animate them and so on.
+
+When we use `List` and `ForEach` to make dynamic views, SwiftUI needs to know how it can identify each item uniquely. Otherwise it's not able to compare view hierarchies and keep track of what has changed.
+
+That's why we need whatever it is we are adding to our `List` or `ForEach` to by uniquely identifiable. We can do this using the `Identifiable` protocol which simply makes our structs require a property `id`.
+
+```swift
+struct ExpenseItem: Identifiable {
+    let id = UUID()
+    let name: String
+    let type: String
+    let amount: Int
+}
+```
 
 ### Links that help
 
@@ -200,3 +216,4 @@ struct ContentView: View {
 - [Why state only works with structs](https://www.hackingwithswift.com/books/ios-swiftui/why-state-only-works-with-structs)
 - [Sharing SwiftUI state with @ObservedObject](https://www.hackingwithswift.com/books/ios-swiftui/sharing-swiftui-state-with-observedobject)
 - [Showing and hiding views](https://www.hackingwithswift.com/books/ios-swiftui/showing-and-hiding-views)
+- [Working with Identifiable items in SwiftUI](https://www.hackingwithswift.com/books/ios-swiftui/working-with-identifiable-items-in-swiftui)
