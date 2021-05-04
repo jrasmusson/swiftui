@@ -210,6 +210,166 @@ struct ExpenseItem: Identifiable {
 }
 ```
 
+And then use it like this.
+
+```swift
+ForEach(expenses.items) { item in
+    Text(item.name)
+}
+```
+
+## Full source
+
+**ContentView.swift**
+
+```swift
+//
+//  ContentView.swift
+//  iExpense
+//
+//  Created by jrasmusson on 2021-05-02.
+//
+
+import SwiftUI
+
+struct ExpenseItem: Identifiable, Codable {
+    let id = UUID()
+    let name: String
+    let type: String
+    let amount: Int
+}
+
+class Expenses: ObservableObject {
+    @Published var items = [ExpenseItem]() {
+        didSet {
+            let encoder = JSONEncoder()
+            if let encoded = try? encoder.encode(items) {
+                UserDefaults.standard.set(encoded, forKey: "Items")
+            }
+        }
+    }
+    
+    init() {
+        if let items = UserDefaults.standard.data(forKey: "Items") {
+            let decoder = JSONDecoder()
+            if let decoded = try? decoder.decode([ExpenseItem].self, from: items) {
+                self.items = decoded
+                return
+            }
+        }
+
+        self.items = []
+    }
+}
+
+struct ContentView: View {
+    @State private var numbers = [Int]()
+    @State private var currentNumber = 1
+    @State private var showingAddExpense = false
+    
+    @ObservedObject var expenses = Expenses()
+    
+    var body: some View {
+        
+        NavigationView {
+            List {
+                ForEach(expenses.items) { item in
+                    HStack {
+                        VStack(alignment: .leading) {
+                            Text(item.name)
+                                .font(.headline)
+                            Text(item.type)
+                        }
+
+                        Spacer()
+                        Text("$\(item.amount)")
+                    }
+                }
+                .onDelete(perform: removeItems)
+            }
+            .navigationBarItems(trailing:
+                Button(action: {
+                    self.showingAddExpense = true
+                }) {
+                    Image(systemName: "plus")
+                }
+            )
+        }.sheet(isPresented: $showingAddExpense) {
+            AddView(expenses: self.expenses)
+        }
+        
+    }
+    
+    func removeItems(at offsets: IndexSet) {
+        expenses.items.remove(atOffsets: offsets)
+    }
+}
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+    }
+}
+```
+
+**AddView.swift**
+
+```swift
+//
+//  AddView.swift
+//  iExpense
+//
+//  Created by jrasmusson on 2021-05-04.
+//
+
+import SwiftUI
+
+struct AddView: View {
+    @State private var name = ""
+    @State private var type = "Personal"
+    @State private var amount = ""
+
+    @ObservedObject var expenses: Expenses
+    
+    // No type required here - Swift can figure out
+    @Environment(\.presentationMode) var presentationMode
+    
+    static let types = ["Business", "Personal"]
+
+    var body: some View {
+        NavigationView {
+            Form {
+                TextField("Name", text: $name)
+                Picker("Type", selection: $type) {
+                    ForEach(Self.types, id: \.self) {
+                        Text($0)
+                    }
+                }
+                TextField("Amount", text: $amount)
+                    .keyboardType(.numberPad)
+            }
+            .navigationBarTitle("Add new expense")
+            .navigationBarItems(trailing: Button("Save") {
+                if let actualAmount = Int(self.amount) {
+                    let item = ExpenseItem(name: self.name, type: self.type, amount: actualAmount)
+                    self.expenses.items.append(item)
+                }
+                self.presentationMode.wrappedValue.dismiss()
+            }
+            )
+        }
+    }
+}
+
+struct AddView_Previews: PreviewProvider {
+    static var previews: some View {
+        AddView(expenses: Expenses())
+    }
+}
+```
+
+![](images/demo.gif)
+
 ### Links that help
 
 - [iExpense Intro](https://www.hackingwithswift.com/books/ios-swiftui/iexpense-introduction)
