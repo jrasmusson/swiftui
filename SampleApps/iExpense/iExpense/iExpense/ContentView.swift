@@ -7,30 +7,44 @@
 
 import SwiftUI
 
+struct ExpenseItem {
+    let name: String
+    let type: String
+    let amount: Int
+}
+
+class Expenses: ObservableObject {
+    @Published var items = [ExpenseItem]()
+}
+
 struct ContentView: View {
     @State private var numbers = [Int]()
     @State private var currentNumber = 1
+    
+    @ObservedObject var expenses = Expenses()
 
     var body: some View {
+        
         NavigationView {
-            VStack {
-                List {
-                    ForEach(numbers, id: \.self) {
-                        Text("\($0)")
-                    }.onDelete(perform: removeRows)
+            List {
+                ForEach(expenses.items, id: \.name) { item in
+                    Text(item.name)
+                }.onDelete(perform: removeItems)
+            }
+            .navigationBarItems(trailing:
+                Button(action: {
+                    let expense = ExpenseItem(name: "Test", type: "Personal", amount: 5)
+                    self.expenses.items.append(expense)
+                }) {
+                    Image(systemName: "plus")
                 }
-                
-                Button("Add Number") {
-                    self.numbers.append(self.currentNumber)
-                    self.currentNumber += 1
-                }
-            }.navigationBarItems(leading: EditButton())
+            )
         }
         
     }
     
-    func removeRows(at offsets: IndexSet) {
-        numbers.remove(atOffsets: offsets)
+    func removeItems(at offsets: IndexSet) {
+        expenses.items.remove(atOffsets: offsets)
     }
 }
 

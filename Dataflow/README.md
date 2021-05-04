@@ -31,7 +31,7 @@ struct SecondView: View {
 
 This is because structs are immutable in Swift. They aren't meant to be modified.
 
-## Modify a programs state
+## @State
 
 If you want to modify a `View` state you need to use the `@State` property wrapper.
 
@@ -49,7 +49,7 @@ struct ContentView: View {
 
 This allows us to modify a structs internal state, and SwiftUI manages this for us.
 
-## Binding state to user interface controls
+## $Binding
 
 To bind state to a control, you need to use the *two-way-binding* symbol `$`.
 
@@ -67,6 +67,64 @@ struct ContentView: View {
 ```
 
 ![](images/bindstate.gif)
+
+
+## @ObservedObject
+
+Define a struct.
+
+```swift
+struct ExpenseItem {
+    let name: String
+    let type: String
+    let amount: Int
+}
+```
+
+Make it observable - note `class`.
+
+```swift
+class Expenses: ObservableObject {
+    @Published var items = [ExpenseItem]()
+}
+```
+
+Use it.
+
+```swift
+struct ContentView: View {
+    @State private var numbers = [Int]()
+    @State private var currentNumber = 1
+    
+    @ObservedObject var expenses = Expenses()
+
+    var body: some View {
+        
+        NavigationView {
+            List {
+                ForEach(expenses.items, id: \.name) { item in
+                    Text(item.name)
+                }.onDelete(perform: removeItems)
+            }
+            .navigationBarItems(trailing:
+                Button(action: {
+                    let expense = ExpenseItem(name: "Test", type: "Personal", amount: 5)
+                    self.expenses.items.append(expense)
+                }) {
+                    Image(systemName: "plus")
+                }
+            )
+        }
+        
+    }
+    
+    func removeItems(at offsets: IndexSet) {
+        expenses.items.remove(atOffsets: offsets)
+    }
+}
+```
+
+![](images/observable1.gif)
 
 
 ## @State
