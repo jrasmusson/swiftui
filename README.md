@@ -11,6 +11,7 @@ Deliberate practice with SwiftUI.
 - [DatePicker](Controls/DatePicker/README.md)
 - [ForEach](Controls/ForEach/README.md)
 - [Form](Controls/Form/README.md)
+- [GeometryReader](Controls/GeometryReader/README.md)
 - [Gradient](Controls/Gradient/README.md)
 - [Lists](Controls/Lists/README.md)
 - [NavigationBar](Controls/NavigationBar/README.md)
