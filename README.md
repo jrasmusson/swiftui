@@ -13,6 +13,7 @@ Deliberate practice with SwiftUI.
 - [Form](Controls/Form/README.md)
 - [GeometryReader](Controls/GeometryReader/README.md)
 - [Gradient](Controls/Gradient/README.md)
+- [Image](Controls/Image/README.md)
 - [Lists](Controls/Lists/README.md)
 - [NavigationBar](Controls/NavigationBar/README.md)
 - [NavigationLink](Controls/NavigationLink/README.md)

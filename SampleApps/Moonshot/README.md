@@ -155,7 +155,8 @@ ScrollView(.vertical) {
 
 One important difference with scroll views is that the views you add get created immediately. Unlike `UITableViewController` which has an very efficient dequeing mechanism, scroll view create all views once created.
 
-## Putting new views onto the stack using NavigationLink
+
+
 
 ### Links that help
 
