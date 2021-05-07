@@ -1,5 +1,7 @@
 # Moonshot
 
+![](images/demo.gif)
+
 ## Resizing images to fir the screen using GeometryReader
 
 Images by default will want to be shown at their native size. But we can resize them using `GeometryReader`.
@@ -155,7 +157,249 @@ ScrollView(.vertical) {
 
 One important difference with scroll views is that the views you add get created immediately. Unlike `UITableViewController` which has an very efficient dequeing mechanism, scroll view create all views once created.
 
+## Full source
 
+**ContentView.swift**
+
+```swift
+//
+//  ContentView.swift
+//  Moonshot
+//
+//  Created by jrasmusson on 2021-05-05.
+//
+
+import SwiftUI
+
+struct ContentView: View {
+    
+    let astronauts: [Astronaut] = Bundle.main.decode("astronauts.json")
+    let missions: [Mission] = Bundle.main.decode("missions.json")
+    
+    var body: some View {
+
+        NavigationView {
+            List(missions) { mission in
+                NavigationLink(destination: MissionView(mission: mission, astronauts: self.astronauts)) {
+                    Image(mission.image)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 44, height: 44)
+
+                    VStack(alignment: .leading) {
+                        Text(mission.displayName)
+                            .font(.headline)
+                        Text(mission.formattedLaunchDate)
+                    }
+                }
+            }
+            .navigationBarTitle("Moonshot")
+        }
+    }
+}
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+    }
+}
+```
+
+![](images/14.png)
+
+**Astronaut.swift**
+
+```swift
+struct Astronaut: Codable, Identifiable {
+    let id: String
+    let name: String
+    let description: String
+}
+```
+
+**Mission.swift**
+
+```swift
+//
+//  Mission.swift
+//  Moonshot
+//
+//  Created by jrasmusson on 2021-05-06.
+//
+
+import Foundation
+
+struct Mission: Codable, Identifiable {
+    struct CrewRole: Codable {
+        let name: String
+        let role: String
+    }
+
+    let id: Int
+    let launchDate: Date?
+    let crew: [CrewRole]
+    let description: String
+    
+    var displayName: String {
+        "Apollo \(id)"
+    }
+
+    var image: String {
+        "apollo\(id)"
+    }
+    
+    var formattedLaunchDate: String {
+        if let launchDate = launchDate {
+            let formatter = DateFormatter()
+            formatter.dateStyle = .long
+            return formatter.string(from: launchDate)
+        } else {
+            return "N/A"
+        }
+    }
+}
+```
+
+
+**MissionView.swift**
+
+```swift
+//
+//  MissionView.swift
+//  Moonshot
+//
+//  Created by jrasmusson on 2021-05-07.
+//
+
+import Foundation
+import SwiftUI
+
+struct MissionView: View {
+    
+    struct CrewMember {
+        let role: String
+        let astronaut: Astronaut
+    }
+    
+    let mission: Mission
+    let astronauts: [CrewMember]
+
+    var body: some View {
+        GeometryReader { geometry in
+            ScrollView(.vertical) {
+                VStack {
+                    Image(self.mission.image)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(maxWidth: geometry.size.width * 0.7)
+                        .padding(.top)
+
+                    Text(self.mission.description)
+                        .padding()
+
+                    ForEach(self.astronauts, id: \.role) { crewMember in
+                        NavigationLink(destination: AstronautView(astronaut: crewMember.astronaut)) {
+                            
+                            HStack {
+                                Image(crewMember.astronaut.id)
+                                    .resizable()
+                                    .frame(width: 83, height: 60)
+                                    .clipShape(Capsule())
+                                    .overlay(Capsule().stroke(Color.primary, lineWidth: 1))
+                                
+                                VStack(alignment: .leading) {
+                                    Text(crewMember.astronaut.name)
+                                        .font(.headline)
+                                    Text(crewMember.role)
+                                        .foregroundColor(.secondary)
+                                }
+                                
+                                Spacer()
+                            }
+                            .padding(.horizontal)
+                        }
+                        .buttonStyle(PlainButtonStyle())
+                    }
+                    
+                    Spacer(minLength: 25)
+                }
+            }
+        }
+        .navigationBarTitle(Text(mission.displayName), displayMode: .inline)
+    }
+    
+    init(mission: Mission, astronauts: [Astronaut]) {
+        self.mission = mission
+
+        var matches = [CrewMember]()
+
+        for member in mission.crew {
+            if let match = astronauts.first(where: { $0.id == member.name }) {
+                matches.append(CrewMember(role: member.role, astronaut: match))
+            } else {
+                fatalError("Missing \(member)")
+            }
+        }
+
+        self.astronauts = matches
+    }
+}
+
+struct MissionView_Previews: PreviewProvider {
+    static let missions: [Mission] = Bundle.main.decode("missions.json")
+    static let astronauts: [Astronaut] = Bundle.main.decode("astronauts.json")
+
+    static var previews: some View {
+        MissionView(mission: missions[0], astronauts: astronauts)
+    }
+}
+```
+
+![](images/12.png)
+
+**Astronaut.swift**
+
+```swift
+//
+//  AstronautView.swift
+//  Moonshot
+//
+//  Created by jrasmusson on 2021-05-07.
+//
+
+import SwiftUI
+
+struct AstronautView: View {
+    let astronaut: Astronaut
+
+    var body: some View {
+        GeometryReader { geometry in
+            ScrollView(.vertical) {
+                VStack {
+                    Image(self.astronaut.id)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: geometry.size.width)
+
+                    Text(self.astronaut.description)
+                        .padding()
+                }
+            }
+        }
+        .navigationBarTitle(Text(astronaut.name), displayMode: .inline)
+    }
+}
+
+struct AstronautView_Previews: PreviewProvider {
+    static let astronauts: [Astronaut] = Bundle.main.decode("astronauts.json")
+
+    static var previews: some View {
+        AstronautView(astronaut: astronauts[0])
+    }
+}
+```
+
+![](images/13.png)
 
 
 ### Links that help
