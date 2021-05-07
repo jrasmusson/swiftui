@@ -33,6 +33,7 @@ Deliberate practice with SwiftUI.
 
 ## How to
 
+- [UIViewController in Swift preview](HowTo/Preview/README.md)
 - [Wrap a UIViewController in a SwiftUI View](HowTo/WrapViewController/README.md)
 
 ## Sample Apps
