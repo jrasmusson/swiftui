@@ -6,7 +6,7 @@
 
 ### @State
 
-If you want to modify a `View` state you need to use the `@State` property wrapper.
+For storing state in a view.
 
 ```swift
 struct ContentView: View {
@@ -20,11 +20,11 @@ struct ContentView: View {
 }
 ```
 
-This allows us to modify a structs internal state, and SwiftUI manages this for us.
+This allows us to modify a structs internal state, and SwiftUI manages this for us. Two-way binding.
 
-#### Binding
+### @Binding
 
-To bind state to a control, you need to use the *two-way-binding* symbol `$`.
+Connecting `@State` to a view's underlying data model.
 
 ```swift
 struct ContentView: View {
@@ -40,6 +40,8 @@ struct ContentView: View {
 ```
 
 ![](images/bindstate.gif)
+
+- [Binding](https://www.hackingwithswift.com/books/ios-swiftui/creating-a-custom-component-with-binding)
 
 ## App Wide
 
@@ -107,6 +109,71 @@ struct ContentView: View {
 ### Environment
 
 `@Environment` is like a shared global state across your app. You don't need to directly bind to it. But it is always there, and you can pull data from it whenever you need to.
+
+#### Dismiss sheet
+
+For example, this is how we dismiss sheets.
+
+```swift
+@Environment(\.presentationMode) var presentationMode
+```
+
+Then when we are ready to dismiss.
+
+```swift
+Text("Hello World")
+    .onTapGesture {
+        self.presentationMode.wrappedValue.dismiss()
+    }
+```
+
+#### Size classes
+
+How much space you have for a view.
+
+Say you want to adjust your view depending on the `sizeClass`.
+
+```swift
+struct ContentView: View {
+    @Environment(\.horizontalSizeClass) var sizeClass
+
+    var body: some View {
+        if sizeClass == .compact {
+            return VStack {
+                Text("Active size class:")
+                Text("COMPACT")
+            }
+            .font(.largeTitle)
+        } else {
+            return HStack {
+                Text("Active size class:")
+                Text("REGULAR")
+            }
+            .font(.largeTitle)
+        }
+    }
+}
+```
+
+This almost works. Except you get an oninous error: 
+
+ > “Function declares an opaque return type, but the return statements in its body do not have matching underlying types.”
+ 
+That's because we can't return different view types from a body. We handle this with something called `type erasure`.
+
+```swift
+return AnyView(HStack {
+    // ...
+}
+.font(.largeTitle))
+```
+
+Type erasure masks the underlying view type. It erases or hides it. We don't use it all the time because of performance. But it's there when we need it.
+
+
+
+
+
 
 
 ## You can't directly modify a views state
