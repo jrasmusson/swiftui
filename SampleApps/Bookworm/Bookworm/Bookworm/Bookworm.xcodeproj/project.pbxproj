@@ -7,27 +7,29 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		71B7358D26459A12003B561B /* BookwormApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B7358C26459A12003B561B /* BookwormApp.swift */; };
-		71B7358F26459A12003B561B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B7358E26459A12003B561B /* ContentView.swift */; };
-		71B7359126459A13003B561B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 71B7359026459A13003B561B /* Assets.xcassets */; };
-		71B7359426459A13003B561B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 71B7359326459A13003B561B /* Preview Assets.xcassets */; };
-		71B7359626459A13003B561B /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B7359526459A13003B561B /* Persistence.swift */; };
-		71B7359926459A13003B561B /* Bookworm.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 71B7359726459A13003B561B /* Bookworm.xcdatamodeld */; };
+		716245BD2645A62400C52B25 /* AddBookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 716245BC2645A62400C52B25 /* AddBookView.swift */; };
+		71D78D9C26459F6600391A66 /* BookwormApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D78D9B26459F6600391A66 /* BookwormApp.swift */; };
+		71D78D9E26459F6600391A66 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D78D9D26459F6600391A66 /* ContentView.swift */; };
+		71D78DA026459F6700391A66 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 71D78D9F26459F6700391A66 /* Assets.xcassets */; };
+		71D78DA326459F6700391A66 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 71D78DA226459F6700391A66 /* Preview Assets.xcassets */; };
+		71D78DA526459F6700391A66 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D78DA426459F6700391A66 /* Persistence.swift */; };
+		71D78DA826459F6700391A66 /* Bookworm.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 71D78DA626459F6700391A66 /* Bookworm.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		71B7358926459A12003B561B /* Bookworm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bookworm.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		71B7358C26459A12003B561B /* BookwormApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookwormApp.swift; sourceTree = "<group>"; };
-		71B7358E26459A12003B561B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		71B7359026459A13003B561B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		71B7359326459A13003B561B /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		71B7359526459A13003B561B /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
-		71B7359826459A13003B561B /* Bookworm.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Bookworm.xcdatamodel; sourceTree = "<group>"; };
-		71B7359A26459A13003B561B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		716245BC2645A62400C52B25 /* AddBookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBookView.swift; sourceTree = "<group>"; };
+		71D78D9826459F6600391A66 /* Bookworm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bookworm.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		71D78D9B26459F6600391A66 /* BookwormApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookwormApp.swift; sourceTree = "<group>"; };
+		71D78D9D26459F6600391A66 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		71D78D9F26459F6700391A66 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		71D78DA226459F6700391A66 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		71D78DA426459F6700391A66 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
+		71D78DA726459F6700391A66 /* Bookworm.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Bookworm.xcdatamodel; sourceTree = "<group>"; };
+		71D78DA926459F6700391A66 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		71B7358626459A12003B561B /* Frameworks */ = {
+		71D78D9526459F6600391A66 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -37,40 +39,49 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		71B7358026459A12003B561B = {
+		716245BB2645A5E800C52B25 /* Files */ = {
 			isa = PBXGroup;
 			children = (
-				71B7358B26459A12003B561B /* Bookworm */,
-				71B7358A26459A12003B561B /* Products */,
+				71D78DA126459F6700391A66 /* Preview Content */,
+				71D78DA926459F6700391A66 /* Info.plist */,
+				71D78D9F26459F6700391A66 /* Assets.xcassets */,
+			);
+			name = Files;
+			sourceTree = "<group>";
+		};
+		71D78D8F26459F6600391A66 = {
+			isa = PBXGroup;
+			children = (
+				71D78D9A26459F6600391A66 /* Bookworm */,
+				71D78D9926459F6600391A66 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		71B7358A26459A12003B561B /* Products */ = {
+		71D78D9926459F6600391A66 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				71B7358926459A12003B561B /* Bookworm.app */,
+				71D78D9826459F6600391A66 /* Bookworm.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		71B7358B26459A12003B561B /* Bookworm */ = {
+		71D78D9A26459F6600391A66 /* Bookworm */ = {
 			isa = PBXGroup;
 			children = (
-				71B7358C26459A12003B561B /* BookwormApp.swift */,
-				71B7358E26459A12003B561B /* ContentView.swift */,
-				71B7359026459A13003B561B /* Assets.xcassets */,
-				71B7359526459A13003B561B /* Persistence.swift */,
-				71B7359A26459A13003B561B /* Info.plist */,
-				71B7359726459A13003B561B /* Bookworm.xcdatamodeld */,
-				71B7359226459A13003B561B /* Preview Content */,
+				716245BB2645A5E800C52B25 /* Files */,
+				71D78D9B26459F6600391A66 /* BookwormApp.swift */,
+				71D78D9D26459F6600391A66 /* ContentView.swift */,
+				71D78DA426459F6700391A66 /* Persistence.swift */,
+				71D78DA626459F6700391A66 /* Bookworm.xcdatamodeld */,
+				716245BC2645A62400C52B25 /* AddBookView.swift */,
 			);
 			path = Bookworm;
 			sourceTree = "<group>";
 		};
-		71B7359226459A13003B561B /* Preview Content */ = {
+		71D78DA126459F6700391A66 /* Preview Content */ = {
 			isa = PBXGroup;
 			children = (
-				71B7359326459A13003B561B /* Preview Assets.xcassets */,
+				71D78DA226459F6700391A66 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
 			sourceTree = "<group>";
@@ -78,13 +89,13 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		71B7358826459A12003B561B /* Bookworm */ = {
+		71D78D9726459F6600391A66 /* Bookworm */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 71B7359D26459A13003B561B /* Build configuration list for PBXNativeTarget "Bookworm" */;
+			buildConfigurationList = 71D78DAC26459F6700391A66 /* Build configuration list for PBXNativeTarget "Bookworm" */;
 			buildPhases = (
-				71B7358526459A12003B561B /* Sources */,
-				71B7358626459A12003B561B /* Frameworks */,
-				71B7358726459A12003B561B /* Resources */,
+				71D78D9426459F6600391A66 /* Sources */,
+				71D78D9526459F6600391A66 /* Frameworks */,
+				71D78D9626459F6600391A66 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -92,24 +103,24 @@
 			);
 			name = Bookworm;
 			productName = Bookworm;
-			productReference = 71B7358926459A12003B561B /* Bookworm.app */;
+			productReference = 71D78D9826459F6600391A66 /* Bookworm.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		71B7358126459A12003B561B /* Project object */ = {
+		71D78D9026459F6600391A66 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1240;
 				LastUpgradeCheck = 1240;
 				TargetAttributes = {
-					71B7358826459A12003B561B = {
+					71D78D9726459F6600391A66 = {
 						CreatedOnToolsVersion = 12.4;
 					};
 				};
 			};
-			buildConfigurationList = 71B7358426459A12003B561B /* Build configuration list for PBXProject "Bookworm" */;
+			buildConfigurationList = 71D78D9326459F6600391A66 /* Build configuration list for PBXProject "Bookworm" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -117,44 +128,45 @@
 				en,
 				Base,
 			);
-			mainGroup = 71B7358026459A12003B561B;
-			productRefGroup = 71B7358A26459A12003B561B /* Products */;
+			mainGroup = 71D78D8F26459F6600391A66;
+			productRefGroup = 71D78D9926459F6600391A66 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				71B7358826459A12003B561B /* Bookworm */,
+				71D78D9726459F6600391A66 /* Bookworm */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		71B7358726459A12003B561B /* Resources */ = {
+		71D78D9626459F6600391A66 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				71B7359426459A13003B561B /* Preview Assets.xcassets in Resources */,
-				71B7359126459A13003B561B /* Assets.xcassets in Resources */,
+				71D78DA326459F6700391A66 /* Preview Assets.xcassets in Resources */,
+				71D78DA026459F6700391A66 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		71B7358526459A12003B561B /* Sources */ = {
+		71D78D9426459F6600391A66 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				71B7359626459A13003B561B /* Persistence.swift in Sources */,
-				71B7359926459A13003B561B /* Bookworm.xcdatamodeld in Sources */,
-				71B7358F26459A12003B561B /* ContentView.swift in Sources */,
-				71B7358D26459A12003B561B /* BookwormApp.swift in Sources */,
+				71D78DA526459F6700391A66 /* Persistence.swift in Sources */,
+				71D78DA826459F6700391A66 /* Bookworm.xcdatamodeld in Sources */,
+				71D78D9E26459F6600391A66 /* ContentView.swift in Sources */,
+				71D78D9C26459F6600391A66 /* BookwormApp.swift in Sources */,
+				716245BD2645A62400C52B25 /* AddBookView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		71B7359B26459A13003B561B /* Debug */ = {
+		71D78DAA26459F6700391A66 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -215,7 +227,7 @@
 			};
 			name = Debug;
 		};
-		71B7359C26459A13003B561B /* Release */ = {
+		71D78DAB26459F6700391A66 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -270,7 +282,7 @@
 			};
 			name = Release;
 		};
-		71B7359E26459A13003B561B /* Debug */ = {
+		71D78DAD26459F6700391A66 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -291,7 +303,7 @@
 			};
 			name = Debug;
 		};
-		71B7359F26459A13003B561B /* Release */ = {
+		71D78DAE26459F6700391A66 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -315,20 +327,20 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		71B7358426459A12003B561B /* Build configuration list for PBXProject "Bookworm" */ = {
+		71D78D9326459F6600391A66 /* Build configuration list for PBXProject "Bookworm" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				71B7359B26459A13003B561B /* Debug */,
-				71B7359C26459A13003B561B /* Release */,
+				71D78DAA26459F6700391A66 /* Debug */,
+				71D78DAB26459F6700391A66 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		71B7359D26459A13003B561B /* Build configuration list for PBXNativeTarget "Bookworm" */ = {
+		71D78DAC26459F6700391A66 /* Build configuration list for PBXNativeTarget "Bookworm" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				71B7359E26459A13003B561B /* Debug */,
-				71B7359F26459A13003B561B /* Release */,
+				71D78DAD26459F6700391A66 /* Debug */,
+				71D78DAE26459F6700391A66 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -336,17 +348,17 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		71B7359726459A13003B561B /* Bookworm.xcdatamodeld */ = {
+		71D78DA626459F6700391A66 /* Bookworm.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				71B7359826459A13003B561B /* Bookworm.xcdatamodel */,
+				71D78DA726459F6700391A66 /* Bookworm.xcdatamodel */,
 			);
-			currentVersion = 71B7359826459A13003B561B /* Bookworm.xcdatamodel */;
+			currentVersion = 71D78DA726459F6700391A66 /* Bookworm.xcdatamodel */;
 			path = Bookworm.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
 /* End XCVersionGroup section */
 	};
-	rootObject = 71B7358126459A12003B561B /* Project object */;
+	rootObject = 71D78D9026459F6600391A66 /* Project object */;
 }

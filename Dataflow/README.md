@@ -172,6 +172,11 @@ Type erasure masks the underlying view type. It erases or hides it. We don't use
 
 
 
+#### CoreData
+
+```swift
+@Environment(\.managedObjectContext) var moc
+```
 
 
 
