@@ -37,9 +37,10 @@ Deliberate practice with SwiftUI.
 ## Sample Apps
 
 - [BetterRest](SampleApps/BetterRest/README.md)
+- [CupCakeCorner](SampleApps/CupCakeCorner/README.md)
 - [GuessTheFlag](SampleApps/GuessTheFlag/README.md)
 - [iExpense](SampleApps/iExpense/README.md)
+- [Moonshot](SampleApps/Moonshot/README.md)
 - [Rooms](SampleApps/Rooms/README.md)
-- [ViewsAndModifiers](SampleApps/ViewsAndModifiers/README.md)
 - [WeSplit](SampleApps/WeSplit/README.md)
 - [WordScramble](SampleApps/WordScramble/README.md)
