@@ -14,10 +14,8 @@ Image("Tron")
 ## Tint
 
 ```swift
-var body: some View {
-    Image("PaulHudson")
-        .colorMultiply(.red)
-}
+Image("Tron")
+    .colorMultiply(.red)
 ```
 
 ![](images/2.png)

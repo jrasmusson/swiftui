@@ -7,23 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		716B689426455E310056A655 /* DrawingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 716B689326455E310056A655 /* DrawingApp.swift */; };
-		716B689626455E310056A655 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 716B689526455E310056A655 /* ContentView.swift */; };
-		716B689826455E310056A655 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 716B689726455E310056A655 /* Assets.xcassets */; };
-		716B689B26455E310056A655 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 716B689A26455E310056A655 /* Preview Assets.xcassets */; };
+		71B7356326457323003B561B /* CupCakeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B7356226457323003B561B /* CupCakeApp.swift */; };
+		71B7356526457323003B561B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B7356426457323003B561B /* ContentView.swift */; };
+		71B7356726457323003B561B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 71B7356626457323003B561B /* Assets.xcassets */; };
+		71B7356A26457323003B561B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 71B7356926457323003B561B /* Preview Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		716B689026455E310056A655 /* Drawing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Drawing.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		716B689326455E310056A655 /* DrawingApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingApp.swift; sourceTree = "<group>"; };
-		716B689526455E310056A655 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		716B689726455E310056A655 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		716B689A26455E310056A655 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		716B689C26455E310056A655 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		71B7355F26457323003B561B /* CupCake.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CupCake.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		71B7356226457323003B561B /* CupCakeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CupCakeApp.swift; sourceTree = "<group>"; };
+		71B7356426457323003B561B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		71B7356626457323003B561B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		71B7356926457323003B561B /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		71B7356B26457323003B561B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		716B688D26455E310056A655 /* Frameworks */ = {
+		71B7355C26457323003B561B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -33,38 +33,38 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		716B688726455E310056A655 = {
+		71B7355626457323003B561B = {
 			isa = PBXGroup;
 			children = (
-				716B689226455E310056A655 /* Drawing */,
-				716B689126455E310056A655 /* Products */,
+				71B7356126457323003B561B /* CupCake */,
+				71B7356026457323003B561B /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		716B689126455E310056A655 /* Products */ = {
+		71B7356026457323003B561B /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				716B689026455E310056A655 /* Drawing.app */,
+				71B7355F26457323003B561B /* CupCake.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		716B689226455E310056A655 /* Drawing */ = {
+		71B7356126457323003B561B /* CupCake */ = {
 			isa = PBXGroup;
 			children = (
-				716B689326455E310056A655 /* DrawingApp.swift */,
-				716B689526455E310056A655 /* ContentView.swift */,
-				716B689726455E310056A655 /* Assets.xcassets */,
-				716B689C26455E310056A655 /* Info.plist */,
-				716B689926455E310056A655 /* Preview Content */,
+				71B7356226457323003B561B /* CupCakeApp.swift */,
+				71B7356426457323003B561B /* ContentView.swift */,
+				71B7356626457323003B561B /* Assets.xcassets */,
+				71B7356B26457323003B561B /* Info.plist */,
+				71B7356826457323003B561B /* Preview Content */,
 			);
-			path = Drawing;
+			path = CupCake;
 			sourceTree = "<group>";
 		};
-		716B689926455E310056A655 /* Preview Content */ = {
+		71B7356826457323003B561B /* Preview Content */ = {
 			isa = PBXGroup;
 			children = (
-				716B689A26455E310056A655 /* Preview Assets.xcassets */,
+				71B7356926457323003B561B /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
 			sourceTree = "<group>";
@@ -72,38 +72,38 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		716B688F26455E310056A655 /* Drawing */ = {
+		71B7355E26457323003B561B /* CupCake */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 716B689F26455E310056A655 /* Build configuration list for PBXNativeTarget "Drawing" */;
+			buildConfigurationList = 71B7356E26457323003B561B /* Build configuration list for PBXNativeTarget "CupCake" */;
 			buildPhases = (
-				716B688C26455E310056A655 /* Sources */,
-				716B688D26455E310056A655 /* Frameworks */,
-				716B688E26455E310056A655 /* Resources */,
+				71B7355B26457323003B561B /* Sources */,
+				71B7355C26457323003B561B /* Frameworks */,
+				71B7355D26457323003B561B /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = Drawing;
-			productName = Drawing;
-			productReference = 716B689026455E310056A655 /* Drawing.app */;
+			name = CupCake;
+			productName = CupCake;
+			productReference = 71B7355F26457323003B561B /* CupCake.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		716B688826455E310056A655 /* Project object */ = {
+		71B7355726457323003B561B /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1240;
 				LastUpgradeCheck = 1240;
 				TargetAttributes = {
-					716B688F26455E310056A655 = {
+					71B7355E26457323003B561B = {
 						CreatedOnToolsVersion = 12.4;
 					};
 				};
 			};
-			buildConfigurationList = 716B688B26455E310056A655 /* Build configuration list for PBXProject "Drawing" */;
+			buildConfigurationList = 71B7355A26457323003B561B /* Build configuration list for PBXProject "CupCake" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -111,42 +111,42 @@
 				en,
 				Base,
 			);
-			mainGroup = 716B688726455E310056A655;
-			productRefGroup = 716B689126455E310056A655 /* Products */;
+			mainGroup = 71B7355626457323003B561B;
+			productRefGroup = 71B7356026457323003B561B /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				716B688F26455E310056A655 /* Drawing */,
+				71B7355E26457323003B561B /* CupCake */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		716B688E26455E310056A655 /* Resources */ = {
+		71B7355D26457323003B561B /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				716B689B26455E310056A655 /* Preview Assets.xcassets in Resources */,
-				716B689826455E310056A655 /* Assets.xcassets in Resources */,
+				71B7356A26457323003B561B /* Preview Assets.xcassets in Resources */,
+				71B7356726457323003B561B /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		716B688C26455E310056A655 /* Sources */ = {
+		71B7355B26457323003B561B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				716B689626455E310056A655 /* ContentView.swift in Sources */,
-				716B689426455E310056A655 /* DrawingApp.swift in Sources */,
+				71B7356526457323003B561B /* ContentView.swift in Sources */,
+				71B7356326457323003B561B /* CupCakeApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		716B689D26455E310056A655 /* Debug */ = {
+		71B7356C26457323003B561B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -207,7 +207,7 @@
 			};
 			name = Debug;
 		};
-		716B689E26455E310056A655 /* Release */ = {
+		71B7356D26457323003B561B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -262,42 +262,42 @@
 			};
 			name = Release;
 		};
-		716B68A026455E310056A655 /* Debug */ = {
+		71B7356F26457323003B561B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "\"Drawing/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"CupCake/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = Drawing/Info.plist;
+				INFOPLIST_FILE = CupCake/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.rsc.Drawing;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rsc.CupCake;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
-		716B68A126455E310056A655 /* Release */ = {
+		71B7357026457323003B561B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "\"Drawing/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"CupCake/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = Drawing/Info.plist;
+				INFOPLIST_FILE = CupCake/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.rsc.Drawing;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rsc.CupCake;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -307,25 +307,25 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		716B688B26455E310056A655 /* Build configuration list for PBXProject "Drawing" */ = {
+		71B7355A26457323003B561B /* Build configuration list for PBXProject "CupCake" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				716B689D26455E310056A655 /* Debug */,
-				716B689E26455E310056A655 /* Release */,
+				71B7356C26457323003B561B /* Debug */,
+				71B7356D26457323003B561B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		716B689F26455E310056A655 /* Build configuration list for PBXNativeTarget "Drawing" */ = {
+		71B7356E26457323003B561B /* Build configuration list for PBXNativeTarget "CupCake" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				716B68A026455E310056A655 /* Debug */,
-				716B68A126455E310056A655 /* Release */,
+				71B7356F26457323003B561B /* Debug */,
+				71B7357026457323003B561B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 716B688826455E310056A655 /* Project object */;
+	rootObject = 71B7355726457323003B561B /* Project object */;
 }

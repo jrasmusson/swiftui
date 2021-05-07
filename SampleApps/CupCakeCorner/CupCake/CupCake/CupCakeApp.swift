@@ -1,6 +1,6 @@
 //
-//  DrawingApp.swift
-//  Drawing
+//  CupCakeApp.swift
+//  CupCake
 //
 //  Created by jrasmusson on 2021-05-07.
 //
@@ -8,7 +8,7 @@
 import SwiftUI
 
 @main
-struct DrawingApp: App {
+struct CupCakeApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
