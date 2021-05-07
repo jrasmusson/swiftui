@@ -13,6 +13,7 @@
 		71B7356A26457323003B561B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 71B7356926457323003B561B /* Preview Assets.xcassets */; };
 		71B7357426458A1E003B561B /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B7357326458A1E003B561B /* Order.swift */; };
 		71B7357726458B3F003B561B /* AddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B7357626458B3F003B561B /* AddressView.swift */; };
+		71B7357E26458C8D003B561B /* CheckoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B7357D26458C8D003B561B /* CheckoutView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		71B7356B26457323003B561B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		71B7357326458A1E003B561B /* Order.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
 		71B7357626458B3F003B561B /* AddressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressView.swift; sourceTree = "<group>"; };
+		71B7357D26458C8D003B561B /* CheckoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +63,7 @@
 				71B7356426457323003B561B /* ContentView.swift */,
 				71B7357326458A1E003B561B /* Order.swift */,
 				71B7357626458B3F003B561B /* AddressView.swift */,
+				71B7357D26458C8D003B561B /* CheckoutView.swift */,
 			);
 			path = CupCake;
 			sourceTree = "<group>";
@@ -154,6 +157,7 @@
 			files = (
 				71B7357426458A1E003B561B /* Order.swift in Sources */,
 				71B7357726458B3F003B561B /* AddressView.swift in Sources */,
+				71B7357E26458C8D003B561B /* CheckoutView.swift in Sources */,
 				71B7356526457323003B561B /* ContentView.swift in Sources */,
 				71B7356326457323003B561B /* CupCakeApp.swift in Sources */,
 			);

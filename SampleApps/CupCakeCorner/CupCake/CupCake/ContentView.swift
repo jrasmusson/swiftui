@@ -7,10 +7,9 @@
 
 import SwiftUI
 
-
 struct ContentView: View {
 
-    @ObservedObject var order = Order()
+    @ObservedObject var order = Order() // initialized
 
     var body: some View {
         NavigationView {
@@ -52,6 +51,7 @@ struct ContentView: View {
             .navigationBarTitle("Cupcake Corner")
         }
     }
+    
 }
 
 
