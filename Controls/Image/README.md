@@ -1,11 +1,26 @@
 # Image
 
+## Resizeable
+
 ```swift
-Image(mission.image)
+Image("Tron")
     .resizable()
     .scaledToFit()
-    .frame(width: 44, height: 44)
+    .frame(width: 300, height: 300)
 ```
+
+![](images/1.png)
+
+## Tint
+
+```swift
+var body: some View {
+    Image("PaulHudson")
+        .colorMultiply(.red)
+}
+```
+
+![](images/2.png)
 
 ### Links that help
 

@@ -47,7 +47,7 @@ Paths work off fixed coordinates.
 .stroke(Color.blue, style: StrokeStyle(lineWidth: 10, lineCap: .round, lineJoin: .round))
 ```
 
-
+![](images/5.png)
 
 
 ### Links that help
