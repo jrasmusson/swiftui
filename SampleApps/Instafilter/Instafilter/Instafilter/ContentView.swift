@@ -6,28 +6,46 @@
 //
 
 import SwiftUI
+import CoreImage
+import CoreImage.CIFilterBuiltins
 
 struct ContentView: View {
-    @State private var showingActionSheet = false
-    @State private var backgroundColor = Color.white
+    @State private var image: Image?
 
     var body: some View {
-        Text("Hello, World!")
-            .frame(width: 300, height: 300)
-            .background(backgroundColor)
-            .onTapGesture {
-                self.showingActionSheet = true
-            }
-            .actionSheet(isPresented: $showingActionSheet) {
-                ActionSheet(title: Text("Change background"), message: Text("Select a new color"), buttons: [
-                    .default(Text("Red")) { self.backgroundColor = .red },
-                    .default(Text("Green")) { self.backgroundColor = .green },
-                    .default(Text("Blue")) { self.backgroundColor = .blue },
-                    .cancel()
-                ])
-            }
+        VStack {
+            image?
+                .resizable()
+                .scaledToFit()
+        }
+        .onAppear(perform: loadImage)
+    }
+
+    func loadImage() {
+        guard let inputImage = UIImage(named: "Tron") else { return }
+        let beginImage = CIImage(image: inputImage)
+
+        let context = CIContext()
+        
+        guard let currentFilter = CIFilter(name: "CITwirlDistortion") else { return }
+        currentFilter.setValue(beginImage, forKey: kCIInputImageKey)
+        currentFilter.setValue(2000, forKey: kCIInputRadiusKey)
+        currentFilter.setValue(CIVector(x: inputImage.size.width, y: inputImage.size.height), forKey: kCIInputCenterKey)
+        
+        // get a CIImage from our filter or exit if that fails
+        guard let outputImage = currentFilter.outputImage else { return }
+
+        // attempt to get a CGImage from our CIImage
+        if let cgimg = context.createCGImage(outputImage, from: outputImage.extent) {
+            // convert that to a UIImage
+            let uiImage = UIImage(cgImage: cgimg)
+
+            // and convert that to a SwiftUI image
+            image = Image(uiImage: uiImage)
+        }
     }
 }
+
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()

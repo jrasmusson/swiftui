@@ -1,6 +1,6 @@
-# Previews
+# Wrapping a UIViewController in a SwiftUI view
 
-## View Controllers
+SwiftUI kind of blends `UIView` and `UIViewController` into a single `View `protocol, which makes our code much simpler.
 
 ```swift
 //
@@ -88,6 +88,10 @@ struct ViewControllerPreviews: PreviewProvider {
 ```
 
 ![](images/nibvc.png)
+
+### Links that help
+
+- [Wrapping a UIViewController in a SwiftUI view](README.md)
 
 
 
