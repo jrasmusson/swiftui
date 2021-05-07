@@ -17,6 +17,7 @@ Deliberate practice with SwiftUI.
 - [Lists](Controls/Lists/README.md)
 - [NavigationBar](Controls/NavigationBar/README.md)
 - [NavigationLink](Controls/NavigationLink/README.md)
+- [Path](Controls/Path/README.md)
 - [Picker](Controls/Picker/README.md)
 - [ScrollView](Controls/ScrollView/README.md)
 - [Section](Controls/Section/README.md)
