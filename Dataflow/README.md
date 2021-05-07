@@ -212,6 +212,101 @@ struct SecondView: View {
 
 This is because structs are immutable in Swift. They aren't meant to be modified.
 
+## How property wrappers become structs
+
+You’ve seen how SwiftUI lets us store changing data in our structs by using the @State property wrapper, how we can bind that state to the value of a UI control using $, and how changes to that state automatically cause SwiftUI to reinvoke the body property of our struct.
+
+All that combined lets us write code such as this:
+
+```swift
+struct ContentView: View {
+    @State private var blurAmount: CGFloat = 0
+
+    var body: some View {
+        VStack {
+            Text("Hello, World!")
+                .blur(radius: blurAmount)
+
+            Slider(value: $blurAmount, in: 0...20)
+        }
+    }
+}
+```
+
+![](images/1.png)
+
+Now, let’s say we want that binding to do more than just handle the radius of the blur effect. Perhaps we want to save that to UserDefaults, run a method, or just print out the value for debugging purposes. You might try updating the property like this:
+
+```swift
+@State private var blurAmount: CGFloat = 0 {
+    didSet {
+        print("New value is \(blurAmount)")
+    }
+}
+```
+
+If you run that code, you’ll be disappointed: as you drag the slider around you’ll see the blur amount change, but you won’t see our print() statement being triggered – in fact, nothing will be output at all.
+
+When we use `@State` to wrap a string, the actual type of property we end up with is a `State<String>`. 
+
+If you Command+Shift+O and open up the State object you'll see:
+
+```swift
+@propertyWrapper public struct State<Value> : DynamicProperty {
+```
+
+and
+
+```swift
+public var wrappedValue: Value { get nonmutating set }
+```
+
+That wrapped value is the actual value we’re trying to store, such as a string. What this generated interface is telling us is that the property can be read (`get`), and written (`set`), but that when we set the value it won’t actually change the struct itself.
+
+So when we see this:
+
+```swift
+@State private var blurAmount: CGFloat = 0 {
+    didSet {
+        print("New value is \(blurAmount)")
+    }
+}
+```
+
+What we are actually observing is the @State wrapper of the blur amount. Not the blur amount itself.
+
+To fix this we need to create a custom binding – we need to use the `Binding` struct directly, which allows us to provide our own code to run when the value is read or written.
+
+```swift
+struct ContentView: View {
+    @State private var blurAmount: CGFloat = 0
+
+    var body: some View {
+        let blur = Binding<CGFloat>(
+            get: {
+                self.blurAmount
+            },
+            set: {
+                self.blurAmount = $0
+                print("New value is \(self.blurAmount)")
+            }
+        )
+
+        return VStack {
+            Text("Hello, World!")
+                .blur(radius: blurAmount)
+
+            Slider(value: blur, in: 0...20)
+        }
+    }
+}
+```
+
+What all this means is that you can do whatever you want inside these closures: you can call methods, run an algorithm to figure out the correct value to use, or even just use random values – it doesn’t matter, as long as you return a value from get. So, if you want to make sure you update `UserDefaults` every time a value is changed, the `set` closure of a Binding is perfect.
+
+- [How property wrappers become structs](https://www.hackingwithswift.com/books/ios-swiftui/how-property-wrappers-become-structs)
+- [Creating custom bindings in SwiftUI](https://www.hackingwithswift.com/books/ios-swiftui/creating-custom-bindings-in-swiftui)
+
 
 ### Links that help
 - [WWDC 2019 - Data Flow Through SwiftUI](https://developer.apple.com/videos/play/wwdc2019/226/)
