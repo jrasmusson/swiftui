@@ -34,12 +34,7 @@ struct AddBookView: View {
                 }
 
                 Section {
-                    Picker("Rating", selection: $rating) {
-                        ForEach(0..<6) {
-                            Text("\($0)")
-                        }
-                    }
-
+                    RatingView(rating: $rating)
                     TextField("Write a review", text: $review)
                 }
 

@@ -52,6 +52,23 @@ struct ContentView_Previews: PreviewProvider {
 
 ![](images/1.png)
 
+## Delete
+
+```swift
+func deleteBooks(at offsets: IndexSet) {
+    for offset in offsets {
+        // find this book in our fetch request
+        let book = books[offset]
+
+        // delete it from the context
+        moc.delete(book)
+    }
+
+    // save the context
+    try? moc.save()
+}
+```
+
 ### Links that help
 
 - [How to combine CoreData and SwiftUI](https://www.hackingwithswift.com/books/ios-swiftui/how-to-combine-core-data-and-swiftui)
