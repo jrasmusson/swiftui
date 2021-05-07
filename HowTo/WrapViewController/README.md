@@ -2,96 +2,91 @@
 
 SwiftUI kind of blends `UIView` and `UIViewController` into a single `View `protocol, which makes our code much simpler.
 
-```swift
-//
-//  ViewController.swift
-//  Test
-//
-//  Created by jrasmusson on 2021-04-26.
-//
-
-import UIKit
-
-final class ViewController: UIViewController {
-
-    let button = UIButton()
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.backgroundColor = .systemBlue
-        button.setTitle("Button", for: .normal)
-        view.addSubview(button)
-        
-        NSLayoutConstraint.activate([
-            button.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            button.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-        ])
-    }
-}
-
-#if canImport(SwiftUI) && DEBUG
-import SwiftUI
-
-extension ViewController: UIViewControllerRepresentable {
-    func makeUIViewController(context: Context) -> ViewController {
-        return ViewController()
-    }
-    
-    func updateUIViewController(_ uiViewController: ViewController, context: Context) {}
-}
-
-@available(iOS 13.0, *)
-struct ViewControllerPreviews: PreviewProvider {
-  static var previews: some View {
-    ViewController()
-  }
-}
-#endif
-```
-
-![](images/vc.png)
-
-## Nibs
-
-### View Controller
-
-Exact same. Can instantiate view controller programmatically.
+The way to wrap an existing `UIViewController` into a SwiftUI view is as follows:
 
 ```swift
-import UIKit
-
-final class ViewController: UIViewController {
-    override func viewDidLoad() {
-        super.viewDidLoad()        
-    }
-}
-
-#if DEBUG
-import SwiftUI
-
-extension ViewController: UIViewControllerRepresentable {
-    func makeUIViewController(context: Context) -> ViewController {
-        return ViewController()
+struct ImagePicker: UIViewControllerRepresentable {
+    func makeUIViewController(context: Context) -> UIImagePickerController {
+        let picker = UIImagePickerController()
+        return picker
     }
     
-    func updateUIViewController(_ uiViewController: ViewController, context: Context) {}
+    func updateUIViewController(_ uiViewController: UIImagePickerController, context: Context) {
+    }
+    
+    typealias UIViewControllerType = UIImagePickerController
 }
-import SwiftUI
-struct ViewControllerPreviews: PreviewProvider {
-  static var previews: some View {
-    ViewController()
-  }
+
+struct ImagePicker_Previews: PreviewProvider {
+    static var previews: some View {
+        ImagePicker()
+    }
 }
-#endif
 ```
 
-![](images/nibvc.png)
+This is a valid SwiftUI view. Now we can use it.
+
+```swift
+struct ContentView: View {
+    @State private var image: Image?
+    @State private var showingImagePicker = false
+
+    var body: some View {
+        VStack {
+            image?
+                .resizable()
+                .scaledToFit()
+
+            Button("Select Image") {
+               self.showingImagePicker = true
+            }
+        }
+        .sheet(isPresented: $showingImagePicker) {
+            ImagePicker()
+        }
+    }
+}
+```
+
+![](images/1.png)
+
+## Using coordinators to manage SwiftUI view controllers
+
+This works but we won't get any callbacks from our SwiftUI. To register ourselves as `delegates` we need to use SwiftUI `coordinators`.
+
+```swift
+struct ImagePicker: UIViewControllerRepresentable {
+    @Environment(\.presentationMode) var presentationMode
+    @Binding var image: UIImage?
+
+    class Coordinator: NSObject, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+        var parent: ImagePicker
+
+        init(_ parent: ImagePicker) {
+            self.parent = parent
+        }
+    }
+
+    func makeCoordinator() -> Coordinator {
+        Coordinator(self)
+    }
+
+    func makeUIViewController(context: UIViewControllerRepresentableContext<ImagePicker>) -> UIImagePickerController {
+        let picker = UIImagePickerController()
+        picker.delegate = context.coordinator
+        return picker
+    }
+
+    func updateUIViewController(_ uiViewController: UIImagePickerController, context: UIViewControllerRepresentableContext<ImagePicker>) {
+
+    }
+}
+```
 
 ### Links that help
 
-- [Wrapping a UIViewController in a SwiftUI view](README.md)
+- [Wrapping a UIViewController in a SwiftUI view](https://www.hackingwithswift.com/books/ios-swiftui/wrapping-a-uiviewcontroller-in-a-swiftui-view)
+- [Using coorindators to manage Swift UI view controllers](https://www.hackingwithswift.com/books/ios-swiftui/using-coordinators-to-manage-swiftui-view-controllers)
 
 
 
