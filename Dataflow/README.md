@@ -2,11 +2,9 @@
 
 ![](images/dataflow.png)
 
-## View
+## @State
 
-### @State
-
-For storing state in a view.
+For storing state in a single view.
 
 ```swift
 struct ContentView: View {
@@ -22,9 +20,9 @@ struct ContentView: View {
 
 This allows us to modify a structs internal state, and SwiftUI manages this for us. Two-way binding.
 
-### @Binding
+## @Binding
 
-Connecting `@State` to a view's underlying data model.
+Connecting `@State` to a control's underlying data model.
 
 ```swift
 struct ContentView: View {
@@ -43,11 +41,25 @@ struct ContentView: View {
 
 - [Binding](https://www.hackingwithswift.com/books/ios-swiftui/creating-a-custom-component-with-binding)
 
-## App Wide
 
-### @ObservableObject / @Published / @ObservedObject
+## @ObservableObject
 
-The Combine framework lets you define a `class` app wide, and publish `@ObservableObjects` to `@ObservedObjects` listeners.
+Let's us pass one object from view to view so we can share it.
+
+![](images/observe1.png)
+
+1. Define a `struct`.
+2. Define a `class` implementing `ObservableObject`.
+3. Define data to be `@Published`.
+4. Instantiate the data once.
+5. Pass to each `View` that wants to be notified.
+
+Key thing to note is that the object we want to published is defined and created once at the top, and then passed down to child views after.
+
+![](images/observe2.png)
+
+
+### Example
 
 Define a struct.
 
