@@ -81,6 +81,8 @@ struct ContentView: View {
 
 ## Full source
 
+![](images/dataflow.png)
+
 **Order.swift**
 
 ```swift
