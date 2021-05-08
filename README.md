@@ -29,9 +29,10 @@ Deliberate practice with SwiftUI.
 - [TextField](Controls/TextField/README.md)
 
 
-## Dataflow
+## Concepts
 
-- [State](Dataflow/README.md)
+- [Dataflow](Dataflow/README.md)
+- [Layout and Geometry](LayoutAndGeometry/README.md)
 
 ## How to
 
