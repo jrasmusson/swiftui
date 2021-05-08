@@ -118,9 +118,129 @@ struct ContentView: View {
 ![](images/observable1.gif)
 
 
-### Environment
+## Environment
 
 `@Environment` is like a shared global state across your app. You don't need to directly bind to it. But it is always there, and you can pull data from it whenever you need to.
+
+Place an object into the environment so that any child view can automatically have access to it.
+
+> One gotcha - views on a Navigation stack are all considered children of the parent and have access to the shared environement variables.
+
+> Views pushed as sheets don't. Those environment variables have to be set by hand (hopefully a bug that SwiftUI will address in the future).
+> 
+
+### Example
+
+How to share data between two views using environment objects.
+
+Define the data using the `ObservableObject` mechanics.
+
+```swift
+class User: ObservableObject {
+    @Published var name = "Taylor Swift"
+}
+```
+
+Create two views wanting to use this new data class.
+
+```swit
+struct EditView: View {
+    @EnvironmentObject var user: User
+
+    var body: some View {
+        TextField("Name", text: $user.name)
+    }
+}
+
+struct DisplayView: View {
+    @EnvironmentObject var user: User
+
+    var body: some View {
+        Text(user.name)
+    }
+}
+```
+
+That @EnvironmentObject property wrapper will automatically look for a User instance in the environment, and place whatever it finds into the user property. **If it can’t find a User in the environment your code will just crash**, so please be careful.
+
+We can now bring those two views together in one place, and send in a User instance for them to work with:
+
+```swift
+struct ContentView: View {
+    let user = User()
+
+    var body: some View {
+        VStack {
+            EditView().environmentObject(user)
+            DisplayView().environmentObject(user)
+        }
+    }
+}
+```
+
+Or applied to both like this:
+
+```swift
+VStack {
+    EditView()
+    DisplayView()
+}
+.environmentObject(user)
+```
+
+
+
+- [Reading custom values from the environment with @EnvironmentObject
+](https://www.hackingwithswift.com/books/ios-swiftui/reading-custom-values-from-the-environment-with-environmentobject)
+
+### Manually publishing ObservableObject changes
+
+Classes that conform to the `ObservableObject` protocol can use SwiftUI’s `@Published` property wrapper to automatically announce changes to properties, so that any views using the object get their body property reinvoked and stay in sync with their data. That works really well a lot of the time, but sometimes you want a little more control and SwiftUI’s solution is called `objectWillChange`.
+
+Every class that conforms to `ObservableObject` automatically gains a property called `objectWillChange`. This is a *publisher*, which means it does the same job as the `@Published` property wrapper: it notifies any views that are observing that object that something important has changed. 
+
+For example, normally we could just publish a notification counter and have it automatically update our view like this.
+
+```swift
+class DelayedUpdater: ObservableObject {
+    @Published var value = 0
+
+    init() {
+        for i in 1...10 {
+            DispatchQueue.main.asyncAfter(deadline: .now() + Double(i)) {
+                self.value += 1
+            }
+        }
+    }
+}
+
+struct ContentView: View {
+    @ObservedObject var updater = DelayedUpdater()
+
+    var body: some View {
+        Text("Value is: \(updater.value)")
+    }
+}
+```
+
+![](images/env1.png)
+
+If we remove the `@Published` property wrapper it will no longer work. But behind the scenes `asyncAfter()` is still firing.
+
+We can still get notified, without the property wrapper, by firing `objectWillChange` observer manually on the property itself.
+
+```swift
+var value = 0 {
+    willSet {
+        objectWillChange.send()
+    }
+}
+```
+
+
+
+
+- [Manually publishing ObservableObject changes](https://www.hackingwithswift.com/books/ios-swiftui/manually-publishing-observableobject-changes)
 
 #### Dismiss sheet
 

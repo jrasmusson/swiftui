@@ -9,6 +9,7 @@ Deliberate practice with SwiftUI.
 - [Animations](Controls/Animations/README.md)
 - [Button](Controls/Button/README.md)
 - [Color](Controls/Color/README.md)
+- [ContextMenu](Controls/ContextMenu/README.md)
 - [DatePicker](Controls/DatePicker/README.md)
 - [ForEach](Controls/ForEach/README.md)
 - [Form](Controls/Form/README.md)
@@ -24,6 +25,7 @@ Deliberate practice with SwiftUI.
 - [Section](Controls/Section/README.md)
 - [Stacks](Controls/Stacks/README.md)
 - [Stepper](Controls/Stepper/README.md)
+- [TabView](Controls/TabView/README.md)
 - [TextField](Controls/TextField/README.md)
 
 
