@@ -1,5 +1,8 @@
 # Wrapping a UIViewController in a SwiftUI view
 
+- import `SwiftUI`
+- make class `final`
+
 SwiftUI kind of blends `UIView` and `UIViewController` into a single `View `protocol, which makes our code much simpler.
 
 ```swift
@@ -11,6 +14,7 @@ SwiftUI kind of blends `UIView` and `UIViewController` into a single `View `prot
 //
 
 import UIKit
+import SwiftUI
 
 final class ViewController: UIViewController {
 
