@@ -37,13 +37,13 @@ extension TextFieldView {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         let configuration = UIImage.SymbolConfiguration(scale: .large)
         let symbolImage = UIImage(systemName: "square.and.pencil", withConfiguration: configuration)
-//        symbolImage?.withTintColor(.label)
         imageView.image = symbolImage
         imageView.tintColor = .label
         
         
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.placeholder = "Wizard name"
+        textField.borderStyle = .roundedRect
     }
     
     func layout() {

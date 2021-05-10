@@ -56,19 +56,12 @@ extension ViewController: UIViewControllerRepresentable {
 
 @available(iOS 13.0, *)
 struct ViewControllerPreviews: PreviewProvider {
-  static var previews: some View {
-    NavigationView {
-        ViewController()
-            .navigationBarTitle(Text("Wizard School Signup"), displayMode: .inline)
-            .preferredColorScheme(.dark)
+    static var previews: some View {
+        NavigationView {
+            ViewController()
+                .navigationBarTitle(Text("Wizard School Signup"), displayMode: .inline)
+                .preferredColorScheme(.dark)
+        }
     }
-    
-//    NavigationView {
-//        List {
-//            Text("Hello World")
-//        }
-//        .navigationBarTitle(Text("Navigation Title")) // Default to large title style
-//    }
-  }
 }
 #endif
