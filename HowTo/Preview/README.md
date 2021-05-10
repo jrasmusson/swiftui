@@ -57,6 +57,37 @@ struct ViewControllerPreviews: PreviewProvider {
 
 ![](images/vc.png)
 
+## Dark Mode
+
+```swift
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView().preferredColorScheme(.dark)
+    }
+}
+```
+
+- [Dark Mode](https://www.hackingwithswift.com/quick-start/swiftui/how-to-preview-your-layout-in-light-and-dark-mode)
+
+
+## Different devices
+
+```swift
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+            .previewDevice(PreviewDevice(rawValue: "iPhone 12"))
+            .previewDisplayName("iPhone 12")
+
+        ContentView()
+            .previewDevice(PreviewDevice(rawValue: "iPhone 12 Pro Max"))
+            .previewDisplayName("iPhone 12 Pro Max")
+    }
+}
+```
+
+- [How to preview your layout in different devices](https://www.hackingwithswift.com/quick-start/swiftui/how-to-preview-your-layout-in-different-devices)
+
 ## Nibs
 
 ### View Controller
