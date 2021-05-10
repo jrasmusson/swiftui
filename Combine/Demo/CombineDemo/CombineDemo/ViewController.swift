@@ -11,7 +11,10 @@ import SwiftUI
 final class ViewController: UIViewController {
     
     let stackView = UIStackView()
-    let nameTextField = TextFieldView()
+    
+    let nameTextField = TextFieldView(symbolName: "person.circle", placeholderText: "Wizard name")
+    let passwordTextField = TextFieldView(symbolName: "lock.circle", placeholderText: "Password")
+    let repeatTextField = TextFieldView(symbolName: "lock.circle", placeholderText: "Repeat password")
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,11 +30,13 @@ extension ViewController {
         
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
-        stackView.spacing = 20
+        stackView.spacing = 8
     }
     
     func layout() {
         stackView.addArrangedSubview(nameTextField)
+        stackView.addArrangedSubview(passwordTextField)
+        stackView.addArrangedSubview(repeatTextField)
         
         view.addSubview(stackView)
         

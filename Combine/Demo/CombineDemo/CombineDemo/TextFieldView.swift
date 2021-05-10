@@ -13,10 +13,10 @@ class TextFieldView: UIView {
     let imageView = UIImageView()
     let textField = UITextField()
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    init(symbolName: String, placeholderText: String) {
+        super.init(frame: .zero)
         
-        style()
+        style(symbolName, placeholderText)
         layout()
     }
     
@@ -25,24 +25,24 @@ class TextFieldView: UIView {
     }
     
     override var intrinsicContentSize: CGSize {
-        return CGSize(width: 200, height: 200)
+        return CGSize(width: 200, height: 44)
     }
 }
 
 extension TextFieldView {
     
-    func style() {
+    func style(_ symbolName: String, _ placeholderText: String) {
         translatesAutoresizingMaskIntoConstraints = false
         
         imageView.translatesAutoresizingMaskIntoConstraints = false
         let configuration = UIImage.SymbolConfiguration(scale: .large)
-        let symbolImage = UIImage(systemName: "square.and.pencil", withConfiguration: configuration)
+        let symbolImage = UIImage(systemName: symbolName, withConfiguration: configuration)
         imageView.image = symbolImage
         imageView.tintColor = .label
         
         
         textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.placeholder = "Wizard name"
+        textField.placeholder = placeholderText
         textField.borderStyle = .roundedRect
     }
     
