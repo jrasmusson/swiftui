@@ -13,8 +13,8 @@ final class ViewController: UIViewController {
     let stackView = UIStackView()
     
     let nameTextField = TextFieldView(symbolName: "person.circle", placeholderText: "Wizard name")
-    let passwordTextField = TextFieldView(symbolName: "lock.circle", placeholderText: "Password")
-    let repeatTextField = TextFieldView(symbolName: "lock.circle", placeholderText: "Repeat password")
+    let passwordTextField = TextFieldView(symbolName: "lock.circle", placeholderText: "Password", isSecureTextEntry: true)
+    let repeatTextField = TextFieldView(symbolName: "lock.circle", placeholderText: "Repeat password", isSecureTextEntry: true)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -88,7 +88,9 @@ extension ViewController: TextFieldViewDelegate {
         if sender == passwordTextField {
             print("Password text entered: \(text)")
         }
-
+        if sender == repeatTextField {
+            print("Repeat text entered: \(text)")
+        }
     }
     
     func didEndEditing(_ sender: TextFieldView, _ text: String?) {

@@ -20,10 +20,10 @@ class TextFieldView: UIView {
     
     weak var delegate: TextFieldViewDelegate?
     
-    init(symbolName: String, placeholderText: String) {
+    init(symbolName: String, placeholderText: String, isSecureTextEntry: Bool = false) {
         super.init(frame: .zero)
         
-        setup()
+        setup(isSecureTextEntry)
         style(symbolName, placeholderText)
         layout()
     }
@@ -39,8 +39,9 @@ class TextFieldView: UIView {
 
 extension TextFieldView {
     
-    func setup() {
+    func setup(_ isSecureTextEntry: Bool = false) {
         textField.delegate = self
+        textField.isSecureTextEntry = isSecureTextEntry
     }
     
     func style(_ symbolName: String, _ placeholderText: String) {
@@ -82,8 +83,7 @@ extension TextFieldView: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let textFieldText = textField.text ?? ""
         let newText = (textFieldText as NSString).replacingCharacters(in: range, with: string)
-        print(newText)
-        delegate?.didEnterText(self, textField.text)
+        delegate?.didEnterText(self, newText)
         return true
     }
     
@@ -96,7 +96,7 @@ extension TextFieldView: UITextFieldDelegate {
         if textField.text != "" {
             return true
         } else {
-            textField.placeholder = "Type something"
+            textField.placeholder = "Type your Wizard name here"
             return false
         }
     }
@@ -105,7 +105,5 @@ extension TextFieldView: UITextFieldDelegate {
         if textField.text != nil {
             delegate?.didEndEditing(self, textField.text)
         }
-        
-        self.textField.text = ""
     }
 }
