@@ -7,9 +7,38 @@
 
 import UIKit
 import SwiftUI
+import Combine
 
 final class ViewController: UIViewController {
     
+    // Combine
+    // Step 1: Create a publisher to compare passwords
+    @Published var password = ""
+    @Published var passwordAgain = ""
+    
+    // Define a publisher of String? that takes the two passwords and combines them into one result that can never fail.
+    var validatedPassword: AnyPublisher<String?, Never> {
+        return Publishers.CombineLatest($password, $passwordAgain)
+            .map { password, passwordRepeat in
+                guard password == passwordRepeat, password.count > 8 else { return nil }
+                return password
+            }
+            .map { ($0 ?? "") == "password1" ? nil : $0 }
+            .eraseToAnyPublisher()
+    }
+    
+    // Step 2: Debounce rapidly typed username
+
+//    var validatedPassword: AnyPublisher<String?, Never> {
+//        return Publishers.CombineLatest($password, $passwordAgain)
+//            .map { password, passwordRepeat in
+//                guard password == passwordRepeat, password.count > 8 else { return nil }
+//                return password
+//            }
+//            .map { ($0 ?? "") == "password1" ? nil : $0 }
+//            .eraseToAnyPublisher()
+//    }
+
     let stackView = UIStackView()
     
     let nameTextField = TextFieldView(symbolName: "person.circle", placeholderText: "Wizard name")
@@ -25,7 +54,7 @@ final class ViewController: UIViewController {
 }
 
 extension ViewController {
-    
+        
     func setup() {
         nameTextField.delegate = self
         passwordTextField.delegate = self
