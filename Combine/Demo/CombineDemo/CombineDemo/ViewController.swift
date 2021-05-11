@@ -18,12 +18,19 @@ final class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setup()
         style()
         layout()
     }
 }
 
 extension ViewController {
+    
+    func setup() {
+        nameTextField.delegate = self
+        passwordTextField.delegate = self
+        repeatTextField.delegate = self
+    }
     
     func style() {
         title = "Wizard School Signup"
@@ -70,3 +77,21 @@ struct ViewControllerPreviews: PreviewProvider {
     }
 }
 #endif
+
+// MARK: - TextFieldViewDelegate
+
+extension ViewController: TextFieldViewDelegate {
+    func didEnterText(_ sender: TextFieldView, _ text: String?) {
+        if sender == nameTextField {
+            print("Name text entered: \(text)")
+        }
+        if sender == passwordTextField {
+            print("Password text entered: \(text)")
+        }
+
+    }
+    
+    func didEndEditing(_ sender: TextFieldView, _ text: String?) {
+        
+    }
+}

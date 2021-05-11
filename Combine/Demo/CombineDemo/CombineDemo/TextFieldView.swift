@@ -8,14 +8,22 @@
 import Foundation
 import UIKit
 
+protocol TextFieldViewDelegate: AnyObject {
+    func didEnterText(_ sender: TextFieldView, _ text: String?)
+    func didEndEditing(_ sender: TextFieldView, _ text: String?)
+}
+
 class TextFieldView: UIView {
     
     let imageView = UIImageView()
     let textField = UITextField()
     
+    weak var delegate: TextFieldViewDelegate?
+    
     init(symbolName: String, placeholderText: String) {
         super.init(frame: .zero)
         
+        setup()
         style(symbolName, placeholderText)
         layout()
     }
@@ -30,6 +38,10 @@ class TextFieldView: UIView {
 }
 
 extension TextFieldView {
+    
+    func setup() {
+        textField.delegate = self
+    }
     
     func style(_ symbolName: String, _ placeholderText: String) {
         translatesAutoresizingMaskIntoConstraints = false
@@ -60,5 +72,40 @@ extension TextFieldView {
         ])
         
         imageView.setContentHuggingPriority(UILayoutPriority.defaultHigh, for: .horizontal)
+    }
+}
+
+// MARK: - UITextFieldDelegate
+
+extension TextFieldView: UITextFieldDelegate {
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let textFieldText = textField.text ?? ""
+        let newText = (textFieldText as NSString).replacingCharacters(in: range, with: string)
+        print(newText)
+        delegate?.didEnterText(self, textField.text)
+        return true
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.endEditing(true)
+        return true
+    }
+    
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        if textField.text != "" {
+            return true
+        } else {
+            textField.placeholder = "Type something"
+            return false
+        }
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if textField.text != nil {
+            delegate?.didEndEditing(self, textField.text)
+        }
+        
+        self.textField.text = ""
     }
 }
