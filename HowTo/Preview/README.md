@@ -95,6 +95,7 @@ static var previews: some View {
     NavigationView {
         ViewController()
             .navigationBarTitle(Text("Navigation Title"), displayMode: .inline)
+            .preferredColorScheme(.dark)
 }
 ```
 

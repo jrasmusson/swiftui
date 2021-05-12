@@ -70,6 +70,7 @@ struct ViewControllerPreviews: PreviewProvider {
     NavigationView {
         ViewController()
             .navigationBarTitle(Text("Navigation Title"), displayMode: .inline)
+            .preferredColorScheme(.dark)
     }
   }
 }
