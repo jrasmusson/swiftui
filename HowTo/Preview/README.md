@@ -88,6 +88,16 @@ struct ContentView_Previews: PreviewProvider {
 
 - [How to preview your layout in different devices](https://www.hackingwithswift.com/quick-start/swiftui/how-to-preview-your-layout-in-different-devices)
 
+## Embed in NavigationController
+
+```swift
+static var previews: some View {
+    NavigationView {
+        ViewController()
+            .navigationBarTitle(Text("Navigation Title"), displayMode: .inline)
+}
+```
+
 ## Nibs
 
 ### View Controller
