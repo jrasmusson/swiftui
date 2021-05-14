@@ -1,10 +1,8 @@
-//
-//  ViewController.swift
-//  TCDemo
-//
-//  Created by jrasmusson on 2021-05-12.
-//
+# Terms & Conditions Demo
 
+![](images/1.png)
+
+```swift
 import UIKit
 import SwiftUI
 import Combine
@@ -33,7 +31,7 @@ final class ViewController: UIViewController {
         }.eraseToAnyPublisher()
     }
     
-    // Define subscribers
+    // Define subscriptions
     var stream: AnyCancellable?
     
     override func viewDidLoad() {
@@ -158,3 +156,13 @@ struct ViewControllerPreviews: PreviewProvider {
   }
 }
 #endif
+```
+
+### Links that help
+
+- [Use Your Loaf - Getting started with Combine](https://useyourloaf.com/blog/getting-started-with-combine/)
+
+
+
+
+
