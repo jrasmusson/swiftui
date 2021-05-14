@@ -55,6 +55,8 @@ struct ViewControllerPreviews: PreviewProvider {
 #endif
 ```
 
+File > Workspace Settings > 
+
 ![](images/vc.png)
 
 ## Dark Mode
