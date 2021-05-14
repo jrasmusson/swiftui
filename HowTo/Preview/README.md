@@ -2,8 +2,7 @@
 
 - import `SwiftUI`
 - make class `final`
-
-SwiftUI kind of blends `UIView` and `UIViewController` into a single `View `protocol, which makes our code much simpler.
+- add extension implementing `UIViewControllerRepresentable`
 
 ```swift
 //
