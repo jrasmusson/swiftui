@@ -1,4 +1,4 @@
-# Wrapping a UIViewController in a SwiftUI view
+# UIViewController
 
 - import `SwiftUI`
 - make class `final`
@@ -58,6 +58,31 @@ struct ViewControllerPreviews: PreviewProvider {
 File > Workspace Settings > 
 
 ![](images/vc.png)
+
+## UIView
+
+```swift
+#if canImport(SwiftUI) && DEBUG
+import SwiftUI
+
+extension PlainView: UIViewRepresentable {
+    func makeUIView(context: Context) -> PlainView {
+        return PlainView()
+    }
+
+    func updateUIView(_ uiView: PlainView, context: Context) {}
+}
+
+@available(iOS 13.0, *)
+struct PlainViewPreview: PreviewProvider {
+
+  static var previews: some View {
+    let headerView = PlainView()
+	 return readerView
+  }
+}
+#endif
+```
 
 ## Dark Mode
 
