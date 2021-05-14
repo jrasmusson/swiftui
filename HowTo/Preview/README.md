@@ -55,7 +55,7 @@ struct ViewControllerPreviews: PreviewProvider {
 #endif
 ```
 
-File > Workspace Settings > 
+File > Workspace Settings > Build System > New Build System
 
 ![](images/vc.png)
 
