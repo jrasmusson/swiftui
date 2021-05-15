@@ -42,7 +42,7 @@ List of every type of [View](https://developer.apple.com/documentation/swiftui/v
 
 ## How to
 
-- [UIViewController in Swift preview](HowTo/Preview/README.md)
+- [UIKit Previews](HowTo/Preview/README.md)
 - [Wrap a UIViewController in a SwiftUI View](HowTo/WrapViewController/README.md)
 
 ## Sample Apps
