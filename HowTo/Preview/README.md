@@ -1,19 +1,13 @@
-# UIViewController
+# UIKit Previews
 
-- import `SwiftUI`
-- make class `final`
-- add extension implementing `UIViewControllerRepresentable`
+SwiftUI previews can be used for `UIViewController` and `UIView` in UIKit. Simply add the following structs to your UIKit application and then create the associated view providers.
+
+## UIViewController
+
+**ViewController.swift**
 
 ```swift
-//
-//  ViewController.swift
-//  Test
-//
-//  Created by jrasmusson on 2021-04-26.
-//
-
 import UIKit
-import SwiftUI
 
 final class ViewController: UIViewController {
 
@@ -36,134 +30,124 @@ final class ViewController: UIViewController {
 
 #if canImport(SwiftUI) && DEBUG
 import SwiftUI
+struct UIViewControllerPreview<ViewController: UIViewController>: UIViewControllerRepresentable {
+    let viewController: ViewController
 
-extension ViewController: UIViewControllerRepresentable {
-    func makeUIViewController(context: Context) -> ViewController {
-        return ViewController()
+    init(_ builder: @escaping () -> ViewController) {
+        viewController = builder()
     }
-    
-    func updateUIViewController(_ uiViewController: ViewController, context: Context) {}
-}
 
-@available(iOS 13.0, *)
-struct ViewControllerPreviews: PreviewProvider {
-  static var previews: some View {
-    ViewController()
-  }
+    // MARK: - UIViewControllerRepresentable
+    func makeUIViewController(context: Context) -> ViewController {
+        viewController
+    }
+
+    func updateUIViewController(_ uiViewController: ViewController, context: UIViewControllerRepresentableContext<UIViewControllerPreview<ViewController>>) {
+        return
+    }
 }
 #endif
-```
 
-File > Workspace Settings > Build System > New Build System
-
-![](images/vc.png)
-
-## UIView
-
-```swift
 #if canImport(SwiftUI) && DEBUG
 import SwiftUI
 
-extension PlainView: UIViewRepresentable {
-    func makeUIView(context: Context) -> PlainView {
-        return PlainView()
-    }
-
-    func updateUIView(_ uiView: PlainView, context: Context) {}
-}
+let deviceNames: [String] = [
+    "iPhone SE",
+    "iPhone 11 Pro Max",
+    "iPad Pro (11-inch)"
+]
 
 @available(iOS 13.0, *)
-struct PlainViewPreview: PreviewProvider {
-
+struct ViewController_Preview: PreviewProvider {
   static var previews: some View {
-    let headerView = PlainView()
-	 return readerView
+    ForEach(deviceNames, id: \.self) { deviceName in
+      UIViewControllerPreview {
+        ViewController()
+      }.previewDevice(PreviewDevice(rawValue: deviceName))
+        .previewDisplayName(deviceName)
+    }
   }
 }
 #endif
 ```
 
-## Dark Mode
+## UIView
+
+**SimpleView.swift**
 
 ```swift
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView().preferredColorScheme(.dark)
-    }
-}
-```
-
-- [Dark Mode](https://www.hackingwithswift.com/quick-start/swiftui/how-to-preview-your-layout-in-light-and-dark-mode)
-
-
-## Different devices
-
-```swift
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-            .previewDevice(PreviewDevice(rawValue: "iPhone 12"))
-            .previewDisplayName("iPhone 12")
-
-        ContentView()
-            .previewDevice(PreviewDevice(rawValue: "iPhone 12 Pro Max"))
-            .previewDisplayName("iPhone 12 Pro Max")
-    }
-}
-```
-
-- [How to preview your layout in different devices](https://www.hackingwithswift.com/quick-start/swiftui/how-to-preview-your-layout-in-different-devices)
-
-## Embed in NavigationController
-
-```swift
-static var previews: some View {
-    NavigationView {
-        ViewController()
-            .navigationBarTitle(Text("Navigation Title"), displayMode: .inline)
-            .preferredColorScheme(.dark)
-}
-```
-
-## Nibs
-
-### View Controller
-
-Exact same. Can instantiate view controller programmatically.
-
-```swift
+import Foundation
 import UIKit
 
-final class ViewController: UIViewController {
-    override func viewDidLoad() {
-        super.viewDidLoad()        
-    }
-}
-
-#if DEBUG
-import SwiftUI
-
-extension ViewController: UIViewControllerRepresentable {
-    func makeUIViewController(context: Context) -> ViewController {
-        return ViewController()
+final class SimpleView: UIView {
+    
+    let label = UILabel()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Simple Label"
+        
+        addSubview(label)
+        
+        NSLayoutConstraint.activate([
+            label.centerXAnchor.constraint(equalTo: centerXAnchor),
+            label.centerYAnchor.constraint(equalTo: centerYAnchor)
+        ])
     }
     
-    func updateUIViewController(_ uiViewController: ViewController, context: Context) {}
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override var intrinsicContentSize: CGSize {
+        return CGSize(width: 200, height: 200)
+    }
 }
+
+#if canImport(SwiftUI) && DEBUG
 import SwiftUI
-struct ViewControllerPreviews: PreviewProvider {
+
+@available(iOS 13, *)
+public struct UIViewPreview<View: UIView>: UIViewRepresentable {
+    public let view: View
+
+    public init(_ builder: @escaping () -> View) {
+        view = builder()
+    }
+
+    // MARK: - UIViewRepresentable
+    public func makeUIView(context: Context) -> UIView {
+        return view
+    }
+
+    public func updateUIView(_ view: UIView, context: Context) {
+        view.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        view.setContentHuggingPriority(.defaultHigh, for: .vertical)
+    }
+}
+#endif
+
+#if canImport(SwiftUI) && DEBUG
+import SwiftUI
+
+@available(iOS 13.0, *)
+struct SimpleView_Preview: PreviewProvider {
   static var previews: some View {
-    ViewController()
+    UIViewPreview {
+      let button = SimpleView()
+      return button
+    }.previewLayout(.sizeThatFits)
+     .padding(10)
   }
 }
 #endif
 ```
-
-![](images/nibvc.png)
 
 ### Links that help
 
-- [Wrapping a UIViewController in a SwiftUI view](README.md)
+- [NSHipster Previews](https://nshipster.com/swiftui-previews/)
 
 
 

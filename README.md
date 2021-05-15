@@ -1,6 +1,6 @@
 ![](images/logo.png)
 
-Deliberate practice with SwiftUI.
+Deliberate practice with SwiftUI. 
 
 ## Controls
 
@@ -28,6 +28,8 @@ Deliberate practice with SwiftUI.
 - [Stepper](Controls/Stepper/README.md)
 - [TabView](Controls/TabView/README.md)
 - [TextField](Controls/TextField/README.md)
+
+List of every type of [View](https://developer.apple.com/documentation/swiftui/view).
 
 ## Combine
 - [Getting Started](Combine/GettingStarted/README.md)
