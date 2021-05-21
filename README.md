@@ -32,7 +32,7 @@ Deliberate practice with SwiftUI.
 List of every type of [View](https://developer.apple.com/documentation/swiftui/view).
 
 ## Combine
-- [Getting Started](Combine/GettingStarted/README.md)
+- [Intro](Combine/Intro/README.md)
 - [Example with UIKit](Combine/TCDemo/README.md)
 
 ## Concepts

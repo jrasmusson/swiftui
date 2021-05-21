@@ -1,4 +1,4 @@
-# Getting Started with Combine
+# Intro
 
 ## Subscription and Publishers
 
