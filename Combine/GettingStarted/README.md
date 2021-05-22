@@ -36,9 +36,66 @@ But before we get into a full on example like this, let's start with an even sim
 
 ## How it works
 
-Say we have a textfield, a button, and a label, and we want to update the label every time someone enters text and hits the publish button. Here is how we’d do that using combine.
+Combine is built around three main abstractions:
 
-![](images/simple-example.png)
+- Publishers
+- Operators, and
+- Subscribers
+
+
+### Publishers
+
+Publishers publish events. Say for example that we want to be notified everytime a new blog is ready to be published. We could a built in publisher like `NotificationCenter` to fire an event every time a new blog post is published.
+
+```swift
+extension Notification.Name {
+    static let newBlogPost = Notification.Name("newPost")
+}
+
+struct BlogPost {
+    let title: String
+}
+
+// Create a publisher
+let publisher = NotificationCenter.Publisher(center: .default, name: .newBlogPost, object: nil)
+ .map { (notification) -> String? in
+     return (notification.object as? BlogPost)?.title ?? ""
+}
+```
+
+### Operators
+
+Operators take the output of publishers, and transform them into other data types downstream subscribers can understand. Like strings.
+
+In this case for example, our `NotificationCenter` emits `Notification` as it's output. We need to convert that into a string based off the title of the blog post.
+
+![](images/operators.png)
+
+Operators do that though operations like `map`.
+
+```swift
+ .map { (notification) -> String? in
+     return (notification.object as? BlogPost)?.title ?? ""
+}
+```
+
+### Subscribers
+
+Once we have our publishers and operators mapped, we are ready to subscribe. Subscription is a two step process. First we need to create the subscriber. Then we need to subscribe that subscriber to the publisher.
+
+```swift
+// Create a subscriber
+let subscriber = Subscribers.Assign(object: subscribedLabel, keyPath: \.text)
+publisher.subscribe(subscriber)
+```
+
+`Assign` is one way we take a UIControl like `UILabel`, and using KVC bind the publishers output to that labels `text` property.
+
+Now whenever a new blog post is published, our label automatically gets the update.
+
+![](images/demo.gif)
+
+### Source Code
 
 **ViewController.swift**
 
