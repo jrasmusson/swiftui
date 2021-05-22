@@ -22,21 +22,17 @@ Let's say we are building wizard registration app. And before a wizard can creat
 
 There is a lot of asynchronous eventing going on here. First we need to listen for when the user taps the text field via a target-action. Then we don't want to call the backend on every keypress as a wizard types in their username - set we setup a timer to debounce and only send the request every couple seconds. Then we might use KVO (Key Value Observing) to notify ourselves that the value of the wizard field has changed, and run additional processing logic to see if the other conditions have been met.
 
-### Without Combine
-
-![](images/async.png)
+![](images/without.png)
 
 What Combine does, it is takes all these different events, logic, and timing, and combines them into one stream, that we can query, and ask: "Have all these conditions been met."
 
-### With Combine
-
-![](images/how-works.png)
+![](images/with.png)
 
 - It can listen for the result of an asynchronous call to `URLSession`.
 - It can merge the validation results from the username, password, and repeat password fields
 - And then it can use that result to update the state of the create account button via KVC (Key Value Coding).
 
-But before we get into a full on example like this, let's start with an even simpler example.
+But before we get into a full on example like this, let's start with an even simpler example to see the mechanics behind how it works.
 
 ## How it works
 

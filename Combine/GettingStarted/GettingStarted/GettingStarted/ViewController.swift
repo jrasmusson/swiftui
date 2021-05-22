@@ -29,7 +29,7 @@ class ViewController: UIViewController {
         
         // Create a publisher
         let publisher = NotificationCenter.Publisher(center: .default, name: .newBlogPost, object: nil)
-         .map { (notification) -> String? in
+         .map { (notification) -> String? in // Combine with an operator
              return (notification.object as? BlogPost)?.title ?? ""
          }
         
