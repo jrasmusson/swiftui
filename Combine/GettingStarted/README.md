@@ -36,6 +36,8 @@ But before we get into a full on example like this, let's start with an even sim
 
 ## How it works
 
+![](images/simple.png)
+
 Combine is built around three main abstractions:
 
 - Publishers
