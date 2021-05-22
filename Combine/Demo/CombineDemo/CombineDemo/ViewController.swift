@@ -26,7 +26,6 @@ final class ViewController: UIViewController {
             }
             .map {
                 ($0 ?? "") == "password1" ? nil : $0
-                
             }
             .eraseToAnyPublisher()
     }
@@ -45,7 +44,7 @@ final class ViewController: UIViewController {
                 // A `Future` can take the value from our published stream and create a new publisher of type `Future`
                 // When you construct a future you give it a closure that takes a promise.
                 // A promise is just another closure, that takes the result. Success or failure.
-                // To use it its pretty simply. You simply call your asynchronous function, pass the result into the promise.
+                // To use it its pretty simple. You simply call your asynchronous function, pass the result into the promise.
                 return Future { promise in
                     // (Result<Output, Failure>) -> Void
                     self.usernameAvailable(username) { available in
@@ -53,7 +52,7 @@ final class ViewController: UIViewController {
                     }
                 }
             }
-            .eraseToAnyPublisher()
+            .eraseToAnyPublisher() // Let's you keep the original AnyPublisher<String?, Never> signature, and not have to return output of flatMap
     }
     
     func usernameAvailable(_ username: String, completion: (Bool) -> Void) {

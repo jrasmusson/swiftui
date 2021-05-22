@@ -22,7 +22,7 @@ class ViewController: UIViewController {
     @IBOutlet var publishButton: UIButton!
     @IBOutlet var subscribedLabel: UILabel!
     
-    override func viewDidLoad() {
+    override func viewDidLoad(  ) {
         super.viewDidLoad()
 
         publishButton.addTarget(self, action: #selector(publishButtonTapped), for: .primaryActionTriggered)
