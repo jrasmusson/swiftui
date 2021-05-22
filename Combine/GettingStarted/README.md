@@ -2,9 +2,7 @@
 
 ## What is Combine?
 
-[Combine](https://developer.apple.com/documentation/combine) is a Swift API for processing events over time. Events come in many forms in iOS apps - many of them asynchronous.
-
-Asynchronous Interfaces
+[Combine](https://developer.apple.com/documentation/combine) is a unified Swift API framework for processing events over time. Events include:
 
 - Target/Action
 - Notification center
@@ -12,9 +10,9 @@ Asynchronous Interfaces
 - Key-Value observing (KVO)
 - Ad-hoc callbacks
 
-Combine takes all these events, streams them into one, and let's you add logic to decide how they get processed and ultimately how they affect the state of our UI controls.
+And what Combine does is it takes all these events, streams them into one, and let's you add logic to decide how they get processed and ultimately how they affect the state of our UI controls.
 
-## How does it work?
+## Where would I use it?
 
 Let's say we are building wizard registration app. And before a wizard can create an account we need to check that:
 
@@ -36,7 +34,7 @@ What Combine does, it is takes all these different events, logic, and timing, an
 
 But before we get into a full on example like this, let's start with an even simpler example.
 
-## A Simple Example
+## How it works
 
 Say we have a textfield, a button, and a label, and we want to update the label every time someone enters text and hits the publish button. Here is how we’d do that using combine.
 
