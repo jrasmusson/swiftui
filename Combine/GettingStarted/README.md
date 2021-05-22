@@ -36,7 +36,14 @@ But before we get into a full on example like this, let's start with an even sim
 
 ## How it works
 
+In this simple example we will use Combine to:
+
+- update a label
+- when a button is pressed
+- with the contents of the text field
+
 ![](images/simple.png)
+
 
 Combine is built around three main abstractions:
 
@@ -44,14 +51,9 @@ Combine is built around three main abstractions:
 - Operators, and
 - Subscribers
 
-Let's take a look at a simple example where a label updates with the text from a text field when a button is pressed.
-
-<img src="images/simple-example.png" width="500" />
-
-
 ### Publishers
 
-Publishers publish events. Say for example that we want to be notified everytime a new blog is ready to be published. We could a built in publisher like `NotificationCenter` to fire an event every time a new blog post is published.
+Publishers publish, or fire the events we are interested in receiving. Say for example that we want to be notified everytime a new blog post is ready to be published. We could a create a `NotificationCenter` based publisher and then fire it when the publish button is pressed.
 
 ```swift
 extension Notification.Name {
@@ -77,7 +79,7 @@ In this case for example, our `NotificationCenter` emits `Notification` as it's 
 
 <img src="images/operators.png" width="600" />
 
-Operators do that though operations like `map`.
+Operators do that though operations like `map`, which we can conveniently tack onto publishers with a closure.
 
 ```swift
 .map { (notification) -> String? in
@@ -159,6 +161,7 @@ class ViewController: UIViewController {
 }
 ```
 
+So that's as simple as Combine gets.
 
 ### Summary
 
