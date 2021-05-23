@@ -56,48 +56,20 @@ final class ViewController: UIViewController {
     }
     
     func usernameAvailable(_ username: String, completion: (Bool) -> Void) {
+        // Asynchronous call to backend server
         completion(true)
     }
     
     // Step 3: Take these two publisher signals we have and use them to enable the create button if both pass
-        
+
     var validatedCredentials: AnyPublisher<(String, String)?, Never> {
         return Publishers.CombineLatest(validatedUsername, validatedPassword)
-
-            .receive(on: RunLoop.main) // <<—— run on main thread
-
-            .map { validatedEMail, validatedPassword in
-                print("validatedEMail: \(validatedEMail ?? "not set"), validatedPassword: \(validatedPassword ?? "not set")")
-
-                guard let eMail = validatedEMail, let password = validatedPassword else { return nil }
-
-                return (eMail, password)
-
-        }
-        .eraseToAnyPublisher()
-        
-//    var validatedCredentials: AnyPublisher<(String, String)?, Never> {
-//
-//        let validatedCredentials = Publishers.CombineLatest(validatedUsername, validatedPassword)
-//            .map { (username, password) -> (String?, String?) in
-//                print("1 \(username) \(password)")
-//                return (username, password)
-//            }
-//            .map { (username, password) -> (String, String)? in
-//                guard let uname = username, let pwd = password else { return nil }
-//                print("2 \(uname) \(pwd)")
-//                return (uname, pwd)
-//            }
-//            .eraseToAnyPublisher()
-//
-//
-//        return validatedCredentials
-                    
-//        return Publishers.CombineLatest(validatedUsername, validatedPassword) { username, password in
-//            guard let uname = username, let pwd = password else { return nil }
-//            return (uname, pwd)
-//        }
-//        .eraseToAnyPublisher()
+            .receive(on: RunLoop.main)
+            .map { username, password in
+                guard let uname = username, let pwd = password else { return nil }
+                return (uname, pwd)
+            }
+            .eraseToAnyPublisher()
     }
     
     var createButtonStream: AnyCancellable?
