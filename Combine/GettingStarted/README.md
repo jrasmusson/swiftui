@@ -161,11 +161,9 @@ class ViewController: UIViewController {
 }
 ```
 
-So that's as simple as Combine gets.
-
 ### Summary
 
-So in summary:
+So that's as simple as Combine gets. The important things to understand at this point are that:
 
 - Combine is a framework for processing events.
 - It leverages existing technologies like NotificationCenter, KVO and KVC to publish and send events.
@@ -175,6 +173,8 @@ And its got three main abstractions:
 - Publishers - publish events.
 - Operators - map and transform the results from publishers.
 - Subscribers - consume the events publishers send out.
+
+# A more complicated example
 	
 ### Links that help
 
