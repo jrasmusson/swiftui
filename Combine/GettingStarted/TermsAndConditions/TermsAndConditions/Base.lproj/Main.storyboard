@@ -82,10 +82,10 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="acceptedSwitch" destination="VKv-TB-y29" id="ZCy-6Z-TUu"/>
                         <outlet property="nameField" destination="EJw-rd-PNp" id="vhj-55-mm4"/>
-                        <outlet property="privacySwitch" destination="NER-ke-5kd" id="PoX-eK-A8Y"/>
+                        <outlet property="privacySwitch" destination="NER-ke-5kd" id="Dpg-WB-u0U"/>
                         <outlet property="submitButton" destination="nlc-AP-Cmw" id="9EF-ns-KCA"/>
-                        <outlet property="termsSwitch" destination="54v-id-uR2" id="AbI-eq-Tho"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

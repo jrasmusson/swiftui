@@ -10,7 +10,7 @@ import Combine
 
 class ViewController: UIViewController {
 
-    @IBOutlet var termsSwitch: UIStackView!
+    @IBOutlet var acceptedSwitch: UISwitch!
     @IBOutlet var privacySwitch: UISwitch!
     @IBOutlet var nameField: UITextField!
     @IBOutlet var submitButton: UIButton!
@@ -20,23 +20,25 @@ class ViewController: UIViewController {
     @Published private var acceptedPrivacy = false
     @Published private var name = ""
     
-    private var stream: AnyCancellable?
+    // Combine publishers into single stream
+    private var validToSubmit: AnyPublisher<Bool, Never> {
+        return Publishers.CombineLatest3($acceptedTerms, $acceptedPrivacy, $name)
+            .map { terms, privacy, name in
+                return terms && privacy && !name.isEmpty
+            }.eraseToAnyPublisher()
+    }
+
+    // Define subscriber
+    private var buttonSubscriber: AnyCancellable?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         nameField.delegate = self
         
-        stream = validToSubmit
+        // Hook subscriber up to publisher
+        buttonSubscriber = validToSubmit
             .receive(on: RunLoop.main)
             .assign(to: \.isEnabled, on: submitButton)
-    }
-
-    private var validToSubmit: AnyPublisher<Bool, Never> {
-        return Publishers.CombineLatest3($acceptedTerms, $acceptedPrivacy, $name)
-            .map { terms, privacy, name in
-                print("foo - terms: \(terms) privacy: \(privacy) name: \(name)")
-                return terms && privacy && !name.isEmpty
-            }.eraseToAnyPublisher()
     }
     
     @IBAction func acceptTerms(_ sender: UISwitch) {
@@ -52,9 +54,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func submitAction(_ sender: UIButton) {
-        print("foo - Submit: \(name)")
     }
-    
 }
 
 extension ViewController: UITextFieldDelegate {
@@ -63,4 +63,3 @@ extension ViewController: UITextFieldDelegate {
         return true;
     }
 }
-
