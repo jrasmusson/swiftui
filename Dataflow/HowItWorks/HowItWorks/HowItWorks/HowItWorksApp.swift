@@ -1,14 +1,14 @@
 //
-//  DataflowApp.swift
-//  Dataflow
+//  HowItWorksApp.swift
+//  HowItWorks
 //
-//  Created by jrasmusson on 2021-04-28.
+//  Created by jrasmusson on 2021-05-29.
 //
 
 import SwiftUI
 
 @main
-struct DataflowApp: App {
+struct HowItWorksApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()

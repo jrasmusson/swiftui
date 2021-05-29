@@ -7,27 +7,25 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7115858126398DFA00460F89 /* PodcastPlayerStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7115858026398DFA00460F89 /* PodcastPlayerStore.swift */; };
-		71C14D4F2639859B0059CB6F /* DataflowApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C14D4E2639859B0059CB6F /* DataflowApp.swift */; };
-		71C14D512639859B0059CB6F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C14D502639859B0059CB6F /* ContentView.swift */; };
-		71C14D532639859B0059CB6F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 71C14D522639859B0059CB6F /* Assets.xcassets */; };
-		71C14D562639859B0059CB6F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 71C14D552639859B0059CB6F /* Preview Assets.xcassets */; };
-		71C14D612639860E0059CB6F /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C14D602639860E0059CB6F /* PlayerView.swift */; };
+		71A5C06E266274DB00178720 /* HowItWorksApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71A5C06D266274DB00178720 /* HowItWorksApp.swift */; };
+		71A5C070266274DB00178720 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71A5C06F266274DB00178720 /* ContentView.swift */; };
+		71A5C072266274DC00178720 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 71A5C071266274DC00178720 /* Assets.xcassets */; };
+		71A5C075266274DC00178720 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 71A5C074266274DC00178720 /* Preview Assets.xcassets */; };
+		71A5C07E2662754E00178720 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71A5C07D2662754E00178720 /* PlayerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		7115858026398DFA00460F89 /* PodcastPlayerStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastPlayerStore.swift; sourceTree = "<group>"; };
-		71C14D4B2639859B0059CB6F /* Dataflow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dataflow.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		71C14D4E2639859B0059CB6F /* DataflowApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataflowApp.swift; sourceTree = "<group>"; };
-		71C14D502639859B0059CB6F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		71C14D522639859B0059CB6F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		71C14D552639859B0059CB6F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		71C14D572639859B0059CB6F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		71C14D602639860E0059CB6F /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
+		71A5C06A266274DB00178720 /* HowItWorks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HowItWorks.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		71A5C06D266274DB00178720 /* HowItWorksApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowItWorksApp.swift; sourceTree = "<group>"; };
+		71A5C06F266274DB00178720 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		71A5C071266274DC00178720 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		71A5C074266274DC00178720 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		71A5C076266274DC00178720 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		71A5C07D2662754E00178720 /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		71C14D482639859B0059CB6F /* Frameworks */ = {
+		71A5C067266274DB00178720 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -37,87 +35,78 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		71C14D422639859B0059CB6F = {
+		71A5C061266274DB00178720 = {
 			isa = PBXGroup;
 			children = (
-				71C14D4D2639859B0059CB6F /* Dataflow */,
-				71C14D4C2639859B0059CB6F /* Products */,
+				71A5C06C266274DB00178720 /* HowItWorks */,
+				71A5C06B266274DB00178720 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		71C14D4C2639859B0059CB6F /* Products */ = {
+		71A5C06B266274DB00178720 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				71C14D4B2639859B0059CB6F /* Dataflow.app */,
+				71A5C06A266274DB00178720 /* HowItWorks.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		71C14D4D2639859B0059CB6F /* Dataflow */ = {
+		71A5C06C266274DB00178720 /* HowItWorks */ = {
 			isa = PBXGroup;
 			children = (
-				71C14D5E263985C20059CB6F /* Files */,
-				71C14D502639859B0059CB6F /* ContentView.swift */,
-				71C14D602639860E0059CB6F /* PlayerView.swift */,
-				7115858026398DFA00460F89 /* PodcastPlayerStore.swift */,
+				71A5C06D266274DB00178720 /* HowItWorksApp.swift */,
+				71A5C06F266274DB00178720 /* ContentView.swift */,
+				71A5C071266274DC00178720 /* Assets.xcassets */,
+				71A5C076266274DC00178720 /* Info.plist */,
+				71A5C073266274DC00178720 /* Preview Content */,
+				71A5C07D2662754E00178720 /* PlayerView.swift */,
 			);
-			path = Dataflow;
+			path = HowItWorks;
 			sourceTree = "<group>";
 		};
-		71C14D542639859B0059CB6F /* Preview Content */ = {
+		71A5C073266274DC00178720 /* Preview Content */ = {
 			isa = PBXGroup;
 			children = (
-				71C14D552639859B0059CB6F /* Preview Assets.xcassets */,
+				71A5C074266274DC00178720 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
-			sourceTree = "<group>";
-		};
-		71C14D5E263985C20059CB6F /* Files */ = {
-			isa = PBXGroup;
-			children = (
-				71C14D542639859B0059CB6F /* Preview Content */,
-				71C14D572639859B0059CB6F /* Info.plist */,
-				71C14D522639859B0059CB6F /* Assets.xcassets */,
-				71C14D4E2639859B0059CB6F /* DataflowApp.swift */,
-			);
-			name = Files;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		71C14D4A2639859B0059CB6F /* Dataflow */ = {
+		71A5C069266274DB00178720 /* HowItWorks */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 71C14D5A2639859B0059CB6F /* Build configuration list for PBXNativeTarget "Dataflow" */;
+			buildConfigurationList = 71A5C079266274DC00178720 /* Build configuration list for PBXNativeTarget "HowItWorks" */;
 			buildPhases = (
-				71C14D472639859B0059CB6F /* Sources */,
-				71C14D482639859B0059CB6F /* Frameworks */,
-				71C14D492639859B0059CB6F /* Resources */,
+				71A5C066266274DB00178720 /* Sources */,
+				71A5C067266274DB00178720 /* Frameworks */,
+				71A5C068266274DB00178720 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = Dataflow;
-			productName = Dataflow;
-			productReference = 71C14D4B2639859B0059CB6F /* Dataflow.app */;
+			name = HowItWorks;
+			productName = HowItWorks;
+			productReference = 71A5C06A266274DB00178720 /* HowItWorks.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		71C14D432639859B0059CB6F /* Project object */ = {
+		71A5C062266274DB00178720 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1240;
 				LastUpgradeCheck = 1240;
 				TargetAttributes = {
-					71C14D4A2639859B0059CB6F = {
+					71A5C069266274DB00178720 = {
 						CreatedOnToolsVersion = 12.4;
 					};
 				};
 			};
-			buildConfigurationList = 71C14D462639859B0059CB6F /* Build configuration list for PBXProject "Dataflow" */;
+			buildConfigurationList = 71A5C065266274DB00178720 /* Build configuration list for PBXProject "HowItWorks" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -125,44 +114,43 @@
 				en,
 				Base,
 			);
-			mainGroup = 71C14D422639859B0059CB6F;
-			productRefGroup = 71C14D4C2639859B0059CB6F /* Products */;
+			mainGroup = 71A5C061266274DB00178720;
+			productRefGroup = 71A5C06B266274DB00178720 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				71C14D4A2639859B0059CB6F /* Dataflow */,
+				71A5C069266274DB00178720 /* HowItWorks */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		71C14D492639859B0059CB6F /* Resources */ = {
+		71A5C068266274DB00178720 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				71C14D562639859B0059CB6F /* Preview Assets.xcassets in Resources */,
-				71C14D532639859B0059CB6F /* Assets.xcassets in Resources */,
+				71A5C075266274DC00178720 /* Preview Assets.xcassets in Resources */,
+				71A5C072266274DC00178720 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		71C14D472639859B0059CB6F /* Sources */ = {
+		71A5C066266274DB00178720 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				71C14D612639860E0059CB6F /* PlayerView.swift in Sources */,
-				71C14D512639859B0059CB6F /* ContentView.swift in Sources */,
-				71C14D4F2639859B0059CB6F /* DataflowApp.swift in Sources */,
-				7115858126398DFA00460F89 /* PodcastPlayerStore.swift in Sources */,
+				71A5C07E2662754E00178720 /* PlayerView.swift in Sources */,
+				71A5C070266274DB00178720 /* ContentView.swift in Sources */,
+				71A5C06E266274DB00178720 /* HowItWorksApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		71C14D582639859B0059CB6F /* Debug */ = {
+		71A5C077266274DC00178720 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -223,7 +211,7 @@
 			};
 			name = Debug;
 		};
-		71C14D592639859B0059CB6F /* Release */ = {
+		71A5C078266274DC00178720 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -278,42 +266,42 @@
 			};
 			name = Release;
 		};
-		71C14D5B2639859B0059CB6F /* Debug */ = {
+		71A5C07A266274DC00178720 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "\"Dataflow/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"HowItWorks/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = Dataflow/Info.plist;
+				INFOPLIST_FILE = HowItWorks/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.rsc.Dataflow;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rsc.HowItWorks;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
-		71C14D5C2639859B0059CB6F /* Release */ = {
+		71A5C07B266274DC00178720 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "\"Dataflow/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"HowItWorks/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = Dataflow/Info.plist;
+				INFOPLIST_FILE = HowItWorks/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.rsc.Dataflow;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rsc.HowItWorks;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -323,25 +311,25 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		71C14D462639859B0059CB6F /* Build configuration list for PBXProject "Dataflow" */ = {
+		71A5C065266274DB00178720 /* Build configuration list for PBXProject "HowItWorks" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				71C14D582639859B0059CB6F /* Debug */,
-				71C14D592639859B0059CB6F /* Release */,
+				71A5C077266274DC00178720 /* Debug */,
+				71A5C078266274DC00178720 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		71C14D5A2639859B0059CB6F /* Build configuration list for PBXNativeTarget "Dataflow" */ = {
+		71A5C079266274DC00178720 /* Build configuration list for PBXNativeTarget "HowItWorks" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				71C14D5B2639859B0059CB6F /* Debug */,
-				71C14D5C2639859B0059CB6F /* Release */,
+				71A5C07A266274DC00178720 /* Debug */,
+				71A5C07B266274DC00178720 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 71C14D432639859B0059CB6F /* Project object */;
+	rootObject = 71A5C062266274DB00178720 /* Project object */;
 }
