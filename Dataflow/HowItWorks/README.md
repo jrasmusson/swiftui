@@ -59,6 +59,7 @@ struct PlayerView: View {
 - Is good to define as `private` so its clear that is state local only to this view.
 - Use @State for tracking local view state within your app.
 
+![](images/statedemo.gif)
 
 ### Links that help
 - [WWDC 2019 - Data Flow Through SwiftUI](https://developer.apple.com/videos/play/wwdc2019/226/)
