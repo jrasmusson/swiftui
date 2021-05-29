@@ -2,8 +2,8 @@
 
 Swift has over six ways to pass around data.
 
-- @State - local to a view
-- @Binding - how you bind
+- @State - local view state
+- @Binding - local view state passed to subviews
 - @StateObject - passed around
 - @ObservedObject - passed around managed by SwiftUI
 - @EnvironmentObject - ?
@@ -14,7 +14,7 @@ Let's see how each works.
 
 ## @State
 
-While we can define `var` in a `struct`
+While we can define `vars` in a `structs`
 
 ```swift
 struct PlayerView: View {
@@ -22,7 +22,7 @@ struct PlayerView: View {
 
 ```
 
-We can't change its state.
+We can't change their state.
 
 ```swift
 struct PlayerView: View {
@@ -38,9 +38,7 @@ struct PlayerView: View {
 }
 ```
 
-To get around this, the creators of SwiftUI created the property wrapper @State.
-
-> @State - for tracking local view state of value types
+To track state locally in SwiftUI views we use the `@State` property wrapper.
 
 ```swift
 struct PlayerView: View {
@@ -56,10 +54,10 @@ struct PlayerView: View {
 }
 ```
 
+- @State tracks the stack of variables locally within our views
 - Works on with value types (no classes).
-- Tracks state local to the view.
- - Good to define with `private`.
-- Use for tracking local view state within that view of the app.
+- Is good to define as `private` so its clear that is state local only to this view.
+- Use @State for tracking local view state within your app.
 
 
 ### Links that help
