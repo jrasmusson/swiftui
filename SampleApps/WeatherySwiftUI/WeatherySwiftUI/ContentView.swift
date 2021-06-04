@@ -9,19 +9,29 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        HStack(alignment: .top) {
-            VStack {
-                CalendarView()
-                Spacer()
-            }
-            Text("Event title").font(.title)
+        VStack {
+            EventHeader()
             Spacer()
         }.padding()
     }
 }
 
+struct EventHeader: View {
+    var body: some View {
+        HStack(spacing: 15) {
+            CalendarView()
+            VStack(alignment: .leading) {
+                Text("Event title").font(.title)
+                Text("Location")
+            }
+            Spacer()
+        }
+    }
+}
 
 struct CalendarView: View {
+    var eventIsVerified = true
+
     var body: some View {
         Image(systemName: "calendar")
             .resizable()
@@ -30,6 +40,20 @@ struct CalendarView: View {
             .background(Color.red)
             .cornerRadius(10)
             .foregroundColor(.white)
+            .addVerifiedBadge(eventIsVerified)
+    }
+}
+
+extension View {
+    func addVerifiedBadge(_ isVerified: Bool) -> some View {
+        ZStack(alignment: .topTrailing) {
+            self
+
+            if isVerified {
+                Image(systemName: "checkmark.circle.fill")
+                    .offset(x: 3, y: -3)
+            }
+        }
     }
 }
 
