@@ -13,9 +13,9 @@ With classes, multiple things can point to the same value. Classes are reference
 
 But structs are value based. There can be only one owner.
 
-What that means is that if we have two SwiftUI views and we send them both the same struct to work with, they actually each have a unique copy of that struct; ifone changes it, the other won't see that change. On the other hand, if we create an instance of a classes and send that to both views, they *will* share changes.
+What that means is that if we have two SwiftUI views and we send them both the same struct to work with, they actually each have a unique copy of that struct; if one changes it, the other won't see that change. On the other hand, if we create an instance of a classes and send that to both views, they *will* share changes.
 
-The reason why @State only works with structs is because when we change @State in a class, we aren't changing the reference of state. It remains the same.
+The reason why `@State` only works with structs is because when we change `@State` in a class, we aren't changing the reference of state. It remains the same.
 
 Yes we are changing the values of state. But everyone gets the same value. No change.
 
@@ -39,9 +39,9 @@ class User {
 }
 ```
 
-`@Published` is more or less have of `@State`. It tells Swift that whenever either of those two properties change, it should send an announcement out to any SwiftUI views that are watching that they should reload.
+`@Published` is more or less half of `@State`. It tells Swift that whenever either of those two properties change, it should send an announcement out to any SwiftUI views that are watching that they should reload.
 
-How do those views know which classes ight send out these modifications? That's another property wrapper, `@ObservedObject`. Which is the other half of `@State`. it tells SwiftUI to watch a class for any change annoucements.
+How do those views know which classes might send out these modifications? That's another property wrapper, `@ObservedObject`. Which is the other half of `@State`. it tells SwiftUI to watch a class for any change annoucements.
 
 ```swift
 @ObservedObject var user = User()
@@ -50,7 +50,7 @@ How do those views know which classes ight send out these modifications? That's 
 So really to make something observable we go from this:
 
 ```swift
-class User {
+struct User {
     var firstName = "Bilbo"
     var lastName = "Baggins"
 }

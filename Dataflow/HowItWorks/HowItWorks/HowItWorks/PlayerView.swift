@@ -11,6 +11,20 @@ struct PlayerView: View {
     @State private var isPlaying: Bool = false
     
     var body: some View {
+        VStack {
+            PlayButton(isPlaying: $isPlaying)
+            
+            Toggle(isOn: $isPlaying) {
+                Text("Hello World")
+            }.padding()
+        }
+    }
+}
+
+struct PlayButton: View {
+    @Binding var isPlaying: Bool
+    
+    var body: some View {
         Button(action: {
             self.isPlaying.toggle()
         }) {
