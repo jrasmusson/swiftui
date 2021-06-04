@@ -37,6 +37,8 @@ List of every type of [View](https://developer.apple.com/documentation/swiftui/v
 ## Data Flow
 - [How it works](Dataflow/HowItWorks/README.md)
 
+## Layout
+- [How it works](Layout/HowItWorks/README.md)
 
 ## How to
 

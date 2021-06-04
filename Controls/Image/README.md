@@ -1,5 +1,24 @@
 # Image
 
+## Frame
+
+```swift
+struct CalendarView: View {
+    var body: some View {
+        Image(systemName: "calendar")
+            .resizable()
+            .frame(width: 50, height: 50)
+            .padding()
+            .background(Color.red)
+            .cornerRadius(10)
+            .foregroundColor(.white)
+    }
+}
+```
+
+![](images/3.png)
+
+
 ## Resizeable
 
 ```swift
@@ -34,3 +53,4 @@ Image("Tron")
 ### Links that help
 
 - [Formatting our mission view](https://www.hackingwithswift.com/books/ios-swiftui/formatting-our-mission-view)
+- [A guide to the SwiftUI layout system - Part 1](https://www.swiftbysundell.com/articles/swiftui-layout-system-guide-part-1/)
