@@ -166,6 +166,189 @@ SwifUI has three property wrappers it uses to share via via the `ObservableObjec
 - @StateObject
 - @EnvironmentObject
 
+#### Sharing state with @ObservedObject
+
+To make a SwiftUI class observable, we need to declare what is publishable.
+
+```swift
+class User {
+    @Published var firstName = "Bilbo"
+    @Published var lastName = "Baggins"
+}
+```
+
+`@Published` is more or less half of `@State`. It tells Swift that whenever either of those two properties change, it should send an announcement out to any SwiftUI views that are watching that they should reload.
+
+How do those views know which classes might send out these modifications? That's another property wrapper, `@ObservedObject`. Which is the other half of `@State`. It tells SwiftUI to watch a class for any change announcements.
+
+```swift
+@ObservedObject var user = User()
+```
+
+So really to make something observable we go from this:
+
+```swift
+struct User {
+    var firstName = "Bilbo"
+    var lastName = "Baggins"
+}
+
+struct ContentView: View {
+    @State private var user = User()
+```
+
+To this:
+
+```swift
+class User: ObservableObject {
+    @Published var firstName = "Bilbo"
+    @Published var lastName = "Baggins"
+}
+
+struct ContentView: View {
+    @ObservedObject var user = User()
+```
+
+The end result here is that we can have our state stored in an external object, and we can now use that object in multiple views and have them all point to the same shared values.
+
+An example
+
+```swift
+import SwiftUI
+
+struct ReadingProgress {
+    let progress: Double
+}
+
+class CurrentlyReading: ObservableObject {
+    @Published var readingProgress: ReadingProgress
+    
+    init(readingProgress: ReadingProgress) {
+        self.readingProgress = readingProgress
+    }
+}
+
+struct ContentView: View {
+    @ObservedObject var currentlyReading: CurrentlyReading
+    
+    var body: some View {
+        Text("Progress: \(currentlyReading.readingProgress.progress)")
+            .padding()
+    }
+}
+```
+
+Changing gears a bit, say we want to asynchronously load our book covers just before they are displayed on screen. These images are an expensive resource, so we only want to keep them alive when visible.
+
+More generally, we notice that we want to tie the life cycle of our observable object to our view, like with @State.
+
+But notice @ObservedObject does not own the live cycle of the state it is observing. So to provide a more economic tool SwithUI team created @StateObject.
+
+#### Efficiently keeping state local with @StateObject
+
+- SwiftUI owns the `ObservableObject`
+- Creation and destruction is tied to the view’s life cycle
+- Instantiated just before the body
+- Just like @ObservedObject, but less expensive
+- Doesn’t get recreated every time view is instantiated
+- Like the reference type version of @State but for persistence in a view
+
+You provide initial value, and SwiftUI will assign just before. Once our image loads, SwiftUi will automatically update the view.
+
+```swift
+class CoverImageLoader: ObservedObject {
+    @Published public private(set) var image: Image? = nil
+    
+    func load(_ name: String) {
+        
+    }
+}
+ 
+struct BookCoverView: View {
+    @StateObject var loader = CoverImageLoader() // source of truth
+    
+    var coverName: String
+    var size: CGFloat
+    
+    var body: some View {
+        CoverImage(loade.image, size: size)
+            .onAppear { loader.load(coverName)}
+    }
+}
+```
+
+`CoverImageLoader` is instantiated just before the body runs, and is keep alive for the views lifecycle. No more on disappear.
+
+To genetically get any piece of data anywhere we have @EnvironmentObject. Which is both a view modifier and a property wrapper.
+
+#### Generically get to any piece of data with @EnvironmentObject
+
+Like @ObservedObject, but you don’t need to pass directly in
+Handy to get to those hard to reach places
+
+Set it up like this.
+
+```swift
+struct MovieList: View {
+  @EnvironmentObject var userStore: UserStore
+  @Environment(\.presentationMode) var presentationMode
+  @StateObject var movieStore = MovieStore()
+  @State private var isPresented = false
+ 
+  var body: some View {
+    NavigationView {
+      List {
+        ForEach(movieStore.movies, id: \.title) {
+          MovieRow(movie: $0)
+        }
+        .onDelete(perform: movieStore.deleteMovie)
+      }
+      .sheet(isPresented: $isPresented) {
+        AddMovie(movieStore: movieStore, showModal: $isPresented)
+      }
+      .navigationBarTitle(Text("Fave Flicks"))
+      .navigationBarItems(
+        leading:
+          NavigationLink(destination: UserView()) {
+            HStack {
+              // 1
+              userStore.currentUserInfo.map { Text($0.userName) }
+              // 2
+              Image(systemName: "person.fill")
+            }
+          },
+        trailing:
+          Button(action: { isPresented.toggle() }) {
+            Image(systemName: "plus")
+          }
+      )
+    }
+  }
+}
+```
+
+Pass the value in like this.
+
+```swift
+let contentView = MovieList().environmentObject(UserStore())
+```
+
+#### Difference between Environment and Environment Object
+
+`@EnvironmentObject` is like an `@ObservableObject` except you don’t need to pass it down through every child explicitly as a reference.
+
+Instead you can define it once up high, and let children bind to it whenever they want.
+
+`@Environment`, is like `@EnvironmentObject` in one way: both are shared across a view hierarchy. The difference is that you can add anything to `@EnvironmentObject`, while `@Environment` is more like key-value pairs.
+
+While both @EnvironmentObject and @Environment share the environment, they serve very different purposes. You usually use @EnvironmentObject to manage dependencies in your app. SwiftUI uses @Environment as a way to manage settings for views and their children. Each view comes with environment values you can use to change the behavior of views in the hierarchy. One of these values is presentationMode.
+
+@EnvironmentObject
+- Pass data you control to other view without the tight coupling
+
+@Environment
+- Key/value pairs to manage settings for views and their children
+
 
 ### Links that help
 - [WWDC 2019 - Data Flow Through SwiftUI](https://developer.apple.com/videos/play/wwdc2019/226/)
