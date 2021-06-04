@@ -102,6 +102,72 @@ struct Toggle<Label>: View {
 }
 ```
 
+## Reference types
+
+Because structs can't be passed around and referenced like classes, if we ever want to sure state more globablly, we need to pass data using references - or classes.
+
+To facilitate that SwiftUI created an [`ObservableObject`](https://developer.apple.com/documentation/combine/observableobject) protocol, and anyone implementing that protocol, can be observed from other views within the app.
+
+**ObservableObject.swift**
+
+```swift
+public protocol ObservableObject : AnyObject {
+ 
+    /// The type of publisher that emits before the object has changed.
+    associatedtype ObjectWillChangePublisher : Publisher = ObservableObjectPublisher where Self.ObjectWillChangePublisher.Failure == Never
+ 
+    /// A publisher that emits before the object has changed.
+    var objectWillChange: Self.ObjectWillChangePublisher { get }
+}
+```
+
+- A type of object with a publisher that emits before the object has changed.
+- Enforces its implementers be classes via `AnyObject` extension.
+- Synthesizes an `objectWillChange` publisher that emits the changed value before any of its @Published properties changes.
+
+An example.
+
+```swift
+class Contact: ObservableObject {
+   @Published var name: String
+   @Published var age: Int
+
+   init(name: String, age: Int) {
+       self.name = name
+       self.age = age
+   }
+
+   func haveBirthday() -> Int {
+       age += 1
+       return age
+   }
+}
+
+let john = Contact(name: "John Appleseed", age: 24)
+cancellable = john.objectWillChange
+   .sink { _ in
+       print("\(john.age) will change")
+}
+print(john.haveBirthday())
+// Prints "24 will change"
+// Prints "25"
+```
+
+#### @Published
+- Automatically works with `ObservableObject`
+- Publishes every time the value changes in `willSet`
+- `projectedValue` is a publisher
+
+### ObservableObject dependencies
+
+SwifUI has three property wrappers it uses to share via via the `ObservableObject` protocol:
+
+- @ObservedObject
+- @StateObject
+- @EnvironmentObject
+
+
 ### Links that help
 - [WWDC 2019 - Data Flow Through SwiftUI](https://developer.apple.com/videos/play/wwdc2019/226/)
 - [How to use @EnvironmentObject to share data between views](https://www.hackingwithswift.com/quick-start/swiftui/how-to-use-environmentobject-to-share-data-between-views)
+- [Apple Docs ObservableObject](https://developer.apple.com/documentation/combine/observableobject)
