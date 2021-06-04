@@ -1,19 +1,17 @@
 # How Data Flow works
 
-Swift has over six ways to pass around data. And the one you choose depends on whether you are working with:
+There are over six ways you can pass data around in SwiftUI. The one you choose depends on whether you are working with:
 
-- a value type (struct)
+- Value types (structs)
  - @State - Transient data owned by the view.
  - @Binding - For mutating data owned by another view.
 
-- a reference type (class)
+- Reference type (classes)
 	- @StateObject - Managed by SwiftUI
 	- @ObservedObject - Shared data passed between views
 	- @EnvironmentObject - Shared data automatically available in subviews
 
 ![](images/how-to-choose.png)
-
-Let's see how each works.
 
 ## Value types
 
@@ -33,13 +31,13 @@ struct PlayerView: View {
 }
 ```
 
-In order to track changes of state in structs, SwiftUI created the @State and @Binding wrappers.
+In order to track changes of state in structs, SwiftUI created the @State and @Binding property wrappers.
 
 ### @State
 
 - A property wrapper for keeping track of transient data owned by the view.
 - Add the @State property wrapper to any value type state you want the view to track.
-- That state will be tracked transiently for the life time of the view.
+- SwiftUI will track that state for the life time of the view.
 
 
 ```swift
@@ -56,14 +54,14 @@ struct PlayerView: View {
 }
 ```
 
-![](images/statedemo.gif)
+### @Binding
 
-## @Binding
-
-- When you want a subview to bi-directionally bind to the @State in the parent, you use @Binding.
-- Add the @Binding property wrapper to the struct in the subview, and then bind to it from the parent using the `$` prefix.
-- @Binding is for mutating data owned by another view.
-- And if the subview changes that state, it will be reflected back in the parent too.
+- When you want a subview to bi-directionally bind to the @State in the parent, you use the @Binding property wrapper.
+- @Binding binds the state of that variable to whatever the parent passes in.
+- The parent passes the state using the `$` prefix.
+- And from that point on, any changes in the parent get sent to the child.
+- And any changes in the child, get sent back up to the parent.
+- That's what we mean when we say bi-directional binding.
 
 ```swift
 struct PlayerView: View {
@@ -103,9 +101,6 @@ struct Toggle<Label>: View {
     )
 }
 ```
-
-![](images/binddemo.gif)
-
 
 ### Links that help
 - [WWDC 2019 - Data Flow Through SwiftUI](https://developer.apple.com/videos/play/wwdc2019/226/)
