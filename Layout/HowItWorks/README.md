@@ -679,3 +679,5 @@ private extension ContentView {
 - [A guide to the SwiftUI layout system - Part 1](https://www.swiftbysundell.com/articles/swiftui-layout-system-guide-part-1/)
 - [A guide to the SwiftUI layout system - Part 2](https://www.swiftbysundell.com/articles/swiftui-layout-system-guide-part-2/)
 - [A guide to the SwiftUI layout system - Part 3](https://www.swiftbysundell.com/articles/swiftui-layout-system-guide-part-3/)
+- [SwiftUI tips and tricks](https://www.hackingwithswift.com/quick-start/swiftui/swiftui-tips-and-tricks)
+- [All SwiftUI property wrappers explained and compared](https://www.hackingwithswift.com/quick-start/swiftui/all-swiftui-property-wrappers-explained-and-compared)

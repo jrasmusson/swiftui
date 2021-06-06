@@ -21,7 +21,6 @@ struct ContentView: View {
                 .font(.title)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .keyboardType(.asciiCapable)
-                .background(Color(.systemFill))
             Image(systemName: "magnifyingglass")
                 .resizable()
                 .aspectRatio(contentMode: .fit)
