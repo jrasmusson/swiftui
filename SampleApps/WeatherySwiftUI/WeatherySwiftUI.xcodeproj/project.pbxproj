@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7187EDD5266BB7F700508021 /* EventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7187EDD4266BB7F700508021 /* EventView.swift */; };
 		71905A00266AB648004F2234 /* WeatherySwiftUIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 719059FF266AB648004F2234 /* WeatherySwiftUIApp.swift */; };
 		71905A02266AB648004F2234 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71905A01266AB648004F2234 /* ContentView.swift */; };
 		71905A04266AB649004F2234 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 71905A03266AB649004F2234 /* Assets.xcassets */; };
@@ -14,6 +15,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7187EDD4266BB7F700508021 /* EventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventView.swift; sourceTree = "<group>"; };
 		719059FC266AB648004F2234 /* WeatherySwiftUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherySwiftUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		719059FF266AB648004F2234 /* WeatherySwiftUIApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherySwiftUIApp.swift; sourceTree = "<group>"; };
 		71905A01266AB648004F2234 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -33,6 +35,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7187EDD7266BB86F00508021 /* Files */ = {
+			isa = PBXGroup;
+			children = (
+				71905A05266AB649004F2234 /* Preview Content */,
+				71905A08266AB649004F2234 /* Info.plist */,
+				71905A03266AB649004F2234 /* Assets.xcassets */,
+				719059FF266AB648004F2234 /* WeatherySwiftUIApp.swift */,
+			);
+			name = Files;
+			sourceTree = "<group>";
+		};
 		719059F3266AB648004F2234 = {
 			isa = PBXGroup;
 			children = (
@@ -52,11 +65,9 @@
 		719059FE266AB648004F2234 /* WeatherySwiftUI */ = {
 			isa = PBXGroup;
 			children = (
-				719059FF266AB648004F2234 /* WeatherySwiftUIApp.swift */,
+				7187EDD7266BB86F00508021 /* Files */,
 				71905A01266AB648004F2234 /* ContentView.swift */,
-				71905A03266AB649004F2234 /* Assets.xcassets */,
-				71905A08266AB649004F2234 /* Info.plist */,
-				71905A05266AB649004F2234 /* Preview Content */,
+				7187EDD4266BB7F700508021 /* EventView.swift */,
 			);
 			path = WeatherySwiftUI;
 			sourceTree = "<group>";
@@ -138,6 +149,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7187EDD5266BB7F700508021 /* EventView.swift in Sources */,
 				71905A02266AB648004F2234 /* ContentView.swift in Sources */,
 				71905A00266AB648004F2234 /* WeatherySwiftUIApp.swift in Sources */,
 			);
