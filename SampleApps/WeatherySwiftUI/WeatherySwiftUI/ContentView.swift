@@ -11,7 +11,13 @@ struct ContentView: View {
     @State private var cityName = ""
     
     var body: some View {
-        SearchView(cityName: $cityName)
+        VStack(alignment: .trailing) {
+            SearchView(cityName: $cityName)
+            Image(systemName: "sun.max")
+                .iconable(.large)
+                .padding(.top)
+            Spacer()
+        }.padding()
     }
 }
 
@@ -21,15 +27,14 @@ struct SearchView: View {
     var body: some View {
         HStack {
             Image(systemName: "location.circle.fill")
-                .iconable()
+                .iconable(.medium)
             TextField("Search", text: $cityName)
                 .font(.title)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .keyboardType(.asciiCapable)
             Image(systemName: "magnifyingglass")
-                .iconable()
+                .iconable(.medium)
         }
-        .padding()
     }
 }
 
@@ -40,9 +45,16 @@ struct ContentView_Previews: PreviewProvider {
 }
 
 extension Image {
-    func iconable() -> some View {
+    
+    enum Size: CGFloat {
+        case small = 22
+        case medium = 44
+        case large = 120
+    }
+    
+    func iconable(_ size: Size) -> some View {
         self.resizable()
-        .aspectRatio(contentMode: .fit)
-        .frame(width: 44, height: 44)
+            .aspectRatio(contentMode: .fit)
+            .frame(width: CGFloat(size.rawValue), height: size.rawValue)
     }
 }
