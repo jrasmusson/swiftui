@@ -17,9 +17,10 @@ struct ContentView: View {
                 .iconable(.large)
                 .padding(.top)
             Text("11")
-                .fon
+                .font(.system(size: 100, weight: .bold))
                 +
                 Text("°C")
+                .font(.system(size: 80))
             Spacer()
         }.padding()
     }
