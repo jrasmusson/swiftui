@@ -21,6 +21,8 @@ struct ContentView: View {
                 +
                 Text("°C")
                 .font(.system(size: 80))
+            Text("Cupertino")
+                .font(.largeTitle)
             Spacer()
         }.padding()
     }
