@@ -27,6 +27,7 @@ Deliberate practice with SwiftUI.
 - [Stacks](Controls/Stacks/README.md)
 - [Stepper](Controls/Stepper/README.md)
 - [TabView](Controls/TabView/README.md)
+- [Text](Controls/Text/README.md)
 - [TextField](Controls/TextField/README.md)
 
 List of every type of [View](https://developer.apple.com/documentation/swiftui/view).
