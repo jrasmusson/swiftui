@@ -48,13 +48,24 @@ TextField("Enter your word", text: $newWord)
 
 ![](images/4.png)
 
-### Turn off autocapitilization
+## Turn off autocapitilization
 
 ```swift
 .autocapitalization(.none)
 ```
 
+## Set background color
 
+```swift
+TextField("Search", text: $cityName)
+    .font(.title)
+    .padding(8)
+    .background(Color(.systemFill))
+        .cornerRadius(10)
+    .keyboardType(.asciiCapable)
+```
+
+![](images/5.png)
 
 ### Links that help
 
