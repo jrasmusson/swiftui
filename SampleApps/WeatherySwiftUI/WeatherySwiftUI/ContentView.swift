@@ -9,22 +9,42 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var cityName = ""
+    @State private var temperature = "11"
     
     var body: some View {
         VStack(alignment: .trailing) {
             SearchView(cityName: $cityName)
-            Image(systemName: "sun.max")
-                .iconable(.large)
-                .padding(.top)
-            Text("11")
-                .font(.system(size: 100, weight: .bold))
-                +
-                Text("°C")
-                .font(.system(size: 80))
-            Text("Cupertino")
-                .font(.largeTitle)
+            WeatherView()
+            TemperatureView(temperature: $temperature)
+            Text(cityName).font(.largeTitle)
             Spacer()
         }.padding()
+        .background(Image("background")
+                        .resizable()
+                        .ignoresSafeArea()
+                        .scaledToFill()
+        )
+        
+    }
+}
+
+struct WeatherView: View {
+    var body: some View {
+        Image(systemName: "sun.max")
+            .iconable(.large)
+            .padding(.top)
+    }
+}
+
+struct TemperatureView: View {
+    @Binding var temperature: String
+    
+    var body: some View {
+        Text(temperature)
+            .font(.system(size: 100, weight: .bold))
+            +
+            Text("°C")
+            .font(.system(size: 80))
     }
 }
 
@@ -52,7 +72,6 @@ struct ContentView_Previews: PreviewProvider {
 }
 
 extension Image {
-    
     enum Size: CGFloat {
         case small = 22
         case medium = 44
