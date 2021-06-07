@@ -1,5 +1,13 @@
 # Color
 
+SwiftUI has its own color pallete separate from `UIKit`. If you want to access `UIKit` colors you can do so like thi.
+
+```swift
+.background(Color(.systemFill))
+```
+
+## Stacks
+
 Note how only the text gets the background color.
 
 ```swift
