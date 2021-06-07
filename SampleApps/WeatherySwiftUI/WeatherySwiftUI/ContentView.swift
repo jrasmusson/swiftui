@@ -16,6 +16,10 @@ struct ContentView: View {
             Image(systemName: "sun.max")
                 .iconable(.large)
                 .padding(.top)
+            Text("11")
+                .fon
+                +
+                Text("°C")
             Spacer()
         }.padding()
     }
