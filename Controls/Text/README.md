@@ -30,6 +30,16 @@ Text("Brevity is the soul of wit.")
 
 ![](images/5.png)
 
+## Specifier
+
+```swift
+Text("\(temperature, specifier: "%.2f")") // x2 decimal
+```
+
+```swift
+Text("\(temperature, specifier: "%.0f")") // 0 decimal
+```
+
 ## NSAttributedStrings
 
 SwiftUI doesn't yet have them. But you can fake by either bringing in `UILabel` or working with `Text`.

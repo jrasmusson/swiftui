@@ -220,9 +220,11 @@ So in summary, when converting an application from `UIKit` to SwiftUI know that:
 
 - layout is done with `HStack`, `VStack` and `Spacer`.
 - not all UIKit elements are present in SwiftUI
-- 
+- while there is no Auto Layout, SwiftUI offers much in the way of defaults (don't fight it).
+- expect to extract lots of little subviews
+- data bindings are used to keep controls and data in sync
 
-### UI Source
+### Source
 
 ```swift
 //

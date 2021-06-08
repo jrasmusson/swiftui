@@ -11,7 +11,11 @@ import SwiftUI
 struct WeatherySwiftUIApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(store: WeatherStore(weatherModel: testData))
         }
     }
 }
+
+#if DEBUG
+let testData = WeatherModel(conditionId: 1, cityName: "Tokyo", temperature: 20)
+#endif

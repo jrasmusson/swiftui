@@ -8,15 +8,15 @@
 import SwiftUI
 
 struct ContentView: View {
+    @ObservedObject var store = WeatherStore()
     @State private var cityName = ""
-    @State private var temperature = "11"
-    
+        
     var body: some View {
         VStack(alignment: .trailing) {
             SearchView(cityName: $cityName)
             WeatherView()
-            TemperatureView(temperature: $temperature)
-            Text(cityName).font(.largeTitle)
+            TemperatureView(temperature: store.weatherModel.temperature)
+            Text(store.weatherModel.cityName).font(.largeTitle)
             Spacer()
         }.padding()
         .background(Image("background")
@@ -37,10 +37,10 @@ struct WeatherView: View {
 }
 
 struct TemperatureView: View {
-    @Binding var temperature: String
+    let temperature: Double
     
     var body: some View {
-        Text(temperature)
+        Text("\(temperature, specifier: "%.0f")")
             .font(.system(size: 100, weight: .bold))
             +
             Text("°C")
