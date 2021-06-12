@@ -8,15 +8,19 @@
 import SwiftUI
 
 struct ContentView: View {
-    @ObservedObject var store = WeatherStore()
     @State private var cityName = ""
+    @State private var weather = defaultWeather
         
+    static var defaultWeather: WeatherModel {
+        return WeatherModel(conditionId: 800, cityName: "", temperature: 0)
+    }
+    
     var body: some View {
         VStack(alignment: .trailing) {
             SearchView(cityName: $cityName)
             WeatherView()
-            TemperatureView(temperature: store.weatherModel.temperature)
-            Text(store.weatherModel.cityName).font(.largeTitle)
+            TemperatureView(temperature: weather.temperature)
+            Text(weather.cityName).font(.largeTitle)
             Spacer()
         }.padding()
         .background(Image("background")
@@ -24,7 +28,6 @@ struct ContentView: View {
                         .ignoresSafeArea()
                         .scaledToFill()
         )
-        
     }
 }
 
@@ -55,7 +58,12 @@ struct SearchView: View {
         HStack {
             Image(systemName: "location.circle.fill")
                 .iconable(.medium)
-            TextField("Search", text: $cityName)
+            TextField(
+                    "Search",
+                     text: $cityName,
+                     onCommit: {
+                        // cityNameChanged
+                })
                 .font(.title)
                 .padding(8)
                 .background(Color(.systemFill))
@@ -64,6 +72,10 @@ struct SearchView: View {
             Image(systemName: "magnifyingglass")
                 .iconable(.medium)
         }
+    }
+    
+    private func fetchWeather(for cityName: String) {
+        // how do you tell the parent to do something?
     }
 }
 

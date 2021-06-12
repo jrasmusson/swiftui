@@ -1,6 +1,31 @@
 # TextField
 
 ```swift
+TextField(
+        "Search",
+         text: $cityName
+    ) { isEditing in
+        // do something
+    } onCommit: {
+        // do something
+    }
+    
+TextField(
+        "Search",
+         text: $cityName,
+         onCommit: {
+			// do something        
+    })
+
+TextField("Search", text: $cityName) 
+    .font(.title)
+    .padding(8)
+    .background(Color(.systemFill))
+        .cornerRadius(10)
+    .keyboardType(.asciiCapable)
+```
+
+```swift
 struct ContentView: View {
     @State private var checkAmount = ""
     

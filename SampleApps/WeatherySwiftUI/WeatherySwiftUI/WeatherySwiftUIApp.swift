@@ -11,7 +11,8 @@ import SwiftUI
 struct WeatherySwiftUIApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView(store: WeatherStore(weatherModel: testData))
+            ContentView()
+//            ContentView(store: WeatherStore(weatherModel: testData))
         }
     }
 }
