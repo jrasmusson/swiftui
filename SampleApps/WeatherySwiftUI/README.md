@@ -1,12 +1,12 @@
-# Weathery
+# UIKit > SwiftUI
 
-![](images/1.png)
-
-This is a conversion of a UIKit applications into a SwiftUI one. Conversion will be done in three parts:
+This is Weathery. The UIKit application we are going to convert into Swift UI. Conversion will be done in three parts:
 
 1. UI.
 2. Data flow.
 3. Networking.
+
+![](images/1.png)
 
 
 ## UI
@@ -146,18 +146,6 @@ Setting the frame is like adding height and width constraints in Auto Layout. It
 .frame(width: 44, height: 44)
 ```
 
-#### SwiftUI doesn't yet have an equivalent for NSAttributedString
-
-Not everything in UIKit is available in SwiftUI. So if you have `NSAttributedString`, you will need to either get direct access to a `UILabel` via `UIViewRepresentable`, or concatenate text in SwiftUI like this:
-
-```swift
-Text(temperature)
-    .font(.system(size: 100, weight: .bold))
-    +
-    Text("°C")
-    .font(.system(size: 80))
-```
-
 #### Expect lots of little sub views
 
 Because there are no view controllers, SwiftUI embeds its presentation logic directly in the `View`. To keep our views from getting too big, its good practice to continuously extract smaller subviews.
@@ -183,7 +171,7 @@ struct SearchView: View {
 }
 ```
 
-##### Refactoring is still really important
+#### Refactoring is still really important
 
 To cut down on the noise in your views, you will want to find ways of capturing often repeated code. Here is one refactoring I created for `Image`.
 
@@ -216,13 +204,12 @@ Image(systemName: "sun.max")
 
 ### Summary
 
-So in summary, when converting an application from `UIKit` to SwiftUI know that:
+In SwiftUI:
 
 - layout is done with `HStack`, `VStack` and `Spacer`.
-- not all UIKit elements are present in SwiftUI
-- while there is no Auto Layout, SwiftUI offers much in the way of defaults (don't fight it).
-- expect to extract lots of little subviews
-- data bindings are used to keep controls and data in sync
+- SwiftUI uses lots of defaults
+- Expect lots of little subviews
+- Data is bound via property wrappers
 
 ### Source
 
@@ -317,6 +304,7 @@ extension Image {
 }
 ```
 
+## Data Flow
 
 ### Links that help
 
