@@ -74,7 +74,7 @@ struct ContentView: View {
 }
 
 struct SearchView: View {
-    @ObservedObject var store: WeatherStore
+    @StateObject var store: WeatherStore
     @State private var cityName: String = ""
     
     var body: some View {
