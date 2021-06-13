@@ -7,16 +7,52 @@
 
 import SwiftUI
 
+struct WeatherModel {
+    let conditionId: Int
+    let cityName: String
+    let temperature: Double
+    
+    var temperatureString: String {
+        return String(format: "%.0f", temperature)
+    }
+    
+    var conditionName: String {
+        switch conditionId {
+        case 200...232:
+            return "cloud.bolt"
+        case 300...321:
+            return "cloud.drizzle"
+        case 500...531:
+            return "cloud.rain"
+        case 600...622:
+            return "cloud.snow"
+        case 701...781:
+            return "cloud.fog"
+        case 800:
+            return "sun.max"
+        case 801...804:
+            return "cloud.bolt"
+        default:
+            return "cloud"
+        }
+    }
+}
+
+class WeatherStore: ObservableObject {
+    @Published var weatherModel: WeatherModel
+    
+    init(weatherModel: WeatherModel) {
+        self.weatherModel = weatherModel
+    }
+}
+
 struct ContentView: View {
-    @ObservedObject var store = WeatherStore()
+    @StateObject var store: WeatherStore
     @State private var cityName = ""
         
     var body: some View {
         VStack(alignment: .trailing) {
             SearchView(cityName: $cityName, store: store)
-            Button(action: addRoom) {
-                Text("Add Room")
-            }
             WeatherView()
             TemperatureView(temperature: store.weatherModel.temperature)
             Text(store.weatherModel.cityName).font(.largeTitle)
@@ -29,28 +65,12 @@ struct ContentView: View {
         )
     }
     
-    func addRoom() {
-        store.weatherModel = WeatherModel(conditionId: 500, cityName: "Texas", temperature: 99)
-    }
-}
-
-struct WeatherView: View {
-    var body: some View {
-        Image(systemName: "sun.max")
-            .iconable(.large)
-            .padding(.top)
-    }
-}
-
-struct TemperatureView: View {
-    let temperature: Double
-    
-    var body: some View {
-        Text("\(temperature, specifier: "%.0f")")
-            .font(.system(size: 100, weight: .bold))
-            +
-            Text("°C")
-            .font(.system(size: 80))
+    struct ContentView_Previews: PreviewProvider {
+        static var previews: some View {
+            let model = WeatherModel(conditionId: 200, cityName: "Unknown", temperature: 0)
+            let store = WeatherStore(weatherModel: model)
+            ContentView(store: store)
+        }
     }
 }
 
@@ -83,11 +103,27 @@ struct SearchView: View {
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
+struct WeatherView: View {
+    var body: some View {
+        Image(systemName: "sun.max")
+            .iconable(.large)
+            .padding(.top)
     }
 }
+
+struct TemperatureView: View {
+    let temperature: Double
+    
+    var body: some View {
+        Text("\(temperature, specifier: "%.0f")")
+            .font(.system(size: 100, weight: .bold))
+            +
+            Text("°C")
+            .font(.system(size: 80))
+    }
+}
+
+
 
 extension Image {
     enum Size: CGFloat {
