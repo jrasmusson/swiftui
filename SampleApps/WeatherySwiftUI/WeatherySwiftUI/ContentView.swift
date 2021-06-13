@@ -52,7 +52,7 @@ struct ContentView: View {
     var body: some View {
         VStack(alignment: .trailing) {
             SearchView(store: store)
-            WeatherView()
+            WeatherView(conditionName: store.weatherModel.conditionName)
             TemperatureView(temperature: store.weatherModel.temperature)
             Text(store.weatherModel.cityName).font(.largeTitle)
             Spacer()
@@ -103,8 +103,10 @@ struct SearchView: View {
 }
 
 struct WeatherView: View {
+    let conditionName: String
+    
     var body: some View {
-        Image(systemName: "sun.max")
+        Image(systemName: conditionName)
             .iconable(.large)
             .padding(.top)
     }
