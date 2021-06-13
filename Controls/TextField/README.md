@@ -1,20 +1,23 @@
 # TextField
 
+You create a text field with a label and a binding to a value. Text field also provides two closures: `EditingChanged` and `onCommit`.
+
+
 ```swift
 TextField(
-        "Search",
-         text: $cityName
-    ) { isEditing in
-        // do something
-    } onCommit: {
-        // do something
-    }
+    "Search",
+     text: $cityName
+) { isEditing in
+    // do something
+} onCommit: {
+    // do something
+}
     
 TextField(
-        "Search",
-         text: $cityName,
-         onCommit: {
-	// do something        
+    "Search",
+     text: $cityName,
+     onCommit: {
+// do something        
 })
 
 TextField("Search", text: $cityName) 
@@ -94,4 +97,5 @@ TextField("Search", text: $cityName)
 
 ### Links that help
 
+- [Apple docs](https://developer.apple.com/documentation/swiftui/textfield)
 - [Reading text from the user with TextField](https://www.hackingwithswift.com/books/ios-swiftui/reading-text-from-the-user-with-textfield)

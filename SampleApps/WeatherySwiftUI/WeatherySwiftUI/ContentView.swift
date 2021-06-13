@@ -48,7 +48,7 @@ struct TemperatureView: View {
 }
 
 struct SearchView: View {
-    @State private var cityName: String = "C"
+    @State private var cityName: String = ""
     @ObservedObject var store = WeatherStore()
     
     var body: some View {
