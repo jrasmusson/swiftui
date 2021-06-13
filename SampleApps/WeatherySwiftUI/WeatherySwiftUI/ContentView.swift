@@ -48,11 +48,10 @@ class WeatherStore: ObservableObject {
 
 struct ContentView: View {
     @StateObject var store: WeatherStore
-    @State private var cityName = ""
         
     var body: some View {
         VStack(alignment: .trailing) {
-            SearchView(cityName: $cityName, store: store)
+            SearchView(store: store)
             WeatherView()
             TemperatureView(temperature: store.weatherModel.temperature)
             Text(store.weatherModel.cityName).font(.largeTitle)
@@ -75,8 +74,8 @@ struct ContentView: View {
 }
 
 struct SearchView: View {
-    @Binding var cityName: String
     @ObservedObject var store: WeatherStore
+    @State private var cityName: String = ""
     
     var body: some View {
         HStack {
