@@ -67,6 +67,7 @@
 			isa = PBXGroup;
 			children = (
 				716B687E264557B60056A655 /* Files */,
+				716B6871264426F20056A655 /* Bundle-Decodable.swift */,
 				716B68602642C92F0056A655 /* ContentView.swift */,
 				716B685E2642C92F0056A655 /* MoonshotApp.swift */,
 				716B686E264426C00056A655 /* Astronaut.swift */,
@@ -88,7 +89,6 @@
 		716B687E264557B60056A655 /* Files */ = {
 			isa = PBXGroup;
 			children = (
-				716B6871264426F20056A655 /* Bundle-Decodable.swift */,
 				716B68622642C9300056A655 /* Assets.xcassets */,
 				716B68642642C9300056A655 /* Preview Content */,
 				716B68672642C9300056A655 /* Info.plist */,

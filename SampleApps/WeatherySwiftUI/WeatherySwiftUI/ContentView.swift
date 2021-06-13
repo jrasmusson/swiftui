@@ -119,7 +119,7 @@ struct TemperatureView: View {
 }
 
 
-
+// MARK: - Extensions
 extension Image {
     enum Size: CGFloat {
         case small = 22
