@@ -9,10 +9,14 @@ import SwiftUI
 
 struct ContentView: View {
     @ObservedObject var store = WeatherStore()
+    @State private var cityName = ""
         
     var body: some View {
         VStack(alignment: .trailing) {
-            SearchView()
+            SearchView(cityName: $cityName, store: store)
+            Button(action: addRoom) {
+                Text("Add Room")
+            }
             WeatherView()
             TemperatureView(temperature: store.weatherModel.temperature)
             Text(store.weatherModel.cityName).font(.largeTitle)
@@ -23,7 +27,10 @@ struct ContentView: View {
                         .ignoresSafeArea()
                         .scaledToFill()
         )
-        
+    }
+    
+    func addRoom() {
+        store.weatherModel = WeatherModel(conditionId: 500, cityName: "Texas", temperature: 99)
     }
 }
 
@@ -48,8 +55,8 @@ struct TemperatureView: View {
 }
 
 struct SearchView: View {
-    @State private var cityName: String = ""
-    @ObservedObject var store = WeatherStore()
+    @Binding var cityName: String
+    @ObservedObject var store: WeatherStore
     
     var body: some View {
         HStack {

@@ -2,7 +2,7 @@
 
 ## State
 
-Transient value state within a view.
+Tracks and updates transient value state objects within a view.
 
 ```swift
 struct PlayerView: View {
@@ -34,97 +34,12 @@ struct PlayButton: View {
 
 ## ObservableObject
 
-For reference objects created externally to a view.
-
-### Store
-
-This is good for when you want to update the whole `Weather` object.
+Define an object to observe at the top of your view hierarchy, and then explicitly pass to each child all the way down.
 
 ```swift
 import SwiftUI
-import Combine
 
-struct Weather {
-    let cityName: String
-}
-
-class WeatherStore: ObservableObject {
-    @Published var weather: Weather
-    
-    init(weather: Weather = Weather(cityName: "Calgary")) {
-        self.weather = weather
-    }
-}
-
-struct ContentView: View {
-    @ObservedObject var store = WeatherStore()
-    
-    var body: some View {
-        Button(action: addRoom) {
-            Text("Add Room")
-        }
-        Text(store.weather.cityName)
-    }
-    
-    func addRoom() {
-        store.weather = Weather(cityName: "Edmonton")
-    }
-}
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-    }
-}
-```
-
-### Single object
-
-This works if you just want to update single attribute of weather like city name.
-
-```swift
-import SwiftUI
-import Combine
-
-class Weather: ObservableObject {
-    @Published var cityName: String
-    
-    init(cityName: String = "Calgary") {
-        self.cityName = cityName
-    }
-}
-
-struct ContentView: View {
-    @ObservedObject var weather = Weather()
-    
-    var body: some View {
-        Button(action: addRoom) {
-            Text("Add Room")
-        }
-        Text(weather.cityName)
-    }
-    
-    func addRoom() {
-        weather.cityName = "Edmonton"
-    }
-}
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-    }
-}
-```
-
-## StateObject
-
-For objects initialized local to a view. Just replace `ObservableObject` with `StateObject`.
-
-## EnvironmentObject
-
-This environment is shared between views and their decendants (subviews), which makes it perfect for passing an object down a hiearchy of views.
-
-```swift
+// Define your observable
 class Book: ObservableObject {
     @Published var title: String
     @Published var author: String
@@ -134,25 +49,98 @@ class Book: ObservableObject {
         self.author = author
     }
 }
-```
 
-Parent
+// Inject into parent view at the top
+struct ContentView: View {
+    @ObservedObject var book: Book // 1
+    
+    var body: some View {
+        DetailView(book: book)
+    }
+}
 
-```swift
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        let book = Book(title: "The Hitchhiker's Guide to the Galaxy", author: "Douglas Adams")
+        ContentView(book: book)
+    }
+}
+
+// And then explicitly pass to each child
 struct DetailView: View
 {
+    @ObservedObject var book: Book // 2
+    
     var body: some View {
         VStack {
-            DetailHeader()
-            Text("Lorem ipsum dolor sit amet")
+            DetailHeader(book: book)
+        }
+    }
+}
+
+// And subview (tighter coupling)
+struct DetailHeader: View
+{
+    @ObservedObject var book: Book // 3
+
+    var body: some View {
+        VStack {
+            Text(book.title)
+            Text(book.author)
         }
     }
 }
 ```
 
-Decendent
+## StateObject
+
+Same mechanics as ``ObservableObject`. Just replace `ObservableObject` with `StateObject`.
+
+## EnvironmentObject
+
+Define once at the top, and have it automatically appear in all subviews without explicitly having to pass.
 
 ```swift
+import SwiftUI
+
+// Define your observable
+class Book: ObservableObject {
+    @Published var title: String
+    @Published var author: String
+
+    init(title: String, author: String) {
+        self.title = title
+        self.author = author
+    }
+}
+
+// Define once at the top
+struct ContentView: View {
+    var book = Book(title: "The Hitchhiker's Guide to the Galaxy", author: "Douglas Adams")
+    
+    var body: some View {
+        DetailView()
+            .environmentObject(book) // 1
+    }
+}
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+    }
+}
+
+// Automtically available
+struct DetailView: View
+{
+    var body: some View {
+        VStack {
+            DetailHeader()
+        }
+    }
+}
+
+// All the way down in decendent subviews
 struct DetailHeader: View
 {
     @EnvironmentObject var book: Book
@@ -165,24 +153,6 @@ struct DetailHeader: View
     }
 }
 ```
-
-Passing it in
-
-```swift
-@main
-struct BookApp: App
-{
-    var book = Book(title: "The Hitchhiker's Guide to the Galaxy", author: "Douglas Adams")
-
-    var body: some Scene {
-        WindowGroup {
-            DetailView()
-                .environmentObject(book)
-        }
-    }
-}
-```
-
 
 ### Links that help
 
