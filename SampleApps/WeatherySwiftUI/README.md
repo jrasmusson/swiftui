@@ -2,18 +2,22 @@
 
 This is Weathery. The UIKit application we are going to convert into Swift UI. Conversion will be done in three parts:
 
-1. UI.
-2. Data flow.
-3. Networking.
+1. UI
+2. Data flow
+3. Networking
 
 ![](images/1.png)
 
 
-## UI
+# UI
+
+## UIKit
 
 UIKit application was originally built as a series of `UIStackViews`.
 
 ![](images/1a.png)
+
+## SwiftUI
 
 The SwiftUI version of the `UIStackView` is the `HStack` and `VStack`. Which we will layout like this.
 
@@ -108,7 +112,7 @@ And we can get the elements in our `VStack` to align on the left using a trailin
 VStack(alignment: .trailing)
 ```
 
-#### SwiftUI binds data using property wrappers
+### SwiftUI binds data using property wrappers
 
 SwiftUI bindings data to controls using these things called property wrappers.
 
@@ -127,7 +131,7 @@ struct ContentView: View {
 }
 ```
 
-#### SwiftUI has its own set of colors
+### SwiftUI has its own set of colors
 
 If you want to use `UIKit` colors in SwiftUI you can.
 
@@ -136,7 +140,7 @@ TextField("Search", text: $cityName)
     .background(Color(.systemFill))
 ```
 
-#### Its OK to use frames
+### Its OK to use frames
 
 Frame used to be a dirty word with me when building everything in UIKit with Auto Layout. Not any more.
 
@@ -146,7 +150,7 @@ Setting the frame is like adding height and width constraints in Auto Layout. It
 .frame(width: 44, height: 44)
 ```
 
-#### Expect lots of little sub views
+### Expect lots of little sub views
 
 Because there are no view controllers, SwiftUI embeds its presentation logic directly in the `View`. To keep our views from getting too big, its good practice to continuously extract smaller subviews.
 
@@ -171,7 +175,7 @@ struct SearchView: View {
 }
 ```
 
-#### Refactoring is still really important
+### Refactoring is still important
 
 To cut down on the noise in your views, you will want to find ways of capturing often repeated code. Here is one refactoring I created for `Image`.
 
@@ -304,7 +308,40 @@ extension Image {
 }
 ```
 
-## Data Flow
+# Data Flow
+
+## UIKit
+
+Protocol-delegate.
+
+![](images/5.png)
+
+## SwiftUI
+
+All views are driven by state. State is shared by publishers.
+
+### Summary
+
+- Data flows from the top down.
+- Views are data driven.
+- You pass and share data between via publishers.
+
+# Networking
+
+Pretty much the same. What's different is what you update and communicate back.
+
+## UIKit
+
+In UIKit we would communicate back via a delegate.
+
+## SwiftUI
+
+In SwiftUI we update the shared published data model.
+
+### Summary
+
+- Do you networking the same
+- Update the data model instead of calling back via a closure, notification, or delegate.
 
 ### Links that help
 

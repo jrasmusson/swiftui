@@ -101,8 +101,6 @@ struct SearchView: View {
         let urlString = "\(weatherURL)&q=\(urlEncodedCityName)"
         
         performRequest(with: urlString)
-
-//        store.weatherModel = WeatherModel(conditionId: 400, cityName: cityName, temperature: 22)
     }
     
     func performRequest(with urlString: String) {
@@ -125,7 +123,7 @@ struct SearchView: View {
             
             DispatchQueue.main.async {
                 let weatherModel = WeatherModel(conditionId: id, cityName: name, temperature: temp)
-                store.weatherModel = weatherModel
+                store.weatherModel = weatherModel // 🦄 Magic!
             }
         }.resume()
     }
