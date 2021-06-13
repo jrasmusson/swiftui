@@ -9,11 +9,10 @@ import SwiftUI
 
 struct ContentView: View {
     @ObservedObject var store = WeatherStore()
-    @State private var cityName = ""
         
     var body: some View {
         VStack(alignment: .trailing) {
-            SearchView(cityName: $cityName)
+            SearchView()
             WeatherView()
             TemperatureView(temperature: store.weatherModel.temperature)
             Text(store.weatherModel.cityName).font(.largeTitle)
@@ -49,7 +48,7 @@ struct TemperatureView: View {
 }
 
 struct SearchView: View {
-    @Binding var cityName: String
+    @State private var cityName: String = "C"
     @ObservedObject var store = WeatherStore()
     
     var body: some View {

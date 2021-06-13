@@ -14,8 +14,8 @@ TextField(
         "Search",
          text: $cityName,
          onCommit: {
-			// do something        
-    })
+	// do something        
+})
 
 TextField("Search", text: $cityName) 
     .font(.title)
