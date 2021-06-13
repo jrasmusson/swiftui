@@ -81,17 +81,11 @@ struct SearchView: View {
         HStack {
             Image(systemName: "location.circle.fill")
                 .iconable(.medium)
-            TextField(
-                "Search",
-                text: $cityName,
+            TextField("Search", text: $cityName,
                 onCommit: {
                     fetchWeather(for: cityName)
                 })
-                .font(.title)
-                .padding(8)
-                .background(Color(.systemFill))
-                    .cornerRadius(10)
-                .keyboardType(.asciiCapable)
+                .searchable()
             Image(systemName: "magnifyingglass")
                 .iconable(.medium)
         }
@@ -137,5 +131,15 @@ extension Image {
         self.resizable()
             .aspectRatio(contentMode: .fit)
             .frame(width: CGFloat(size.rawValue), height: size.rawValue)
+    }
+}
+
+extension TextField {
+    func searchable() -> some View {
+        self.font(.title)
+            .padding(8)
+            .background(Color(.systemFill))
+            .cornerRadius(10)
+            .keyboardType(.asciiCapable)
     }
 }
