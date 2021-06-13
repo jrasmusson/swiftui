@@ -92,7 +92,42 @@ struct SearchView: View {
     }
     
     private func fetchWeather(for cityName: String) {
-        store.weatherModel = WeatherModel(conditionId: 400, cityName: cityName, temperature: 22)
+        guard let urlEncodedCityName = cityName.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else {
+            assertionFailure("Could not encode city named: \(cityName)")
+            return
+        }
+        
+        let weatherURL = URL(string: "https://api.openweathermap.org/data/2.5/weather?appid=ce5edb27133f4b3a9eab5abfe8072942&units=metric")!
+        let urlString = "\(weatherURL)&q=\(urlEncodedCityName)"
+        
+        performRequest(with: urlString)
+
+//        store.weatherModel = WeatherModel(conditionId: 400, cityName: cityName, temperature: 22)
+    }
+    
+    func performRequest(with urlString: String) {
+        let url = URL(string: urlString)!
+        URLSession.shared.dataTask(with: url) { data, response, error in
+
+            guard let data = data else {
+                print("No data in response: \(error?.localizedDescription ?? "Unknown error").")
+                return
+            }
+
+            guard let decodedData = try? JSONDecoder().decode(WeatherData.self, from: data) else {
+                print("Error decoding JSON response.")
+                return
+            }
+            
+            let id = decodedData.weather[0].id
+            let temp = decodedData.main.temp
+            let name = decodedData.name
+            
+            DispatchQueue.main.async {
+                let weatherModel = WeatherModel(conditionId: id, cityName: name, temperature: temp)
+                store.weatherModel = weatherModel
+            }
+        }.resume()
     }
 }
 
@@ -118,6 +153,21 @@ struct TemperatureView: View {
     }
 }
 
+// MARK: - JSON
+struct WeatherData: Codable {
+    let weather: [Weather]
+    let main: Main
+    let name: String
+}
+
+struct Weather: Codable {
+    let id: Int
+    let description: String
+}
+
+struct Main: Codable {
+    let temp: Double
+}
 
 // MARK: - Extensions
 extension Image {
