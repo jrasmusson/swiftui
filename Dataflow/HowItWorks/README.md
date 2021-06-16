@@ -1,6 +1,6 @@
-# How Data Flow works
+# How Data Flow works in SwiftUI
 
-There are over six ways you can pass data around in SwiftUI. The one you choose depends on whether you are working with:
+There are over six ways you can pass data around in SwiftUI. The one you choose depends on whether you are working with a value or reference type:
 
 ![](images/how-to-choose.png)
 
@@ -55,6 +55,7 @@ struct ContentView_Previews: PreviewProvider {
 ```
 
 ![](images/property.png)
+
 
 SwiftUI's heavy use of structs means we can't just define vars in structs and expect that to mutate with state changes.
 
