@@ -54,7 +54,7 @@ struct ContentView_Previews: PreviewProvider {
 }
 ```
 
-![](images/property.png)
+![](images/property2.png)
 
 
 SwiftUI's heavy use of structs means we can't just define vars in structs and expect that to mutate with state changes.
