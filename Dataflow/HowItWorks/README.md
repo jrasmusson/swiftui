@@ -2,18 +2,59 @@
 
 There are over six ways you can pass data around in SwiftUI. The one you choose depends on whether you are working with:
 
+![](images/how-to-choose.png)
+
 - Value types (structs)
- - @State - Transient data owned by the view.
- - @Binding - For mutating data owned by another view.
+   - Property - Immutable property that never changes.
+   - @State - Transient data owned by the view.
+   - @Binding - For mutating data owned by another view.
 
 - Reference type (classes)
 	- @StateObject - Managed by SwiftUI
 	- @ObservedObject - Shared data passed between views
 	- @EnvironmentObject - Shared data automatically available in subviews
 
-![](images/how-to-choose.png)
 
 ## Value types
+
+
+### Property
+
+The simplest way to flow data into a SwiftUI view is by setting it as a plain old property.
+
+```swift
+import SwiftUI
+
+struct ContentView: View {
+    var body: some View {
+        PlayerView(isPlaying: false)
+            .padding()
+    }
+}
+
+struct PlayerView: View {
+    var isPlaying: Bool = true
+    
+    var body: some View {
+        Button(action: {
+            
+        }) {
+            Image(systemName: isPlaying ? "pause.circle" : "play.circle")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 300, height: 300)
+        }
+    }
+}
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+    }
+}
+```
+
+![](images/property.png)
 
 SwiftUI's heavy use of structs means we can't just define vars in structs and expect that to mutate with state changes.
 
