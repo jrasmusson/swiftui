@@ -56,12 +56,14 @@ struct ContentView_Previews: PreviewProvider {
 
 ![](images/property2.png)
 
+SwiftUI Views are cheap, immutable structures that get re-rendered everytime their data changes. So the simplest thing we can do as far as data flow goes, is to pass a value type in, and let the view render itself.
 
-SwiftUI's heavy use of structs means we can't just define vars in structs and expect that to mutate with state changes.
+Of course that works so long as our property never changes. As soon as it does we have a problem.
+
 
 ```swift
 struct PlayerView: View {
-    var isPlaying: Bool = true // OK
+    var isPlaying: Bool = true 
     
     var body: some View {
         Button(action: {
@@ -73,7 +75,8 @@ struct PlayerView: View {
 }
 ```
 
-In order to track changes of state in structs, SwiftUI created the @State and @Binding property wrappers.
+Structs don't support the changing of properties - they are immutable. So in cases like this, where we want to change a property's value in a struct we go to `@State`.
+
 
 ### @State
 
