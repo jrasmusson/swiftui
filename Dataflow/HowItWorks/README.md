@@ -281,6 +281,14 @@ struct ContentView: View {
             .padding()
     }
 }
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        let progress = ReadingProgress(progress: 20)
+        let currentlyReading = CurrentlyReading(readingProgress: progress)
+        ContentView(currentlyReading: currentlyReading)
+    }
+}
 ```
 
 Changing gears a bit, say we want to asynchronously load our book covers just before they are displayed on screen. These images are an expensive resource, so we only want to keep them alive when visible.
