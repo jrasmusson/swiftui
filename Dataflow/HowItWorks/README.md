@@ -462,22 +462,22 @@ struct DetailHeader: View {
 }
 ```
 
-#### Difference between Environment and Environment Object
+### Difference between Environment and Environment Object
 
-`@EnvironmentObject` is like an `@ObservableObject` except you don’t need to pass it down through every child explicitly as a reference.
+SwiftUI gives us both `@Environment` and `@EnvironmentObject` property wrappers, but they are subtly different: whereas `@EnvironmentObject` allows us to inject arbitrary values into the environment, `@Environment` is specifically there to work with SwiftUI’s own pre-defined keys.
 
-Instead you can define it once up high, and let children bind to it whenever they want.
+For example, `@Environment` is great for reading out things like a Core Data managed object context, whether the device is in dark mode or light mode, what size class your view is being rendered with, and more – fixed properties that come from the system. In code, it looks like this:
 
-`@Environment`, is like `@EnvironmentObject` in one way: both are shared across a view hierarchy. The difference is that you can add anything to `@EnvironmentObject`, while `@Environment` is more like key-value pairs.
+```swift
+@Environment(\.horizontalSizeClass) var horizontalSizeClass
+@Environment(\.managedObjectContext) var managedObjectContext
+```
 
-While both @EnvironmentObject and @Environment share the environment, they serve very different purposes. You usually use @EnvironmentObject to manage dependencies in your app. SwiftUI uses @Environment as a way to manage settings for views and their children. Each view comes with environment values you can use to change the behavior of views in the hierarchy. One of these values is presentationMode.
+On the other hand, `@EnvironmentObject` is designed for arbitrary objects to be read from the environment, like this:
 
-@EnvironmentObject
-- Pass data you control to other view without the tight coupling
-
-@Environment
-- Key/value pairs to manage settings for views and their children
-
+```swift
+@EnvironmentObject var order: Order
+```
 
 ### Links that help
 - [WWDC 2019 - Data Flow Through SwiftUI](https://developer.apple.com/videos/play/wwdc2019/226/)
