@@ -261,41 +261,67 @@ An example
 ```swift
 import SwiftUI
 
-struct ReadingProgress {
-    let progress: Double
-}
+// Define your observable
+class Book: ObservableObject {
+    @Published var title: String
+    @Published var author: String
 
-class CurrentlyReading: ObservableObject {
-    @Published var readingProgress: ReadingProgress
-    
-    init(readingProgress: ReadingProgress) {
-        self.readingProgress = readingProgress
+    init(title: String, author: String) {
+        self.title = title
+        self.author = author
     }
 }
 
+// Inject into parent view at the top
 struct ContentView: View {
-    @ObservedObject var currentlyReading: CurrentlyReading
+    @ObservedObject var book: Book // 1
     
     var body: some View {
-        Text("Progress: \(currentlyReading.readingProgress.progress)")
-            .padding()
+        DetailView(book: book)
+    }
+}
+
+// And then explicitly pass to each child
+struct DetailView: View
+{
+    @ObservedObject var book: Book // 2
+    
+    var body: some View {
+        VStack {
+            DetailHeader(book: book)
+        }
+    }
+}
+
+// And subview (tighter coupling)
+struct DetailHeader: View
+{
+    @ObservedObject var book: Book // 3
+
+    var body: some View {
+        VStack {
+            Text(book.title)
+            Text(book.author)
+        }
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        let progress = ReadingProgress(progress: 20)
-        let currentlyReading = CurrentlyReading(readingProgress: progress)
-        ContentView(currentlyReading: currentlyReading)
+        let book = Book(title: "The Hitchhiker's Guide to the Galaxy", author: "Douglas Adams")
+        ContentView(book: book)
     }
 }
 ```
 
-Changing gears a bit, say we want to asynchronously load our book covers just before they are displayed on screen. These images are an expensive resource, so we only want to keep them alive when visible.
+![](images/observedObject.png)
 
-More generally, we notice that we want to tie the life cycle of our observable object to our view, like with @State.
+The thing to note here is how the `@ObservedObject` is passed along to every subview until is lands where it is needed. Of course it could be used, and updated anywhere along the way.
 
-But notice @ObservedObject does not own the live cycle of the state it is observing. So to provide a more economic tool SwithUI team created @StateObject.
+The one disadvantage of `@ObservedObject` is that this reference object is created everytime a new view is created (which could be often).
+
+A more performant variant of this, which can be used when the view owns the observable object is the reference version of `@State` called `@StateObject`.
+
 
 #### Efficiently keeping state local with @StateObject
 
