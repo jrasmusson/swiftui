@@ -21,7 +21,7 @@ There are over six ways you can pass data around in SwiftUI. The one you choose 
 
 The simplest way to flow data into a SwiftUI view is by setting it as a plain old property.
 
-![](images/property3.png)
+![](images/property4.png)
 
 ```swift
 import SwiftUI
@@ -202,7 +202,6 @@ print(john.haveBirthday())
 - Publishes every time the value changes in `willSet`
 - `projectedValue` is a publisher
 
-### ObservableObject dependencies
 
 SwifUI has three property wrappers it uses to share via via the `ObservableObject` protocol:
 
