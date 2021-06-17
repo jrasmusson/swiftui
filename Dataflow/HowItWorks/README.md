@@ -211,7 +211,7 @@ SwifUI has three property wrappers it uses to share via via the `ObservableObjec
 - @StateObject
 - @EnvironmentObject
 
-#### Sharing state with @ObservedObject
+### @ObservedObject
 
 To make a SwiftUI class observable, we need to declare what is publishable.
 
@@ -323,93 +323,143 @@ The one disadvantage of `@ObservedObject` is that this reference object is creat
 A more performant variant of this, which can be used when the view owns the observable object is the reference version of `@State` called `@StateObject`.
 
 
-#### Efficiently keeping state local with @StateObject
+### @StateObject
 
-- SwiftUI owns the `ObservableObject`
-- Creation and destruction is tied to the view’s life cycle
-- Instantiated just before the body
-- Just like @ObservedObject, but less expensive
-- Doesn’t get recreated every time view is instantiated
-- Like the reference type version of @State but for persistence in a view
+- Just like @ObservedObject, but less expensive.
+- Doesn’t get recreated every time view is instantiated.
+- Creation and destruction is tied to the view’s life cycle.
+- Owned by the view.
 
-You provide initial value, and SwiftUI will assign just before. Once our image loads, SwiftUi will automatically update the view.
+Mechanically `@StateObject` works just like `ObservedObject`. Simply replace one with the other and you will get the same functionality, just different lifecycle and ownership.
+
+![](images/state.png)
 
 ```swift
-class CoverImageLoader: ObservedObject {
-    @Published public private(set) var image: Image? = nil
-    
-    func load(_ name: String) {
-        
+import SwiftUI
+
+// Define your observable
+class Book: ObservableObject {
+    @Published var title: String
+    @Published var author: String
+
+    init(title: String, author: String) {
+        self.title = title
+        self.author = author
     }
 }
- 
-struct BookCoverView: View {
-    @StateObject var loader = CoverImageLoader() // source of truth
-    
-    var coverName: String
-    var size: CGFloat
+
+// Inject into parent view at the top
+struct ContentView: View {
+    @StateObject var book: Book // 1
     
     var body: some View {
-        CoverImage(loade.image, size: size)
-            .onAppear { loader.load(coverName)}
+        DetailView(book: book)
+    }
+}
+
+// And then explicitly pass to each child
+struct DetailView: View
+{
+    @StateObject var book: Book // 2
+    
+    var body: some View {
+        VStack {
+            DetailHeader(book: book)
+        }
+    }
+}
+
+// And subview (tighter coupling)
+struct DetailHeader: View
+{
+    @StateObject var book: Book // 3
+
+    var body: some View {
+        VStack {
+            Text(book.title)
+            Text(book.author)
+        }
+    }
+}
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        let book = Book(title: "The Hitchhiker's Guide to the Galaxy", author: "Douglas Adams")
+        ContentView(book: book)
     }
 }
 ```
 
-`CoverImageLoader` is instantiated just before the body runs, and is keep alive for the views lifecycle. No more on disappear.
+### @EnvironmentObject
 
-To genetically get any piece of data anywhere we have @EnvironmentObject. Which is both a view modifier and a property wrapper.
-
-#### Generically get to any piece of data with @EnvironmentObject
-
-Like @ObservedObject, but you don’t need to pass directly in
-Handy to get to those hard to reach places
+- Like `@ObservedObject` and `@StatObject` but without the coupling.
+- Here you inject `EnvironmentObject` at the top of your view, and it will magically be made available to all subviews without having to explicitly reference.
+- Handy for getting to those hard to reach places.
 
 Set it up like this.
 
+![](images/environmentObject.png)
+
 ```swift
-struct MovieList: View {
-  @EnvironmentObject var userStore: UserStore
-  @Environment(\.presentationMode) var presentationMode
-  @StateObject var movieStore = MovieStore()
-  @State private var isPresented = false
- 
-  var body: some View {
-    NavigationView {
-      List {
-        ForEach(movieStore.movies, id: \.title) {
-          MovieRow(movie: $0)
-        }
-        .onDelete(perform: movieStore.deleteMovie)
-      }
-      .sheet(isPresented: $isPresented) {
-        AddMovie(movieStore: movieStore, showModal: $isPresented)
-      }
-      .navigationBarTitle(Text("Fave Flicks"))
-      .navigationBarItems(
-        leading:
-          NavigationLink(destination: UserView()) {
-            HStack {
-              // 1
-              userStore.currentUserInfo.map { Text($0.userName) }
-              // 2
-              Image(systemName: "person.fill")
-            }
-          },
-        trailing:
-          Button(action: { isPresented.toggle() }) {
-            Image(systemName: "plus")
-          }
-      )
+//
+//  ContentView.swift
+//  Demo
+//
+//  Created by jrasmusson on 2021-06-16.
+//
+
+import SwiftUI
+
+// Define your observable
+class Book: ObservableObject {
+    @Published var title: String
+    @Published var author: String
+
+    init(title: String, author: String) {
+        self.title = title
+        self.author = author
     }
-  }
 }
-```
 
-Pass the value in like this.
+// Inject once at the top
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        let book = Book(title: "The Hitchhiker's Guide to the Galaxy", author: "Douglas Adams")
 
-```swift
-let contentView = MovieList().environmentObject(UserStore())
+        ContentView()
+            .environmentObject(book) // 1
+    }
+}
+
+// Define once at the top
+struct ContentView: View {
+    // No need to define
+    var body: some View {
+        DetailView()
+    }
+}
+
+// Automtically available
+struct DetailView: View {
+    // No need to reference
+    var body: some View {
+        VStack {
+            DetailHeader()
+        }
+    }
+}
+
+// Pull out when needed
+struct DetailHeader: View {
+    @EnvironmentObject var book: Book // 2
+
+    var body: some View {
+        VStack {
+            Text(book.title)
+            Text(book.author)
+        }
+    }
+}
 ```
 
 #### Difference between Environment and Environment Object
