@@ -17,13 +17,20 @@ There are over six ways you can pass data around in SwiftUI. The one you choose 
 
 ## Value types
 
-
 ### Property
 
 The simplest way to flow data into a SwiftUI view is by setting it as a plain old property.
 
+![](images/property3.png)
+
 ```swift
 import SwiftUI
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+    }
+}
 
 struct ContentView: View {
     var body: some View {
@@ -46,15 +53,7 @@ struct PlayerView: View {
         }
     }
 }
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-    }
-}
 ```
-
-![](images/property2.png)
 
 SwiftUI Views are cheap, immutable structures that get re-rendered everytime their data changes. So the simplest thing we can do as far as data flow goes, is to pass a value type in, and let the view render itself.
 
