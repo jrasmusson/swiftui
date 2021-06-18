@@ -2,10 +2,6 @@
 
 The type of data structure you need for a SwiftUI view depends on whether your data is a *value type* or a *reference type*.
 
-
-Reference type - instances share a single copy of the data (`class`).
-
-
 - Value types (structs)
    - Property - Immutable property that never changes.
    - @State - Transient data owned by the view.
@@ -23,9 +19,7 @@ Value type - each instance keeps a unique copy of its data (`struct`, `enum`, tu
 
 ### Property
 
-The simplest way to flow data into a SwiftUI view is by setting it as a plain old property.
-
-![](images/property4.png)
+- Simply pass in the read-only value type you want to be reflected locally in your view.
 
 ```swift
 import SwiftUI
@@ -36,15 +30,8 @@ struct ContentView_Previews: PreviewProvider {
     }
 }
 
-struct ContentView: View {
-    var body: some View {
-        PlayerView(isPlaying: false)
-            .padding()
-    }
-}
-
 struct PlayerView: View {
-    var isPlaying: Bool = true
+    var isPlaying: Bool = true			// 1. Define your property
     
     var body: some View {
         Button(action: {
@@ -57,12 +44,15 @@ struct PlayerView: View {
         }
     }
 }
+
+struct ContentView: View {
+    var body: some View {
+        PlayerView(isPlaying: false)		// 2. Pass it into your view.
+    }
+}
 ```
 
-SwiftUI Views are cheap, immutable structures that get re-rendered everytime their data changes. So the simplest thing we can do as far as data flow goes, is to pass a value type in, and let the view render itself.
-
-Of course that works so long as our property never changes. As soon as it does we have a problem.
-
+This works until your property wants to change.
 
 ```swift
 struct PlayerView: View {
@@ -78,66 +68,93 @@ struct PlayerView: View {
 }
 ```
 
-Structs don't support the changing of properties - they are immutable. So in cases like this, where we want to change a property's value in a struct we go to `@State`.
-
+To handle this we need something that can synthesize and track state in a `struct`. This is where we use `@State`.
 
 ### @State
 
-- A property wrapper for keeping track of transient data owned by the view.
-- Add the @State property wrapper to any value type state you want the view to track.
-- SwiftUI will track that state for the life time of the view.
-
+- A property wrapper for keeping track of transient state owned by the view.
 
 ```swift
+import SwiftUI
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+    }
+}
+
 struct PlayerView: View {
-    @State private var isPlaying: Bool = false // 🚀
+    @State private var isPlaying: Bool = false // 1. Define your state 🚀.
     
     var body: some View {
         Button(action: {
-            self.isPlaying.toggle()
+            
         }) {
             Image(systemName: isPlaying ? "pause.circle" : "play.circle")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 300, height: 300)
         }
+    }
+}
+
+struct ContentView: View {
+    var body: some View {
+        PlayerView() 						// 2. No need to set down here.
     }
 }
 ```
 
 ### @Binding
 
-- When you want a subview to bi-directionally bind to the @State in the parent, you use the @Binding property wrapper.
-- @Binding binds the state of that variable to whatever the parent passes in.
-- The parent passes the state using the `$` prefix.
-- And from that point on, any changes in the parent get sent to the child.
-- And any changes in the child, get sent back up to the parent.
-- That's what we mean when we say bi-directional binding.
+- How we pass `@State` down to subviews, and bi-directionally bind it back.
 
 ```swift
+import SwiftUI
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+    }
+}
+
 struct PlayerView: View {
-    @State private var isPlaying: Bool = false
+    @State private var isPlaying: Bool = false // 1. Define State
     
     var body: some View {
         VStack {
-            PlayButton(isPlaying: $isPlaying)
+            PlayButton(isPlaying: $isPlaying)  // 2. Pass with `$`
             
             Toggle(isOn: $isPlaying) {
                 Text("Hello World")
             }
-        }
+        }.padding()
     }
 }
 
 struct PlayButton: View {
-    @Binding var isPlaying: Bool
+    @Binding var isPlaying: Bool              // 3. Define Binding
     
     var body: some View {
         Button(action: {
-            self.isPlaying.toggle()
+            self.isPlaying.toggle()           // 4. Bi-directional
         }) {
             Image(systemName: isPlaying ? "pause.circle" : "play.circle")
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 100, height: 100)
         }
     }
 }
+
+struct ContentView: View {
+    var body: some View {
+        PlayerView()
+    }
+}
 ```
+
+![](images/binding-demo.gif)
 
 SwiftUI controls take `Binding` property wrappers in their initializers to bind to the external properties you define.
 
@@ -152,9 +169,11 @@ struct Toggle<Label>: View {
 
 ## Reference types
 
-Because structs can't be passed around and referenced like classes, if we ever want to sure state more globablly, we need to pass data using references - or classes.
+Reference type - instances share a single copy of the data (`class`).
 
-To facilitate that SwiftUI created an [`ObservableObject`](https://developer.apple.com/documentation/combine/observableobject) protocol, and anyone implementing that protocol, can be observed from other views within the app.
+- Because `structs` can't share the same instance of data (their values are copied), reference types are used to share a single copy of the data amongst multiple views.
+
+- To facilitate that SwiftUI created an [`ObservableObject`](https://developer.apple.com/documentation/combine/observableobject) protocol, and `class` implementing that protocol, can be observed from any other view.
 
 **ObservableObject.swift**
 
