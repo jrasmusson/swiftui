@@ -1,8 +1,10 @@
 # How Data Flow works in SwiftUI
 
-There are over six ways you can pass data around in SwiftUI. The one you choose depends on whether you are working with a value or reference type:
+The type of data structure you need for a SwiftUI view depends on whether your data is a *value type* or a *reference type*.
 
-![](images/how-to-choose.png)
+
+Reference type - instances share a single copy of the data (`class`).
+
 
 - Value types (structs)
    - Property - Immutable property that never changes.
@@ -16,6 +18,8 @@ There are over six ways you can pass data around in SwiftUI. The one you choose 
 
 
 ## Value types
+
+Value type - each instance keeps a unique copy of its data (`struct`, `enum`, tuple).
 
 ### Property
 
@@ -476,6 +480,10 @@ On the other hand, `@EnvironmentObject` is designed for arbitrary objects to be 
 ```swift
 @EnvironmentObject var order: Order
 ```
+
+### How to choose?
+
+![](images/how-to-choose.png)
 
 ### Links that help
 - [WWDC 2019 - Data Flow Through SwiftUI](https://developer.apple.com/videos/play/wwdc2019/226/)
