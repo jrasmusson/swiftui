@@ -268,41 +268,7 @@ public protocol ObservableObject : AnyObject {
 - Enforces its implementers be classes via `AnyObject` extension.
 - Synthesizes an `objectWillChange` publisher that emits the changed value before any of its @Published properties changes.
 
-An example.
-
-```swift
-class Contact: ObservableObject {
-   @Published var name: String
-   @Published var age: Int
-
-   init(name: String, age: Int) {
-       self.name = name
-       self.age = age
-   }
-
-   func haveBirthday() -> Int {
-       age += 1
-       return age
-   }
-}
-
-let john = Contact(name: "John Appleseed", age: 24)
-cancellable = john.objectWillChange
-   .sink { _ in
-       print("\(john.age) will change")
-}
-print(john.haveBirthday())
-// Prints "24 will change"
-// Prints "25"
-```
-
-#### @Published
-- Automatically works with `ObservableObject`
-- Publishes every time the value changes in `willSet`
-- `projectedValue` is a publisher
-
-
-SwifUI has three property wrappers it uses to share via via the `ObservableObject` protocol:
+SwifUI leverages this protocol, along with three property wrappers, to give you three ways to broadcast changes in data.
 
 - @ObservedObject
 - @StateObject
@@ -310,9 +276,9 @@ SwifUI has three property wrappers it uses to share via via the `ObservableObjec
 
 ### @ObservedObject
 
-To make a SwiftUI object observable, we need to define it as a `class`, and make its properties `@Published`.
+- A property wrapper type that subscribes to an observable object and invalidates a view whenever the observable object changes.
 
-So continuing with our book example, we need to convert this:
+You can turn any `struct` 
 
 ```swift
 struct Book {
@@ -321,7 +287,7 @@ struct Book {
 }
 ```
 
-to this:
+into an `@ObservableObject`
 
 ```swift
 class Book: ObservableObject {
@@ -335,7 +301,9 @@ class Book: ObservableObject {
 }
 ```
 
-Now that we can have our state stored in an external object, we can use that object in multiple views and have them all point to the same shared values.
+And then call it in any view or subview like this.
+
+![](images/observedObject2.png)
 
 ```swift
 import SwiftUI
@@ -361,8 +329,7 @@ struct ContentView: View {
 }
 
 // And then explicitly pass to each child
-struct DetailView: View
-{
+struct DetailView: View{
     @ObservedObject var book: Book // 2
     
     var body: some View {
@@ -373,8 +340,7 @@ struct DetailView: View
 }
 
 // And subview (tighter coupling)
-struct DetailHeader: View
-{
+struct DetailHeader: View{
     @ObservedObject var book: Book // 3
 
     var body: some View {
@@ -387,21 +353,18 @@ struct DetailHeader: View
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        let book = Book(title: "The Hitchhiker's Guide to the Galaxy", author: "Douglas Adams")
+        let book = Book(title: "Lord of the Rings", author: "Tolkien")
         ContentView(book: book)
     }
 }
 ```
 
+> Note: With `@ObservedObject` we need to explicitly pass the object to every subview. High coupling.
 
 ### @StateObject
 
-- Just like @ObservedObject, but life cycle is managed by SwiftUI.
-
-
-Mechanically `@StateObject` works just like `ObservedObject`. The difference is that `ObservedObject` gets created everytime a new subview is built - which can be expensive.
-
-If your shared data isn't used outside your view hierarchy, use `StateObject` instead. This transfers ownership to SwiftUI, it will control the `StateObject` lifecyle, resulting in a more performant app.
+- A property wrapper type that subscribes to an observable object and *does not* invalidate a view whenever the observable object changes.
+- Mechanically `@ObservedObject` and `@StateObject` behave the exact same way.
 
 ![](images/state.png)
 
@@ -460,6 +423,16 @@ struct ContentView_Previews: PreviewProvider {
     }
 }
 ```
+
+#### What's the difference between @ObservedObject and @State
+
+- The difference is in the view lifecycle.
+- With `@ObservedObject`, when ever you change a property on a view where you have this property bound, it creates a whole new view.
+   - That means it invalidates the states. Creates a brand new view. And your view starts all over again.
+- With `@StateObject`, the invalidation never happens. 
+   - The view doesn't redraw itself with a property change. SwiftUI controls that property state for us. It will still change if the property changes. But it won't invalidate it like `@ObservedObject`.
+
+- So if you notice your views are resettin in a way you don't like, try switching from `@ObservedObject` to `@StateObject` and let SwiftUI control that view lifecycle for you.
 
 ### @EnvironmentObject
 
