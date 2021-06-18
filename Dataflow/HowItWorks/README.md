@@ -12,10 +12,18 @@ The type of data structure you need for a SwiftUI view depends on whether your d
 	- @ObservedObject - Shared data passed between views
 	- @EnvironmentObject - Shared data automatically available in subviews
 
+## Views are a function of state
+
+![](images/function-of-state.png)
+
+When a user does some interaction, that results in a mutation of state which the framework tracks. The framework then updates the views, which re-render themselves with the new state.
+
+In this model, data always flows in a single direction, greatly simplifying things in the app.
+
 
 ## Value types
 
-Value type - each instance keeps a unique copy of its data (`struct`, `enum`, tuple).
+Value types are instances where each type keeps a unique copy of its data (`struct`, `enum`, tuple).
 
 ### Property
 
@@ -108,6 +116,7 @@ struct ContentView: View {
 ### @Binding
 
 - How we pass `@State` down to subviews, and bi-directionally bind it back.
+
 
 ```swift
 import SwiftUI
@@ -234,9 +243,13 @@ This will update the UI when the button is tapped because the views are bound to
 
 Reference type - instances share a single copy of the data (`class`).
 
-- Because `structs` can't share the same instance of data (their values are copied), reference types are used to share a single copy of the data amongst multiple views.
+### Working with external data
 
-- To facilitate that SwiftUI created an [`ObservableObject`](https://developer.apple.com/documentation/combine/observableobject) protocol, and `class` implementing that protocol, can be observed from any other view.
+![](images/external-data.png)
+
+- Sometimes data changes externally for our views. And we need a way of being notified.
+- As good as `structs` are, because they can't share the same instance of data (their values are copied), reference types like `class` are instead used to publish and share external data changes to SwiftUI views.
+- To facilitate this sharing of data, SwiftUI created a [`ObservableObject`](https://developer.apple.com/documentation/combine/observableobject) protocol, a `class` implementing that protocol, can be observed from any other view.
 
 **ObservableObject.swift**
 
@@ -297,50 +310,32 @@ SwifUI has three property wrappers it uses to share via via the `ObservableObjec
 
 ### @ObservedObject
 
-To make a SwiftUI class observable, we need to declare what is publishable.
+To make a SwiftUI object observable, we need to define it as a `class`, and make its properties `@Published`.
+
+So continuing with our book example, we need to convert this:
 
 ```swift
-class User {
-    @Published var firstName = "Bilbo"
-    @Published var lastName = "Baggins"
+struct Book {
+    var title: String
+    var author: String
 }
 ```
 
-`@Published` is more or less half of `@State`. It tells Swift that whenever either of those two properties change, it should send an announcement out to any SwiftUI views that are watching that they should reload.
-
-How do those views know which classes might send out these modifications? That's another property wrapper, `@ObservedObject`. Which is the other half of `@State`. It tells SwiftUI to watch a class for any change announcements.
+to this:
 
 ```swift
-@ObservedObject var user = User()
-```
+class Book: ObservableObject {
+    @Published var title: String
+    @Published var author: String
 
-So really to make something observable we go from this:
-
-```swift
-struct User {
-    var firstName = "Bilbo"
-    var lastName = "Baggins"
+    init(title: String, author: String) {
+        self.title = title
+        self.author = author
+    }
 }
-
-struct ContentView: View {
-    @State private var user = User()
 ```
 
-To this:
-
-```swift
-class User: ObservableObject {
-    @Published var firstName = "Bilbo"
-    @Published var lastName = "Baggins"
-}
-
-struct ContentView: View {
-    @ObservedObject var user = User()
-```
-
-The end result here is that we can have our state stored in an external object, and we can now use that object in multiple views and have them all point to the same shared values.
-
-An example
+Now that we can have our state stored in an external object, we can use that object in multiple views and have them all point to the same shared values.
 
 ```swift
 import SwiftUI
@@ -398,23 +393,15 @@ struct ContentView_Previews: PreviewProvider {
 }
 ```
 
-![](images/observedObject.png)
-
-The thing to note here is how the `@ObservedObject` is passed along to every subview until is lands where it is needed. Of course it could be used, and updated anywhere along the way.
-
-The one disadvantage of `@ObservedObject` is that this reference object is created everytime a new view is created (which could be often).
-
-A more performant variant of this, which can be used when the view owns the observable object is the reference version of `@State` called `@StateObject`.
-
 
 ### @StateObject
 
-- Just like @ObservedObject, but less expensive.
-- Doesn’t get recreated every time view is instantiated.
-- Creation and destruction is tied to the view’s life cycle.
-- Owned by the view.
+- Just like @ObservedObject, but life cycle is managed by SwiftUI.
 
-Mechanically `@StateObject` works just like `ObservedObject`. Simply replace one with the other and you will get the same functionality, just different lifecycle and ownership.
+
+Mechanically `@StateObject` works just like `ObservedObject`. The difference is that `ObservedObject` gets created everytime a new subview is built - which can be expensive.
+
+If your shared data isn't used outside your view hierarchy, use `StateObject` instead. This transfers ownership to SwiftUI, it will control the `StateObject` lifecyle, resulting in a more performant app.
 
 ![](images/state.png)
 
