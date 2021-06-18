@@ -72,7 +72,7 @@ To handle this we need something that can synthesize and track state in a `struc
 
 ### @State
 
-- A property wrapper for keeping track of transient state owned by the view.
+- A read-write property wrapper for keeping track of transient state owned by the view.
 
 ```swift
 import SwiftUI
@@ -550,18 +550,16 @@ struct DetailHeader: View {
 
 SwiftUI gives us both `@Environment` and `@EnvironmentObject` property wrappers, but they are subtly different: whereas `@EnvironmentObject` allows us to inject arbitrary values into the environment, `@Environment` is specifically there to work with SwiftUI’s own pre-defined keys.
 
-For example, `@Environment` is great for reading out things like a Core Data managed object context, whether the device is in dark mode or light mode, what size class your view is being rendered with, and more – fixed properties that come from the system. In code, it looks like this:
+For example, `@Environment` is great for setting contextual information about your views that flows down the view hierarchy and changes different aspects of any contained views all at once.
+
+For example we could change the size category of all our views to extra large and see what that looks like in our previews like this.
 
 ```swift
-@Environment(\.horizontalSizeClass) var horizontalSizeClass
-@Environment(\.managedObjectContext) var managedObjectContext
+ContentView(store: RoomStore(rooms: testData))
+   .environment(\.sizeCategory, .extraExtraExtraLarge)
 ```
 
-On the other hand, `@EnvironmentObject` is designed for arbitrary objects to be read from the environment, like this:
-
-```swift
-@EnvironmentObject var order: Order
-```
+So `Environment` for iOS type style things about the look of our controls. `EnvironmentObject` for app data we control and want to share.
 
 ### How to choose?
 
