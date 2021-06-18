@@ -167,6 +167,69 @@ struct Toggle<Label>: View {
 }
 ```
 
+`@State` and `@Binding` can also be used with `structs` you create.
+
+```swift
+import SwiftUI
+
+// Define your struct
+struct Book {
+    var title: String
+    var author: String
+}
+
+// Inject into parent view at the top
+struct ContentView: View {
+    @State var book: Book // 1
+    
+    var body: some View {
+        DetailView(book: $book)
+    }
+}
+
+// Then explicitly pass binding to each child
+struct DetailView: View
+{
+    @Binding var book: Book // 2
+    
+    var body: some View {
+        VStack {
+            DetailHeader(book: $book)
+        }
+    }
+}
+
+// And subview (tighter coupling)
+struct DetailHeader: View
+{
+    @Binding var book: Book // 3
+
+    var body: some View {
+        VStack {
+            Text(book.title)
+            Text(book.author)
+            Button(action: {
+                book.author = "Jonathan"
+            }) {
+                Text("Tap me!")
+            }
+        }
+    }
+}
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        let book = Book(title: "Lord of the Rings",
+                        author: "Tolkien")
+        ContentView(book: book)
+    }
+}
+```
+
+This will update the UI when the button is tapped because the views are bound to the `Book` `struct`.
+
+![](images/binding-book-demo.gif)
+
 ## Reference types
 
 Reference type - instances share a single copy of the data (`class`).
