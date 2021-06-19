@@ -1,29 +1,27 @@
-# How Data Flow works in SwiftUI
+# Data Flow in SwiftUI
 
-The type of data structure you need for a SwiftUI view depends on whether your data is a *value type* or a *reference type*.
+![](images/summary.png)
 
-- Value types (structs)
-   - Property - Immutable property that never changes.
-   - @State - Transient data owned by the view.
-   - @Binding - For mutating data owned by another view.
+## How does it work?
 
-- Reference type (classes)
-	- @StateObject - Managed by SwiftUI
-	- @ObservedObject - Shared data passed between views
-	- @EnvironmentObject - Shared data automatically available in subviews
-
-## Views are a function of state
+### Views are a function of state
 
 ![](images/function-of-state.png)
 
-When a user does some interaction, that results in a mutation of state which the framework tracks. The framework then updates the views, which re-render themselves with the new state.
+When a user does an action, that causes a mutation of state, SwiftUI views re-render themselves. Data flows in one direction - always into the body of the view - and this is how data flows in SwiftUI.
 
-In this model, data always flows in a single direction, greatly simplifying things in the app.
+When working with user interactions like these, we will often track these changes using value types:
+
+- Property - Immutable property that never changes.
+- @State - Transient data owned by the view.
+- @Binding - For mutating data owned by another view.
+
+
 
 
 ## Value types
 
-Value types are instances where each type keeps a unique copy of its data (`struct`, `enum`, tuple).
+Value types are instances where each type keeps a unique copy of its data (`struct`, `enum`, tuple). They are good for tracking local, simple state changes in views. And their states can be bound to SwiftUI controls.
 
 ### Property
 
@@ -268,7 +266,7 @@ public protocol ObservableObject : AnyObject {
 - Enforces its implementers be classes via `AnyObject` extension.
 - Synthesizes an `objectWillChange` publisher that emits the changed value before any of its @Published properties changes.
 
-SwifUI leverages this protocol, along with three property wrappers, to give you three ways to broadcast changes in data.
+SwitUI has three property wrappers for receiving updates from observerable objects:
 
 - @ObservedObject
 - @StateObject
@@ -278,7 +276,7 @@ SwifUI leverages this protocol, along with three property wrappers, to give you 
 
 - A property wrapper type that subscribes to an observable object and invalidates a view whenever the observable object changes.
 
-You can turn any `struct` 
+Say we have a `struct` 
 
 ```swift
 struct Book {
@@ -287,7 +285,7 @@ struct Book {
 }
 ```
 
-into an `@ObservableObject`
+that we want to turn into an `@ObservableObject`:
 
 ```swift
 class Book: ObservableObject {
@@ -301,7 +299,7 @@ class Book: ObservableObject {
 }
 ```
 
-And then call it in any view or subview like this.
+Once that `struct` becomes a `class` implementing `@ObservableObject` we can observe it like this.
 
 ![](images/observedObject2.png)
 
@@ -359,14 +357,14 @@ struct ContentView_Previews: PreviewProvider {
 }
 ```
 
-> Note: With `@ObservedObject` we need to explicitly pass the object to every subview. High coupling.
-
 ### @StateObject
 
-- A property wrapper type that subscribes to an observable object and *does not* invalidate a view whenever the observable object changes.
-- Mechanically `@ObservedObject` and `@StateObject` behave the exact same way.
+- Mechanically the same as `@ObservedObject`.
+- The difference with state is the view controls the `@StateObject` life-cycle.
+- Meaning if a property on `@StateObject` changes, a new view isn't created. The old one simply updates it's state.
 
-![](images/state.png)
+
+![](images/state2.png)
 
 ```swift
 import SwiftUI
@@ -523,7 +521,7 @@ So `Environment` for iOS type style things about the look of our controls. `Envi
 
 ### How to choose?
 
-![](images/how-to-choose.png)
+![](images/choose.png)
 
 ### Links that help
 - [WWDC 2019 - Data Flow Through SwiftUI](https://developer.apple.com/videos/play/wwdc2019/226/)
