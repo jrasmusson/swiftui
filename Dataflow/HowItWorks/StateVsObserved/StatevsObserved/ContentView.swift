@@ -8,14 +8,14 @@
 import SwiftUI
 
 struct ContentView: View {
-    @ObservedObject var messenger = SearchManager()
+    @ObservedObject var manager = SearchManager()
     
     var body: some View {
         VStack {
-            TextField("Search for music here", text: $messenger.message)
+            TextField("Search for music here", text: $manager.message)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding()
-            SearchView(messenger: messenger)
+            SearchView(manager: manager)
         }.padding()
     }
 }

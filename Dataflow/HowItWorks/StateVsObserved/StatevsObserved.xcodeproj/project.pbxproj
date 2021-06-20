@@ -13,8 +13,8 @@
 		710C33D5267F787300EFD0B0 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 710C33D4267F787300EFD0B0 /* Player.swift */; };
 		710C33D8267F7A5100EFD0B0 /* SearchManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 710C33D7267F7A5100EFD0B0 /* SearchManager.swift */; };
 		710C33DC267F7A8F00EFD0B0 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 710C33DB267F7A8F00EFD0B0 /* SearchView.swift */; };
-		710C33E7267F86D000EFD0B0 /* yes.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 710C33E6267F86D000EFD0B0 /* yes.mp3 */; };
 		7137D0B2267F88350021BF73 /* StateObservedApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7137D0B1267F88350021BF73 /* StateObservedApp.swift */; };
+		7137D0B5267F891A0021BF73 /* kickstarter.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7137D0B4267F891A0021BF73 /* kickstarter.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,8 +26,8 @@
 		710C33D4267F787300EFD0B0 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		710C33D7267F7A5100EFD0B0 /* SearchManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchManager.swift; sourceTree = "<group>"; };
 		710C33DB267F7A8F00EFD0B0 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
-		710C33E6267F86D000EFD0B0 /* yes.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = yes.mp3; sourceTree = "<group>"; };
 		7137D0B1267F88350021BF73 /* StateObservedApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateObservedApp.swift; sourceTree = "<group>"; };
+		7137D0B4267F891A0021BF73 /* kickstarter.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = kickstarter.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,7 +81,7 @@
 		710C33CC267F784300EFD0B0 /* Files */ = {
 			isa = PBXGroup;
 			children = (
-				710C33E6267F86D000EFD0B0 /* yes.mp3 */,
+				7137D0B4267F891A0021BF73 /* kickstarter.mp3 */,
 				710C33C0267F782A00EFD0B0 /* Assets.xcassets */,
 				710C33C5267F782A00EFD0B0 /* Info.plist */,
 				7137D0B1267F88350021BF73 /* StateObservedApp.swift */,
@@ -146,7 +146,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				710C33E7267F86D000EFD0B0 /* yes.mp3 in Resources */,
+				7137D0B5267F891A0021BF73 /* kickstarter.mp3 in Resources */,
 				710C33C4267F782A00EFD0B0 /* Preview Assets.xcassets in Resources */,
 				710C33C1267F782A00EFD0B0 /* Assets.xcassets in Resources */,
 			);

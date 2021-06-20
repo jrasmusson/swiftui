@@ -422,15 +422,16 @@ struct ContentView_Previews: PreviewProvider {
 }
 ```
 
-#### What's the difference between @ObservedObject and @State
+### What's the difference between @StateObject and @ObservedObject
 
-- The difference is in the view lifecycle.
-- With `@ObservedObject`, when ever you change a property on a view where you have this property bound, it creates a whole new view.
-   - That means it invalidates the states. Creates a brand new view. And your view starts all over again.
-- With `@StateObject`, the invalidation never happens. 
-   - The view doesn't redraw itself with a property change. SwiftUI controls that property state for us. It will still change if the property changes. But it won't invalidate it like `@ObservedObject`.
+![](images/state-vs-observed.png)
 
-- So if you notice your views are resettin in a way you don't like, try switching from `@ObservedObject` to `@StateObject` and let SwiftUI control that view lifecycle for you.
+Everytime a property changes in a view powered by `@ObservedObject` that view recreates itself - it loses its 'local` state.
+
+With `@StateObject` the view refreshes itself with a property change, but it dones't recreate the view or lose it current state - the local view maintains it.
+
+- So if you want your view to refresh but not recreate use `@StateObject`.
+- If you want to new view recreated and re-initalized every time use `@ObservedObject`.
 
 ### @EnvironmentObject
 
