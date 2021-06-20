@@ -10,19 +10,24 @@ import SwiftUI
 struct SearchView: View {
     
     @ObservedObject var messenger: SearchManager
-    @StateObject var player = Player(name: "kickstarter", type: "mp3")
+    @StateObject var player = Player(name: "yes", type: "mp3")
+    
+    @State private var isPlaying: Bool = true
     
     var body: some View {
         VStack {
             Text("Search result: \(messenger.message)")
             
             Button(action: {
+                isPlaying.toggle()
                 player.togglePlayer()
-            }, label: {
-                Text(player.isPlaying ? "pause audio" : "start audio")
-            })
-            .foregroundColor(player.isPlaying ? .red : .blue)
-            .padding()
+            }) {
+                Image(systemName: isPlaying ? "pause.circle" : "play.circle")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 44, height: 44)
+                    .foregroundColor(isPlaying ? .blue : .red)
+            }
         }
         .onAppear {
             self.player.togglePlayer()
@@ -30,7 +35,7 @@ struct SearchView: View {
     }
 }
 
-struct EmojiCollectionView_Previews: PreviewProvider {
+struct SearchView_Previews: PreviewProvider {
     static var previews: some View {
         SearchView(messenger: SearchManager())
     }
