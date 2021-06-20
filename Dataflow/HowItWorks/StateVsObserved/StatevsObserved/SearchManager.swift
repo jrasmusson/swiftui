@@ -9,13 +9,8 @@ import Foundation
 import Combine
 
 class SearchManager: ObservableObject {
-    
     @Published var message: String = ""
             
-    func clear() {
-        message = ""
-    }
-    
     func add(_ text: String) {
         message.append(text)
     }

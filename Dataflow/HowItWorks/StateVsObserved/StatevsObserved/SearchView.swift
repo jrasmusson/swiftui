@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct SearchViewView: View {
+struct SearchView: View {
     
     @ObservedObject var messenger: SearchManager
     @StateObject var player = Player(name: "kickstarter", type: "mp3")
@@ -32,6 +32,6 @@ struct SearchViewView: View {
 
 struct EmojiCollectionView_Previews: PreviewProvider {
     static var previews: some View {
-        SearchViewView(messenger: SearchManager())
+        SearchView(messenger: SearchManager())
     }
 }

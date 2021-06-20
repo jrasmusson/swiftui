@@ -12,24 +12,10 @@ struct ContentView: View {
     
     var body: some View {
         VStack {
-            
-            Text("Send a New Year Message to you friends!")
-                .font(.title)
+            TextField("Search for music here", text: $messenger.message)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding()
-            HStack {
-                TextField("message", text: $messenger.message)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                Button(action: {
-                    messenger.clear()
-                       
-                }, label: {
-                    Image(systemName: "plus.circle")
-                })
-            }.padding()
-            
-            SearchViewView(messenger: messenger)
-            
-
+            SearchView(messenger: messenger)
         }.padding()
     }
 }
