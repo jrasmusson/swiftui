@@ -1,14 +1,14 @@
 //
-//  HowItWorksApp.swift
-//  HowItWorks
+//  StatevsObservedApp.swift
+//  StatevsObserved
 //
-//  Created by jrasmusson on 2021-05-29.
+//  Created by jrasmusson on 2021-06-20.
 //
 
 import SwiftUI
 
 @main
-struct HowItWorksApp: App {
+struct StatevsObservedApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
