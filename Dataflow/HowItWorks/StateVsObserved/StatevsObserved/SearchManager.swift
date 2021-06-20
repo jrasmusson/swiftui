@@ -8,12 +8,10 @@
 import Foundation
 import Combine
 
-class MessengerManager: ObservableObject {
+class SearchManager: ObservableObject {
     
     @Published var message: String = ""
-    
-    var subscriptions = Set<AnyCancellable>()
-        
+            
     func clear() {
         message = ""
     }
@@ -21,6 +19,4 @@ class MessengerManager: ObservableObject {
     func add(_ text: String) {
         message.append(text)
     }
-    
-    let emojis = [["😇", "🙂", "🤬"],["🤯","🥱", "🤔"],["😸", "😿", "🙀"]]
 }

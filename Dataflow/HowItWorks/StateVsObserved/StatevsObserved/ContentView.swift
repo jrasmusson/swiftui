@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @ObservedObject var messenger = MessengerManager()
+    @ObservedObject var messenger = SearchManager()
     
     var body: some View {
         VStack {
@@ -27,7 +27,7 @@ struct ContentView: View {
                 })
             }.padding()
             
-            EmojiCollectionView(messenger: messenger)
+            SearchViewView(messenger: messenger)
             
 
         }.padding()
