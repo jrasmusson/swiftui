@@ -529,3 +529,4 @@ So `Environment` for iOS type style things about the look of our controls. `Envi
 - [Hacking in Swift - How to use @EnvironmentObject to share data between views](https://www.hackingwithswift.com/quick-start/swiftui/how-to-use-environmentobject-to-share-data-between-views)
 - [Apple Docs ObservableObject](https://developer.apple.com/documentation/combine/observableobject)
 - [Learn App Making - How to pass data between views](https://learnappmaking.com/pass-data-between-views-swiftui-how-to/)
+- [Physics Nerd](https://www.youtube.com/watch?v=5ryXee_Ye3k&list=LL&index=2&t=799s&ab_channel=PhysicsNerd)

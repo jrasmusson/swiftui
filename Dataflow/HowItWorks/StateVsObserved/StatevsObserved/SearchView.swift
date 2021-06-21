@@ -10,7 +10,7 @@ import SwiftUI
 struct SearchView: View {
     
     @ObservedObject var manager: SearchManager
-    @ObservedObject var player = Player(name: "kickstarter", type: "mp3")
+    @StateObject var player = Player(name: "kickstarter", type: "mp3")
     
     @State private var isPlaying: Bool = true
     
