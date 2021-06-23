@@ -40,51 +40,23 @@ Text("\(temperature, specifier: "%.2f")") // x2 decimal
 Text("\(temperature, specifier: "%.0f")") // 0 decimal
 ```
 
-## NSAttributedStrings
-
-SwiftUI doesn't yet have them. But you can fake by either bringing in `UILabel` or working with `Text`.
-
-### UIViewRepresentable
+## submitLabel
 
 ```swift
-struct UIKLabel: UIViewRepresentable {
-
-    typealias TheUIView = UILabel
-    fileprivate var configuration = { (view: TheUIView) in }
-
-    func makeUIView(context: UIViewRepresentableContext<Self>) -> TheUIView { TheUIView() }
-    func updateUIView(_ uiView: TheUIView, context: UIViewRepresentableContext<Self>) {
-        configuration(uiView)
+struct ContentView: View {
+    @State private var username = ""
+    @State private var password = ""
+    
+    var body: some View {
+        Form {
+            TextField("Username", text: $username)
+                .submitLabel(.continue)
+            SecureField("Password", text: $password)
+                .submitLabel(.done)
+        }
     }
 }
 ```
-
-And then use:
-
-```swift
-var body: some View {
-    UIKLabel {
-        $0.attributedText = NSAttributedString(string: "HelloWorld")
-    }
-}
-```
-
-### Concatenate Text
-
-```swift
-Group {
-    Text("Bold")
-        .fontWeight(.bold) +
-    Text("Underlined")
-        .underline() +
-    Text("Color")
-        .foregroundColor(Color.red)
-}
-```
-
-![](images/6.png)
-
-- [StackOverFlow](https://stackoverflow.com/questions/59531122/how-to-use-attributed-string-in-swiftui)
 
 ### Links that help
 

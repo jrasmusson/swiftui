@@ -80,6 +80,45 @@ List {
 }
 ```
 
+## List Styles
+
+### automatic
+
+```swift
+struct ContentView: View {
+    var body: some View {
+        List(1..<20) {
+            Text("\($0)")
+        }.listStyle(.automatic)
+    }
+}
+```
+
+![](images/6.png)
+
+### grouped
+
+![](images/7.png)
+
+### inset
+
+![](images/8.png)
+
+### insetGrouped
+
+![](images/9.png)
+
+### plain
+
+![](images/10.png)
+
+### sidebar
+
+![](images/11.png)
+
+
+
+
 ### Links that help
 
 - [Introducing Lists](https://www.hackingwithswift.com/books/ios-swiftui/introducing-list-your-best-friend)
