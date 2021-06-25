@@ -7,6 +7,7 @@ Deliberate practice with SwiftUI.
 - [ActionSheet](Controls/ActionSheet/README.md)
 - [Alert](Controls/Alert/README.md)
 - [Animations](Controls/Animations/README.md)
+- [Badges](Controls/Badges/README.md)
 - [Button](Controls/Button/README.md)
 - [Color](Controls/Color/README.md)
 - [ContextMenu](Controls/ContextMenu/README.md)
