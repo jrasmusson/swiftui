@@ -29,6 +29,7 @@ Deliberate practice with SwiftUI.
 - [TabView](Controls/TabView/README.md)
 - [Text](Controls/Text/README.md)
 - [TextField](Controls/TextField/README.md)
+- [zMisc](Controls/zMisc/README.md)
 
 List of every type of [View](https://developer.apple.com/documentation/swiftui/view).
 
