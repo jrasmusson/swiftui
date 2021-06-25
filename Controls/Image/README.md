@@ -38,6 +38,59 @@ Image(systemName: "chevron.left").imageScale(.medium)
 Image(systemName: "chevron.left").imageScale(.large)
 ```
 
+## AsyncImage
+
+```swift
+import SwiftUI
+
+struct ContentView: View {
+    
+    var body: some View {
+        AsyncImage(url: URL(string: "https://www.hackingwithswift.com/img/paul.png"))
+    }
+}
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+    }
+}
+```
+
+Has a grey default image placeholder until image loads. 
+
+To specify a resizable background image and make everything line up do this.
+
+```swift
+import SwiftUI
+
+struct ContentView: View {
+    
+    var body: some View {
+        VStack {
+            AsyncImage(url: URL(string: "https://www.hackingwithswift.com/img/paul.png")) { image in
+                image.resizable()
+            } placeholder: {
+                Color.red
+            }
+            .frame(width: 128, height: 128)
+            .clipShape(RoundedRectangle(cornerRadius: 25))
+            Text("Hello, world!")
+        }
+    }
+}
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+    }
+}
+```
+
+![](images/4.png)
+
+
+
 ## Tint
 
 ```swift
