@@ -7,22 +7,57 @@ We don’t assign the alert to a variable then write something like `myAlert.sho
 Instead, we create some state that tracks whether our alert is showing, like this.
 
 ```swift
+import SwiftUI
+
 struct ContentView: View {
     @State private var showingAlert = false
-
+    
     var body: some View {
         Button("Show Alert") {
-            self.showingAlert = true
+            showingAlert = true
         }
-        .alert(isPresented: $showingAlert) {
-            Alert(title: Text("Hello SwiftUI!"), message: Text("This is some detail message"), dismissButton: .default(Text("OK")))
+        .alert("Important message!", isPresented: $showingAlert) {
+            Button("OK", role: .cancel) { }
         }
+    }
+}
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
     }
 }
 ```
 
-![](images/1.png)
+![](images/2.png)
 
-### Links that help
+Note: by default all buttons dismiss the alert, and the `$showingAlert` gets reset back to false upon dismiss as part of its two way binding.
 
-- [Alert](https://www.hackingwithswift.com/books/ios-swiftui/showing-alert-messages)
+Note also how cancel button is automatically added.
+
+```swift
+import SwiftUI
+
+struct ContentView: View {
+    @State private var showingAlert = false
+    
+    var body: some View {
+        Button("Show Alert") {
+            showingAlert = true
+        }
+        .alert("Important message!", isPresented: $showingAlert) {
+            Button("First") { }
+            Button("Second") { }
+            Button("Third") { }
+        }
+    }
+}
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+    }
+}
+```
+
+![](images/3.png)

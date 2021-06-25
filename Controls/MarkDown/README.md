@@ -23,4 +23,6 @@ struct ContentView_Previews: PreviewProvider {
 }
 ```
 
+- images don't yet work
+
 ![](images/1.png)
