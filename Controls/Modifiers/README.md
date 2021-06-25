@@ -1,6 +1,6 @@
-# Misc
+# Modifiers
 
-## Pull to refresh
+## refreshable
 
 ```swift
 import SwiftUI
@@ -44,3 +44,4 @@ struct ContentView: View {
 
 ![](images/1.png)
 
+## searchable

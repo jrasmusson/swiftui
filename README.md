@@ -18,6 +18,7 @@ Deliberate practice with SwiftUI.
 - [Group](Controls/Group/README.md)
 - [Image](Controls/Image/README.md)
 - [Lists](Controls/Lists/README.md)
+- [Modifiers](Controls/Modifiers/README.md)
 - [NavigationLink](Controls/NavigationLink/README.md)
 - [NavigationView](Controls/NavigationView/README.md)
 - [Path](Controls/Path/README.md)
@@ -29,7 +30,6 @@ Deliberate practice with SwiftUI.
 - [TabView](Controls/TabView/README.md)
 - [Text](Controls/Text/README.md)
 - [TextField](Controls/TextField/README.md)
-- [zMisc](Controls/zMisc/README.md)
 
 List of every type of [View](https://developer.apple.com/documentation/swiftui/view).
 
