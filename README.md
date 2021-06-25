@@ -18,6 +18,7 @@ Deliberate practice with SwiftUI.
 - [Group](Controls/Group/README.md)
 - [Image](Controls/Image/README.md)
 - [Lists](Controls/Lists/README.md)
+- [Materials](Controls/Materials/README.md)
 - [Modifiers](Controls/Modifiers/README.md)
 - [NavigationLink](Controls/NavigationLink/README.md)
 - [NavigationView](Controls/NavigationView/README.md)
