@@ -276,4 +276,104 @@ struct ContentView_Previews: PreviewProvider {
 
 ![](images/8.png)
 
+## confirmationDialog
+
+This is the SwiftUI action sheet. Use this instead of `.alert`.
+
+```swift
+import SwiftUI
+
+struct ContentView: View {
+    @State private var showingOptions = false
+    @State private var selected = "None"
+    
+    var body: some View {
+        VStack {
+            Text(selected)
+            Button("Confirm paint color") {
+                showingOptions = true
+            }
+            .confirmationDialog("Important message!", isPresented: $showingOptions, titleVisibility: .visible) {
+                Button("Red", role: .destructive) {
+                    selected = "Red"
+                }
+                Button("Green") {
+                    selected = "Green"
+                }
+                Button("Blue") {
+                    selected = "Blue"
+                }
+            }
+        }
+    }
+}
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+    }
+}
+```
+
+![](images/9.png)
+
+## onSubmit
+
+Can do on the `TextField` or you can take one level higher.
+
+So instead of this:
+
+```swift
+import SwiftUI
+
+struct ContentView: View {
+    @State private var username = ""
+    @State private var password = ""
+    
+    var body: some View {
+        Form {
+            TextField("Username", text: $username, onCommit: {
+                
+            })
+            SecureField("Password", text: $password, onCommit: {
+                
+            })
+        }
+    }
+}
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+    }
+}
+```
+
+You cna attach to the form:
+
+```swift
+import SwiftUI
+
+struct ContentView: View {
+    @State private var username = ""
+    @State private var password = ""
+    
+    var body: some View {
+        Form {
+            TextField("Username", text: $username)
+            SecureField("Password", text: $password)
+        }
+        .onSubmit {
+            guard username.isEmpty == false && password.isEmpty == false else { return }
+            print("Authenticating...")
+        }
+    }
+}
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+    }
+}
+```
 
