@@ -21,6 +21,7 @@ Deliberate practice with SwiftUI.
 - [Lists](Controls/Lists/README.md)
 - [MarkDown](Controls/MarkDown/README.md)
 - [Materials](Controls/Materials/README.md)
+- [Menu](Controls/Menu/README.md)
 - [Modifiers](Controls/Modifiers/README.md)
 - [NavigationLink](Controls/NavigationLink/README.md)
 - [NavigationView](Controls/NavigationView/README.md)
