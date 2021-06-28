@@ -377,3 +377,58 @@ struct ContentView_Previews: PreviewProvider {
 }
 ```
 
+## foregroundStyle
+
+Make the whole view a certain foreground color.
+
+```swift
+import SwiftUI
+
+struct ContentView: View {
+    
+    var body: some View {
+        HStack {
+            Image(systemName: "clock.fill")
+            Text("Set the time")
+        }
+        .font(.largeTitle.bold())
+        .foregroundStyle(.quaternary)
+    }
+}
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+    }
+}
+```
+
+![](images/10.png)
+
+## linearGradient
+
+```swift
+import SwiftUI
+
+struct ContentView: View {
+    
+    var body: some View {
+        HStack {
+            Image(systemName: "clock.fill")
+            Text("Set the time")
+        }
+        .font(.largeTitle.bold())
+        .foregroundStyle(
+            .linearGradient(colors: [.red, .blue], startPoint: .leading, endPoint: .trailing)
+        )
+    }
+}
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+    }
+}
+```
+
+![](images/11.png)
