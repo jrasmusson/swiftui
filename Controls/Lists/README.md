@@ -116,7 +116,31 @@ struct ContentView: View {
 
 ![](images/11.png)
 
+## listRowSeparator
 
+```swift
+
+
+struct ContentView: View {
+    
+    var body: some View {
+        List {
+            ForEach(1..<100) { index in
+                Text("Row \(index)")
+                    .listRowSeparatorTint(.red)
+            }
+        }
+    }
+}
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+    }
+}
+```
+
+![](images/12.png)
 
 
 ### Links that help
