@@ -9,6 +9,7 @@ import SwiftUI
 
 class Pool: ObservableObject {
     @Published var name: String = ""
+    @Published var numberOfPlayers: Int = 1
     
     init() {}
 }
@@ -38,17 +39,18 @@ struct FamilyNameView: View {
 }
 
 struct NumberOfPlayersView: View {
-    @State private var numberOfPlayers = 0
+    @EnvironmentObject var pool: Pool
+//    @State private var numberOfPlayers = 0
     
     var body: some View {
         VStack {
             Text("How many players?")
-            Picker("", selection: $numberOfPlayers) {
-                ForEach(0 ..< 6) {
+            Picker("", selection: $pool.numberOfPlayers) {
+                ForEach(1 ..< 5) {
                     Text("\($0)")
                 }
             }
-            Text("\(numberOfPlayers) players")
+            Text("\(pool.numberOfPlayers) players")
         }
     }
 }
