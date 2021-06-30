@@ -17,7 +17,7 @@ struct ContentView: View {
     var body: some View {
         TabView {
             FamilyNameView()
-            Text("How many players?")
+            NumberOfPlayersView()
             Text("Pick your teams")
             Text("Start your pool!")
         }
@@ -32,8 +32,24 @@ struct FamilyNameView: View {
     var body: some View {
         VStack {
             TextField("What's your family name?", text: $pool.name)
-            
+            Text("Swipe to continue >")
         }.padding()
+    }
+}
+
+struct NumberOfPlayersView: View {
+    @State private var numberOfPlayers = 0
+    
+    var body: some View {
+        VStack {
+            Text("How many players?")
+            Picker("", selection: $numberOfPlayers) {
+                ForEach(0 ..< 6) {
+                    Text("\($0)")
+                }
+            }
+            Text("\(numberOfPlayers) players")
+        }
     }
 }
 
