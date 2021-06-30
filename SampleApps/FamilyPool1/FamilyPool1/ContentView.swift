@@ -7,6 +7,14 @@
 
 import SwiftUI
 
+class Pool: ObservableObject {
+    @Published var name: String
+    
+    init(name: String) {
+        self.name = name
+    }
+}
+
 struct ContentView: View {
     var body: some View {
         TabView {
@@ -22,6 +30,8 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
+        let pool = Pool(name: "")
         ContentView()
+            .environmentObject(pool)
     }
 }
