@@ -8,17 +8,15 @@
 import SwiftUI
 
 class Pool: ObservableObject {
-    @Published var name: String
+    @Published var name: String = ""
     
-    init(name: String) {
-        self.name = name
-    }
+    init() {}
 }
 
 struct ContentView: View {
     var body: some View {
         TabView {
-            Text("What's your family name?")
+            FamilyNameView()
             Text("How many players?")
             Text("Pick your teams")
             Text("Start your pool!")
@@ -28,9 +26,20 @@ struct ContentView: View {
     }
 }
 
+struct FamilyNameView: View {
+    @EnvironmentObject var pool: Pool
+    
+    var body: some View {
+        VStack {
+            TextField("What's your family name?", text: $pool.name)
+            
+        }.padding()
+    }
+}
+
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        let pool = Pool(name: "")
+        let pool = Pool()
         ContentView()
             .environmentObject(pool)
     }

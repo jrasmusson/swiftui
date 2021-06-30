@@ -11,7 +11,9 @@ import SwiftUI
 struct FamilyPool1App: App {
     var body: some Scene {
         WindowGroup {
+            let pool = Pool()
             ContentView()
+                .environmentObject(pool)
         }
     }
 }
