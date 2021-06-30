@@ -10,29 +10,13 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         TabView {
-            FirstView()
-            SecondView()
-            ThirdView()
+            Text("What's your family name?")
+            Text("How many players?")
+            Text("Pick your teams")
+            Text("Start your pool!")
         }
         .tabViewStyle(.page)
-    }
-}
-
-struct FirstView: View {
-    var body: some View {
-        Text("View 1")
-    }
-}
-
-struct SecondView: View {
-    var body: some View {
-        Text("View 2")
-    }
-}
-
-struct ThirdView: View {
-    var body: some View {
-        Text("View 3")
+        .indexViewStyle(.page(backgroundDisplayMode: .always))
     }
 }
 

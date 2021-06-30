@@ -1,6 +1,8 @@
 # TabView
 
-Basic tab view.
+SwiftUI’s TabView doubles up as the equivalent to a `UIPageViewController`, letting us swipe through multiple screens of content, with paging dots at the bottom to show users where they are.
+
+## Tabs
 
 ```swift
 import SwiftUI
@@ -37,7 +39,9 @@ struct ContentView_Previews: PreviewProvider {
 
 ![](images/2.png)
 
-Which can also be paged and used like a page view controller.
+## Page Style
+
+You can swipe.
 
 ```swift
 import SwiftUI
@@ -45,29 +49,13 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         TabView {
-            FirstView()
-            SecondView()
-            ThirdView()
+            Text("First")
+            Text("Second")
+            Text("Third")
+            Text("Fourth")
         }
         .tabViewStyle(.page)
-    }
-}
-
-struct FirstView: View {
-    var body: some View {
-        Text("View 1")
-    }
-}
-
-struct SecondView: View {
-    var body: some View {
-        Text("View 2")
-    }
-}
-
-struct ThirdView: View {
-    var body: some View {
-        Text("View 3")
+        .indexViewStyle(.page(backgroundDisplayMode: .always))
     }
 }
 
@@ -78,7 +66,11 @@ struct ContentView_Previews: PreviewProvider {
 }
 ```
 
-![](images/3.gif)
+![](images/3.png)
+
+Hide the dots.
+
+`.tabViewStyle(.page(indexDisplayMode: .never))`.
 
 ## Programmatically Selecting Tabs
 
@@ -125,3 +117,4 @@ struct ContentView: View {
 ### Links that help
 
 - [Creating tabs with TabView and tabItem()](https://www.hackingwithswift.com/books/ios-swiftui/creating-tabs-with-tabview-and-tabitem)
+- [How to create scrolling pages of content using tabViewStyle()](https://www.hackingwithswift.com/quick-start/swiftui/how-to-create-scrolling-pages-of-content-using-tabviewstyle)
