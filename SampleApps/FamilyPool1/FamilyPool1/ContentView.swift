@@ -40,17 +40,16 @@ struct FamilyNameView: View {
 
 struct NumberOfPlayersView: View {
     @EnvironmentObject var pool: Pool
-//    @State private var numberOfPlayers = 0
     
     var body: some View {
         VStack {
             Text("How many players?")
             Picker("", selection: $pool.numberOfPlayers) {
-                ForEach(1 ..< 5) {
+                ForEach(2 ..< 5) {
                     Text("\($0)")
                 }
             }
-            Text("\(pool.numberOfPlayers) players")
+            Text("\(pool.numberOfPlayers + 2) players")
         }
     }
 }
