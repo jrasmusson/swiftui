@@ -1,22 +1,84 @@
 # TabView
 
-```swift
-TabView {
-    Text("Tab 1")
-        .tabItem {
-            Image(systemName: "star")
-            Text("One")
-        }
+Basic tab view.
 
-    Text("Tab 2")
-        .tabItem {
-            Image(systemName: "star.fill")
-            Text("Two")
+```swift
+import SwiftUI
+
+struct ContentView: View {
+    var body: some View {
+        TabView {
+            Text("The First Tab")
+                .badge(10)
+                .tabItem {
+                    Image(systemName: "1.square.fill")
+                    Text("First")
+                }
+            Text("Another Tab")
+                .tabItem {
+                    Image(systemName: "2.square.fill")
+                    Text("Second")
+                }
+            Text("The Last Tab")
+                .tabItem {
+                    Image(systemName: "3.square.fill")
+                    Text("Third")
+                }
         }
+    }
+}
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+    }
 }
 ```
 
-![](images/1.png)
+![](images/2.png)
+
+Which can also be paged and used like a page view controller.
+
+```swift
+import SwiftUI
+
+struct ContentView: View {
+    var body: some View {
+        TabView {
+            FirstView()
+            SecondView()
+            ThirdView()
+        }
+        .tabViewStyle(.page)
+    }
+}
+
+struct FirstView: View {
+    var body: some View {
+        Text("View 1")
+    }
+}
+
+struct SecondView: View {
+    var body: some View {
+        Text("View 2")
+    }
+}
+
+struct ThirdView: View {
+    var body: some View {
+        Text("View 3")
+    }
+}
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+    }
+}
+```
+
+![](images/3.gif)
 
 ## Programmatically Selecting Tabs
 
