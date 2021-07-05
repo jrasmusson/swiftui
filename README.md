@@ -23,9 +23,21 @@ Deliberate practice with SwiftUI.
 
 ### Controls
 
+- [Link](Controls/Link/README.md)
+- [Menu](Controls/Menu/README.md)
+
 ### Value Selectors
 
+- [Toggle](Controls/Toggle/README.md)
+- [Slider](Controls/Slider/README.md)
+- [Stepper](Controls/Stepper/README.md)
+- [Picker](Controls/Picker/README.md)
+- [DatePicker](Controls/DatePicker/README.md)
+
 ### Value Indicators
+
+- [Label](Controls/Label/README.md)
+- [ProgressView](Controls/ProgressView/README.md)
 
 ### Misc
 
@@ -45,17 +57,17 @@ Deliberate practice with SwiftUI.
 - [Lists](Controls/Lists/README.md)
 - [MarkDown](Controls/MarkDown/README.md)
 - [Materials](Controls/Materials/README.md)
-- [Menu](Controls/Menu/README.md)
+
 - [Modifiers](Controls/Modifiers/README.md)
 - [NavigationLink](Controls/NavigationLink/README.md)
 - [NavigationView](Controls/NavigationView/README.md)
 - [Path](Controls/Path/README.md)
-- [Picker](Controls/Picker/README.md)
+
 - [ScrollView](Controls/ScrollView/README.md)
 - [Section](Controls/Section/README.md)
 - [Sheet](Controls/Sheet/README.md)
 - [Stacks](Controls/Stacks/README.md)
-- [Stepper](Controls/Stepper/README.md)
+
 - [TabView](Controls/TabView/README.md)
 
 
