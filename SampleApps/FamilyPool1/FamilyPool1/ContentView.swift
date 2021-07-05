@@ -31,9 +31,16 @@ struct ContentView: View {
 struct IntroView: View {
     var body: some View {
         VStack {
+            Image("intro")
+                .resizable()
+                .scaledToFit()
             Text("Welcome to Family Pool").font(.title)
-            Text("Create your pool by swiping through the next couple of screens.")
+            Text("Create your pool by clicking next or swiping through the next couple of screens to answer a few simple questions.")
                 .padding()
+            Button("Next") {
+                
+            }
+            Spacer()
         }
     }
 }

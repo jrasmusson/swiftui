@@ -1,5 +1,40 @@
 # Button
 
+![](images/4.png)
+
+```swift
+import SwiftUI
+
+struct ContentView: View {
+
+    var body: some View {
+        HStack {
+            Button("Sign In", action: signIn)
+            Button("Register", action: register)
+        }
+        .buttonStyle(.bordered)
+    }
+    
+    func signIn() {}
+    func register() {}
+}
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+    }
+}
+```
+
+`.buttonStyle(.automatic)`
+
+![](images/5.png)
+
+`.buttonStyle(.plain)`
+
+![](images/6.png)
+
+
 ## Simple
 
 ```swift
