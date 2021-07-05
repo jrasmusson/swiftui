@@ -4,11 +4,36 @@ Deliberate practice with SwiftUI.
 
 ## Controls
 
+### Text
+
+- [Text](Controls/Text/README.md)
+- [TextField](Controls/TextField/README.md)
+- [SecureField](Controls/SecureField/README.md)
+
+
+### Images
+
+- [Image](Controls/Image/README.md)
+
+
+### Buttons
+
+- [Button](Controls/Button/README.md)
+- [EditButton](Controls/EditButton/README.md)
+
+### Controls
+
+### Value Selectors
+
+### Value Indicators
+
+### Misc
+
+
 - [ActionSheet](Controls/ActionSheet/README.md)
 - [Alert](Controls/Alert/README.md)
 - [Animations](Controls/Animations/README.md)
 - [Badges](Controls/Badges/README.md)
-- [Button](Controls/Button/README.md)
 - [Color](Controls/Color/README.md)
 - [ContextMenu](Controls/ContextMenu/README.md)
 - [DatePicker](Controls/DatePicker/README.md)
@@ -17,7 +42,6 @@ Deliberate practice with SwiftUI.
 - [GeometryReader](Controls/GeometryReader/README.md)
 - [Gradient](Controls/Gradient/README.md)
 - [Group](Controls/Group/README.md)
-- [Image](Controls/Image/README.md)
 - [Lists](Controls/Lists/README.md)
 - [MarkDown](Controls/MarkDown/README.md)
 - [Materials](Controls/Materials/README.md)
@@ -33,8 +57,8 @@ Deliberate practice with SwiftUI.
 - [Stacks](Controls/Stacks/README.md)
 - [Stepper](Controls/Stepper/README.md)
 - [TabView](Controls/TabView/README.md)
-- [Text](Controls/Text/README.md)
-- [TextField](Controls/TextField/README.md)
+
+
 
 List of every type of [View](https://developer.apple.com/documentation/swiftui/view).
 
