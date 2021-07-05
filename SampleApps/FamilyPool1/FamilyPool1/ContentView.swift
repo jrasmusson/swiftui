@@ -17,6 +17,7 @@ class Pool: ObservableObject {
 struct ContentView: View {
     var body: some View {
         TabView {
+            IntroView()
             FamilyNameView()
             NumberOfPlayersView()
             Text("Pick your teams")
@@ -24,6 +25,16 @@ struct ContentView: View {
         }
         .tabViewStyle(.page)
         .indexViewStyle(.page(backgroundDisplayMode: .always))
+    }
+}
+
+struct IntroView: View {
+    var body: some View {
+        VStack {
+            Text("Welcome to Family Pool").font(.title)
+            Text("Create your pool by swiping through the next couple of screens.")
+                .padding()
+        }
     }
 }
 

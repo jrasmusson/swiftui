@@ -32,6 +32,7 @@ var body: some View {
 
 ![](images/vstack.png)
 
+### alignment
 ```swift
 VStack(alignment: .leading) {
     Text("Hello World")
@@ -40,6 +41,17 @@ VStack(alignment: .leading) {
 ```
 
 ![](images/leading.png)
+
+### spacing
+
+```swift
+VStack(spacing: 20) {
+    Text("Welcome to Family Pool").font(.title)
+    Text("Create your pool by swiping through the next couple of screens.")
+}
+```
+
+![](images/3.png)
 
 ## HStack
 
