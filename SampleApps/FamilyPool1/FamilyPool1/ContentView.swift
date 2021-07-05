@@ -37,11 +37,14 @@ struct IntroView: View {
             Text("Welcome to Family Pool").font(.title)
             Text("Create your pool by clicking next or swiping through the next couple of screens to answer a few simple questions.")
                 .padding()
-            Button("Next") {
-                
-            }
+            Button("Next", action: next)
+                .buttonStyle(.bordered)
             Spacer()
         }
+    }
+    
+    func next() {
+        // U R HERE - how to change state to advance next
     }
 }
 
