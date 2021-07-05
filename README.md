@@ -10,11 +10,9 @@ Deliberate practice with SwiftUI.
 - [TextField](Controls/TextField/README.md)
 - [SecureField](Controls/SecureField/README.md)
 
-
 ### Images
 
 - [Image](Controls/Image/README.md)
-
 
 ### Buttons
 
@@ -33,6 +31,7 @@ Deliberate practice with SwiftUI.
 - [Stepper](Controls/Stepper/README.md)
 - [Picker](Controls/Picker/README.md)
 - [DatePicker](Controls/DatePicker/README.md)
+- [Disclousure Group](Controls/DisclosureGroup/README.md)
 
 ### Value Indicators
 
@@ -50,7 +49,7 @@ Deliberate practice with SwiftUI.
 - [GeometryReader](Controls/GeometryReader/README.md)
 - [Gradient](Controls/Gradient/README.md)
 - [Group](Controls/Group/README.md)
-- [Lists](Controls/Lists/README.md)
+- [List](Controls/Lists/README.md)
 - [MarkDown](Controls/MarkDown/README.md)
 - [Materials](Controls/Materials/README.md)
 - [Modifiers](Controls/Modifiers/README.md)
@@ -58,6 +57,7 @@ Deliberate practice with SwiftUI.
 - [NavigationView](Controls/NavigationView/README.md)
 - [Path](Controls/Path/README.md)
 - [ScrollView](Controls/ScrollView/README.md)
+- [ScrollViewReader](Controls/ScrollViewReader/README.md)
 - [Section](Controls/Section/README.md)
 - [Sheet](Controls/Sheet/README.md)
 - [Stacks](Controls/Stacks/README.md)

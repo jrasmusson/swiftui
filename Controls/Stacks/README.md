@@ -73,6 +73,81 @@ These automatically take up all the remaining space. So if you add one at the en
 
 ![](images/spacer.png)
 
+## LazyHGrid
+
+A container view that arranges its child views in a grid that grows horizontally, creating items only as needed.
+
+![](images/1.png)
+
+```swift
+import SwiftUI
+
+struct ContentView: View {
+    
+    var rows: [GridItem] = Array(repeating: .init(.fixed(20)), count: 2)
+
+    var body: some View {
+        ScrollView(.horizontal) {
+            LazyHGrid(rows: rows, alignment: .top) {
+                ForEach((0...79), id: \.self) {
+                    let codepoint = $0 + 0x1f600
+                    let codepointString = String(format: "%02X", codepoint)
+                    Text("\(codepointString)")
+                        .font(.footnote)
+                    let emoji = String(Character(UnicodeScalar(codepoint)!))
+                    Text("\(emoji)")
+                        .font(.largeTitle)
+                }
+            }
+        }
+    }
+}
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+    }
+}
+```
+
+## LazyHStack
+
+A view that arranges its children in a line that grows horizontally, creating items only as needed.
+
+![](images/2.png)
+
+```swift
+import SwiftUI
+
+struct ContentView: View {
+
+    var body: some View {
+        ScrollView(.horizontal) {
+            LazyHStack(alignment: .top, spacing: 10) {
+                ForEach((0...79), id: \.self) {
+                    let codepoint = $0 + 0x1f600
+                    let codepointString = String(format: "%02X", codepoint)
+                    Text("\(codepointString)")
+                        .font(.footnote)
+                    let emoji = String(Character(UnicodeScalar(codepoint)!))
+                    Text("\(emoji)")
+                        .font(.largeTitle)
+                }
+            }
+        }
+    }
+}
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+    }
+}
+```
+
+- [Apple Docs](https://developer.apple.com/documentation/swiftui/lazyhstack)
+
+
 ### Links that help
 
 - [Using stacks to arrange views](https://www.hackingwithswift.com/books/ios-swiftui/using-stacks-to-arrange-views)
