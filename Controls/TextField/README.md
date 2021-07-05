@@ -62,7 +62,7 @@ TextField("Enter your word", text: $newWord)
 ### RoundedBorderTextFieldStyle
 
 ```swift
-.textFieldStyle(RoundedBorderTextFieldStyle())
+.textFieldStyle(.roundedBorder)
 .padding()
 ```
 
@@ -71,7 +71,7 @@ TextField("Enter your word", text: $newWord)
 ### PlainTextFieldStyle
 
 ```swift
-.textFieldStyle(PlainTextFieldStyle())
+.textFieldStyle(.plain)
 ```
 
 ![](images/4.png)
