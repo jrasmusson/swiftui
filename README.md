@@ -41,14 +41,10 @@ Deliberate practice with SwiftUI.
 
 ### Misc
 
-
-- [ActionSheet](Controls/ActionSheet/README.md)
-- [Alert](Controls/Alert/README.md)
 - [Animations](Controls/Animations/README.md)
 - [Badges](Controls/Badges/README.md)
 - [Color](Controls/Color/README.md)
 - [ContextMenu](Controls/ContextMenu/README.md)
-- [DatePicker](Controls/DatePicker/README.md)
 - [ForEach](Controls/ForEach/README.md)
 - [Form](Controls/Form/README.md)
 - [GeometryReader](Controls/GeometryReader/README.md)
@@ -57,19 +53,15 @@ Deliberate practice with SwiftUI.
 - [Lists](Controls/Lists/README.md)
 - [MarkDown](Controls/MarkDown/README.md)
 - [Materials](Controls/Materials/README.md)
-
 - [Modifiers](Controls/Modifiers/README.md)
 - [NavigationLink](Controls/NavigationLink/README.md)
 - [NavigationView](Controls/NavigationView/README.md)
 - [Path](Controls/Path/README.md)
-
 - [ScrollView](Controls/ScrollView/README.md)
 - [Section](Controls/Section/README.md)
 - [Sheet](Controls/Sheet/README.md)
 - [Stacks](Controls/Stacks/README.md)
-
 - [TabView](Controls/TabView/README.md)
-
 
 
 List of every type of [View](https://developer.apple.com/documentation/swiftui/view).
