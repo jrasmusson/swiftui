@@ -15,12 +15,10 @@ class Pool: ObservableObject {
 }
 
 struct ContentView: View {
-    @State private var selectedTab = 0
-    
     var body: some View {
-        TabView(selection: $selectedTab) {
-            IntroView(selectedTab: $selectedTab).tag(0)
-            FamilyNameView().tag(1)
+        TabView() {
+            IntroView()
+            FamilyNameView()
             NumberOfPlayersView()
             Text("Pick your teams")
             Text("Start your pool!")
@@ -31,8 +29,6 @@ struct ContentView: View {
 }
 
 struct IntroView: View {
-    @Binding var selectedTab: Int
-    
     var body: some View {
         VStack {
             Image("intro")
@@ -45,10 +41,6 @@ struct IntroView: View {
             Label("Swipe", systemImage: "arrow.backward")
             Spacer()
         }
-    }
-    
-    func next() {
-        selectedTab = 1
     }
 }
 
