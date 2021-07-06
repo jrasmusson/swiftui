@@ -39,16 +39,15 @@ struct IntroView: View {
                 .resizable()
                 .scaledToFit()
             Text("Welcome to Family Pool").font(.title)
-            Text("Create your pool by clicking next or swiping through the next couple of screens to answer a few simple questions.")
+            Text("Create your pool by swiping through the next couple screens and answering a few simple questions.")
                 .padding()
-            Button("Next", action: next)
-                .buttonStyle(.bordered)
+            Spacer()
+            Label("Swipe", systemImage: "arrow.backward")
             Spacer()
         }
     }
     
     func next() {
-        // U R HERE - how to change state to advance next
         selectedTab = 1
     }
 }
