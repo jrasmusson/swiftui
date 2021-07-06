@@ -44,11 +44,26 @@ struct IntroView: View {
 
 struct FamilyNameView: View {
     @EnvironmentObject var pool: Pool
-    
+    @State private var isEditing = false
+
     var body: some View {
         VStack {
             Image("billboard").resizable().scaledToFit()
-            TextField("What's your family name?", text: $pool.name)
+            Spacer()
+            TextField("Enter your pool name", text: $pool.name) { isEditing in
+                self.isEditing = isEditing
+            }
+            .disableAutocorrection(true)
+            .textFieldStyle(.roundedBorder)
+            Spacer()
+            Spacer()
+            HStack {
+                Image(systemName: "arrow.backward")
+                Text("Swipe")
+                Image(systemName: "arrow.forward")
+            }.opacity(isEditing ? 0 : 1)
+
+            Spacer()
         }.padding()
     }
 }
