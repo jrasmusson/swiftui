@@ -31,9 +31,7 @@ struct ContentView: View {
 struct IntroView: View {
     var body: some View {
         VStack {
-            Image("intro")
-                .resizable()
-                .scaledToFit()
+            Image("intro").resizable().scaledToFit()
             Text("Welcome to Family Pool").font(.title)
             Text("Create your pool by swiping through the next couple screens and answering a few simple questions.")
                 .padding()
@@ -49,8 +47,8 @@ struct FamilyNameView: View {
     
     var body: some View {
         VStack {
+            Image("billboard").resizable().scaledToFit()
             TextField("What's your family name?", text: $pool.name)
-            Text("Swipe to continue >")
         }.padding()
     }
 }
