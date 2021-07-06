@@ -57,11 +57,7 @@ struct FamilyNameView: View {
             .textFieldStyle(.roundedBorder)
             Spacer()
             Spacer()
-            HStack {
-                Image(systemName: "arrow.backward")
-                Text("Swipe")
-                Image(systemName: "arrow.forward")
-            }.opacity(isEditing ? 0 : 1)
+            Label("Swipe", systemImage: "arrow.backward").opacity(isEditing ? 0 : 1)
 
             Spacer()
         }.padding()
@@ -73,13 +69,18 @@ struct NumberOfPlayersView: View {
     
     var body: some View {
         VStack {
-            Text("How many players?")
+            Image("player")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 300, height: 300, alignment: .center)
+            Text("How many players in the pool?")
             Picker("", selection: $pool.numberOfPlayers) {
                 Text("2")
                 Text("4")
             }
             .pickerStyle(.segmented)
-            Text("\(pool.numberOfPlayers + 2) players")
+            Text("Hi \(pool.numberOfPlayers)")
+            Spacer()
         }
     }
 }
@@ -89,7 +90,9 @@ struct NumberOfPlayersView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         let pool = Pool()
-        ContentView()
+//        ContentView()
+//            .environmentObject(pool)
+        NumberOfPlayersView()
             .environmentObject(pool)
     }
 }
