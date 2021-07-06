@@ -75,14 +75,16 @@ struct NumberOfPlayersView: View {
         VStack {
             Text("How many players?")
             Picker("", selection: $pool.numberOfPlayers) {
-                ForEach(2 ..< 5) {
-                    Text("\($0)")
-                }
+                Text("2")
+                Text("4")
             }
+            .pickerStyle(.segmented)
             Text("\(pool.numberOfPlayers + 2) players")
         }
     }
 }
+
+// U R HERE - figure out how to select 2 or 4 people (maybe buttons better)
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
