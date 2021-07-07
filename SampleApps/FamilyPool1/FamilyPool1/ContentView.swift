@@ -90,9 +90,9 @@ struct NumberOfPlayersView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         let pool = Pool()
-//        ContentView()
-//            .environmentObject(pool)
-        NumberOfPlayersView()
+        ContentView()
             .environmentObject(pool)
+//        NumberOfPlayersView()
+//            .environmentObject(pool)
     }
 }
