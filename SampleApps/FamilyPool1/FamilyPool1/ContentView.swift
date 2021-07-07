@@ -9,7 +9,7 @@ import SwiftUI
 
 class Pool: ObservableObject {
     @Published var name: String = ""
-    @Published var numberOfPlayers: Int = 1
+    @Published var numberOfPlayers: Int = 2
     
     init() {}
 }
@@ -76,10 +76,10 @@ struct NumberOfPlayersView: View {
             Text("How many players in the pool?")
             HStack {
                 Button("2", action: twoPlayers)
-                Button("4", action: fourPlayers)
+                Button("4", action: fourPlayers).disabled(true)
             }
             .buttonStyle(.bordered)
-            Text("Hi \(pool.numberOfPlayers)")
+            Text("\(pool.numberOfPlayers) players")
             Spacer()
         }
     }
