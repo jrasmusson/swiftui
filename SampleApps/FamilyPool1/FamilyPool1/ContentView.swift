@@ -25,7 +25,7 @@ struct ContentView: View {
             IntroView()
             FamilyNameView()
             NumberOfPlayersView()
-            Text("Pick your teams")
+            ChooseTeamsView()
             Text("Start your pool!")
         }
         .tabViewStyle(.page)
@@ -94,7 +94,7 @@ struct NumberOfPlayersView: View {
     
     private func twoPlayers() {
         pool.numberOfPlayers = 2
-        pool.players.append(Player(name: "Player1", team: []))
+        pool.players.append(Player(name: "Player1", team: ["Team1", "Team2"]))
         pool.players.append(Player(name: "Player2", team: []))
     }
     
@@ -103,33 +103,34 @@ struct NumberOfPlayersView: View {
     }
 }
 
-struct TaskRow: View {
-    var body: some View {
-        Text("Task data goes here")
-    }
-}
-
 struct ChooseTeamsView: View {
-    @EnvironmentObject var pool: Pool
+    @State private var teams = ["Edmonton Oilers", "Calgary Flames"]
     
     var body: some View {
-        List {
-            Section(header: Text("Player1 Team")) {
-                TaskRow()
-                TaskRow()
-                TaskRow()
-            }
-            
-            Section(header: Text("Player2 Team")) {
-                TaskRow()
-                TaskRow()
-                TaskRow()
+        NavigationView {
+            Form {
+                Section(header: Text("Player1 Team")) {
+                    Picker("Select your team", selection: $teams) {
+                        ForEach(0..<teams.count) {
+                            Text(teams[$0])
+                        }
+                    }
+                }
             }
         }
     }
 }
 
-// U R HERE - figure out how to select 2 or 4 people (maybe buttons better)
+struct AllTeamsView: View {
+    var teams = ["Edmonton Oilers", "Calgary Flames"]
+    
+    var body: some View {
+        List(teams, id: \.self) {
+            Text($0)
+        }
+    }
+}
+
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
@@ -140,5 +141,7 @@ struct ContentView_Previews: PreviewProvider {
 //            .environmentObject(pool)
         ChooseTeamsView()
             .environmentObject(pool)
+//        AllTeamsView()
+//            .environmentObject(pool)
     }
 }
