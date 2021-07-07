@@ -88,4 +88,4 @@ Button(action: {
 
 ### Links that help
 
-- [Section Header](https://www.hackingwithswift.com/books/ios-swiftui/adding-a-segmented-control-for-tip-percentages)
+- [Apple Docs](https://developer.apple.com/documentation/swiftui/button)

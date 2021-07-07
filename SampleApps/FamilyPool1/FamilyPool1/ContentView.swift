@@ -74,14 +74,22 @@ struct NumberOfPlayersView: View {
                 .scaledToFit()
                 .frame(width: 300, height: 300, alignment: .center)
             Text("How many players in the pool?")
-            Picker("", selection: $pool.numberOfPlayers) {
-                Text("2")
-                Text("4")
+            HStack {
+                Button("2", action: twoPlayers)
+                Button("4", action: fourPlayers)
             }
-            .pickerStyle(.segmented)
+            .buttonStyle(.bordered)
             Text("Hi \(pool.numberOfPlayers)")
             Spacer()
         }
+    }
+    
+    private func twoPlayers() {
+        pool.numberOfPlayers = 2
+    }
+    
+    private func fourPlayers() {
+        pool.numberOfPlayers = 4
     }
 }
 
@@ -90,9 +98,9 @@ struct NumberOfPlayersView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         let pool = Pool()
-        ContentView()
-            .environmentObject(pool)
-//        NumberOfPlayersView()
+//        ContentView()
 //            .environmentObject(pool)
+        NumberOfPlayersView()
+            .environmentObject(pool)
     }
 }
