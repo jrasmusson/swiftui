@@ -7,16 +7,22 @@
 
 import SwiftUI
 
+var teams = ["Edmonton Oilers", "Calgary Flames", "Winnipeg Jets", "Montreal Canadians"]
+
 struct Player {
     let name: String
-    var team: [String]
+    
+    var team1Index: Int = 0
+    var team2Index: Int = 0
+    
+    var team1Name: String { teams[team1Index] }
+    var team2Name: String { teams[team2Index] }
 }
 
 class Pool: ObservableObject {
     @Published var name: String = ""
-    @Published var numberOfPlayers: Int = 2
-    @Published var players: [Player] = []
-    @Published var type = 0
+    @Published var player1: Player = Player(name: "Player1")
+    @Published var player2: Player = Player(name: "Player2")
     init() {}
 }
 
@@ -24,8 +30,6 @@ struct ContentView: View {
     var body: some View {
         TabView() {
             IntroView()
-            FamilyNameView()
-            NumberOfPlayersView()
             ChooseTeamsView()
             Text("Start your pool!")
         }
@@ -73,46 +77,32 @@ struct FamilyNameView: View {
     }
 }
 
-struct NumberOfPlayersView: View {
-    @EnvironmentObject var pool: Pool
-    
-    var body: some View {
-        VStack {
-            Image("player")
-                .resizable()
-                .scaledToFit()
-                .frame(width: 300, height: 300, alignment: .center)
-            Text("How many players in the pool?")
-            HStack {
-                Button("2", action: twoPlayers)
-                Button("4", action: fourPlayers).disabled(true)
-            }
-            .buttonStyle(.bordered)
-            Text("\(pool.numberOfPlayers) players")
-            Spacer()
-        }
-    }
-    
-    private func twoPlayers() {
-        pool.numberOfPlayers = 2
-        pool.players.append(Player(name: "Player1", team: ["Team1", "Team2"]))
-        pool.players.append(Player(name: "Player2", team: []))
-    }
-    
-    private func fourPlayers() {
-        pool.numberOfPlayers = 4
-    }
-}
-
 struct ChooseTeamsView: View {
-    @State private var teams = ["Edmonton Oilers", "Calgary Flames"]
     @EnvironmentObject var pool: Pool
+    @State private var selectedTeamIndex = 0
     
     var body: some View {
         NavigationView {
             Form {
-                Section {
-                    Picker("Select your cake type", selection: $pool.type) {
+                Section(header: Text("Player1 team")) {
+                    Picker("Select team1", selection: $pool.player1.team1Index) {
+                        ForEach(0..<teams.count) {
+                            Text(teams[$0])
+                        }
+                    }
+                    Picker("Select team2", selection: $pool.player1.team2Index) {
+                        ForEach(0..<teams.count) {
+                            Text(teams[$0])
+                        }
+                    }
+                }
+                Section(header: Text("Player2 team")) {
+                    Picker("Select team1", selection: $pool.player2.team1Index) {
+                        ForEach(0..<teams.count) {
+                            Text(teams[$0])
+                        }
+                    }
+                    Picker("Select team2", selection: $pool.player2.team2Index) {
                         ForEach(0..<teams.count) {
                             Text(teams[$0])
                         }
@@ -123,27 +113,12 @@ struct ChooseTeamsView: View {
     }
 }
 
-struct AllTeamsView: View {
-    var teams = ["Edmonton Oilers", "Calgary Flames"]
-    
-    var body: some View {
-        List(teams, id: \.self) {
-            Text($0)
-        }
-    }
-}
-
-
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         let pool = Pool()
 //        ContentView()
 //            .environmentObject(pool)
-//        NumberOfPlayersView()
-//            .environmentObject(pool)
         ChooseTeamsView()
             .environmentObject(pool)
-//        AllTeamsView()
-//            .environmentObject(pool)
     }
 }
