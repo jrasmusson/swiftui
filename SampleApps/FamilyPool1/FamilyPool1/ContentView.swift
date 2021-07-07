@@ -7,10 +7,15 @@
 
 import SwiftUI
 
+struct Player {
+    let name: String
+    var team: [String]
+}
+
 class Pool: ObservableObject {
     @Published var name: String = ""
     @Published var numberOfPlayers: Int = 2
-    
+    @Published var players: [Player] = []
     init() {}
 }
 
@@ -50,6 +55,9 @@ struct FamilyNameView: View {
         VStack {
             Image("billboard").resizable().scaledToFit()
             Spacer()
+            if !pool.name.isEmpty {
+                Text("\(pool.name) family pool")
+            }
             TextField("Enter your pool name", text: $pool.name) { isEditing in
                 self.isEditing = isEditing
             }
@@ -86,10 +94,38 @@ struct NumberOfPlayersView: View {
     
     private func twoPlayers() {
         pool.numberOfPlayers = 2
+        pool.players.append(Player(name: "Player1", team: []))
+        pool.players.append(Player(name: "Player2", team: []))
     }
     
     private func fourPlayers() {
         pool.numberOfPlayers = 4
+    }
+}
+
+struct TaskRow: View {
+    var body: some View {
+        Text("Task data goes here")
+    }
+}
+
+struct ChooseTeamsView: View {
+    @EnvironmentObject var pool: Pool
+    
+    var body: some View {
+        List {
+            Section(header: Text("Player1 Team")) {
+                TaskRow()
+                TaskRow()
+                TaskRow()
+            }
+            
+            Section(header: Text("Player2 Team")) {
+                TaskRow()
+                TaskRow()
+                TaskRow()
+            }
+        }
     }
 }
 
@@ -100,7 +136,9 @@ struct ContentView_Previews: PreviewProvider {
         let pool = Pool()
 //        ContentView()
 //            .environmentObject(pool)
-        NumberOfPlayersView()
+//        NumberOfPlayersView()
+//            .environmentObject(pool)
+        ChooseTeamsView()
             .environmentObject(pool)
     }
 }
