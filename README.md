@@ -44,6 +44,7 @@ Deliberate practice with SwiftUI.
 - [Badges](Controls/Badges/README.md)
 - [Color](Controls/Color/README.md)
 - [ContextMenu](Controls/ContextMenu/README.md)
+- [Environment](Controls/Environment/README.md)
 - [ForEach](Controls/ForEach/README.md)
 - [Form](Controls/Form/README.md)
 - [GeometryReader](Controls/GeometryReader/README.md)
