@@ -16,6 +16,7 @@ class Pool: ObservableObject {
     @Published var name: String = ""
     @Published var numberOfPlayers: Int = 2
     @Published var players: [Player] = []
+    @Published var type = 0
     init() {}
 }
 
@@ -105,12 +106,13 @@ struct NumberOfPlayersView: View {
 
 struct ChooseTeamsView: View {
     @State private var teams = ["Edmonton Oilers", "Calgary Flames"]
+    @EnvironmentObject var pool: Pool
     
     var body: some View {
         NavigationView {
             Form {
-                Section(header: Text("Player1 Team")) {
-                    Picker("Select your team", selection: $teams) {
+                Section {
+                    Picker("Select your cake type", selection: $pool.type) {
                         ForEach(0..<teams.count) {
                             Text(teams[$0])
                         }

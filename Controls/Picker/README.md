@@ -104,6 +104,57 @@ This will give us the detail view along with it's selected value. This is a good
 
 [Creating pickers in a form](https://www.hackingwithswift.com/books/ios-swiftui/creating-pickers-in-a-form)
 
+## Binding to high-level object
+
+Because the picker select is bound to an index, you need to bind that selection to your top level object.
+
+![](images/1.png)
+
+```swift
+import SwiftUI
+
+struct Player {
+    let name: String
+    var team1Index: Int
+}
+
+class Pool: ObservableObject {
+    @Published var player1: Player = Player(name: "Jonathan", team1Index: 0)
+    init() {}
+}
+
+struct ContentView: View {
+    @EnvironmentObject var pool: Pool
+    @State private var selectedTeamIndex = 0
+    
+    var teams = ["Edmonton Oilers", "Calgary Flames"]
+
+    var body: some View {
+        NavigationView {
+            Form {
+                Section {
+                    Picker("Select team1", selection: $pool.player1.team1Index) {
+                        ForEach(0..<teams.count) {
+                            Text(teams[$0])
+                        }
+                    }
+                    Text("You selected:         \(teams[selectedTeamIndex])")
+                    Text("Bound to pool:        \(pool.player1.team1Index)")
+                }
+            }
+        }
+    }
+}
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        let pool = Pool()
+        ContentView()
+            .environmentObject(pool)
+    }
+}
+```
+
 ## Segmented control
 
 Special kind of picker showing a handful of options in a horizontal list. Great for when you have only a small selection to choose from.
