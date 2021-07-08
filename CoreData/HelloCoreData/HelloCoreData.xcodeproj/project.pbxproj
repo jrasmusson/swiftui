@@ -13,6 +13,7 @@
 		71496A452696617C00F0715E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 71496A442696617C00F0715E /* Preview Assets.xcassets */; };
 		71496A4D269661C600F0715E /* HelloCoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 71496A4B269661C600F0715E /* HelloCoreDataModel.xcdatamodeld */; };
 		71496A4F2696622900F0715E /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71496A4E2696622900F0715E /* CoreDataManager.swift */; };
+		71496A522697200800F0715E /* MovieDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71496A512697200800F0715E /* MovieDetail.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +24,7 @@
 		71496A442696617C00F0715E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		71496A4C269661C600F0715E /* HelloCoreDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = HelloCoreDataModel.xcdatamodel; sourceTree = "<group>"; };
 		71496A4E2696622900F0715E /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		71496A512697200800F0715E /* MovieDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetail.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +62,7 @@
 				71496A3F2696617A00F0715E /* ContentView.swift */,
 				71496A4E2696622900F0715E /* CoreDataManager.swift */,
 				71496A4B269661C600F0715E /* HelloCoreDataModel.xcdatamodeld */,
+				71496A512697200800F0715E /* MovieDetail.swift */,
 			);
 			path = HelloCoreData;
 			sourceTree = "<group>";
@@ -153,6 +156,7 @@
 			files = (
 				71496A4D269661C600F0715E /* HelloCoreDataModel.xcdatamodeld in Sources */,
 				71496A402696617A00F0715E /* ContentView.swift in Sources */,
+				71496A522697200800F0715E /* MovieDetail.swift in Sources */,
 				71496A4F2696622900F0715E /* CoreDataManager.swift in Sources */,
 				71496A3E2696617A00F0715E /* HelloCoreDataApp.swift in Sources */,
 			);

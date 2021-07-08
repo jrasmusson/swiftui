@@ -27,10 +27,19 @@ class CoreDataManager {
         do {
             try persistentContainer.viewContext.save()
         } catch {
-            print("Failed to save move \(error)")
+            print("Failed to save movie \(error)")
         }
     }
-    
+
+    func updateMovie() {
+        do {
+            try persistentContainer.viewContext.save()
+        } catch {
+            persistentContainer.viewContext.rollback()
+            print("Failed to update movie \(error)")
+        }
+    }
+
     func deleteMovie(movie: Movie) {
         persistentContainer.viewContext.delete(movie) // mark for deletion
         

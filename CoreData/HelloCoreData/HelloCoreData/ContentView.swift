@@ -12,6 +12,7 @@ struct ContentView: View {
     
     @State private var movieTitle: String = ""
     @State private var movies = [Movie]()
+    @State private var needsRefresh = false
     
     var body: some View {
         NavigationView {
@@ -24,7 +25,9 @@ struct ContentView: View {
                 }
                 List {
                     ForEach(movies, id: \.self) { movie in
-                        Text(movie.title ?? "")
+                        NavigationLink(destination: MovieDetail(movie: movie, coreDM: coreDM, needsRefresh: $needsRefresh), label: {
+                            Text(movie.title ?? "")
+                        })
                     }.onDelete(perform: { indexSet in
                         indexSet.forEach { index in
                             let movie = movies[index]
@@ -33,6 +36,8 @@ struct ContentView: View {
                         }
                     })
                 }
+                .listStyle(.plain)
+                .accentColor(needsRefresh ? .white: .black)
                 Spacer()
             }
             .padding()
