@@ -5,6 +5,8 @@
 //  Created by jrasmusson on 2021-07-13.
 //
 
+// https://blckbirds.com/post/core-data-and-swiftui/
+
 import SwiftUI
 import CoreData
 
