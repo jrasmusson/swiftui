@@ -17,8 +17,13 @@ struct ResultsView: View {
                     HStack {
                         Text(pool.player1.team1Name)
                         Spacer()
-                        Text("\(pool.player1Points) pts")
+                        Text("\(pool.player1Points(forTeam: "Edmonton Oilers")) pts")
                     }
+                    HStack {
+                        Text(pool.player1.team2Name)
+                        Spacer()
+                    }
+
                 }
                 Section(header: Text("Player2 team")) {
                     Picker("Select team1", selection: $pool.player2.team1Index) {
