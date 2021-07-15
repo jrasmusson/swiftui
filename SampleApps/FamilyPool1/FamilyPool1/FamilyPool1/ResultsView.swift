@@ -15,12 +15,9 @@ struct ResultsView: View {
             Form {
                 Section(header: Text("Player1 team")) {
                     HStack {
-                        
-                    }
-                    Picker("Select team2", selection: $pool.player1.team2Index) {
-                        ForEach(0..<teams.count) {
-                            Text(teams[$0])
-                        }
+                        Text(pool.player1.team1Name)
+                        Spacer()
+                        Text("\(pool.player1Points) pts")
                     }
                 }
                 Section(header: Text("Player2 team")) {
@@ -45,7 +42,15 @@ struct ResultsView: View {
 struct Results_Previews: PreviewProvider {
     static var previews: some View {
         let pool = Pool()
-        ResultsView()
+        pool.player1.team1Name = "Edmonton Oilers"
+        pool.player2.team2Name = "Calgary Flames"
+        
+        let oilersWins = Wins(team: "Edmonton Oilers", wins: 4)
+        let calgaryWins = Wins(team: "Calgary Flames", wins: 3)
+        
+        pool.wins = [oilersWins, calgaryWins]
+        
+        return ResultsView()
             .environmentObject(pool)
     }
 }

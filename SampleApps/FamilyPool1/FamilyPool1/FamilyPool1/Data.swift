@@ -25,17 +25,26 @@ struct Player {
     var team2Name = teams[0]
 }
 
-struct Series {
-    let name: String
-    let team1Wins: Int
-    let team2Wins: Int
+struct Wins: Codable {
+    let team: String
+    let wins: Int
 }
 
 class Pool: ObservableObject {
-    @Published var name: String = ""
     @Published var player1: Player = Player(name: "Player1")
     @Published var player2: Player = Player(name: "Player2")
-    @Published var results: [Series] = []
     
+    @Published var wins: [Wins] = []
+    
+    var player1Points: Int {
+        var total = 0
+        for win in wins {
+            if win.team == player1.team1Name || win.team == player1.team2Name {
+                total += win.wins
+            }
+        }
+        return total
+    }
+        
     init() {}
 }
