@@ -22,6 +22,7 @@ struct ResultsView: View {
                     HStack {
                         Text(pool.player1.team2Name)
                         Spacer()
+                        Text("\(pool.player1Points(forTeam: "Calgary Flames")) pts")
                     }
 
                 }
@@ -48,7 +49,7 @@ struct Results_Previews: PreviewProvider {
     static var previews: some View {
         let pool = Pool()
         pool.player1.team1Name = "Edmonton Oilers"
-        pool.player2.team2Name = "Calgary Flames"
+        pool.player1.team2Name = "Calgary Flames"
         
         let oilersWins = Wins(team: "Edmonton Oilers", wins: 4)
         let calgaryWins = Wins(team: "Calgary Flames", wins: 3)

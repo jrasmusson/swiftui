@@ -37,13 +37,12 @@ class Pool: ObservableObject {
     @Published var wins: [Wins] = []
     
     func player1Points(forTeam team: String) -> Int {
-        var total = 0
         for win in wins {
-            if win.team == player1.team1Name || win.team == player1.team2Name {
-                total += win.wins
+            if win.team == team {
+                return win.wins
             }
         }
-        return total
+        return 0
     }
         
     init() {}
