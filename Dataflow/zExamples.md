@@ -94,7 +94,7 @@ struct DetailHeader: View
 
 ## StateObject
 
-Same mechanics as ``ObservableObject`. Just replace `ObservableObject` with `StateObject`.
+Same mechanics as `ObservableObject`. Just replace `ObservableObject` with `StateObject`.
 
 ## EnvironmentObject
 

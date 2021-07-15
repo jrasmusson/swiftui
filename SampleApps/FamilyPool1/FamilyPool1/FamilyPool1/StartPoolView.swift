@@ -8,27 +8,20 @@
 import SwiftUI
 
 struct StartPoolView: View {
-//    var body: some View {
-//        Button("Start Pool!", action: createPool)
-//            .buttonStyle(.bordered)
-//    }
-//
-//    func createPool() {
-//        ResultsView()
-//    }
-    
-    @State private var isPresented = false
     
     var body: some View {
-        Button("Present!") {
-            isPresented.toggle()
-        }
-        .fullScreenCover(isPresented: $isPresented, content: ResultsView.init)
+        Button("Start Pool!", action: startPool)
+            .buttonStyle(.bordered)
+    }
+
+    func startPool() {
     }
 }
 
 struct StartPoolView_Previews: PreviewProvider {
     static var previews: some View {
+        let pool = Pool()
         StartPoolView()
+            .environmentObject(pool)
     }
 }
