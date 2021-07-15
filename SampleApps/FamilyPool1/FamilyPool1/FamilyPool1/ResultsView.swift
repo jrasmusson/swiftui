@@ -42,8 +42,8 @@ struct ResultsView: View {
 struct Results_Previews: PreviewProvider {
     static var previews: some View {
         let pool = Pool()
-        pool.player1.team1Name = "Edmonton Oilers"
-        pool.player1.team2Name = "Calgary Flames"
+        pool.player1.team1Name = Team.edmonton.rawValue
+        pool.player1.team2Name = Team.calgary.rawValue
         
         let oilersWins = Wins(team: "Edmonton Oilers", wins: 4)
         let calgaryWins = Wins(team: "Calgary Flames", wins: 3)
