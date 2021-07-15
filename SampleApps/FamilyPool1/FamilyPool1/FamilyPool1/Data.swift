@@ -25,9 +25,17 @@ struct Player {
     var team2Name = teams[0]
 }
 
+struct Series {
+    let name: String
+    let team1Wins: Int
+    let team2Wins: Int
+}
+
 class Pool: ObservableObject {
     @Published var name: String = ""
     @Published var player1: Player = Player(name: "Player1")
     @Published var player2: Player = Player(name: "Player2")
+    @Published var results: [Series] = []
+    
     init() {}
 }

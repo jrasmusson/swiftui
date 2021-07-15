@@ -1,24 +1,21 @@
 //
-//  ChooseTeamsView.swift
+//  Results.swift
 //  FamilyPool1
 //
-//  Created by jrasmusson on 2021-07-14.
+//  Created by jrasmusson on 2021-07-15.
 //
 
 import SwiftUI
 
-struct ChooseTeamsView: View {
+struct ResultsView: View {
     @EnvironmentObject var pool: Pool
-    @State private var selectedTeamIndex = 0
     
     var body: some View {
         NavigationView {
             Form {
                 Section(header: Text("Player1 team")) {
-                    Picker("Select team1", selection: $pool.player1.team1Index) {
-                        ForEach(0..<teams.count) {
-                            Text(teams[$0])
-                        }
+                    HStack {
+                        
                     }
                     Picker("Select team2", selection: $pool.player1.team2Index) {
                         ForEach(0..<teams.count) {
@@ -40,14 +37,15 @@ struct ChooseTeamsView: View {
                 }
                 Text(pool.player1.team1Name)
             }
-            
+            .navigationBarTitle("Results")
         }
     }
 }
-struct ChooseTeamsView_Previews: PreviewProvider {
+
+struct Results_Previews: PreviewProvider {
     static var previews: some View {
         let pool = Pool()
-        ChooseTeamsView()
+        ResultsView()
             .environmentObject(pool)
     }
 }

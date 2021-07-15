@@ -1,22 +1,30 @@
 # Family Pool
 
-## Data Flow
+## Setting team name
 
-By defining an `ObservableObject`
+### Data
+
+Define `ObservableObject`. When `teamIndex` changes, update `team1Name`.
 
 ```swift
 import Foundation
 
-var teams = ["Edmonton Oilers", "Calgary Flames", "Winnipeg Jets", "Montreal Canadians"]
+var teams = ["Choose team", "Edmonton Oilers", "Calgary Flames", "Winnipeg Jets", "Montreal Canadians"]
 
 struct Player {
     let name: String
     
-    var team1Index: Int = 0
+    var team1Index: Int = 0 {
+        didSet {
+            if team1Index != 0 { // Ignore "Choose team"
+                team1Name = teams[team1Index]
+            }
+        }
+    }
     var team2Index: Int = 0
     
-    var team1Name: String { teams[team1Index] }
-    var team2Name: String { teams[team2Index] }
+    var team1Name = teams[0]
+    var team2Name = teams[0]
 }
 
 class Pool: ObservableObject {
@@ -27,7 +35,7 @@ class Pool: ObservableObject {
 }
 ```
 
-And then injecting that into our main view
+Inject into view.
 
 ```swit
 import SwiftUI
@@ -53,9 +61,15 @@ struct ContentView_Previews: PreviewProvider {
 }
 ```
 
-every subview now has access to `Pool`. 
+### Flow
 
-So if we want to change something in `Pool` from down in a subview, we need to bind to it. Like we do here when selecting teams for players.
+By binding to 
+
+```swift
+Picker("Select team1", selection: $pool.player1.team1Index)
+```
+
+We can propogate the index back up to the pool, and update our team name there.
 
 ```swift
 import SwiftUI
@@ -80,16 +94,6 @@ struct ChooseTeamsView: View {
     }
 }
 ```
-
-Because picker is bound to an attribute in `Pool`
-
-```swift
-Picker("Select team1", selection: $pool.player1.team1Index)
-```
-
-When we change the attribute in the picker, that get's propogated back up to pool.
-
-
 
 ### Links that help
 

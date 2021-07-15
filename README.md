@@ -2,7 +2,7 @@
 
 Deliberate practice with SwiftUI. 
 
-## Controls
+## Controls 🕹
 
 ### Text
 
@@ -38,7 +38,7 @@ Deliberate practice with SwiftUI.
 - [Label](Controls/Label/README.md)
 - [ProgressView](Controls/ProgressView/README.md)
 
-### Misc
+### Misc 
 
 - [Animations](Controls/Animations/README.md)
 - [Badges](Controls/Badges/README.md)
@@ -67,19 +67,23 @@ Deliberate practice with SwiftUI.
 
 List of every type of [View](https://developer.apple.com/documentation/swiftui/view).
 
-## Combine
+## Combine ➡️
 - [Getting Started](Combine/GettingStarted/README.md)
 
-## Data Flow
+## Data Flow 🔁
 - [How it works](Dataflow/HowItWorks/README.md)
 - [Examples](Dataflow/zExamples.md)
 
-## Layout
+## Layout ↔️
 - [How it works](Layout/HowItWorks/README.md)
 
-## How to
+## How to 🧱
 
 - [UIKit Previews](HowTo/Preview/README.md)
 - [Wrap a UIViewController in a SwiftUI View](HowTo/WrapViewController/README.md)
 - [Layout and Geometry](LayoutAndGeometry/README.md)
 
+## Sample Apps 🍭
+
+- [BetterRest](SampleApps/BetterRest/README.md)
+- [Bookworm](SampleApps/Bookworm/README.md)

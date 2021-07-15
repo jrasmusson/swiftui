@@ -1,5 +1,8 @@
 # Better Rest
 
+![](images/1.png)
+![](images/2.png)
+
 ```swift
 import SwiftUI
 
@@ -99,9 +102,6 @@ struct ContentView_Previews: PreviewProvider {
     }
 }
 ```
-
-![](images/1.png)
-![](images/2.png)
 
 ### Links that help
 

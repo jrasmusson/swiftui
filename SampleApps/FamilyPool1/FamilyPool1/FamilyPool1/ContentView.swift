@@ -12,10 +12,15 @@ struct ContentView: View {
         TabView() {
             IntroView()
             ChooseTeamsView()
-            Text("Start your pool!")
+            Button("Start Pool!", action: createPool)
+                .buttonStyle(.bordered)
         }
         .tabViewStyle(.page)
         .indexViewStyle(.page(backgroundDisplayMode: .always))
+    }
+    
+    func createPool() {
+        print("Create pool")
     }
 }
 
