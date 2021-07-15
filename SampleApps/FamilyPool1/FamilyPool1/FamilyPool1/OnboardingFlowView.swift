@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct OnboardingFlowView: View {
     var body: some View {
         TabView() {
             IntroView()
@@ -22,7 +22,7 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         let pool = Pool()
-        ContentView()
+        OnboardingFlowView()
             .environmentObject(pool)
     }
 }

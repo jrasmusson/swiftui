@@ -12,8 +12,10 @@ struct FamilyPool1App: App {
     var body: some Scene {
         WindowGroup {
             let pool = Pool()
-            ContentView()
+            OnboardingFlowView()
                 .environmentObject(pool)
         }
     }
 }
+
+// https://www.hackingwithswift.com/quick-start/swiftui/how-to-run-code-when-your-app-launches

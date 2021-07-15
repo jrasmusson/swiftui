@@ -24,6 +24,12 @@ Deliberate practice with SwiftUI.
 - [Link](Controls/Link/README.md)
 - [Menu](Controls/Menu/README.md)
 
+### Containers
+
+- [NavigationView](Controls/NavigationView/README.md)
+- [TabView](Controls/TabView/README.md)
+- [Group](Controls/Group/README.md)
+
 ### Value Selectors
 
 - [Toggle](Controls/Toggle/README.md)
@@ -49,20 +55,17 @@ Deliberate practice with SwiftUI.
 - [Form](Controls/Form/README.md)
 - [GeometryReader](Controls/GeometryReader/README.md)
 - [Gradient](Controls/Gradient/README.md)
-- [Group](Controls/Group/README.md)
 - [List](Controls/Lists/README.md)
 - [MarkDown](Controls/MarkDown/README.md)
 - [Materials](Controls/Materials/README.md)
 - [Modifiers](Controls/Modifiers/README.md)
 - [NavigationLink](Controls/NavigationLink/README.md)
-- [NavigationView](Controls/NavigationView/README.md)
 - [Path](Controls/Path/README.md)
 - [ScrollView](Controls/ScrollView/README.md)
 - [ScrollViewReader](Controls/ScrollViewReader/README.md)
 - [Section](Controls/Section/README.md)
 - [Sheet](Controls/Sheet/README.md)
 - [Stacks](Controls/Stacks/README.md)
-- [TabView](Controls/TabView/README.md)
 
 
 List of every type of [View](https://developer.apple.com/documentation/swiftui/view).
