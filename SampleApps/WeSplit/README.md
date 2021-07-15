@@ -1,5 +1,7 @@
 # WeSplit
 
+![](images/demo.gif)
+
 ```swift
 import SwiftUI
 
@@ -58,7 +60,6 @@ struct ContentView_Previews: PreviewProvider {
 }
 ```
 
-![](images/demo.gif)
 
 ### Links that help
 - [WeSplit - Paul Hudson](https://www.hackingwithswift.com/books/ios-swiftui/wesplit-wrap-up)

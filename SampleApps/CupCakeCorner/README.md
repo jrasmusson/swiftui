@@ -1,5 +1,7 @@
 # Cupcake Corner
 
+![](images/2.png)
+
 ## Adding Codable conformance for @Published properties
 
 Property wrappers like `@Published` aren't by default `Codeable`. We need to do some extra work.
@@ -225,9 +227,6 @@ struct ContentView: View {
     
 }
 ```
-
-![](images/2.png)
-
 
 
 **AddressView.shift**

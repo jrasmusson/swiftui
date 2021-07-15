@@ -1,5 +1,7 @@
 # Word Scramble
 
+![](images/1.png)
+
 ## Loading resources from your app bundle
 
 ```swift
@@ -70,8 +72,6 @@ struct ContentView: View {
     }
 }
 ```
-
-![](images/1.png)
 
 - [Adding to a list of words](https://www.hackingwithswift.com/books/ios-swiftui/adding-to-a-list-of-words)
 

@@ -1,5 +1,7 @@
 # iExpense
 
+![](images/demo.gif)
+
 ## Why @State only works with structs
 
 @State is a property wrapper that monitors changes in our structs. Each time a value inside our struct changes the *whole* struct changes. We get a new struct every time.
@@ -367,8 +369,6 @@ struct AddView_Previews: PreviewProvider {
     }
 }
 ```
-
-![](images/demo.gif)
 
 ### Links that help
 
