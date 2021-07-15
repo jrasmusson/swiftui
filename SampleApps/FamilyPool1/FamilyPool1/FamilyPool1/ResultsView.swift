@@ -24,21 +24,15 @@ struct ResultsView: View {
                         Spacer()
                         Text("\(pool.player1Points(forTeam: "Calgary Flames")) pts")
                     }
+                    HStack {
+                        Text("Total")
+                        Spacer()
+                        let team1Pts = pool.player1Points(forTeam: "Edmonton Oilers")
+                        let team2Pts = pool.player1Points(forTeam: "Calgary Flames")
+                        Text("\(team1Pts + team2Pts) pts")
+                    }
 
                 }
-                Section(header: Text("Player2 team")) {
-                    Picker("Select team1", selection: $pool.player2.team1Index) {
-                        ForEach(0..<teams.count) {
-                            Text(teams[$0])
-                        }
-                    }
-                    Picker("Select team2", selection: $pool.player2.team2Index) {
-                        ForEach(0..<teams.count) {
-                            Text(teams[$0])
-                        }
-                    }
-                }
-                Text(pool.player1.team1Name)
             }
             .navigationBarTitle("Results")
         }

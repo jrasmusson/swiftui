@@ -7,6 +7,7 @@
 
 import Foundation
 
+
 var teams = ["Choose team", "Edmonton Oilers", "Calgary Flames", "Winnipeg Jets", "Montreal Canadians"]
 
 struct Player {
