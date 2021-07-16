@@ -29,8 +29,15 @@ struct Player {
             }
         }
     }
-    var team2Index: Int = 0
-    
+
+    var team2Index: Int = 0 {
+        didSet {
+            if team2Index != 0 { // Ignore "Choose team"
+                team2Name = teams[team2Index].rawValue
+            }
+        }
+    }
+
     var team1Name = Team.choose.rawValue
     var team2Name = Team.choose.rawValue
 }
