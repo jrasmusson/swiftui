@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19141.11" systemVersion="20F71" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Player1" representedClassName="Player1" syncable="YES" codeGenerationType="category">
+        <attribute name="team1Name" attributeType="String"/>
+        <attribute name="team2Name" attributeType="String"/>
+    </entity>
+    <entity name="Player2" representedClassName="Player2" syncable="YES" codeGenerationType="category">
+        <attribute name="team1Name" attributeType="String"/>
+        <attribute name="team2Name" attributeType="String"/>
+    </entity>
+    <elements>
+        <element name="Player1" positionX="-27" positionY="18" width="128" height="59"/>
+        <element name="Player2" positionX="18" positionY="81" width="128" height="59"/>
+    </elements>
+</model>
