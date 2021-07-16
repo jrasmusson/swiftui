@@ -67,9 +67,9 @@
 			children = (
 				715021DB268C90CD000E2510 /* FamilyPool1App.swift */,
 				71E74121269F1EB6004D5F16 /* Data.swift */,
+				71C2C05D26A06482009B0B80 /* ResultsView.swift */,
 				71C2C06226A0DF3E009B0B80 /* Misc */,
 				71C2C06126A0DEF2009B0B80 /* Onboarding */,
-				71C2C06426A0DF69009B0B80 /* Main */,
 				715021DF268C90CE000E2510 /* Assets.xcassets */,
 				715021E1268C90CE000E2510 /* Preview Content */,
 			);
@@ -102,14 +102,6 @@
 				71C2C05C26A060B3009B0B80 /* results.json */,
 			);
 			name = Misc;
-			sourceTree = "<group>";
-		};
-		71C2C06426A0DF69009B0B80 /* Main */ = {
-			isa = PBXGroup;
-			children = (
-				71C2C05D26A06482009B0B80 /* ResultsView.swift */,
-			);
-			name = Main;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

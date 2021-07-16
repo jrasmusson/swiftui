@@ -7,17 +7,11 @@
 
 import SwiftUI
 
-enum PlayerType: String {
-    case player1 = "Player1"
-    case player2 = "Player2"
-}
-
 struct ResultsView: View {
     @EnvironmentObject var pool: Pool
     
     var body: some View {
         NavigationView {
-            
             Form {
                 ResultSection(playerType: .player1)
                 ResultSection(playerType: .player2)

@@ -58,8 +58,8 @@
 		71496A5E2697B46A00F0715E /* HelloCoreDataMVVM */ = {
 			isa = PBXGroup;
 			children = (
-				71496A732697B5D100F0715E /* View Models */,
 				71496A5F2697B46A00F0715E /* HelloCoreDataMVVMApp.swift */,
+				71496A732697B5D100F0715E /* View Models */,
 				71496A612697B46A00F0715E /* ContentView.swift */,
 				71496A6D2697B49800F0715E /* CoreDataManager.swift */,
 				71496A6F2697B4F300F0715E /* TodoAppModel.xcdatamodeld */,
