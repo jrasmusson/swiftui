@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ResultsView: View {
-    @EnvironmentObject var pool: Pool
+    @EnvironmentObject var pool: PoolVM
     
     var body: some View {
         NavigationView {
@@ -23,15 +23,15 @@ struct ResultsView: View {
 }
 
 struct ResultSection: View {
-    @EnvironmentObject var pool: Pool
+    @EnvironmentObject var pool: PoolVM
     
     let playerType: PlayerType
     
     var body: some View {
         let playerName = playerType.rawValue
         
-        let team1: Team
-        let team2: Team
+        let team1: TeamVM
+        let team2: TeamVM
         
         switch playerType {
         case .player1:
@@ -69,16 +69,16 @@ struct ResultSection: View {
 
 struct Results_Previews: PreviewProvider {
     static var previews: some View {
-        let pool = Pool()
-        pool.player1.team1 = Team.edmonton
-        pool.player1.team2 = Team.calgary
-        pool.player2.team1 = Team.winnipeg
-        pool.player2.team2 = Team.montreal
+        let pool = PoolVM()
+        pool.player1.team1 = TeamVM.edmonton
+        pool.player1.team2 = TeamVM.calgary
+        pool.player2.team1 = TeamVM.winnipeg
+        pool.player2.team2 = TeamVM.montreal
         
-        let oilersWins = Wins(team: Team.edmonton, wins: 4)
-        let calgaryWins = Wins(team: Team.calgary, wins: 3)
-        let winnipegWins = Wins(team: Team.winnipeg, wins: 1)
-        let montrealWins = Wins(team: Team.montreal, wins: 8)
+        let oilersWins = WinsVM(team: TeamVM.edmonton, wins: 4)
+        let calgaryWins = WinsVM(team: TeamVM.calgary, wins: 3)
+        let winnipegWins = WinsVM(team: TeamVM.winnipeg, wins: 1)
+        let montrealWins = WinsVM(team: TeamVM.montreal, wins: 8)
         
         pool.wins = [oilersWins, calgaryWins, winnipegWins, montrealWins]
         

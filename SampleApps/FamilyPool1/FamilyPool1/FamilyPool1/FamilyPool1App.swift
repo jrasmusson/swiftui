@@ -19,7 +19,7 @@ class AppState: ObservableObject {
 struct FamilyPool1App: App {
     
     @ObservedObject var appState = AppState(hasOnboarded: false)
-    @ObservedObject var pool = Pool()
+    @ObservedObject var pool = PoolVM()
         
     var body: some Scene {
         WindowGroup {

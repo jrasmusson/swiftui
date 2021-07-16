@@ -20,8 +20,6 @@ struct StartPoolView: View {
 
 struct StartPoolView_Previews: PreviewProvider {
     static var previews: some View {
-        let pool = Pool()
         StartPoolView()
-            .environmentObject(pool)
     }
 }

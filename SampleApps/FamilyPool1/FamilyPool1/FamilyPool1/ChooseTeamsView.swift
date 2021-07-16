@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ChooseTeamsView: View {
-    @EnvironmentObject var pool: Pool
+    @EnvironmentObject var pool: PoolVM
     @State private var selectedTeamIndex = 0
     
     var body: some View {
@@ -45,7 +45,7 @@ struct ChooseTeamsView: View {
 }
 struct ChooseTeamsView_Previews: PreviewProvider {
     static var previews: some View {
-        let pool = Pool()
+        let pool = PoolVM()
         ChooseTeamsView()
             .environmentObject(pool)
     }

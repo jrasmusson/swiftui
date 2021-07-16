@@ -17,7 +17,7 @@
 		71D3B74E26A1E17F00BC0F75 /* results.json in Resources */ = {isa = PBXBuildFile; fileRef = 71C2C05C26A060B3009B0B80 /* results.json */; };
 		71E7411E269F1D9F004D5F16 /* ChooseTeamsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E7411D269F1D9F004D5F16 /* ChooseTeamsView.swift */; };
 		71E74120269F1E16004D5F16 /* IntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E7411F269F1E16004D5F16 /* IntroView.swift */; };
-		71E74122269F1EB6004D5F16 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E74121269F1EB6004D5F16 /* Data.swift */; };
+		71E74122269F1EB6004D5F16 /* ViewModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E74121269F1EB6004D5F16 /* ViewModels.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,7 +32,7 @@
 		71C2C05F26A0DBBC009B0B80 /* StartPoolView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartPoolView.swift; sourceTree = "<group>"; };
 		71E7411D269F1D9F004D5F16 /* ChooseTeamsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseTeamsView.swift; sourceTree = "<group>"; };
 		71E7411F269F1E16004D5F16 /* IntroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroView.swift; sourceTree = "<group>"; };
-		71E74121269F1EB6004D5F16 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
+		71E74121269F1EB6004D5F16 /* ViewModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModels.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,7 +66,7 @@
 			isa = PBXGroup;
 			children = (
 				715021DB268C90CD000E2510 /* FamilyPool1App.swift */,
-				71E74121269F1EB6004D5F16 /* Data.swift */,
+				71E74121269F1EB6004D5F16 /* ViewModels.swift */,
 				71C2C05D26A06482009B0B80 /* ResultsView.swift */,
 				71C2C06226A0DF3E009B0B80 /* Misc */,
 				71C2C06126A0DEF2009B0B80 /* Onboarding */,
@@ -177,7 +177,7 @@
 			files = (
 				715021DE268C90CD000E2510 /* OnboardingFlowView.swift in Sources */,
 				71C2C06026A0DBBC009B0B80 /* StartPoolView.swift in Sources */,
-				71E74122269F1EB6004D5F16 /* Data.swift in Sources */,
+				71E74122269F1EB6004D5F16 /* ViewModels.swift in Sources */,
 				71E74120269F1E16004D5F16 /* IntroView.swift in Sources */,
 				71C2C05E26A06482009B0B80 /* ResultsView.swift in Sources */,
 				71C2C05B26A05DDE009B0B80 /* BundleDecodable.swift in Sources */,

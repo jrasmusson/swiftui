@@ -8,15 +8,15 @@
 import Foundation
 
 // MARK: External
-struct Wins: Codable {
-    let team: Team
+struct WinsVM: Codable {
+    let team: TeamVM
     let wins: Int
 }
 
 // MARK: Internal
-struct Player {
-    var team1 = Team.choose
-    var team2 = Team.choose
+struct PlayerVM {
+    var team1 = TeamVM.choose
+    var team2 = TeamVM.choose
 
     var team1Index: Int = 0 {
         didSet { team1 = teams[team1Index] }
@@ -27,13 +27,13 @@ struct Player {
     }
 }
 
-class Pool: ObservableObject {
-    @Published var player1: Player = Player()
-    @Published var player2: Player = Player()
+class PoolVM: ObservableObject {
+    @Published var player1: PlayerVM = PlayerVM()
+    @Published var player2: PlayerVM = PlayerVM()
     
-    @Published var wins: [Wins] = []
+    @Published var wins: [WinsVM] = []
     
-    func playerPoints(forTeam team: Team) -> Int {
+    func playerPoints(forTeam team: TeamVM) -> Int {
         return wins.first(where: { $0.team == team })?.wins ?? 0
     }
 
@@ -48,7 +48,7 @@ enum PlayerType: String {
     case player2 = "Player2"
 }
 
-enum Team: String, CaseIterable, Identifiable, Codable {
+enum TeamVM: String, CaseIterable, Identifiable, Codable {
     case choose = "Choose team"
     case edmonton = "Edmonton Oilers"
     case calgary = "Calgary Flames"
@@ -58,5 +58,5 @@ enum Team: String, CaseIterable, Identifiable, Codable {
     var id: String { self.rawValue }
 }
 
-var teams = [Team.choose, Team.edmonton, Team.calgary, Team.winnipeg, Team.montreal]
+var teams = [TeamVM.choose, TeamVM.edmonton, TeamVM.calgary, TeamVM.winnipeg, TeamVM.montreal]
 
