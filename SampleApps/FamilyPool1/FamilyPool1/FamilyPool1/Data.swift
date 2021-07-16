@@ -24,26 +24,26 @@ struct Player {
     
     var team1Index: Int = 0 {
         didSet {
-            if team1Index != 0 { // Ignore "Choose team"
-                team1Name = teams[team1Index].rawValue
+            if team1Index != 0 { // Ignore .choose
+                team1Name = teams[team1Index]
             }
         }
     }
 
     var team2Index: Int = 0 {
         didSet {
-            if team2Index != 0 { // Ignore "Choose team"
-                team2Name = teams[team2Index].rawValue
+            if team2Index != 0 { // Ignore .choose
+                team2Name = teams[team2Index]
             }
         }
     }
 
-    var team1Name = Team.choose.rawValue
-    var team2Name = Team.choose.rawValue
+    var team1Name = Team.choose // TODO rename team1
+    var team2Name = Team.choose
 }
 
 struct Wins: Codable {
-    let team: String
+    let team: String // TODO convert enum
     let wins: Int
 }
 
@@ -53,9 +53,9 @@ class Pool: ObservableObject {
     
     @Published var wins: [Wins] = []
     
-    func playerPoints(forTeam team: String) -> Int {
+    func playerPoints(forTeam team: Team) -> Int {
         for win in wins {
-            if win.team == team {
+            if win.team == team.rawValue {
                 return win.wins
             }
         }
