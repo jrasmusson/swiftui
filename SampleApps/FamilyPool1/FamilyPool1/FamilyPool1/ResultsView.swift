@@ -7,40 +7,63 @@
 
 import SwiftUI
 
+enum PlayerType: String {
+    case player1 = "Player1"
+    case player2 = "Player2"
+}
+
 struct ResultsView: View {
     @EnvironmentObject var pool: Pool
-    @EnvironmentObject var appState: AppState
     
     var body: some View {
         NavigationView {
+            
             Form {
-                Section(header: Text("Player1 team")) {
-                    let team1 = pool.player1.team1Name
-                    let team1Pts = pool.playerPoints(forTeam: team1)
-
-                    let team2 = pool.player1.team2Name
-                    let team2Pts = pool.playerPoints(forTeam: team2)
-
-                    let player1Total = team1Pts + team2Pts
-
-                    HStack {
-                        Text(team1)
-                        Spacer()
-                        Text("\(team1Pts) pts")
-                    }
-                    HStack {
-                        Text(team2)
-                        Spacer()
-                        Text("\(team2Pts) pts")
-                    }
-                    HStack {
-                        Text("Total")
-                        Spacer()
-                        Text("\(player1Total) pts")
-                    }
-                }
+                ResultSection(playerName: "Player1",
+                              team1Name: pool.player1.team1Name,
+                              team2Name: pool.player1.team2Name,
+                              team1Pts: pool.playerPoints(forTeam: pool.player1.team1Name),
+                              team2Pts: pool.playerPoints(forTeam: pool.player1.team2Name))
+                
+                ResultSection(playerName: "Player2",
+                              team1Name: pool.player1.team1Name,
+                              team2Name: pool.player1.team2Name,
+                              team1Pts: pool.playerPoints(forTeam: pool.player2.team1Name),
+                              team2Pts: pool.playerPoints(forTeam: pool.player2.team2Name))
             }
             .navigationBarTitle("Results")
+        }
+        
+    }
+}
+
+struct ResultSection: View {
+    let playerName: String
+    let team1Name: String
+    let team2Name: String
+    
+    let team1Pts: Int
+    let team2Pts: Int
+
+    var body: some View {
+        Section(header: Text("\(playerName) team")) {
+            let playerTotal = team1Pts + team2Pts
+            
+            HStack {
+                Text(team1Name)
+                Spacer()
+                Text("\(team1Pts) pts")
+            }
+            HStack {
+                Text(team2Name)
+                Spacer()
+                Text("\(team2Pts) pts")
+            }
+            HStack {
+                Text("Total")
+                Spacer()
+                Text("\(playerTotal) pts")
+            }
         }
     }
 }
