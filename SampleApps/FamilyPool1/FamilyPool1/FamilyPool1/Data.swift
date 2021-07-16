@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Team: String, CaseIterable, Identifiable {
+enum Team: String, CaseIterable, Identifiable, Codable {
     case choose = "Choose team"
     case edmonton = "Edmonton Oilers"
     case calgary = "Calgary Flames"
@@ -25,7 +25,7 @@ struct Player {
     var team1Index: Int = 0 {
         didSet {
             if team1Index != 0 { // Ignore .choose
-                team1Name = teams[team1Index]
+                team1 = teams[team1Index]
             }
         }
     }
@@ -33,17 +33,17 @@ struct Player {
     var team2Index: Int = 0 {
         didSet {
             if team2Index != 0 { // Ignore .choose
-                team2Name = teams[team2Index]
+                team2 = teams[team2Index]
             }
         }
     }
 
-    var team1Name = Team.choose // TODO rename team1
-    var team2Name = Team.choose
+    var team1 = Team.choose
+    var team2 = Team.choose
 }
 
 struct Wins: Codable {
-    let team: String // TODO convert enum
+    let team: Team
     let wins: Int
 }
 
@@ -55,7 +55,7 @@ class Pool: ObservableObject {
     
     func playerPoints(forTeam team: Team) -> Int {
         for win in wins {
-            if win.team == team.rawValue {
+            if win.team == team {
                 return win.wins
             }
         }

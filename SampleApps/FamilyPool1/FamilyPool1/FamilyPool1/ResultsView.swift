@@ -41,17 +41,16 @@ struct ResultSection: View {
         
         switch playerType {
         case .player1:
-            team1 = pool.player1.team1Name
-            team2 = pool.player1.team2Name
+            team1 = pool.player1.team1
+            team2 = pool.player1.team2
         case .player2:
-            team1 = pool.player2.team1Name
-            team2 = pool.player2.team2Name
+            team1 = pool.player2.team1
+            team2 = pool.player2.team2
         }
         
         let team1Pts = pool.playerPoints(forTeam: team1)
         let team2Pts = pool.playerPoints(forTeam: team2)
 
-        
         return Section(header: Text("\(playerName) team")) {
             let playerTotal = team1Pts + team2Pts
             
@@ -77,15 +76,15 @@ struct ResultSection: View {
 struct Results_Previews: PreviewProvider {
     static var previews: some View {
         let pool = Pool()
-        pool.player1.team1Name = Team.edmonton
-        pool.player1.team2Name = Team.calgary
-        pool.player2.team1Name = Team.winnipeg
-        pool.player2.team2Name = Team.montreal
+        pool.player1.team1 = Team.edmonton
+        pool.player1.team2 = Team.calgary
+        pool.player2.team1 = Team.winnipeg
+        pool.player2.team2 = Team.montreal
         
-        let oilersWins = Wins(team: Team.edmonton.rawValue, wins: 4)
-        let calgaryWins = Wins(team: Team.calgary.rawValue, wins: 3)
-        let winnipegWins = Wins(team: Team.winnipeg.rawValue, wins: 1)
-        let montrealWins = Wins(team: Team.montreal.rawValue, wins: 8)
+        let oilersWins = Wins(team: Team.edmonton, wins: 4)
+        let calgaryWins = Wins(team: Team.calgary, wins: 3)
+        let winnipegWins = Wins(team: Team.winnipeg, wins: 1)
+        let montrealWins = Wins(team: Team.montreal, wins: 8)
         
         pool.wins = [oilersWins, calgaryWins, winnipegWins, montrealWins]
         
