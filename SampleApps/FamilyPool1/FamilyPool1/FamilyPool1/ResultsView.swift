@@ -19,17 +19,8 @@ struct ResultsView: View {
         NavigationView {
             
             Form {
-                ResultSection(playerName: "Player1",
-                              team1Name: pool.player1.team1Name,
-                              team2Name: pool.player1.team2Name,
-                              team1Pts: pool.playerPoints(forTeam: pool.player1.team1Name),
-                              team2Pts: pool.playerPoints(forTeam: pool.player1.team2Name))
-                
-                ResultSection(playerName: "Player2",
-                              team1Name: pool.player1.team1Name,
-                              team2Name: pool.player1.team2Name,
-                              team1Pts: pool.playerPoints(forTeam: pool.player2.team1Name),
-                              team2Pts: pool.playerPoints(forTeam: pool.player2.team2Name))
+                ResultSection(playerType: .player1)
+                ResultSection(playerType: .player2)
             }
             .navigationBarTitle("Results")
         }
@@ -38,15 +29,30 @@ struct ResultsView: View {
 }
 
 struct ResultSection: View {
-    let playerName: String
-    let team1Name: String
-    let team2Name: String
+    @EnvironmentObject var pool: Pool
     
-    let team1Pts: Int
-    let team2Pts: Int
-
+    let playerType: PlayerType
+    
     var body: some View {
-        Section(header: Text("\(playerName) team")) {
+        let playerName = playerType.rawValue
+        
+        let team1Name: String
+        let team2Name: String
+        
+        switch playerType {
+        case .player1:
+            team1Name = pool.player1.team1Name
+            team2Name = pool.player1.team2Name
+        case .player2:
+            team1Name = pool.player2.team1Name
+            team2Name = pool.player2.team2Name
+        }
+        
+        let team1Pts = pool.playerPoints(forTeam: team1Name)
+        let team2Pts = pool.playerPoints(forTeam: team2Name)
+
+        
+        return Section(header: Text("\(playerName) team")) {
             let playerTotal = team1Pts + team2Pts
             
             HStack {
@@ -73,11 +79,15 @@ struct Results_Previews: PreviewProvider {
         let pool = Pool()
         pool.player1.team1Name = Team.edmonton.rawValue
         pool.player1.team2Name = Team.calgary.rawValue
+        pool.player2.team1Name = Team.winnipeg.rawValue
+        pool.player2.team2Name = Team.montreal.rawValue
         
-        let oilersWins = Wins(team: "Edmonton Oilers", wins: 4)
-        let calgaryWins = Wins(team: "Calgary Flames", wins: 3)
+        let oilersWins = Wins(team: Team.edmonton.rawValue, wins: 4)
+        let calgaryWins = Wins(team: Team.calgary.rawValue, wins: 3)
+        let winnipegWins = Wins(team: Team.winnipeg.rawValue, wins: 1)
+        let montrealWins = Wins(team: Team.montreal.rawValue, wins: 8)
         
-        pool.wins = [oilersWins, calgaryWins]
+        pool.wins = [oilersWins, calgaryWins, winnipegWins, montrealWins]
         
         return ResultsView()
             .environmentObject(pool)
