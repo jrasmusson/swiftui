@@ -7,4 +7,13 @@
         "team": "Calgary Flames",
         "wins": 3
     },
+    {
+        "team": "Winnipeg Jets",
+        "wins": 1
+    },
+    {
+        "team": "Montreal Canadians",
+        "wins": 8
+    },
+
 ]
