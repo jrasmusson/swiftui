@@ -14,6 +14,7 @@
 		71C2C05B26A05DDE009B0B80 /* BundleDecodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C2C05A26A05DDE009B0B80 /* BundleDecodable.swift */; };
 		71C2C05E26A06482009B0B80 /* ResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C2C05D26A06482009B0B80 /* ResultsView.swift */; };
 		71C2C06026A0DBBC009B0B80 /* StartPoolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C2C05F26A0DBBC009B0B80 /* StartPoolView.swift */; };
+		71D3B74E26A1E17F00BC0F75 /* results.json in Resources */ = {isa = PBXBuildFile; fileRef = 71C2C05C26A060B3009B0B80 /* results.json */; };
 		71E7411E269F1D9F004D5F16 /* ChooseTeamsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E7411D269F1D9F004D5F16 /* ChooseTeamsView.swift */; };
 		71E74120269F1E16004D5F16 /* IntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E7411F269F1E16004D5F16 /* IntroView.swift */; };
 		71E74122269F1EB6004D5F16 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E74121269F1EB6004D5F16 /* Data.swift */; };
@@ -171,6 +172,7 @@
 			files = (
 				715021E3268C90CE000E2510 /* Preview Assets.xcassets in Resources */,
 				715021E0268C90CE000E2510 /* Assets.xcassets in Resources */,
+				71D3B74E26A1E17F00BC0F75 /* results.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

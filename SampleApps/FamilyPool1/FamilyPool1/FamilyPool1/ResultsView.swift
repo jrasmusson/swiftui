@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ResultsView: View {
     @EnvironmentObject var pool: Pool
+    @EnvironmentObject var appState: AppState
     
     var body: some View {
         NavigationView {

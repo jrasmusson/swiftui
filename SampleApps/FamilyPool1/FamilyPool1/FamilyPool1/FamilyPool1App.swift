@@ -7,23 +7,32 @@
 
 import SwiftUI
 
-@main
-struct FamilyPool1App: App {
-    
-    private var pool = Pool()
-        
-    var body: some Scene {
-        WindowGroup {
-            
-//            if onboarding.hasOnboarded {
-//                ResultsView()
-//                    .environmentObject(pool)
-//            } else {
-                OnboardingFlowView()
-                    .environmentObject(pool)
-//            }
-        }
+class AppState: ObservableObject {
+    @Published var hasOnboarded: Bool
+
+    init(hasOnboarded: Bool) {
+        self.hasOnboarded = hasOnboarded
     }
 }
 
-// Figure out flow to switch from onboarding to non-onboarding
+@main
+struct FamilyPool1App: App {
+    
+    @ObservedObject var appState = AppState(hasOnboarded: false)
+    @ObservedObject var pool = Pool()
+        
+    var body: some Scene {
+        WindowGroup {
+
+            if appState.hasOnboarded {
+                ResultsView()
+                    .environmentObject(appState)
+                    .environmentObject(pool)
+            } else {
+                OnboardingFlowView()
+                    .environmentObject(appState)
+                    .environmentObject(pool)
+            }
+        }
+    }
+}

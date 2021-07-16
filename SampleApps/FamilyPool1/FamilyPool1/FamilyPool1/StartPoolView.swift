@@ -8,13 +8,13 @@
 import SwiftUI
 
 struct StartPoolView: View {
+    @EnvironmentObject var appState: AppState
     
     var body: some View {
-        Button("Start Pool!", action: startPool)
-            .buttonStyle(.bordered)
-    }
-
-    func startPool() {
+        Button("Start Pool!") {
+            appState.hasOnboarded = true
+        }
+        .buttonStyle(.bordered)
     }
 }
 

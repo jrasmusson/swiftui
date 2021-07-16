@@ -53,5 +53,11 @@ class Pool: ObservableObject {
         return 0
     }
         
-    init() {}
+    init() {
+        load()
+    }
+    
+    func load() {
+        wins = Bundle.main.decode("results.json")
+    }
 }
