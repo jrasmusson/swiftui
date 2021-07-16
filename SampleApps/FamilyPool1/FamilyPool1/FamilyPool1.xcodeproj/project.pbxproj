@@ -66,6 +66,7 @@
 			isa = PBXGroup;
 			children = (
 				715021DB268C90CD000E2510 /* FamilyPool1App.swift */,
+				71E74121269F1EB6004D5F16 /* Data.swift */,
 				71C2C06226A0DF3E009B0B80 /* Misc */,
 				71C2C06126A0DEF2009B0B80 /* Onboarding */,
 				71C2C06426A0DF69009B0B80 /* Main */,
@@ -97,7 +98,6 @@
 		71C2C06226A0DF3E009B0B80 /* Misc */ = {
 			isa = PBXGroup;
 			children = (
-				71E74121269F1EB6004D5F16 /* Data.swift */,
 				71C2C05A26A05DDE009B0B80 /* BundleDecodable.swift */,
 				71C2C05C26A060B3009B0B80 /* results.json */,
 			);

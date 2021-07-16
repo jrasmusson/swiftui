@@ -1,11 +1,10 @@
 [
-{
-    "team": "Edmonton Oilers",
-    "wins": 4
-},
-{
-    "team": "Calgary Flames",
-    "wins": 3
-},
-
+    {
+        "team": "Edmonton Oilers",
+        "wins": 4
+    },
+    {
+        "team": "Calgary Flames",
+        "wins": 3
+    },
 ]

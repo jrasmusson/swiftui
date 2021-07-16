@@ -15,24 +15,29 @@ struct ResultsView: View {
         NavigationView {
             Form {
                 Section(header: Text("Player1 team")) {
+                    let team1 = pool.player1.team1Name
+                    let team1Pts = pool.playerPoints(forTeam: team1)
+
+                    let team2 = pool.player1.team2Name
+                    let team2Pts = pool.playerPoints(forTeam: team2)
+
+                    let player1Total = team1Pts + team2Pts
+
                     HStack {
-                        Text(pool.player1.team1Name)
+                        Text(team1)
                         Spacer()
-                        Text("\(pool.player1Points(forTeam: "Edmonton Oilers")) pts")
+                        Text("\(team1Pts) pts")
                     }
                     HStack {
-                        Text(pool.player1.team2Name)
+                        Text(team2)
                         Spacer()
-                        Text("\(pool.player1Points(forTeam: "Calgary Flames")) pts")
+                        Text("\(team2Pts) pts")
                     }
                     HStack {
                         Text("Total")
                         Spacer()
-                        let team1Pts = pool.player1Points(forTeam: "Edmonton Oilers")
-                        let team2Pts = pool.player1Points(forTeam: "Calgary Flames")
-                        Text("\(team1Pts + team2Pts) pts")
+                        Text("\(player1Total) pts")
                     }
-
                 }
             }
             .navigationBarTitle("Results")

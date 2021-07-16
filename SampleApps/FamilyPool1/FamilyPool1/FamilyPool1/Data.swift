@@ -7,12 +7,14 @@
 
 import Foundation
 
-enum Team: String {
+enum Team: String, CaseIterable, Identifiable {
     case choose = "Choose team"
     case edmonton = "Edmonton Oilers"
     case calgary = "Calgary Flames"
     case winnipeg = "Winnipeg Jets"
     case montreal = "Montreal Canadians"
+    
+    var id: String { self.rawValue }
 }
 
 var teams = [Team.choose, Team.edmonton, Team.calgary, Team.winnipeg, Team.montreal]
@@ -44,7 +46,7 @@ class Pool: ObservableObject {
     
     @Published var wins: [Wins] = []
     
-    func player1Points(forTeam team: String) -> Int {
+    func playerPoints(forTeam team: String) -> Int {
         for win in wins {
             if win.team == team {
                 return win.wins
