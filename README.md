@@ -87,6 +87,7 @@ SwiftUI by [example](https://www.hackingwithswift.com/quick-start/swiftui).
 
 ## How to 🧱
 
+- [Dismiss a view](HowTo/DismissAView/README.md)
 - [UIKit Previews](HowTo/Preview/README.md)
 - [Wrap a UIViewController in a SwiftUI View](HowTo/WrapViewController/README.md)
 - [Layout and Geometry](LayoutAndGeometry/README.md)

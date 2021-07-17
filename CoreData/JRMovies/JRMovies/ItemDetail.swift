@@ -11,12 +11,15 @@ struct ItemDetail: View {
     
     let item: Item
     
+    @Environment(\.presentationMode) var presentationMode
+    
     var body: some View {
         VStack {
             Text("\(item.timestamp!, formatter: itemFormatter)")
             Button("Update") {
                 item.timestamp = Date()
                 PersistenceController.shared.saveContext()
+                presentationMode.wrappedValue.dismiss()
             }
         }
     }
