@@ -1,6 +1,6 @@
 //
 //  Persistence.swift
-//  PaulCoreData
+//  JRMovies
 //
 //  Created by jrasmusson on 2021-07-17.
 //
@@ -11,31 +11,32 @@ struct PersistenceController {
     static let shared = PersistenceController()
 
     static var preview: PersistenceController = {
-        let controller = PersistenceController(inMemory: true)
-        
-        // Create 10 example programming languages.
+        let result = PersistenceController(inMemory: true)
+        let viewContext = result.container.viewContext
         for _ in 0..<10 {
-            let language = ProgrammingLanguage(context: controller.container.viewContext)
-            language.name = "Example Language 1"
-            language.creator = "A. Programmer"
+            let newItem = Item(context: viewContext)
+            newItem.timestamp = Date()
         }
-        
-        return controller
+        do {
+            try viewContext.save()
+        } catch {
+            fatalError("Error: \(error.localizedDescription)")
+        }
+        return result
     }()
 
     let container: NSPersistentContainer
 
     init(inMemory: Bool = false) {
-        container = NSPersistentContainer(name: "PaulCoreData")
+        container = NSPersistentContainer(name: "JRMovies")
         if inMemory {
             container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
         }
-        
-        container.loadPersistentStores { description, error in
-            if let error = error {
-                fatalError("Error: \(error.localizedDescription)")
+        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+            if let error = error as NSError? {
+                fatalError("Unresolved error \(error), \(error.userInfo)")
             }
-        }
+        })
     }
     
     func saveContext() {
