@@ -12,6 +12,7 @@ struct PersistenceController {
 
     static let shared = PersistenceController()
 
+    // Convenience
     var viewContext: NSManagedObjectContext {
         return container.viewContext
     }
@@ -40,6 +41,7 @@ struct PersistenceController {
         })
     }
     
+    // Better save
     func saveContext() {
         let context = container.viewContext
 

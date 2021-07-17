@@ -21,6 +21,7 @@ struct ItemDetail: View {
                 PersistenceController.shared.saveContext()
                 presentationMode.wrappedValue.dismiss()
             }
+            Spacer()
         }
     }
 }
