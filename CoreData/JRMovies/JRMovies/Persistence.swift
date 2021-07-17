@@ -8,7 +8,13 @@
 import CoreData
 
 struct PersistenceController {
+    let container: NSPersistentContainer
+
     static let shared = PersistenceController()
+
+    var viewContext: NSManagedObjectContext {
+        return container.viewContext
+    }
 
     static var preview: PersistenceController = {
         let result = PersistenceController(inMemory: true)
@@ -17,15 +23,10 @@ struct PersistenceController {
             let newItem = Item(context: viewContext)
             newItem.timestamp = Date()
         }
-        do {
-            try viewContext.save()
-        } catch {
-            fatalError("Error: \(error.localizedDescription)")
-        }
+        shared.saveContext()
+        
         return result
     }()
-
-    let container: NSPersistentContainer
 
     init(inMemory: Bool = false) {
         container = NSPersistentContainer(name: "JRMovies")

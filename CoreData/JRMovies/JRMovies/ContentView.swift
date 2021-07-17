@@ -20,7 +20,9 @@ struct ContentView: View {
         NavigationView {
             List {
                 ForEach(items) { item in
-                    Text("\(item.timestamp!, formatter: itemFormatter)")
+                    NavigationLink(destination: ItemDetail(item: item)) {
+                        Text("\(item.timestamp!, formatter: itemFormatter)")
+                    }
                 }
                 .onDelete(perform: deleteItems)
             }
@@ -51,7 +53,7 @@ struct ContentView: View {
     }
 }
 
-private let itemFormatter: DateFormatter = {
+let itemFormatter: DateFormatter = {
     let formatter = DateFormatter()
     formatter.dateStyle = .none
     formatter.timeStyle = .medium

@@ -13,6 +13,7 @@
 		716C9D8626A3107F00246A31 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 716C9D8526A3107F00246A31 /* Preview Assets.xcassets */; };
 		716C9D8826A3107F00246A31 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 716C9D8726A3107F00246A31 /* Persistence.swift */; };
 		716C9D8B26A3107F00246A31 /* JRMovies.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 716C9D8926A3107F00246A31 /* JRMovies.xcdatamodeld */; };
+		716C9D9226A313E200246A31 /* ItemDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 716C9D9126A313E200246A31 /* ItemDetail.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +24,7 @@
 		716C9D8526A3107F00246A31 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		716C9D8726A3107F00246A31 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		716C9D8A26A3107F00246A31 /* JRMovies.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = JRMovies.xcdatamodel; sourceTree = "<group>"; };
+		716C9D9126A313E200246A31 /* ItemDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDetail.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,9 +59,10 @@
 			children = (
 				716C9D7E26A3107F00246A31 /* JRMoviesApp.swift */,
 				716C9D8026A3107F00246A31 /* ContentView.swift */,
-				716C9D8226A3107F00246A31 /* Assets.xcassets */,
+				716C9D9126A313E200246A31 /* ItemDetail.swift */,
 				716C9D8726A3107F00246A31 /* Persistence.swift */,
 				716C9D8926A3107F00246A31 /* JRMovies.xcdatamodeld */,
+				716C9D8226A3107F00246A31 /* Assets.xcassets */,
 				716C9D8426A3107F00246A31 /* Preview Content */,
 			);
 			path = JRMovies;
@@ -146,6 +149,7 @@
 				716C9D8B26A3107F00246A31 /* JRMovies.xcdatamodeld in Sources */,
 				716C9D8826A3107F00246A31 /* Persistence.swift in Sources */,
 				716C9D8126A3107F00246A31 /* ContentView.swift in Sources */,
+				716C9D9226A313E200246A31 /* ItemDetail.swift in Sources */,
 				716C9D7F26A3107F00246A31 /* JRMoviesApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
