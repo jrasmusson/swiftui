@@ -8,13 +8,23 @@
 import SwiftUI
 
 struct CompanyDetail: View {
+    let company: Company
+    
+    @Environment(\.presentationMode) var presentationMode
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Text("Ready for employees")
+            .navigationTitle(company.name ?? "Unknown")
     }
 }
 
 struct CompanyDetail_Previews: PreviewProvider {
     static var previews: some View {
-        CompanyDetail()
+        let viewContext = PersistenceController.preview.container.viewContext
+        let newCompany = Company(context: viewContext)
+        newCompany.name = "Apple"
+        
+        return CompanyDetail(company: newCompany)
+            .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
     }
 }

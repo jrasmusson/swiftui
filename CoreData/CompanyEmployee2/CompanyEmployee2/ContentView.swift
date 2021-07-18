@@ -30,7 +30,7 @@ struct ContentView: View {
                 }
                 List {
                     ForEach(companies) { company in
-                        NavigationLink(destination: CompanyDetail()) {
+                        NavigationLink(destination: CompanyDetail(company: company)) {
                             Text(company.name ?? "")
                         }
                     }
