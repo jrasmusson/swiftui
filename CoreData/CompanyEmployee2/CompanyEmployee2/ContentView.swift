@@ -20,7 +20,7 @@ struct ContentView: View {
         NavigationView {
             List {
                 ForEach(companies) { company in
-                    Text("\(company)")
+                    Text(company.name ?? "")
                 }
                 .onDelete(perform: deleteItems)
             }
