@@ -20,22 +20,22 @@ struct ContentView: View {
                 Button("Save") {
                     addCompany()
                 }
-                List {
-                    ForEach(companies) { company in
-                        NavigationLink(destination: CompanyDetail(company: company)) {
-                            Text("\(company.name!)")
-                        }
-                    }
-                    .onDelete(perform: deleteItems)
-                }
-                .toolbar {
-                    HStack {
-                        EditButton()
-                        Button(action: addCompany) {
-                            Label("Add Item", systemImage: "plus")
-                        }
-                    }
-                }
+//                List {
+//                    ForEach(companies) { company in
+//                        NavigationLink(destination: CompanyDetail(company: company)) {
+//                            Text("\(company.name!)")
+//                        }
+//                    }
+//                    .onDelete(perform: deleteItems)
+//                }
+//                .toolbar {
+//                    HStack {
+//                        EditButton()
+//                        Button(action: addCompany) {
+//                            Label("Add Item", systemImage: "plus")
+//                        }
+//                    }
+//                }
             }
         }
     }
