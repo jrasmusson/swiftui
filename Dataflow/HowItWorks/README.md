@@ -581,3 +581,4 @@ So `Environment` for iOS type style things about the look of our controls. `Envi
 - [SwiftUI Property Wrappers](https://swiftuipropertywrappers.com/)
 - [Difference between StateObject and ObservedObject](https://www.donnywals.com/whats-the-difference-between-stateobject-and-observedobject/)
 - [Difference State and Observed Objects Stackoverflow](https://stackoverflow.com/questions/62544115/what-is-the-difference-between-observedobject-and-stateobject-in-swiftui)
+- [Apple managing model data](https://developer.apple.com/documentation/swiftui/managing-model-data-in-your-app)
