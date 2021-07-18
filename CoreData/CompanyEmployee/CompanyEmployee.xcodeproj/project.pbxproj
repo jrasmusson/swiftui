@@ -13,6 +13,7 @@
 		71E86C9226A4725200AE7554 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 71E86C9126A4725200AE7554 /* Preview Assets.xcassets */; };
 		71E86C9426A4725200AE7554 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E86C9326A4725200AE7554 /* Persistence.swift */; };
 		71E86C9726A4725200AE7554 /* CompanyEmployee.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 71E86C9526A4725200AE7554 /* CompanyEmployee.xcdatamodeld */; };
+		71E86C9E26A473A400AE7554 /* CompanyDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E86C9D26A473A400AE7554 /* CompanyDetail.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +24,7 @@
 		71E86C9126A4725200AE7554 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		71E86C9326A4725200AE7554 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		71E86C9626A4725200AE7554 /* CompanyEmployee.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CompanyEmployee.xcdatamodel; sourceTree = "<group>"; };
+		71E86C9D26A473A400AE7554 /* CompanyDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyDetail.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +59,7 @@
 			children = (
 				71E86C8A26A4725100AE7554 /* CompanyEmployeeApp.swift */,
 				71E86C8C26A4725100AE7554 /* ContentView.swift */,
+				71E86C9D26A473A400AE7554 /* CompanyDetail.swift */,
 				71E86C9326A4725200AE7554 /* Persistence.swift */,
 				71E86C9526A4725200AE7554 /* CompanyEmployee.xcdatamodeld */,
 				71E86C8E26A4725200AE7554 /* Assets.xcassets */,
@@ -146,6 +149,7 @@
 				71E86C9426A4725200AE7554 /* Persistence.swift in Sources */,
 				71E86C8D26A4725100AE7554 /* ContentView.swift in Sources */,
 				71E86C8B26A4725100AE7554 /* CompanyEmployeeApp.swift in Sources */,
+				71E86C9E26A473A400AE7554 /* CompanyDetail.swift in Sources */,
 				71E86C9726A4725200AE7554 /* CompanyEmployee.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
