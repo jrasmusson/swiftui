@@ -57,9 +57,9 @@
 			children = (
 				717B865026A4779B00273E8E /* CompanyEmployee2App.swift */,
 				717B865226A4779B00273E8E /* ContentView.swift */,
-				717B865426A4779B00273E8E /* Assets.xcassets */,
 				717B865926A4779B00273E8E /* Persistence.swift */,
 				717B865B26A4779B00273E8E /* CompanyEmployee2.xcdatamodeld */,
+				717B865426A4779B00273E8E /* Assets.xcassets */,
 				717B865626A4779B00273E8E /* Preview Content */,
 			);
 			path = CompanyEmployee2;

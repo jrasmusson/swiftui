@@ -35,7 +35,7 @@ struct PersistenceController {
     }()
 
     init(inMemory: Bool = false) {
-        container = NSPersistentContainer(name: "JRMovies")
+        container = NSPersistentContainer(name: "--REPLACEME--") // else UnsafeRawBufferPointer with negative count
         if inMemory {
             container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
         }
