@@ -17,13 +17,11 @@ When working with user interactions like these, we will often track these change
 - @Binding - For mutating data owned by another view.
 
 
-
-
-## Value types
+# Value types
 
 Value types are instances where each type keeps a unique copy of its data (`struct`, `enum`, tuple). They are good for tracking local, simple state changes in views. And their states can be bound to SwiftUI controls.
 
-### Property
+## Property
 
 - Simply pass in the read-only value type you want to be reflected locally in your view.
 
@@ -76,7 +74,7 @@ struct PlayerView: View {
 
 To handle this we need something that can synthesize and track state in a `struct`. This is where we use `@State`.
 
-### @State
+## @State
 
 - A read-write property wrapper for keeping track of transient state owned by the view.
 
@@ -111,7 +109,7 @@ struct ContentView: View {
 }
 ```
 
-### @Binding
+## @Binding
 
 - How we pass `@State` down to subviews, and bi-directionally bind it back.
 
@@ -237,11 +235,9 @@ This will update the UI when the button is tapped because the views are bound to
 
 ![](images/binding-book-demo.gif)
 
-## Reference types
+# Reference types
 
 Reference type - instances share a single copy of the data (`class`).
-
-### Working with external data
 
 ![](images/external-data.png)
 
@@ -272,9 +268,9 @@ SwitUI has three property wrappers for receiving updates from observerable objec
 - @StateObject
 - @EnvironmentObject
 
-### @ObservedObject
+## @ObservedObject
 
-- A property wrapper type that subscribes to an observable object and invalidates a view whenever the observable object changes.
+- Blows away and recreates the view entirely whenever there is a change in state.
 
 Say we have a `struct` 
 
@@ -359,12 +355,10 @@ struct ContentView_Previews: PreviewProvider {
 
 ### @StateObject
 
-- Mechanically the same as `@ObservedObject`.
-- The difference with state is the view controls the `@StateObject` life-cycle.
-- Meaning if a property on `@StateObject` changes, a new view isn't created. The old one simply updates it's state.
+- Mechanically the same as `@ObservedObject` only `@StateObject` maintains its state. Doesn't invalidate when view recreated.
+- Standard usage is to define `@StateObject` at the top in the view that creates it, and then pass it down as `@ObservedObject` through subviews to the bottom.
 
-
-![](images/state2.png)
+![](images/state3.png)
 
 ```swift
 import SwiftUI
@@ -380,7 +374,7 @@ class Book: ObservableObject {
     }
 }
 
-// Inject into parent view at the top
+// Inject into as @StateObject in initializing view at the top
 struct ContentView: View {
     @StateObject var book: Book // 1
     
@@ -389,10 +383,10 @@ struct ContentView: View {
     }
 }
 
-// And then explicitly pass to each child
+// And then receive as ObservedObject in subviews
 struct DetailView: View
 {
-    @StateObject var book: Book // 2
+    @ObservedObject var book: Book // 2
     
     var body: some View {
         VStack {
@@ -404,7 +398,7 @@ struct DetailView: View
 // And subview (tighter coupling)
 struct DetailHeader: View
 {
-    @StateObject var book: Book // 3
+    @ObservedObject var book: Book // 3
 
     var body: some View {
         VStack {
@@ -416,22 +410,80 @@ struct DetailHeader: View
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        let book = Book(title: "The Hitchhiker's Guide to the Galaxy", author: "Douglas Adams")
+        let book = Book(title: "Lord of the Rings", author: "Tolkein")
         ContentView(book: book)
     }
 }
 ```
 
-### What's the difference between @StateObject and @ObservedObject
+### Difference between @StateObject and @ObservedObject
 
 ![](images/state-vs-observed.png)
 
-Everytime a property changes in a view powered by `@ObservedObject` that view recreates itself - it loses its 'local` state.
+- `@ObservedObject` doesn't maintain state when a new view is created. It recreates itself as new object every time.
 
-With `@StateObject` the view refreshes itself with a property change, but it dones't recreate the view or lose it current state - the local view maintains it.
+![](images/no-state.png)
 
-- So if you want your view to refresh but not recreate use `@StateObject`.
-- If you want to new view recreated and re-initalized every time use `@ObservedObject`.
+- `@StateObject` maintains the state of the observable object and won't recreate a new one every time.
+
+![](images/yes-state.png)
+
+- Which one you use depends on your use-case. Sometimes you want a refreshed data source. Sometimes you don't.
+
+```swift
+import SwiftUI
+
+class DataSource: ObservableObject {
+  @Published var counter = 0
+}
+
+struct Counter: View {
+  @StateObject var dataSource = DataSource() // view maintains state
+
+  var body: some View {
+    VStack {
+      Button("Increment counter") {
+        dataSource.counter += 1
+      }
+
+      Text("Count is \(dataSource.counter)")
+    }
+  }
+}
+
+struct ItemList: View {
+  @State private var items = ["hello", "world"]
+
+  var body: some View {
+    VStack {
+      Button("Append item to list") {
+        items.append("test")
+      }
+
+      List(items, id: \.self) { name in
+        Text(name)
+      }
+
+      Counter() // new create view
+    }
+  }
+}
+
+struct ContentView: View {
+  
+  var body: some View {
+    VStack {
+        ItemList()
+    }
+  }
+}
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+    }
+}
+```
 
 ### @EnvironmentObject
 
@@ -525,8 +577,7 @@ So `Environment` for iOS type style things about the look of our controls. `Envi
 ![](images/choose.png)
 
 ### Links that help
-- [WWDC 2019 - Data Flow Through SwiftUI](https://developer.apple.com/videos/play/wwdc2019/226/)
-- [Hacking in Swift - How to use @EnvironmentObject to share data between views](https://www.hackingwithswift.com/quick-start/swiftui/how-to-use-environmentobject-to-share-data-between-views)
-- [Apple Docs ObservableObject](https://developer.apple.com/documentation/combine/observableobject)
-- [Learn App Making - How to pass data between views](https://learnappmaking.com/pass-data-between-views-swiftui-how-to/)
-- [Physics Nerd](https://www.youtube.com/watch?v=5ryXee_Ye3k&list=LL&index=2&t=799s&ab_channel=PhysicsNerd)
+
+- [SwiftUI Property Wrappers](https://swiftuipropertywrappers.com/)
+- [Difference between StateObject and ObservedObject](https://www.donnywals.com/whats-the-difference-between-stateobject-and-observedobject/)
+- [Difference State and Observed Objects Stackoverflow](https://stackoverflow.com/questions/62544115/what-is-the-difference-between-observedobject-and-stateobject-in-swiftui)
