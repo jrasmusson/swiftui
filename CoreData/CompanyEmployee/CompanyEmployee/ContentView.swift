@@ -7,7 +7,7 @@ struct ContentView: View {
     @State private var companyName: String = ""
 
     @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Company.timestamp, ascending: true)],
+        sortDescriptors: [NSSortDescriptor(keyPath: \Company.name, ascending: true)],
         animation: .default)
     
     private var companies: FetchedResults<Company>
@@ -18,13 +18,12 @@ struct ContentView: View {
                 TextField("Company name", text: $companyName)
                     .textFieldStyle(.roundedBorder)
                 Button("Save") {
-                    coreDM.saveMovie(title: movieTitle)
-                    populateMovies()
+                    addCompany()
                 }
                 List {
                     ForEach(companies) { company in
-                        NavigationLink(destination: CompanyDetail(item: company)) {
-                            Text("\(company.timestamp!)")
+                        NavigationLink(destination: CompanyDetail(company: company)) {
+                            Text("\(company.name!)")
                         }
                     }
                     .onDelete(perform: deleteItems)
@@ -32,7 +31,7 @@ struct ContentView: View {
                 .toolbar {
                     HStack {
                         EditButton()
-                        Button(action: addItem) {
+                        Button(action: addCompany) {
                             Label("Add Item", systemImage: "plus")
                         }
                     }
@@ -41,10 +40,10 @@ struct ContentView: View {
         }
     }
 
-    private func addItem() {
+    private func addCompany() {
         withAnimation {
-            let newItem = Company(context: viewContext)
-            newItem.timestamp = Date()
+            let newCompany = Company(context: viewContext)
+            newCompany.name = "Pixar"
             PersistenceController.shared.saveContext()
         }
     }
