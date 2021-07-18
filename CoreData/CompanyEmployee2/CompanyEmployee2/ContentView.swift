@@ -11,6 +11,8 @@ import CoreData
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
 
+    @State private var companyName: String = ""
+    
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Company.name, ascending: true)],
         animation: .default)
@@ -18,27 +20,34 @@ struct ContentView: View {
 
     var body: some View {
         NavigationView {
-            List {
-                ForEach(companies) { company in
-                    Text(company.name ?? "")
-                }
-                .onDelete(perform: deleteItems)
-            }
-            .toolbar {
+            VStack {
                 HStack {
-                    EditButton()
+                    TextField("Company name", text: $companyName)
+                        .textFieldStyle(.roundedBorder)
                     Button(action: addCompany) {
-                        Label("Add Item", systemImage: "plus")
+                        Label("", systemImage: "plus")
+                    }
+                }
+                List {
+                    ForEach(companies) { company in
+                        Text(company.name ?? "")
+                    }
+                    .onDelete(perform: deleteItems)
+                }
+                .toolbar {
+                    HStack {
+                        EditButton()
                     }
                 }
             }
+            .navigationTitle("Companies")
         }
     }
 
     private func addCompany() {
         withAnimation {
             let newCompany = Company(context: viewContext)
-            newCompany.name = "Pixar"
+            newCompany.name = companyName
 
             do {
                 try viewContext.save()
