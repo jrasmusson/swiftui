@@ -1,10 +1,11 @@
-# CoreData
+# CoreData Canonical Example
 
-## Canonical Example
 
 ![](images/1.png)
 
 ![](images/2.png)
+
+## Convenience wrapper and save in context 
 
 **PersistenceController.swift**
 
@@ -60,6 +61,8 @@ struct PersistenceController {
 }
 ```
 
+## Save when app goes to background
+
 **App.swift**
 
 ```swift
@@ -82,6 +85,8 @@ struct JRMoviesApp: App {
     }
 }
 ```
+
+## FetchRequest automatically refreshes the view
 
 **ContentView.swift**
 
