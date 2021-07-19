@@ -59,11 +59,16 @@ struct CompanyDetail: View {
             PersistenceController.shared.saveContext()
         }
     }
-
-    private func deleteEmployee(offsets: IndexSet) {
+    
+    func deleteEmployee(at offsets: IndexSet) {
         withAnimation {
-//            offsets.map { company.employees[$0] }.forEach(viewContext.delete)
-            PersistenceController.shared.saveContext()
+            for index in offsets {
+                if let employees = company.employees?.allObjects as? [Employee] {
+                    let employee = employees[index]
+                    viewContext.delete(employee)
+                    PersistenceController.shared.saveContext()
+                }
+            }
         }
     }
 }
