@@ -27,7 +27,7 @@ struct ContentView: View {
                     Button(action: addCompany) {
                         Label("", systemImage: "plus")
                     }
-                }
+                }.padding()
                 List {
                     ForEach(companies) { company in
                         NavigationLink(destination: CompanyDetail(company: company)) {
@@ -50,36 +50,17 @@ struct ContentView: View {
         withAnimation {
             let newCompany = Company(context: viewContext)
             newCompany.name = companyName
-
-            do {
-                try viewContext.save()
-            } catch {
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-            }
+            PersistenceController.shared.saveContext()
         }
     }
 
     private func deleteItems(offsets: IndexSet) {
         withAnimation {
             offsets.map { companies[$0] }.forEach(viewContext.delete)
-
-            do {
-                try viewContext.save()
-            } catch {
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-            }
+            PersistenceController.shared.saveContext()
         }
     }
 }
-
-private let itemFormatter: DateFormatter = {
-    let formatter = DateFormatter()
-    formatter.dateStyle = .short
-    formatter.timeStyle = .medium
-    return formatter
-}()
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
