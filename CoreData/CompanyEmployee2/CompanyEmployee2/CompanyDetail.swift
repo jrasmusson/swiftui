@@ -12,6 +12,14 @@ struct CompanyDetail: View {
     
     @Environment(\.presentationMode) var presentationMode
     
+    @State private var employeeName: String = ""
+    
+    @FetchRequest(
+        sortDescriptors: [NSSortDescriptor(keyPath: \Company.name, ascending: true)],
+        animation: .default)
+    private var employees: FetchedResults<Employee>
+
+    
     var body: some View {
         Text("Ready for employees")
             .navigationTitle(company.name ?? "Unknown")
