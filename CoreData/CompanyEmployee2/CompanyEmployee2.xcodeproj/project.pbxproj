@@ -7,19 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		717B865126A4779B00273E8E /* CompanyEmployee2App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717B865026A4779B00273E8E /* CompanyEmployee2App.swift */; };
-		717B865326A4779B00273E8E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717B865226A4779B00273E8E /* ContentView.swift */; };
+		717B865126A4779B00273E8E /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717B865026A4779B00273E8E /* App.swift */; };
+		717B865326A4779B00273E8E /* CompanyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717B865226A4779B00273E8E /* CompanyView.swift */; };
 		717B865526A4779B00273E8E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 717B865426A4779B00273E8E /* Assets.xcassets */; };
 		717B865826A4779B00273E8E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 717B865726A4779B00273E8E /* Preview Assets.xcassets */; };
 		717B865A26A4779B00273E8E /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717B865926A4779B00273E8E /* Persistence.swift */; };
-		717B865D26A4779B00273E8E /* CompanyEmployee2.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 717B865B26A4779B00273E8E /* CompanyEmployee2.xcdatamodeld */; };
+		717B865D26A4779B00273E8E /* CoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 717B865B26A4779B00273E8E /* CoreData.xcdatamodeld */; };
 		71F472BD26A48007003CF262 /* CompanyDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71F472BC26A48007003CF262 /* CompanyDetail.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		717B864D26A4779B00273E8E /* CompanyEmployee2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CompanyEmployee2.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		717B865026A4779B00273E8E /* CompanyEmployee2App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyEmployee2App.swift; sourceTree = "<group>"; };
-		717B865226A4779B00273E8E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		717B865026A4779B00273E8E /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
+		717B865226A4779B00273E8E /* CompanyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyView.swift; sourceTree = "<group>"; };
 		717B865426A4779B00273E8E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		717B865726A4779B00273E8E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		717B865926A4779B00273E8E /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
@@ -57,11 +57,11 @@
 		717B864F26A4779B00273E8E /* CompanyEmployee2 */ = {
 			isa = PBXGroup;
 			children = (
-				717B865026A4779B00273E8E /* CompanyEmployee2App.swift */,
-				717B865226A4779B00273E8E /* ContentView.swift */,
+				717B865026A4779B00273E8E /* App.swift */,
+				717B865226A4779B00273E8E /* CompanyView.swift */,
 				71F472BC26A48007003CF262 /* CompanyDetail.swift */,
 				717B865926A4779B00273E8E /* Persistence.swift */,
-				717B865B26A4779B00273E8E /* CompanyEmployee2.xcdatamodeld */,
+				717B865B26A4779B00273E8E /* CoreData.xcdatamodeld */,
 				717B865426A4779B00273E8E /* Assets.xcassets */,
 				717B865626A4779B00273E8E /* Preview Content */,
 			);
@@ -147,10 +147,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				717B865A26A4779B00273E8E /* Persistence.swift in Sources */,
-				717B865326A4779B00273E8E /* ContentView.swift in Sources */,
-				717B865D26A4779B00273E8E /* CompanyEmployee2.xcdatamodeld in Sources */,
+				717B865326A4779B00273E8E /* CompanyView.swift in Sources */,
+				717B865D26A4779B00273E8E /* CoreData.xcdatamodeld in Sources */,
 				71F472BD26A48007003CF262 /* CompanyDetail.swift in Sources */,
-				717B865126A4779B00273E8E /* CompanyEmployee2App.swift in Sources */,
+				717B865126A4779B00273E8E /* App.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -355,13 +355,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		717B865B26A4779B00273E8E /* CompanyEmployee2.xcdatamodeld */ = {
+		717B865B26A4779B00273E8E /* CoreData.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
 				717B865C26A4779B00273E8E /* CompanyEmployee2.xcdatamodel */,
 			);
 			currentVersion = 717B865C26A4779B00273E8E /* CompanyEmployee2.xcdatamodel */;
-			path = CompanyEmployee2.xcdatamodeld;
+			path = CoreData.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
