@@ -34,7 +34,7 @@ struct CompanyView: View {
                             Text(company.name ?? "")
                         }
                     }
-                    .onDelete(perform: deleteItems)
+                    .onDelete(perform: deleteCompany)
                 }
                 .toolbar {
                     HStack {
@@ -54,7 +54,7 @@ struct CompanyView: View {
         }
     }
 
-    private func deleteItems(offsets: IndexSet) {
+    private func deleteCompany(offsets: IndexSet) {
         withAnimation {
             offsets.map { companies[$0] }.forEach(viewContext.delete)
             PersistenceController.shared.saveContext()
