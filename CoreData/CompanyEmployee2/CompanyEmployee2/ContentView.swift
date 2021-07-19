@@ -8,7 +8,7 @@
 import SwiftUI
 import CoreData
 
-struct ContentView: View {
+struct CompanyView: View {
     @Environment(\.managedObjectContext) private var viewContext
 
     @State private var companyName: String = ""
@@ -64,6 +64,6 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+        CompanyView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
     }
 }
