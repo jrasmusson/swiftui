@@ -192,3 +192,6 @@ struct ItemDetail_Previews: PreviewProvider {
 ```
 
 
+### Links that help
+
+- [One-to-many relationships with @FetchRequest and SwiftUI](https://www.youtube.com/watch?v=y1oWprQqLJY&ab_channel=PaulHudson)

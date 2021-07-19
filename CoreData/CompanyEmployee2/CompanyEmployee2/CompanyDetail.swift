@@ -15,12 +15,6 @@ struct CompanyDetail: View {
     
     @State private var employeeName: String = ""
     
-//    @FetchRequest(
-//        sortDescriptors: [NSSortDescriptor(keyPath: \Company.name, ascending: true)],
-//        animation: .default)
-//    private var employees: FetchedResults<Employee>
-
-    
     var body: some View {
         NavigationView {
             VStack {
@@ -31,18 +25,17 @@ struct CompanyDetail: View {
                         Label("", systemImage: "plus")
                     }
                 }.padding()
-                if let employees = company.employees?.allObjects as? [Employee] {
-                    List {
-                        ForEach(employees) { employee in
-                            NavigationLink(destination: EmployeeDetail(employee: employee)) {
-                                Text(employee.name ?? "")
-                            }
+                
+                List {
+                    ForEach(company.employeesArray) { employee in
+                        NavigationLink(destination: EmployeeDetail(employee: employee)) {
+                            Text(employee.name ?? "")
                         }
-                        .onDelete(perform: deleteEmployee)
                     }
-                    .toolbar {
-                        HStack { EditButton() }
-                    }
+                    .onDelete(perform: deleteEmployee)
+                }
+                .toolbar {
+                    HStack { EditButton() }
                 }
             }
             .navigationTitle("Companies")
@@ -56,6 +49,8 @@ struct CompanyDetail: View {
         withAnimation {
             let newEmployee = Employee(context: viewContext)
             newEmployee.name = employeeName
+            
+            company.addToEmployees(newEmployee)
             PersistenceController.shared.saveContext()
         }
     }

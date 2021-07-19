@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19141.11" systemVersion="20F71" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="Company" representedClassName="Company" syncable="YES" codeGenerationType="class">
+    <entity name="Company" representedClassName="Company" syncable="YES">
         <attribute name="name" attributeType="String"/>
         <relationship name="employees" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Employee" inverseName="company" inverseEntity="Employee"/>
     </entity>
-    <entity name="Employee" representedClassName="Employee" syncable="YES" codeGenerationType="class">
+    <entity name="Employee" representedClassName="Employee" syncable="YES">
         <attribute name="name" attributeType="String"/>
         <relationship name="company" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Company" inverseName="employees" inverseEntity="Company"/>
     </entity>
