@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CompanyDetail: View {
-    let company: Company
+    @StateObject var company: Company
     
     @Environment(\.presentationMode) var presentationMode
     @Environment(\.managedObjectContext) private var viewContext
@@ -17,7 +17,6 @@ struct CompanyDetail: View {
     
     var body: some View {
         VStack {
-            Text("Employees")
             HStack {
                 TextField("Employee name", text: $employeeName)
                     .textFieldStyle(.roundedBorder)
@@ -31,12 +30,8 @@ struct CompanyDetail: View {
                     NavigationLink(destination: EmployeeDetail(employee: employee)) {
                         Text(employee.name ?? "")
                     }
-                }
-                .onDelete(perform: deleteEmployee)
-            }
-            .toolbar {
-                HStack { EditButton() }
-            }
+                }.onDelete(perform: deleteEmployee)
+            }.toolbar { EditButton() }
         }
     }
     

@@ -8,6 +8,14 @@
 import SwiftUI
 import CoreData
 
+class CompanyStore: ObservableObject {
+    @Published var company: Company
+    
+    init(company: Company) {
+        self.company = company
+    }
+}
+
 struct CompanyView: View {
     @Environment(\.managedObjectContext) private var viewContext
 
@@ -33,14 +41,8 @@ struct CompanyView: View {
                         NavigationLink(destination: CompanyDetail(company: company)) {
                             Text(company.name ?? "")
                         }
-                    }
-                    .onDelete(perform: deleteCompany)
-                }
-                .toolbar {
-                    HStack {
-                        EditButton()
-                    }
-                }
+                    }.onDelete(perform: deleteCompany)
+                }.toolbar { EditButton() }
             }
             .navigationTitle("Companies")
         }
