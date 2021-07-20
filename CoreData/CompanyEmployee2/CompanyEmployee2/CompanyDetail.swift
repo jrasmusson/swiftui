@@ -32,7 +32,7 @@ struct CompanyDetail: View {
                     }
                 }.onDelete(perform: deleteEmployee)
             }
-        }
+        }.navigationTitle(company.unwrappedName)
     }
     
     private func addEmployee() {
