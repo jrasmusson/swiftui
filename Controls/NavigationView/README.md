@@ -45,10 +45,6 @@ NavigationView {
 ![](images/3.png)
 
 
-
-
-
-
 ## onAppear
 
 ```swift

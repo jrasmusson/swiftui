@@ -8,11 +8,9 @@
 import SwiftUI
 
 struct CompanyDetail: View {
-    @StateObject var company: Company
-    
-    @Environment(\.presentationMode) var presentationMode
     @Environment(\.managedObjectContext) private var viewContext
     
+    @StateObject var company: Company
     @State private var employeeName: String = ""
     
     var body: some View {

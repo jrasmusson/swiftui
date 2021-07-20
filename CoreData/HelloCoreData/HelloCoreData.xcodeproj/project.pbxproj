@@ -60,9 +60,9 @@
 				71496A502696624600F0715E /* Files */,
 				71496A3D2696617A00F0715E /* HelloCoreDataApp.swift */,
 				71496A3F2696617A00F0715E /* ContentView.swift */,
+				71496A512697200800F0715E /* MovieDetail.swift */,
 				71496A4E2696622900F0715E /* CoreDataManager.swift */,
 				71496A4B269661C600F0715E /* HelloCoreDataModel.xcdatamodeld */,
-				71496A512697200800F0715E /* MovieDetail.swift */,
 			);
 			path = HelloCoreData;
 			sourceTree = "<group>";

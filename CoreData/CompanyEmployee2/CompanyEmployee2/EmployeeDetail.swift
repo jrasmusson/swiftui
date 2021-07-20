@@ -8,12 +8,29 @@
 import SwiftUI
 
 struct EmployeeDetail: View {
-    
-    let employee: Employee
-    
+    @Environment(\.presentationMode) var presentationMode
+
+    @StateObject var employee: Employee
+    @State private var employeeName: String = ""
+        
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        HStack {
+            TextField(employee.unwrappedName, text: $employeeName)
+                .textFieldStyle(.roundedBorder)
+            Button(action: updateEmployee) {
+                Label("", systemImage: "arrow.counterclockwise")
+            }
+        }.padding()
     }
+    
+    private func updateEmployee() {
+        withAnimation {
+            employee.name = employeeName
+            PersistenceController.shared.saveContext()
+            presentationMode.wrappedValue.dismiss()
+        }
+    }
+
 }
 
 struct EmployeeDetail_Previews: PreviewProvider {
@@ -26,3 +43,5 @@ struct EmployeeDetail_Previews: PreviewProvider {
             .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
     }
 }
+
+// Spike how to dismiss a navigationview link programmatically
