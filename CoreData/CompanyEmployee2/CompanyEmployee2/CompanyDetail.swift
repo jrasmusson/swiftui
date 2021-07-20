@@ -16,33 +16,28 @@ struct CompanyDetail: View {
     @State private var employeeName: String = ""
     
     var body: some View {
-        NavigationView {
-            VStack {
-                HStack {
-                    TextField("Employee name", text: $employeeName)
-                        .textFieldStyle(.roundedBorder)
-                    Button(action: addEmployee) {
-                        Label("", systemImage: "plus")
-                    }
-                }.padding()
-                
-                List {
-                    ForEach(company.employeesArray) { employee in
-                        NavigationLink(destination: EmployeeDetail(employee: employee)) {
-                            Text(employee.name ?? "")
-                        }
-                    }
-                    .onDelete(perform: deleteEmployee)
+        VStack {
+            Text("Employees")
+            HStack {
+                TextField("Employee name", text: $employeeName)
+                    .textFieldStyle(.roundedBorder)
+                Button(action: addEmployee) {
+                    Label("", systemImage: "plus")
                 }
-                .toolbar {
-                    HStack { EditButton() }
+            }.padding()
+            
+            List {
+                ForEach(company.employeesArray) { employee in
+                    NavigationLink(destination: EmployeeDetail(employee: employee)) {
+                        Text(employee.name ?? "")
+                    }
                 }
+                .onDelete(perform: deleteEmployee)
             }
-            .navigationTitle("Companies")
+            .toolbar {
+                HStack { EditButton() }
+            }
         }
-
-        Text("Ready for employees")
-            .navigationTitle(company.name ?? "Unknown")
     }
     
     private func addEmployee() {
@@ -76,10 +71,10 @@ struct CompanyDetail_Previews: PreviewProvider {
         
         let employee1 = Employee(context: viewContext)
         employee1.name = "Jobs"
-
+        
         let employee2 = Employee(context: viewContext)
         employee2.name = "Woz"
-
+        
         newCompany.addToEmployees(employee1)
         newCompany.addToEmployees(employee2)
         

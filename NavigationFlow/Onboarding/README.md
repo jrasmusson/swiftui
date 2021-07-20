@@ -25,7 +25,7 @@ class AppState: ObservableObject {
 // Load it into your app
 @main
 struct DemoApp: App {
-    @ObservedObject var appState = AppState(hasOnboarded: false)
+    @StateObject var appState = AppState(hasOnboarded: false)
     
     var body: some Scene {
         WindowGroup {
