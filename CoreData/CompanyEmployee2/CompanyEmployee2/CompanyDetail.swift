@@ -31,7 +31,7 @@ struct CompanyDetail: View {
                         Text(employee.name ?? "")
                     }
                 }.onDelete(perform: deleteEmployee)
-            }.toolbar { EditButton() }
+            }
         }
     }
     
@@ -48,11 +48,9 @@ struct CompanyDetail: View {
     func deleteEmployee(at offsets: IndexSet) {
         withAnimation {
             for index in offsets {
-                if let employees = company.employees?.allObjects as? [Employee] {
-                    let employee = employees[index]
-                    viewContext.delete(employee)
-                    PersistenceController.shared.saveContext()
-                }
+                let employee = company.employeesArray[index]
+                viewContext.delete(employee)
+                PersistenceController.shared.saveContext()
             }
         }
     }
