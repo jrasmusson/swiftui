@@ -15,9 +15,9 @@ NavigationView {
 
 ## How to programmatically dismiss
 
-![](images/4.png)
+<img src="images/4.png" alt="drawing" width="200"/>
 
-![](images/5.png)
+<img src="images/5.png" alt="drawing" width="200"/>
 
 - Bind a `@State` property to the `isActive` attribute of `NavigationLink` 
 - Toggle its state in the child detail causing the parent to re-render and stop showing the child view.
