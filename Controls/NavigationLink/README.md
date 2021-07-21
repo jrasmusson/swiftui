@@ -27,16 +27,13 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var isShowingDetailView = false
-
+    
     var body: some View {
         NavigationView {
-            VStack {
-                NavigationLink(destination: DetailView(isShowingDetailView: $isShowingDetailView),
-                               isActive: $isShowingDetailView) {
-                    Text("Detail >")
-                }.padding()
-            }
-            .navigationTitle("Navigation")
+            NavigationLink(destination: DetailView(isShowingDetailView: $isShowingDetailView),
+                           isActive: $isShowingDetailView) {
+                Text("Detail >")
+            }.navigationTitle("Navigation")
         }
     }
 }
