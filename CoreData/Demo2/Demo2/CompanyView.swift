@@ -17,9 +17,6 @@ struct CompanyView: View {
                     Text("\(company.name)")
                 }
             }
-            NavigationLink(destination: CompanyDetailView()) {
-                    Text("Push Company")
-            }
         }
     }
 }

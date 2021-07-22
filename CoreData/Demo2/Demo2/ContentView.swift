@@ -44,12 +44,6 @@ struct CompanyDetailView: View {
     }
 }
 
-struct EmployeeView: View {
-    var body: some View {
-        Text("Employee name")
-    }
-}
-
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()

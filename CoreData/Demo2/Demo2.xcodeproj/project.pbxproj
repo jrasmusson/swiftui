@@ -12,6 +12,7 @@
 		71494C5E26A88F3500BF8319 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 71494C5D26A88F3500BF8319 /* Assets.xcassets */; };
 		71494C6126A88F3500BF8319 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 71494C6026A88F3500BF8319 /* Preview Assets.xcassets */; };
 		71494C6826A9034800BF8319 /* CompanyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71494C6726A9034800BF8319 /* CompanyView.swift */; };
+		71494C6E26A90AAB00BF8319 /* EmployeeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71494C6D26A90AAB00BF8319 /* EmployeeView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,6 +22,7 @@
 		71494C5D26A88F3500BF8319 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		71494C6026A88F3500BF8319 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		71494C6726A9034800BF8319 /* CompanyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyView.swift; sourceTree = "<group>"; };
+		71494C6D26A90AAB00BF8319 /* EmployeeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,11 +55,12 @@
 		71494C5826A88F3400BF8319 /* Demo2 */ = {
 			isa = PBXGroup;
 			children = (
-				71494C5926A88F3400BF8319 /* Demo2App.swift */,
-				71494C5B26A88F3400BF8319 /* ContentView.swift */,
 				71494C5D26A88F3500BF8319 /* Assets.xcassets */,
 				71494C5F26A88F3500BF8319 /* Preview Content */,
+				71494C5926A88F3400BF8319 /* Demo2App.swift */,
+				71494C5B26A88F3400BF8319 /* ContentView.swift */,
 				71494C6726A9034800BF8319 /* CompanyView.swift */,
+				71494C6D26A90AAB00BF8319 /* EmployeeView.swift */,
 			);
 			path = Demo2;
 			sourceTree = "<group>";
@@ -140,6 +143,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				71494C6E26A90AAB00BF8319 /* EmployeeView.swift in Sources */,
 				71494C5C26A88F3400BF8319 /* ContentView.swift in Sources */,
 				71494C5A26A88F3400BF8319 /* Demo2App.swift in Sources */,
 				71494C6826A9034800BF8319 /* CompanyView.swift in Sources */,
