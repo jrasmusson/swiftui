@@ -8,14 +8,6 @@
 import SwiftUI
 import CoreData
 
-//class CompanyStore: ObservableObject {
-//    @Published var company: Company
-//    
-//    init(company: Company) {
-//        self.company = company
-//    }
-//}
-
 struct CompanyView: View {
     @Environment(\.managedObjectContext) private var viewContext
 
