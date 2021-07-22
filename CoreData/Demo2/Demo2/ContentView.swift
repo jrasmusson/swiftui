@@ -37,11 +37,10 @@ struct ContentView: View {
 }
 
 struct CompanyView: View {
-    @State private var showDetail = false
 
     var body: some View {
         VStack {
-            NavigationLink(destination: CompanyDetailView(showSelf: $showDetail), isActive: $showDetail) {
+            NavigationLink(destination: CompanyDetailView()) {
                 Text("Push Company")
             }
         }
@@ -49,37 +48,28 @@ struct CompanyView: View {
 }
 
 struct CompanyDetailView: View {
-    @Binding var showSelf: Bool
     
     var body: some View {
         VStack {
             NavigationLink(destination: EmployeesView()) {
-                Text("Push Employee")
-            }
-            Button(action: {
-                self.showSelf = false
-            }) {
-                Text("Pop Company Detail")
+                Text("Push Employees")
             }
         }
     }
 }
 
 struct EmployeesView: View {
-    @State private var showDetail = false
     
     var body: some View {
         VStack {
-            NavigationLink(destination: EmployeeDetailView(showSelf: $showDetail), isActive: $showDetail) {
+            NavigationLink(destination: EmployeeDetailView()) {
                 Text("Push Employee")
             }
         }
     }
 }
 
-struct EmployeeDetailView: View {
-    @Binding var showSelf: Bool
-    
+struct EmployeeDetailView: View {    
     var body: some View {
         Text("Employee")
     }
