@@ -37,34 +37,26 @@ struct ContentView: View {
 }
 
 struct CompanyView: View {
-
     var body: some View {
-        VStack {
-            NavigationLink(destination: CompanyDetailView()) {
-                Text("Push Company")
-            }
+        NavigationLink(destination: CompanyDetailView()) {
+            Text("Push Company")
         }
     }
 }
 
 struct CompanyDetailView: View {
-    
     var body: some View {
-        VStack {
-            NavigationLink(destination: EmployeesView()) {
-                Text("Push Employees")
-            }
+        NavigationLink(destination: EmployeesView()) {
+            Text("Push Employees")
         }
+        
     }
 }
 
 struct EmployeesView: View {
-    
     var body: some View {
-        VStack {
-            NavigationLink(destination: EmployeeDetailView()) {
-                Text("Push Employee")
-            }
+        NavigationLink(destination: EmployeeDetailView()) {
+            Text("Push Employee")
         }
     }
 }
@@ -74,7 +66,6 @@ struct EmployeeDetailView: View {
         Text("Employee")
     }
 }
-
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
