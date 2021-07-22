@@ -11,8 +11,13 @@ struct CompanyDetailView: View {
     let company: Company
     
     var body: some View {
-        NavigationLink(destination: EmployeeView()) {
-            Text(company.employees[0].name)
+        let employees = company.employees
+        List {
+            ForEach(employees, id: \.self) { employee in
+                NavigationLink(destination: EmployeeView(employee: employee)) {
+                    Text("\(employee.name)")
+                }
+            }
         }
     }
 }

@@ -62,8 +62,8 @@
 				71494C5926A88F3400BF8319 /* Demo2App.swift */,
 				71494C5B26A88F3400BF8319 /* ContentView.swift */,
 				71494C6726A9034800BF8319 /* CompanyView.swift */,
-				71494C6D26A90AAB00BF8319 /* EmployeeView.swift */,
 				71494C6F26A90B0700BF8319 /* CompanyDetailView.swift */,
+				71494C6D26A90AAB00BF8319 /* EmployeeView.swift */,
 			);
 			path = Demo2;
 			sourceTree = "<group>";

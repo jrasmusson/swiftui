@@ -8,13 +8,15 @@
 import SwiftUI
 
 struct EmployeeView: View {
+    let employee: Employee
+    
     var body: some View {
-        Text("Employee name")
+        Text("\(employee.name)")
     }
 }
 
 struct EmployeeView_Previews: PreviewProvider {
     static var previews: some View {
-        EmployeeView()
+        EmployeeView(employee: Employee(name: "Steve"))
     }
 }

@@ -12,7 +12,7 @@ struct CompanyView: View {
     
     var body: some View {
         List {
-            ForEach(companies) { company in
+            ForEach(companies, id: \.self) { company in
                 NavigationLink(destination: CompanyDetailView(company: company)) {
                     Text("\(company.name)")
                 }

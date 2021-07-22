@@ -21,8 +21,8 @@ struct Company: Identifiable, Hashable {
 let steve = Employee(name: "Steve")
 let watson = Employee(name: "Watson")
 
-let apple = Company(name: "Apple", employees: [steve])
-let ibm = Company(name: "IBM", employees: [watson])
+let apple = Company(name: "Apple", employees: [steve, watson])
+let ibm = Company(name: "IBM", employees: [watson, steve])
 
 let companies = [apple, ibm]
 
