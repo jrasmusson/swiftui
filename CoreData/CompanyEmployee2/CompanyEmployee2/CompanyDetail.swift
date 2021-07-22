@@ -25,9 +25,7 @@ struct CompanyDetail: View {
             
             List {
                 ForEach(company.employeesArray) { employee in
-                    NavigationLink(destination: EmployeeDetail(employee: employee)) {
-                        Text(employee.name ?? "")
-                    }
+                    Text(employee.name ?? "")
                 }.onDelete(perform: deleteEmployee)
             }
         }.navigationTitle(company.unwrappedName)
