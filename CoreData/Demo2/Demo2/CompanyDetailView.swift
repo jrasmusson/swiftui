@@ -8,15 +8,17 @@
 import SwiftUI
 
 struct CompanyDetailView: View {
+    let company: Company
+    
     var body: some View {
         NavigationLink(destination: EmployeeView()) {
-            Text("Push Employee")
+            Text(company.employees[0].name)
         }
     }
 }
 
 struct CompanyDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        CompanyDetailView()
+        CompanyDetailView(company: apple)
     }
 }

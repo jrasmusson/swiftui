@@ -13,7 +13,7 @@ struct CompanyView: View {
     var body: some View {
         List {
             ForEach(companies) { company in
-                NavigationLink(destination: CompanyDetailView()) {
+                NavigationLink(destination: CompanyDetailView(company: company)) {
                     Text("\(company.name)")
                 }
             }
