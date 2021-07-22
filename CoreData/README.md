@@ -1,9 +1,9 @@
 # CoreData Canonical Example
 
 
-![](images/1.png)
+![](zArchive/images/1.png)
 
-![](images/2.png)
+![](zArchive/images/2.png)
 
 ## Convenience wrapper and save in context 
 
