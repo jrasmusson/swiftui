@@ -38,24 +38,15 @@ struct ContentView: View {
 
 struct CompanyDetailView: View {
     var body: some View {
-        NavigationLink(destination: EmployeesView()) {
-            Text("Push Employees")
-        }
-        
-    }
-}
-
-struct EmployeesView: View {
-    var body: some View {
-        NavigationLink(destination: EmployeeDetailView()) {
+        NavigationLink(destination: EmployeeView()) {
             Text("Push Employee")
         }
     }
 }
 
-struct EmployeeDetailView: View {    
+struct EmployeeView: View {
     var body: some View {
-        Text("Employee")
+        Text("Employee name")
     }
 }
 
