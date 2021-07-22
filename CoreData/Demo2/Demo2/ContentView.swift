@@ -12,7 +12,7 @@ struct Employee: Identifiable, Hashable {
     let name: String
 }
 
-struct Company: Identifiable {
+struct Company: Identifiable, Hashable {
     var id: String { name}
     let name: String
     let employees: [Employee]
@@ -31,15 +31,7 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         NavigationView {
-            CompanyView()
-        }
-    }
-}
-
-struct CompanyView: View {
-    var body: some View {
-        NavigationLink(destination: CompanyDetailView()) {
-            Text("Push Company")
+            CompanyView(companies: companies)
         }
     }
 }
