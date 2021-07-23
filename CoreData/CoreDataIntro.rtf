@@ -1,35 +1,149 @@
 {\rtf1\ansi\ansicpg1252\cocoartf2580
-\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fswiss\fcharset0 Helvetica-Bold;}
-{\colortbl;\red255\green255\blue255;}
-{\*\expandedcolortbl;;}
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fnil\fcharset0 .AppleSystemUIFontMonospaced-Regular;}
+{\colortbl;\red255\green255\blue255;\red140\green148\blue165;}
+{\*\expandedcolortbl;;\cssrgb\c61569\c64706\c70588;}
 \margl1440\margr1440\vieww11520\viewh8400\viewkind0
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
 
-\f0\fs24 \cf0 What is CoreData?\
+\f0\fs24 \cf0 Core Data and SwiftUI\
 \
-How does it work?\
+New project (with nothing)\
+- add data model\
+- add company (cmd + s)\
+- add PersistenceController\
+- inject viewContext into environment\
 \
-Why use it?\
+import SwiftUI\
 \
-How does it work with SwiftUI?\
-- pretty much the same - just makes some things easier\
+@main\
+struct CoreDataIntroApp: App \{\
+    let persistenceController = PersistenceController.shared\
+    \
+    var body: some Scene \{\
+        WindowGroup \{\
+            ContentView()\
+                .environment(\\.managedObjectContext, persistenceController.viewContext)\
+        \}\
+    \}\
+\}\
+\
+- Pull it out in our ContentView\
+\
+\pard\pardeftab720\sl394\partightenfactor0
+
+\f1 \cf2 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 struct ContentView: View \{\
+    @Environment(\\.managedObjectContext) private var viewContext\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0 \cf0 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 \
+
+\fs48 Create a company
+\fs24 \
+\
+\pard\tx741\pardeftab741\pardirnatural\partightenfactor0
+\cf0 @State private var companyName: String = ""\
+\
+TextField("Company name", text: $companyName)\
+   .textFieldStyle(.roundedBorder)\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 HStack\
+\
+\pard\tx741\pardeftab741\pardirnatural\partightenfactor0
+\cf0 Button(action: addCompany) \{\
+   Label("", systemImage: "plus")\
+\}\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \
+    private func addCompany() \{\
+        withAnimation \{\
+            let newCompany = Company(context: viewContext)\
+            newCompany.name = companyName\
+            PersistenceController.shared.saveContext()\
+        \}\
+    \}\
+\pard\tx741\pardeftab741\pardirnatural\partightenfactor0
+\cf0 \
+\}.padding()\
+\
+Would like this to appear near the top, so I am going to embed in a VStack.\
+\
+VStack \{\
+   HStack \{\
+\
+Then the trick to get everything to the top is to add one of these Spacers().\
+\
+Run the app! Can add companies. Just can see them. Let\'92s fix that.\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\fs48 \cf0 View saved companies
+\fs24 \
+\
+- Add the fetchRequest\
+\
+@FetchRequest(\
+        sortDescriptors: [NSSortDescriptor(keyPath: \\Company.name, ascending: true)],\
+        animation: .default)\
+    private var companies: FetchedResults<Company>\
+\
+List \{\
+  ForEach(companies) \{ company in\
+    Text(company.name ?? "")\
+  \}.onDelete(perform: deleteCompany)\
+\}\
+\
+private func deleteCompany(offsets: IndexSet) \{\
+  withAnimation \{\
+    offsets.map \{ companies[$0] \}.forEach(viewContext.delete)\
+      PersistenceController.shared.saveContext()\
+    \}\
+\}\
+\
+Run the app. See your companies!\
+Show delete.\
 \
 
-\fs28 New Project
+\fs48 Load data in previews
 \fs24 \
-- core data option\
-- explain 
-\f1\b view context
-\f0\b0  and how it gets into our views\
-- explain 
-\f1\b fetchRequest
-\f0\b0  - property wrapper that automatically syncs our entities with our page\
-- run the preview\
-- explain what CoreData is saving - Item\
-- show where and how Item is defined in the data model\
 \
-Where\'92s the data?\
+Need to inject our special previews viewContext.\
 \
+ContentView().environment(\\.managedObjectContext,\
+ PersistenceController.preview.container.viewContext)\
+\
+\
+    static var preview: PersistenceController = \{\
+        let result = PersistenceController(inMemory: true)\
+        let viewContext = result.container.viewContext\
+\
+        // Companies\
+        let newCompany = Company(context: viewContext)\
+        newCompany.name = "Apple"\
+\
+        shared.saveContext()\
+        \
+        return result\
+    \}()\
+\
+\
+Load your preview. Will now see company data.\
+\
+\
+
+\fs48 Update
+\fs24 \
+\
+Going to create a new view to update our company name.\
+\
+UpdateView\
+\
+Three step process.\
+1.Add @StateObject to change state and refresh the view\
+2. Convert out text view into a NavigationLink.\
+3. Embed in a navigationView\
+4. Do our actual update in the new view.\
 \
 \
 }
