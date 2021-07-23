@@ -18,19 +18,23 @@ struct ContentView: View {
     private var companies: FetchedResults<Company>
     
     var body: some View {
-        VStack {
-            HStack {
-                TextField("Company name", text: $companyName)
-                    .textFieldStyle(.roundedBorder)
-                Button(action: addCompany) {
-                    Label("", systemImage: "plus")
+        NavigationView {
+            VStack {
+                HStack {
+                    TextField("Company name", text: $companyName)
+                        .textFieldStyle(.roundedBorder)
+                    Button(action: addCompany) {
+                        Label("", systemImage: "plus")
+                    }
+                }.padding()
+                List {
+                    ForEach(companies) { company in
+                        NavigationLink(destination: UpdateView(company: company)) {
+                            Text(company.name ?? "")
+                        }
+                    }.onDelete(perform: deleteCompany)
                 }
-            }.padding()
-            List {
-                ForEach(companies) { company in
-                    Text(company.name ?? "")
-                }.onDelete(perform: deleteCompany)
-            }
+            }.navigationTitle("Companies")
         }
     }
     

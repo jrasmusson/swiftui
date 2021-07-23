@@ -141,9 +141,90 @@ UpdateView\
 \
 Three step process.\
 1.Add @StateObject to change state and refresh the view\
+2. Update our view to receive a company as an observable object.\
 2. Convert out text view into a NavigationLink.\
 3. Embed in a navigationView\
 4. Do our actual update in the new view.\
+\
+Add @StateObject\
+\
+struct UpdateView: View \{\
+    \
+    @StateObject var company: Company\
+\
+Update our preview\
+\
+struct UpdateView_Previews: PreviewProvider \{\
+    static var previews: some View \{\
+        let viewContext = PersistenceController.preview.container.viewContext\
+        let newCompany = Company(context: viewContext)\
+        newCompany.name = "Apple"\
+                \
+        return UpdateView(company: newCompany)\
+            .environment(\\.managedObjectContext, PersistenceController.preview.container.viewContext)\
+    \}\
+\}\
+\
+We are going to update our company name by providing a textfield to edit, and then show update below.\
+\
+    @State private var companyName: String = ""\
+    \
+    var body: some View \{\
+        VStack \{\
+            HStack \{\
+                TextField("Update company name", text: $companyName)\
+                    .textFieldStyle(.roundedBorder)\
+                Button(action: updateCompany) \{\
+                    Label("", systemImage: "arrowshape.turn.up.left")\
+                \}\
+            \}.padding()\
+            Text(company.name ?? "")\
+            Spacer()\
+        \}\
+    \}\
+    \
+    private func updateCompany() \{\
+        withAnimation \{\
+            company.name = companyName\
+            PersistenceController.shared.saveContext()\
+        \}\
+    \}\
+\
+Show SF Symbols - where you got arrow shape.\
+Test out in previews - point out how nice SwiftUI is for doing this.\
+\
+Now we need to pass that company down to this view from parent.\
+Going to convert into a NavigationLink.\
+\
+Return to parent view. And comment out this text.\
+\
+                ForEach(companies) \{ company in\
+//                    Text(company.name ?? "")\
+                \}.onDelete(perform: deleteCompany)\
+\
+Going to replace with \
+\
+NavigationLink(destination: CompanyDetail(company: company)) \{\
+  Text(company.name ?? "")\
+\}\
+\
+Note how this changes the view of our company text. Adds a chevon.\
+Run and see how doesn\'92t link.\
+Need to embed in NavigationView.\
+Test in preview.\
+\
+Add title\
+\
+VStack \{\
+\
+\}.navigationTitle("Companies") \
+\
+Run and demo!\
+\
+Congratulations! You now know\'85\
+Come back next time and see how we can add employees to our companies and setup 1-many relationships.\
+\
+Thanks for coming!\
 \
 \
 }
