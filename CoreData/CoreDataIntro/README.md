@@ -1,9 +1,7 @@
-# CoreData Canonical Example
+# CoreData Intro
 
 
-![](zArchive/images/1.png)
-
-![](zArchive/images/2.png)
+![](images/1.png)
 
 ## Convenience wrapper and save in context 
 
@@ -92,101 +90,119 @@ struct JRMoviesApp: App {
 **ContentView.swift**
 
 ```swift
+//
+//  ContentView.swift
+//  CoreDataIntro
+//
+//  Created by jrasmusson on 2021-07-23.
+//
+
 import SwiftUI
-import CoreData
 
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
-
+    
+    @State private var companyName: String = ""
+    
     @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
+        sortDescriptors: [NSSortDescriptor(keyPath: \Company.name, ascending: true)],
         animation: .default)
-    private var items: FetchedResults<Item>
-
+    private var companies: FetchedResults<Company>
+    
     var body: some View {
         NavigationView {
-            List {
-                ForEach(items) { item in
-                    NavigationLink(destination: ItemDetail(item: item)) {
-                        Text("\(item.timestamp!, formatter: itemFormatter)")
-                    }
-                }
-                .onDelete(perform: deleteItems)
-            }
-            .toolbar {
+            VStack {
                 HStack {
-                    EditButton()
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
+                    TextField("Company name", text: $companyName)
+                        .textFieldStyle(.roundedBorder)
+                    Button(action: addCompany) {
+                        Label("", systemImage: "plus")
                     }
-                }
-            }
+                }.padding()
+                List {
+                    ForEach(companies) { company in
+                        NavigationLink(destination: UpdateView(company: company)) {
+                            Text(company.name ?? "")
+                        }
+                    }.onDelete(perform: deleteCompany)
+                }.toolbar { EditButton() }
+            }.navigationTitle("Companies")
+        }
+    }
+    
+    private func deleteCompany(offsets: IndexSet) {
+      withAnimation {
+        offsets.map { companies[$0] }.forEach(viewContext.delete)
+          PersistenceController.shared.saveContext()
         }
     }
 
-    private func addItem() {
+    private func addCompany() {
         withAnimation {
-            let newItem = Item(context: viewContext)
-            newItem.timestamp = Date()
+            let newCompany = Company(context: viewContext)
+            newCompany.name = companyName
             PersistenceController.shared.saveContext()
         }
     }
 
-    private func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            offsets.map { items[$0] }.forEach(viewContext.delete)
-            PersistenceController.shared.saveContext()
-        }
-    }
 }
-
-let itemFormatter: DateFormatter = {
-    let formatter = DateFormatter()
-    formatter.dateStyle = .none
-    formatter.timeStyle = .medium
-    return formatter
-}()
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView().environment(\.managedObjectContext, PersistenceController.preview.viewContext)
+        ContentView().environment(\.managedObjectContext,
+         PersistenceController.preview.container.viewContext)
     }
 }
 ```
 
-**Detail.swift**
+**UpdateView.swift**
 
-![](images/3.png)
+![](images/2.png)
 
 ```swift
+//
+//  UpdateView.swift
+//  CoreDataIntro
+//
+//  Created by jrasmusson on 2021-07-23.
+//
+
 import SwiftUI
 
-struct ItemDetail: View {
+struct UpdateView: View {
+    @StateObject var company: Company
     
-    let item: Item
-    
-    @Environment(\.presentationMode) var presentationMode
+    @State private var companyName: String = ""
     
     var body: some View {
         VStack {
-            Text("\(item.timestamp!, formatter: itemFormatter)")
-            Button("Update") {
-                item.timestamp = Date()
-                PersistenceController.shared.saveContext()
-                presentationMode.wrappedValue.dismiss()
-            }
+            HStack {
+                TextField("Update company name", text: $companyName)
+                    .textFieldStyle(.roundedBorder)
+                Button(action: updateCompany) {
+                    Label("", systemImage: "arrowshape.turn.up.left")
+                }
+            }.padding()
+            Text(company.name ?? "")
             Spacer()
+        }
+    }
+    
+    private func updateCompany() {
+        withAnimation {
+            company.name = companyName
+            PersistenceController.shared.saveContext()
         }
     }
 }
 
-struct ItemDetail_Previews: PreviewProvider {
+struct UpdateView_Previews: PreviewProvider {
     static var previews: some View {
         let viewContext = PersistenceController.preview.container.viewContext
-        let newItem = Item(context: viewContext)
-        newItem.timestamp = Date()
-
-        return ItemDetail(item: newItem)
+        let newCompany = Company(context: viewContext)
+        newCompany.name = "IBM"
+                
+        return UpdateView(company: newCompany)
             .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
     }
 }
