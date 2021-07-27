@@ -24,9 +24,9 @@ extension Company {
     }
 
     public var employeesArray: [Employee] {
-        let eSet = employees as? Set<Employee> ?? []
+        let employeeSet = employees as? Set<Employee> ?? []
         
-        return eSet.sorted {
+        return employeeSet.sorted {
             $0.unwrappedName < $1.unwrappedName
         }
     }
