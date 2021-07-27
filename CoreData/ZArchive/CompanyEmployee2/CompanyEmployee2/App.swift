@@ -9,6 +9,8 @@ import SwiftUI
 
 @main
 struct CompanyEmployee2App: App {
+    @Environment(\.scenePhase) var scenePhase
+    
     let persistenceController = PersistenceController.shared
 
     var body: some Scene {
@@ -16,5 +18,9 @@ struct CompanyEmployee2App: App {
             CompanyView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
+        .onChange(of: scenePhase) { _ in
+            persistenceController.saveContext()
+        }
     }
 }
+ 

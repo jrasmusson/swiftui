@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		71773CFA26AF986300A82914 /* CompanyDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71773CF926AF986300A82914 /* CompanyDetail.swift */; };
+		71773CFF26AF9B2400A82914 /* Employee+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71773CFB26AF9B2400A82914 /* Employee+CoreDataClass.swift */; };
+		71773D0026AF9B2400A82914 /* Employee+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71773CFC26AF9B2400A82914 /* Employee+CoreDataProperties.swift */; };
+		71773D0126AF9B2400A82914 /* Company+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71773CFD26AF9B2400A82914 /* Company+CoreDataClass.swift */; };
+		71773D0226AF9B2400A82914 /* Company+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71773CFE26AF9B2400A82914 /* Company+CoreDataProperties.swift */; };
 		71D2F21626AA3C17005F0254 /* CoreDataIntroApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D2F21526AA3C17005F0254 /* CoreDataIntroApp.swift */; };
 		71D2F21826AA3C17005F0254 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D2F21726AA3C17005F0254 /* ContentView.swift */; };
 		71D2F21A26AA3C18005F0254 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 71D2F21926AA3C18005F0254 /* Assets.xcassets */; };
@@ -17,6 +22,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		71773CF926AF986300A82914 /* CompanyDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyDetail.swift; sourceTree = "<group>"; };
+		71773CFB26AF9B2400A82914 /* Employee+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Employee+CoreDataClass.swift"; path = "CoreDataIntro/Employee+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		71773CFC26AF9B2400A82914 /* Employee+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Employee+CoreDataProperties.swift"; path = "CoreDataIntro/Employee+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
+		71773CFD26AF9B2400A82914 /* Company+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Company+CoreDataClass.swift"; path = "CoreDataIntro/Company+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		71773CFE26AF9B2400A82914 /* Company+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Company+CoreDataProperties.swift"; path = "CoreDataIntro/Company+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		71D2F21226AA3C17005F0254 /* CoreDataIntro.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoreDataIntro.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		71D2F21526AA3C17005F0254 /* CoreDataIntroApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataIntroApp.swift; sourceTree = "<group>"; };
 		71D2F21726AA3C17005F0254 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -38,6 +48,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		71773D0326AF9B4200A82914 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				71773CFB26AF9B2400A82914 /* Employee+CoreDataClass.swift */,
+				71773CFC26AF9B2400A82914 /* Employee+CoreDataProperties.swift */,
+				71773CFD26AF9B2400A82914 /* Company+CoreDataClass.swift */,
+				71773CFE26AF9B2400A82914 /* Company+CoreDataProperties.swift */,
+				71D2F22326AA3C34005F0254 /* Intro.xcdatamodeld */,
+				71D2F22626AA3CA5005F0254 /* PersistenceController.swift */,
+			);
+			name = CoreData;
+			sourceTree = "<group>";
+		};
 		71D2F20926AA3C17005F0254 = {
 			isa = PBXGroup;
 			children = (
@@ -57,13 +80,13 @@
 		71D2F21426AA3C17005F0254 /* CoreDataIntro */ = {
 			isa = PBXGroup;
 			children = (
-				71D2F21526AA3C17005F0254 /* CoreDataIntroApp.swift */,
-				71D2F22626AA3CA5005F0254 /* PersistenceController.swift */,
-				71D2F21726AA3C17005F0254 /* ContentView.swift */,
-				71D2F22826AA4759005F0254 /* UpdateView.swift */,
-				71D2F22326AA3C34005F0254 /* Intro.xcdatamodeld */,
 				71D2F21926AA3C18005F0254 /* Assets.xcassets */,
 				71D2F21B26AA3C18005F0254 /* Preview Content */,
+				71773D0326AF9B4200A82914 /* CoreData */,
+				71D2F21526AA3C17005F0254 /* CoreDataIntroApp.swift */,
+				71D2F21726AA3C17005F0254 /* ContentView.swift */,
+				71D2F22826AA4759005F0254 /* UpdateView.swift */,
+				71773CF926AF986300A82914 /* CompanyDetail.swift */,
 			);
 			path = CoreDataIntro;
 			sourceTree = "<group>";
@@ -148,8 +171,13 @@
 			files = (
 				71D2F21826AA3C17005F0254 /* ContentView.swift in Sources */,
 				71D2F21626AA3C17005F0254 /* CoreDataIntroApp.swift in Sources */,
+				71773CFA26AF986300A82914 /* CompanyDetail.swift in Sources */,
 				71D2F22926AA4759005F0254 /* UpdateView.swift in Sources */,
+				71773D0126AF9B2400A82914 /* Company+CoreDataClass.swift in Sources */,
 				71D2F22526AA3C34005F0254 /* Intro.xcdatamodeld in Sources */,
+				71773D0026AF9B2400A82914 /* Employee+CoreDataProperties.swift in Sources */,
+				71773CFF26AF9B2400A82914 /* Employee+CoreDataClass.swift in Sources */,
+				71773D0226AF9B2400A82914 /* Company+CoreDataProperties.swift in Sources */,
 				71D2F22726AA3CA5005F0254 /* PersistenceController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
