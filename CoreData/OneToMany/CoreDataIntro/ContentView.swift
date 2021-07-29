@@ -29,7 +29,7 @@ struct ContentView: View {
                 }.padding()
                 List {
                     ForEach(companies) { company in
-                        NavigationLink(destination: UpdateView(company: company)) {
+                        NavigationLink(destination: CompanyDetail(company: company)) {
                             Text(company.name ?? "")
                         }
                     }.onDelete(perform: deleteCompany)

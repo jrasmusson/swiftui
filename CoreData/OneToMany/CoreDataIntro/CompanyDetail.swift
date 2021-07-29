@@ -24,11 +24,11 @@ struct CompanyDetail: View {
             }.padding()
             
             List {
-                ForEach(company.employees) { employee in
-                    Text(employee.name ?? "")
+                ForEach(company.employeesArray) { employee in
+                    Text(employee.unwrappedName)
                 }.onDelete(perform: deleteEmployee)
             }
-        }.navigationTitle(company.name ?? "Unknown")
+        }.navigationTitle("Employees")
     }
     
     private func addEmployee() {
