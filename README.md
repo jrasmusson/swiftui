@@ -85,6 +85,11 @@ SwiftUI by [example](https://www.hackingwithswift.com/quick-start/swiftui).
 ## Combine ➡️
 - [Getting Started](Combine/GettingStarted/README.md)
 
+## CoreData
+
+- [Intro](CoreData/Intro/README.md)
+- [One-to-many](CoreData/OneToMany/README.md)
+
 ## How to 🧱
 
 - [Dismiss a view](HowTo/DismissAView/README.md)
