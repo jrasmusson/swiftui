@@ -84,6 +84,7 @@ SwiftUI by [example](https://www.hackingwithswift.com/quick-start/swiftui).
 
 ## Combine ➡️
 - [Getting Started](Combine/GettingStarted/README.md)
+- [Terms & Conditions Example](Combine/GettingStarted/TermsAndConditions/README.md)
 
 ## CoreData
 
