@@ -83,6 +83,7 @@ SwiftUI by [example](https://www.hackingwithswift.com/quick-start/swiftui).
 
 ## Layout ↔️
 - [How it works](Layout/HowItWorks/README.md)
+- [ViewBuilder](Layout/ViewBuilder/README.md)
 
 ## Combine ➡️
 - [Getting Started](Combine/GettingStarted/README.md)
