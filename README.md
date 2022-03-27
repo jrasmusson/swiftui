@@ -26,9 +26,13 @@ Deliberate practice with SwiftUI.
 
 ### Containers
 
-- [NavigationView](Controls/NavigationView/README.md)
-- [TabView](Controls/TabView/README.md)
+- [Form](Controls/Form/README.md)
 - [Group](Controls/Group/README.md)
+- [List](Controls/Lists/README.md)
+- [NavigationView](Controls/NavigationView/README.md)
+- OutlineGroup
+- [TabView](Controls/TabView/README.md)
+
 
 ### Value Selectors
 
@@ -52,10 +56,8 @@ Deliberate practice with SwiftUI.
 - [ContextMenu](Controls/ContextMenu/README.md)
 - [Environment](Controls/Environment/README.md)
 - [ForEach](Controls/ForEach/README.md)
-- [Form](Controls/Form/README.md)
 - [GeometryReader](Controls/GeometryReader/README.md)
 - [Gradient](Controls/Gradient/README.md)
-- [List](Controls/Lists/README.md)
 - [MarkDown](Controls/MarkDown/README.md)
 - [Materials](Controls/Materials/README.md)
 - [Modifiers](Controls/Modifiers/README.md)

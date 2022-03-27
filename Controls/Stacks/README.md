@@ -77,6 +77,35 @@ ZStack {
 
 ![](images/zstack.png)
 
+From [Stanford](https://youtu.be/ayQl_F_uMS4?t=3589):
+
+- If even one of its children is fully flexible size, then the `ZStack` will be too.
+
+### .background modifier
+An alternative is `.backgroundModifier`.
+
+```swift
+Text("hello").background(Rectangle().foregroundColor(.red))
+```
+
+![](images/4.png)
+
+This is similar to making a `ZStack` of `Text` and `Rectangle`, however there is a big difference. In this case the resultant view is *sized to the text* (the `Rectangle` is not involved). In otherwords the `Text` solely determines the layout of this *mini-ZStack of two things*.
+
+But it is a handy trick for when you want the background of the text to be a certain color, but not be flexible to fill the entire view.
+
+### .overlay modifier
+
+Same layout rules as `.background`, but stacked the other way around.
+
+```swift
+Circle().overlay(Text("Hello").foregroundColor(.red), alignment: .center)
+```
+
+This will be *sized to the Circle* (i.e. it will be fully-flexible size). The `Text` will be stacked on top of the `Circle` with the specified alignment inside the `Circle`.
+
+![](images/5.png)
+
 ## Spacers
 
 Vertical and horizontal stacks automatically fill their available space in the center. If you want to push the content to the side, you need to use a spacer.
@@ -126,6 +155,11 @@ struct ContentView_Previews: PreviewProvider {
 
 A view that arranges its children in a line that grows horizontally, creating items only as needed.
 
+- These *lazy* versions don't build any of their Views that are not visible. 
+- They also size themselves to fit their views. 
+- So they don't take up all the space offerred to them even if they have flexible views inside. 
+- You'd use these when you have a stack that is in a `ScrollView`.
+
 ![](images/2.png)
 
 ```swift
@@ -163,3 +197,4 @@ struct ContentView_Previews: PreviewProvider {
 ### Links that help
 
 - [Using stacks to arrange views](https://www.hackingwithswift.com/books/ios-swiftui/using-stacks-to-arrange-views)
+- [Lecture 5: Properties Layout](https://www.youtube.com/watch?v=ayQl_F_uMS4&ab_channel=Stanford)

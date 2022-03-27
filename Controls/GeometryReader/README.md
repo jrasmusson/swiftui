@@ -30,6 +30,13 @@ VStack {
 
 ![](images/8.png)
 
+## Stanford
+
+![](images/9.png)
+
+![](images/10.png)
+
 ### Links that help
 
 - [Resizing images with GeometryReader](https://www.hackingwithswift.com/books/ios-swiftui/resizing-images-to-fit-the-screen-using-geometryreader)
+- [Stanford](https://youtu.be/ayQl_F_uMS4?t=3989)
