@@ -113,3 +113,10 @@ SwiftUI by [example](https://www.hackingwithswift.com/quick-start/swiftui).
 - [Weathery](SampleApps/WeatherySwiftUI/README.md)
 - [WeSplit](SampleApps/WeSplit/README.md)
 - [WordScramble](SampleApps/WordScramble/README.md)
+
+## Stanford 🎓
+
+### 2021
+
+- [Lecture 1: Getting Started with SwiftUI](Stanford/2021/Lecture1/README.md)
+- [Lecture 2: Learning More about SwiftUI](Stanford/2021/Lecture2/README.md)
