@@ -1,88 +1,256 @@
-# Lecture 1: Getting started with Swift UI
+# Lecture 2: Learning More about SwiftUI
 
-Everything in SwiftUI is a `View`. Event text.
+## How to adjust preview
+
+If you click on `ContentView` you can change the parameters around how it looks.
+
+For example here is color scheme dark:
 
 ![](images/1.png)
 
-To views we can add `modifiers`.
+To see both at the same time just copy `ContentView` again:
+
+## @State
+
+Because `structs` are immutable, we can't change the values of any `vars`. To get around this we use `@State`.
 
 ![](images/2.png)
 
-Modifiers are cool because they can be added to any view. Gone are the days when every control needed to have its own property (i.e. `alpha`).
+@State is a property wrapper. It creates a little bit of memory outside the View that SwiftUI that tracks the state of this var, and then creates a new View every time it changes.
 
-Now you can add any modifier to any View and get the change you want. To see a list of which modifieres you can add use that search bar down in the bottom right.
+```swift
+struct CardView: View {
+    @State var isFaceUp: Bool = true
+```
+
+When people first see this they think that means this `var` is now writtable. But that's not true. This View is still immutable.
+
+It just turns that variable that used to be a `Bool` into a pointer to some `Bool` somewhere else. This is just to track state for our view currently displayed.
+
+## String conforms to Identifiable
+
+Because Views need to be uniquely identifiable, we can't just use a String to build a view - we need to associated it with an id.
+
+We can solve that problem with Strings like this:
+
+```swift
+ForEach(emojis, id: \.self, content: { emoji in
+    CardView(content: emoji)
+})
+```    
+
+What this does is use the String as the identifier for for the emoji itself. This is fine so long as every String is unique.
+
+As soon as we have dupliacates:
+
+```swift
+var emojis = ["✈️", "✈️", "🚀", "🚁", "🚜"]
+```
+
+This fails because the same ID is used for each duplicated String. it can't tell them apart.
+
+For now we'll just get rid of the duplicate. When we do this for real it won't be a problem because we will be passing in an identifiable `CardView`.
+
+## Button
+
+When we add a button, we pass it two closes: one for `action` and one for `label`:
+
+```swif
+Button(action: {}, label: { Text("Add Card") })
+```
+
+Label is a function because it is a `ViewBuilder`. So its a bag of lego we might use to make a more complicated view.
+
+For example we could do something like this:
+
+```swift
+Button(action: {}, label: {
+    VStack {
+        Text("Add")
+        Text("Card")
+    }
+})
+```
+
+Here the `ViewBuilder` function returns a list of views. That's what `ViewBuilders` do. They return arbitrarily complex views.
+
+## Spacer
+
+Useful for adding space between two views. Spacer will always grab as much space as it can.
 
 ![](images/3.png)
 
-Views are really lego combiners. They can combine subviews and return them as one combined big view. For example look at `ZStack`.
+## vars as Views
+
+Sometimes instead of creating dedicated views for everything, it is simpler to make a `var`.
+
+```swift
+var remove: some View {
+    Button(action: {
+        emojiCount -= 1
+    }, label: {
+        VStack {
+            Text("Remove")
+            Text("Card")
+        }
+    })
+}
+```
 
 ![](images/4.png)
 
-`ZStack` takes `content` in the form of a function. The function here is of type `() -> _` meaning it takes no input but it does return something. It returns a bag of lego.
+## using Symbols
+
+```swift
+var remove: some View {
+    Button(action: {
+        emojiCount -= 1
+    }, label: {
+        Image(systemName: "minus.circle")
+    })
+}
+```
+
+## no arguments required
+
+Even if you have two trailing closures:
+
+```swift
+var remove: some View {
+    Button(action: {
+        guard emojiCount > 1 else { return }
+        emojiCount -= 1
+    }, label: {
+        Image(systemName: "minus.circle")
+    })
+}
+```
+
+You can get rid of the label and the brackets for the first, but we need the label for the second:
+
+```swit
+var remove: some View {
+    Button {
+        guard emojiCount > 1 else { return }
+        emojiCount -= 1
+    } label: {
+        Image(systemName: "minus.circle")
+    }
+}
+```
+
+## Review
+
+- SwiftUI is functional
+- Its data structures behave like views - function
+- The UI portion is all functional programming (no inherent state)
+- Later on we will combine functional with OO when we use classes
+- SwiftUI is about building small views
+- We must implement one data strucutre `var body: some View`
+- We build all views from this.
+- The body of a view is some other view.
+- Some views return a list of views - we call these `ViewBuilders`.
+- They allow us to list our views.
+- We can embed `if/then` and `vars` inside our views.
+- Anothe way of doing bag of lego is `ForEach`.
+- It must contain things that are identifable.
+- Normally the things in the arrays must be unique.
+- Or we can implement the `identifiable` protocol or interface.
+- Strings are not identifiable. We cheezed it by going `\.self` and keeping our array elements unique. Will handle for real later.
+- View combiners can consist of more view combiners and so on.
+- This is how we build more complex user interfaces.
+- So we refactor out smaller views (i.e. `CardView`).
+- Can also do this with `vars` (i.e. `remove` and `add` button).
+
+## LazyVGrid
+
+How can we make our cards it a grid? Use `LazyVGrid`. Has an argument called columns where we pass in an array of `GridItems`.
+
+```swift
+LazyVGrid(columns: [GridItem(), GridItem(), GridItem()]) { .. }
+```
 
 ![](images/5.png)
 
-This bag of lego must be a `View` and it must support the `@ViewBuilder` attributes which means it will treat whatever it is passed as a list of views.
+So why do our cards look the way they do?
 
-![](images/6.png)
+The HStack uses all the space it can in both directions. That's why they stretched.
 
-`Never` is an `enum` that represents something bad has happened. or should *Never* happen.
+`LazyVGrid` is different. It uses all the width horizontally for its columns. But vertically it makes them as small as possible.
+
+The `Spacer` also affects the layout. The spacer is now taking up all the space in between.
+
+![](images/6.png) 
+
+When you drop in a `Spacer` it also causes the other views to pin to the edges.
+
+## Making the card
+
+Our cards are 2 wide and 3 high. We can set this with an `aspectRatio` on the `CardView` when we create.
+
+```swift
+CardView(content: emoji).aspectRatio(2/3, contentMode: .fit)
+```
 
 ![](images/7.png)
 
-Because Swift knows you are going to want to make these bags of lego a lot it makes it really easy by enhancing the concept of a function to represent a bag of lego.
+## ScrollView
 
-## ViewBuilder
+To handle many cards drop cards into a `ScrollView`.
 
-This function that you pass to a lego combiner view, is known as a [ViewBuilder](https://developer.apple.com/documentation/swiftui/viewbuilder).
+```swift
+ScrollView {
+    LazyVGrid(columns: [GridItem(), GridItem(), GridItem()]) {
+        ForEach(emojis[0..<emojiCount], id: \.self, content: { emoji in
+            CardView(content: emoji).aspectRatio(2/3, contentMode: .fit)
+        })
+    }
+}
+```
 
 ![](images/8.png)
 
-This `ViewBuilder` is a custom parameter that constructs a list of views from closures. It essentially list you list other views inside and then bags them together.
+## The word lazy in LazyVGrid
+
+Lazy is about being lazy. It only gets the `var body` of the element it is rendering (i.e. `CardView`) when it is accessed.
+
+This makes them very performant. Because it only accesses the elemnts it needs, when it needs them (or they appear on screen).
+
+So this can scale to having 1000s of cards.
+
+## Scroll view cuts off edges
+
+If we increase the width of our stroke, you can see that our`ScrollView` is cutting off the edges of our view.
 
 ![](images/9.png)
 
-But what's cool about building this list of views in a closure is we can use `if/then` statements and even `vars` to dynamically build our views based the state of what is going on inside.
-
-So `ZStack` stacks these views ontop of eachother out towards the user. Good for a stack of cards. And every `View` in SwiftUI is just `some View`. We always let the compiler figure out what's inside.
-
-So this is basically the beginning of our card.
-
-## Modifiers on ZStack
-
-There are two types of modifiers:
-
-- ones that affect the view
-- ones that the affect the contained views
-
-### padding
-
-For example, when we add `padding` to a `ZStack` that affects the `ZStack` view.
+Its has to do with how stroke works. Remember `CoreAnimation` how lines got drawing in the middle? Can fix with a modifier called `strokeBorder`. Will put everything inside.
 
 ![](images/10.png)
 
-ZStack is just a view. It can be padded list anything else.
+## Landscape mode
 
-### foreground
+We can tell `LazyVGrid` to fit as many elements into a row as it can as follows.
 
-But watch what happens when we put `foreground` on the `ZStack`. It affects everything inside.
+First make `LazyVGrid` take only one `GridItem`.
+
+```swift
+LazyVGrid(columns: [GridItem()]) { ... }
+```
+
+And then we tell it to fit as many elements as it can into that one `GridItem` row, and then the next row, by making it `adaptive`:
+
+```swift
+LazyVGrid(columns: [GridItem(.adaptive(minimum: 25))]) {
+```
 
 ![](images/11.png)
 
-But we can still override locally.
-
-![](images/12.png)
-
-## Cleanup
-
-Swift can figure out what is going on. So we can clean things up a bit. We don't need to pass in `content` as an argument. It is a `trailing` function, so we can just inline it like this:
-
-![](images/13.png)
-
+Will hard code for now, and then make dynamic based on screen width later.
 
 ### Links that help
 
-- [Lecture 1](https://www.youtube.com/watch?v=bqu6BquVi2M&ab_channel=Stanford)
+- [Lecture 2](https://www.youtube.com/watch?v=3lahkdHEhW8&ab_channel=Stanford)
 - [Standford 2021](https://cs193p.sites.stanford.edu/)
 
 
