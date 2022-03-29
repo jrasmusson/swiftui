@@ -25,7 +25,10 @@ struct ContentView: View {
         }
         .padding(.horizontal)
     }
+}
 
+// MARK: Buttons
+extension ContentView {
     var buttons: some View {
         HStack {
             vehiclesButton

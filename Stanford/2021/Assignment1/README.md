@@ -78,5 +78,23 @@ struct ContentView: View {
 }
 ```
 
+You can also extract vars into extensions:
+
+```swift
+// MARK: Buttons
+extension ContentView {
+    var flagButton: some View {
+        Button {
+            emojis = flags
+        } label: {
+            VStack {
+                Image(systemName: "flag")
+                Text("Flags").font(.subheadline)
+            }
+        }
+    }
+}
+```
+
 
 
