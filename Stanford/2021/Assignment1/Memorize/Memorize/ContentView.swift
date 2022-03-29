@@ -33,7 +33,7 @@ extension ContentView {
 
     var cards: some View {
         ScrollView {
-            LazyVGrid(columns: [GridItem(.adaptive(minimum: 65))]) {
+            LazyVGrid(columns: [GridItem(.adaptive(minimum: adaptiveWidth()))]) {
                 ForEach(emojis[0..<emojis.count], id: \.self, content: { emoji in
                     CardView(content: emoji).aspectRatio(2/3, contentMode: .fit)
                 })
@@ -42,6 +42,9 @@ extension ContentView {
         .foregroundColor(.red)
     }
 
+    private func adaptiveWidth() -> CGFloat {
+        return UIScreen.main.bounds.width / CGFloat(emojis.count) * 2
+    }
 
     var buttons: some View {
         HStack {
