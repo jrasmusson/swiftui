@@ -134,3 +134,4 @@ SwiftUI by [example](https://www.hackingwithswift.com/quick-start/swiftui).
 - [Lecture 2: Learning More about SwiftUI](Stanford/2021/Lecture2/README.md)
 - [Assignment 1](Stanford/2021/Assignment1/README.md)
 - [Lecture 3: MVVM](Stanford/2021/Lecture3/README.md)
+- [Lecture 4: More MVVM enum Optionals](Stanford/2021/Lecture4/README.md)
