@@ -19,17 +19,21 @@ struct ContentView: View {
             CardsView(emojis: emojis)
             .foregroundColor(.red)
             Spacer()
-            HStack {
-                vehiclesButton
-                Spacer()
-                foodButton
-                Spacer()
-                flagButton
-            }
+            buttons
             .font(.largeTitle)
             .padding(.horizontal)
         }
         .padding(.horizontal)
+    }
+
+    var buttons: some View {
+        HStack {
+            vehiclesButton
+            Spacer()
+            foodButton
+            Spacer()
+            flagButton
+        }
     }
 
     var vehiclesButton: some View {
@@ -79,6 +83,8 @@ struct CardsView: View {
         }
     }
 }
+
+// Buttons
 
 struct CardView: View {
     var content: String
