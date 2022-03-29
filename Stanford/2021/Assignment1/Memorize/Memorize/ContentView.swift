@@ -13,11 +13,10 @@ struct ContentView: View {
     var flags = ["🏴‍☠️", "🚩", "🏁", "🏳️‍🌈", "🇦🇽", "🇦🇺", "🇦🇹", "🇹🇩", "🇨🇦", "🇨🇩"]
 
     @State private var emojis = ["🚗", "🚕", "🚙", "🚌", "🚎", "🏎", "🚡", "🚜", "🛴", "✈️"]
-    @State var emojiCount = 10
 
     var body: some View {
         VStack {
-            CardsView(emojisCount: emojiCount, emojis: emojis)
+            CardsView(emojis: emojis)
             .foregroundColor(.red)
             Spacer()
             HStack {
@@ -68,19 +67,14 @@ struct ContentView: View {
 }
 
 struct CardsView: View {
-    let emojisCount: Int
     let emojis: [String]
 
     var body: some View {
         ScrollView {
-            if emojisCount != emojis.count {
-                Text("Emoj counts don't match.")
-            } else {
-                LazyVGrid(columns: [GridItem(.adaptive(minimum: 65))]) {
-                    ForEach(emojis[0..<emojisCount], id: \.self, content: { emoji in
-                        CardView(content: emoji).aspectRatio(2/3, contentMode: .fit)
-                    })
-                }
+            LazyVGrid(columns: [GridItem(.adaptive(minimum: 65))]) {
+                ForEach(emojis[0..<emojis.count], id: \.self, content: { emoji in
+                    CardView(content: emoji).aspectRatio(2/3, contentMode: .fit)
+                })
             }
         }
     }
