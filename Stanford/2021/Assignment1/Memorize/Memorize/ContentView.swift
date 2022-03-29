@@ -17,17 +17,7 @@ struct ContentView: View {
 
     var body: some View {
         VStack {
-            ScrollView {
-                if emojis.count != emojiCount {
-                    Text("Emoj counts don't match.")
-                } else {
-                    LazyVGrid(columns: [GridItem(.adaptive(minimum: 65))]) {
-                        ForEach(emojis[0..<emojiCount], id: \.self, content: { emoji in
-                            CardView(content: emoji).aspectRatio(2/3, contentMode: .fit)
-                        })
-                    }
-                }
-            }
+            CardsView(emojisCount: emojiCount, emojis: emojis)
             .foregroundColor(.red)
             Spacer()
             HStack {
@@ -72,6 +62,25 @@ struct ContentView: View {
             VStack {
                 Image(systemName: "flag")
                 Text("Flags").font(.subheadline)
+            }
+        }
+    }
+}
+
+struct CardsView: View {
+    let emojisCount: Int
+    let emojis: [String]
+
+    var body: some View {
+        ScrollView {
+            if emojisCount != emojis.count {
+                Text("Emoj counts don't match.")
+            } else {
+                LazyVGrid(columns: [GridItem(.adaptive(minimum: 65))]) {
+                    ForEach(emojis[0..<emojisCount], id: \.self, content: { emoji in
+                        CardView(content: emoji).aspectRatio(2/3, contentMode: .fit)
+                    })
+                }
             }
         }
     }
