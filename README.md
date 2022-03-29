@@ -2,6 +2,18 @@
 
 Deliberate practice with SwiftUI. 
 
+## Shortcuts
+
+### Preview
+- Option + Command + Enter `Show Preview`
+- Command + Enter `Hide Preview`
+- Option + Command + P `Resume Preview`
+
+### Views
+- Command + Shift + L `Code snippet`
+- Command + View `see options for that view`
+- Control + Option + View `inspect view`
+
 ## Controls 🕹
 
 ### Text

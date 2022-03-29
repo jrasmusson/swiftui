@@ -2,6 +2,9 @@
 
 ![](images/1.png)
 
+## Creating the model
+
+
 ### Links that help
 
 - [Lecture 3](https://www.youtube.com/watch?v=--qKOhdgJAs&ab_channel=Stanford)
