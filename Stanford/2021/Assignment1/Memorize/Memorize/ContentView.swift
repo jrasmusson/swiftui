@@ -16,13 +16,10 @@ struct ContentView: View {
 
     var body: some View {
         VStack {
-            Text("Memorize").font(.largeTitle)
-            CardsView(emojis: emojis)
-            .foregroundColor(.red)
+            title
+            cards
             Spacer()
             buttons
-            .font(.largeTitle)
-            .padding(.horizontal)
         }
         .padding(.horizontal)
     }
@@ -30,6 +27,22 @@ struct ContentView: View {
 
 // MARK: Buttons
 extension ContentView {
+    var title: some View {
+        Text("Memorize").font(.largeTitle)
+    }
+
+    var cards: some View {
+        ScrollView {
+            LazyVGrid(columns: [GridItem(.adaptive(minimum: 65))]) {
+                ForEach(emojis[0..<emojis.count], id: \.self, content: { emoji in
+                    CardView(content: emoji).aspectRatio(2/3, contentMode: .fit)
+                })
+            }
+        }
+        .foregroundColor(.red)
+    }
+
+
     var buttons: some View {
         HStack {
             vehiclesButton
@@ -38,6 +51,7 @@ extension ContentView {
             Spacer()
             flagButton
         }
+        .padding(.horizontal)
     }
 
     var vehiclesButton: some View {
@@ -79,22 +93,6 @@ extension ContentView {
     }
 }
 
-struct CardsView: View {
-    let emojis: [String]
-
-    var body: some View {
-        ScrollView {
-            LazyVGrid(columns: [GridItem(.adaptive(minimum: 65))]) {
-                ForEach(emojis[0..<emojis.count], id: \.self, content: { emoji in
-                    CardView(content: emoji).aspectRatio(2/3, contentMode: .fit)
-                })
-            }
-        }
-    }
-}
-
-// Buttons
-
 struct CardView: View {
     var content: String
     @State var isFaceUp: Bool = true
@@ -115,11 +113,10 @@ struct CardView: View {
         }
     }
 }
+
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
             .preferredColorScheme(.light)
-        ContentView()
-            .preferredColorScheme(.dark)
     }
 }
