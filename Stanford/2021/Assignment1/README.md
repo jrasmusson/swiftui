@@ -96,5 +96,14 @@ extension ContentView {
 }
 ```
 
+## Extra credit
 
+### Random number of cards
+
+```swift
+private func randomNumberOfCardsFrom(_ cards: [String]) -> [String] {
+    let random = Int.random(in: 4...cards.count - 1)
+    return cards.dropLast(cards.count - random)
+}
+```
 
