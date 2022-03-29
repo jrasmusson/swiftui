@@ -8,24 +8,34 @@
 import SwiftUI
 
 struct ContentView: View {
-    var emojis = ["🚲", "🚂", "🚁", "🚜", "🚕", "🏎", "🚑", "🚓", "🚒", "✈️", "🚀", "⛵️", "🛸", "🛶", "🚌", "🏍", "🚃", "🚡", "🛵", "🚗", "🚚", "🚇", "🛻", "🚄"]
-    @State var emojiCount = 20
+    var vehicles = ["🚗", "🚕", "🚙", "🚌", "🚎", "🏎", "🚡", "🚜", "🛴", "✈️"]
+    var food = ["🍏", "🍎", "🍐", "🍊", "🍌", "🍉", "🍇", "🍓", "🫐", "🍒"]
+    var flags = ["🏴‍☠️", "🚩", "🏁", "🏳️‍🌈", "🇦🇽", "🇦🇺", "🇦🇹", "🇹🇩", "🇨🇦", "🇨🇩"]
+
+    @State private var emojis = ["🚗", "🚕", "🚙", "🚌", "🚎", "🏎", "🚡", "🚜", "🛴", "✈️"]
+    @State var emojiCount = 10
 
     var body: some View {
         VStack {
             ScrollView {
-                LazyVGrid(columns: [GridItem(.adaptive(minimum: 65))]) {
-                    ForEach(emojis[0..<emojiCount], id: \.self, content: { emoji in
-                        CardView(content: emoji).aspectRatio(2/3, contentMode: .fit)
-                    })
+                if emojis.count != emojiCount {
+                    Text("Emoj counts don't match.")
+                } else {
+                    LazyVGrid(columns: [GridItem(.adaptive(minimum: 65))]) {
+                        ForEach(emojis[0..<emojiCount], id: \.self, content: { emoji in
+                            CardView(content: emoji).aspectRatio(2/3, contentMode: .fit)
+                        })
+                    }
                 }
             }
             .foregroundColor(.red)
             Spacer()
             HStack {
-                remove
+                vehiclesButton
                 Spacer()
-                add
+                foodButton
+                Spacer()
+                flagButton
             }
             .font(.largeTitle)
             .padding(.horizontal)
@@ -33,21 +43,36 @@ struct ContentView: View {
         .padding(.horizontal)
     }
 
-    var remove: some View {
+    var vehiclesButton: some View {
         Button {
-            guard emojiCount > 1 else { return }
-            emojiCount -= 1
+            emojis = vehicles
         } label: {
-            Image(systemName: "minus.circle")
+            VStack {
+                Image(systemName: "car")
+                Text("Vehicles").font(.subheadline)
+            }
         }
     }
 
-    var add: some View {
+    var foodButton: some View {
         Button {
-            guard emojiCount < emojis.count else { return }
-            emojiCount += 1
+            emojis = food
         } label: {
-            Image(systemName: "plus.circle")
+            VStack {
+                Image(systemName: "cart")
+                Text("Food").font(.subheadline)
+            }
+        }
+    }
+
+    var flagButton: some View {
+        Button {
+            emojis = flags
+        } label: {
+            VStack {
+                Image(systemName: "flag")
+                Text("Flags").font(.subheadline)
+            }
         }
     }
 }
