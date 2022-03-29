@@ -9,13 +9,14 @@ import SwiftUI
 
 struct ContentView: View {
     var vehicles = ["🚗", "🚕", "🚙", "🚌", "🚎", "🏎", "🚡", "🚜", "🛴", "✈️"]
-    var food = ["🍏", "🍎", "🍐", "🍊", "🍌", "🍉", "🍇", "🍓", "🫐", "🍒"]
-    var flags = ["🏴‍☠️", "🚩", "🏁", "🏳️‍🌈", "🇦🇽", "🇦🇺", "🇦🇹", "🇹🇩", "🇨🇦", "🇨🇩"]
+    var food = ["🍏", "🍎", "🍐", "🍊", "🍌", "🍉", "🍇", "🍓", "🫐"]
+    var flags = ["🏴‍☠️", "🚩", "🏁", "🏳️‍🌈", "🇦🇽", "🇦🇺", "🇦🇹", "🇹🇩"]
 
     @State private var emojis = ["🚗", "🚕", "🚙", "🚌", "🚎", "🏎", "🚡", "🚜", "🛴", "✈️"]
 
     var body: some View {
         VStack {
+            Text("Memorize").font(.largeTitle)
             CardsView(emojis: emojis)
             .foregroundColor(.red)
             Spacer()
@@ -41,7 +42,7 @@ extension ContentView {
 
     var vehiclesButton: some View {
         Button {
-            emojis = vehicles
+            emojis = randomNumberOfCardsFrom(vehicles).shuffled()
         } label: {
             VStack {
                 Image(systemName: "car")
@@ -52,7 +53,7 @@ extension ContentView {
 
     var foodButton: some View {
         Button {
-            emojis = food
+            emojis = randomNumberOfCardsFrom(food).shuffled()
         } label: {
             VStack {
                 Image(systemName: "cart")
@@ -63,13 +64,18 @@ extension ContentView {
 
     var flagButton: some View {
         Button {
-            emojis = flags
+            emojis = randomNumberOfCardsFrom(flags).shuffled()
         } label: {
             VStack {
                 Image(systemName: "flag")
                 Text("Flags").font(.subheadline)
             }
         }
+    }
+
+    private func randomNumberOfCardsFrom(_ cards: [String]) -> [String] {
+        let random = Int.random(in: 4...cards.count - 1)
+        return cards.dropLast(cards.count - random)
     }
 }
 
