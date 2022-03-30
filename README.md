@@ -8,6 +8,7 @@ Deliberate practice with SwiftUI.
 - Option + Command + Enter `Show Preview`
 - Command + Enter `Hide Preview`
 - Option + Command + P `Resume Preview`
+- Pin preview by clicking thumbnail
 
 ### Views
 - Command + Shift + L `Code snippet`
