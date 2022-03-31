@@ -29,3 +29,10 @@ class EmojiMemoryGame: ObservableObject {
         model.choose(card)
     }
 }
+
+struct Theme {
+    let name: String
+    let emojis: [String]
+    let numberOfPairs: Int
+    let color: UIColor
+}
