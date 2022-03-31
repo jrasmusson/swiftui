@@ -286,8 +286,106 @@ Optionals can be chained.
 
 ![](images/16.png)
 
+## Structs vs Classes
 
+One difference I notice working in SwiftUI how you access data.
 
+In a `UIKit` app everything is stored by reference. So if I have an array of `UILabel`, I can just `filter`, `map`, `reduce` them and get the values I want. Because I am affecting their values.
+
+In SwiftUI that is not the case. Everything is a struct. So you need to work with `indexes` more and use those to affect data of whatever you are mutating.
+
+```swift
+struct MemoryGame<CardContent> {
+    private(set) var cards: [Card]
+    private var indexOfTheOneAndOnlyFaceUpCard: Int?
+
+    mutating func choose(_ card: Card) {
+        if let chosenIndex = cards.firstIndex(where: { $0.id == card.id }) {
+            if let potentialMatchIndex = indexOfTheOneAndOnlyFaceUpCard {
+                if cards[chosenIndex].content == cards[potentialMatchIndex].content {
+                    cards[chosenIndex].isMatched = true
+                    cards[potentialMatchIndex].isMatched = true
+                }
+                indexOfTheOneAndOnlyFaceUpCard = nil
+            } else {
+                for index in cards.indices {
+                    cards[index].isFaceUp = false
+                }
+            }
+
+            cards[chosenIndex].isFaceUp.toggle()
+        }
+    }
+}
+```
+
+## && behaving like if let
+
+When you unwrap an optional you can't use it immediately in an `&&`.
+
+```swift
+if let chosenIndex = cards.firstIndex(where: { $0.id == card.id }) && !card[chosenIndex].isFaceUp { ... }
+```
+
+But if you replace the `&&` with a comma `,` it acts just like the `&&`.
+
+```swift
+if let chosenIndex = cards.firstIndex(where: { $0.id == card.id }), !card[chosenIndex].isFaceUp { ... }
+```
+
+## Dealing with the Generic
+
+Paul does the example with a generic. And it causes us problems with doing the compare.
+
+```swift
+struct MemoryGame<CardContent> {
+
+   if cards[chosenIndex].content == cards[potentialMatchIndex].content {
+   		// Binary operation == can not be applied to two `CardContent` operands
+   }
+}
+```
+
+We can fix this by turing the don't care into int a we care a little bit with a `where` clause the behaves like `Equatable`.
+
+```swift
+struct MemoryGame<CardContent> where CardContent: Equatable {
+```
+
+This is the protocol oriented way of design that Swift supports.
+
+For examples when you see a `ForEach` in SwiftUI like this:
+
+```swift
+ForEach(viewModel.cards) { card in
+ 
+}
+``` 
+
+The contents the `ForEach` takes is a generic. And that generic has on it a where clause of `Identifiable`. Meaning everything you pass me here needs an `id`.
+
+```swift
+extension ForEach where ID == Data.Element : Identifiable {}
+
+```
+
+## Review
+
+- Models are UI independent
+- No reference in view in model
+- Models have data and logic
+- Model is the truth
+- Purpose of view is to reflect the model
+- Views are declarative
+- View model binds the view to the model
+- Can also act as an interpretter
+- Is also the gate keeper from the model to the view
+- View model enables reactive architecture
+- View model publishes changes (@ObservableObject) via send
+- @Published means when this variable changes call `sendObjectWillSend` letting world know something has changed
+- View has @ObservedObject and when change body gets rebuilt
+- Not all subviews - just the ones affected by the change - very efficient
+- 
 
 ### Links that help
 
