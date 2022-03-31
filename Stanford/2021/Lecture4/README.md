@@ -230,6 +230,65 @@ struct ContentView: View {
 }
 ```
 
+## enums
+
+Data structures with discrete states.
+
+![](images/4.png)
+
+Can have associated data.
+
+![](images/5.png)
+
+We check `enum` state with `switch`.
+
+![](images/6.png)
+
+And in Swift we can switch on anything. Not just `enum`.
+
+![](images/7.png)
+
+Multiple lines allowed. Also has a default called `fallthrough` I had never heard of.
+
+![](images/8.png)
+
+Use `let` to access associated data. Name can be different.
+
+![](images/9.png)
+
+Enums can have functions.
+
+![](images/10.png)
+
+And you can get all cases with `CaseIterable`.
+
+![](images/11.png)
+
+## Optionals
+
+An `Optional` is an `enum`.
+
+![](images/12.png)
+
+Long form optional looks like this:
+
+![](images/13.png)
+
+Can upwrap with a `!` or `if let`.
+
+![](images/14.png)
+
+Or `nil-coalescing operator`.
+
+![](images/15.png)
+
+Optionals can be chained.
+
+![](images/16.png)
+
+
+
+
 ### Links that help
 
 - [Lecture 4](https://www.youtube.com/watch?v=oWZOFSYS5GE&ab_channel=Stanford)
