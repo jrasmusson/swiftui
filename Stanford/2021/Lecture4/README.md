@@ -114,6 +114,14 @@ Now this will update the card in the model correctly, but we still need to see a
 
 ![](images/2.png)
 
+## MVVM in action
+
+SwiftUI is state driven. Meaning to change the UI, we need to change the state. To make our UI update we need to:
+
+1. Make our view model `@ObservableObject`.
+2. Mark key attributes `@Published`.
+3. Bind `@ObservedObject` into our view
+
 Here is where MVVM really pays off. We are going to add three simple, yet power keywords to make our UI reactive to changes in our state.
 
 ### 1. Make our view model an `@ObservableObject`.
@@ -159,7 +167,7 @@ func choose(_ card: MemoryGame<String>.Card) {
 
 Next we need to make our view redraw when something changes.
 
-### Add `@ObservedObject` in the view
+### Bind `@ObservedObject` into our view
 
 ```swift
 struct ContentView: View {
@@ -170,7 +178,57 @@ Now everything is hooked up. Our view model is observable and published. It is g
 
 Now our view will update itself when the model changes. Which is the whole basis of MVVM and the foundation of how SwiftUI works.
 
+![](images/3.png)
 
+**EmojiMemoryGame**
+
+```swift
+class EmojiMemoryGame: ObservableObject { // 1
+    static var emojis = ["🚲", "🚂", "🚁", "🚜", "🚕", "🏎", "🚑", "🚓", "🚒", "✈️", "🚀", "⛵️", "🛸", "🛶", "🚌", "🏍", "🚃", "🚡", "🛵", "🚗", "🚚", "🚇", "🛻", "🚄"]
+
+    static func createMemoryGame() -> MemoryGame<String> {
+        MemoryGame<String>(numberOfPairsOfCards: 4) { pairIndex in
+            EmojiMemoryGame.emojis[pairIndex]
+        }
+    }
+
+    @Published private var model: MemoryGame<String> = createMemoryGame() // 2
+
+    var cards: [MemoryGame<String>.Card] {
+        return model.cards
+    }
+
+    // MARK: - Intent(s)
+    func choose(_ card: MemoryGame<String>.Card) {
+        model.choose(card)
+    }
+}
+```
+
+**ContentView**
+
+```swift
+import SwiftUI
+
+struct ContentView: View {
+    @ObservedObject var viewModel: EmojiMemoryGame // 3
+
+    var body: some View {
+        ScrollView {
+            LazyVGrid(columns: [GridItem(.adaptive(minimum: 65))]) {
+                ForEach(viewModel.cards) { card in
+                    CardView(card: card).aspectRatio(2/3, contentMode: .fit)
+                        .onTapGesture {
+                            viewModel.choose(card)
+                        }
+                }
+            }
+        }
+        .foregroundColor(.red)
+        .padding(.horizontal)
+    }
+}
+```
 
 ### Links that help
 
