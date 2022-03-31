@@ -2,12 +2,12 @@
 //  MemoryGame.swift
 //  Memorize
 //
-//  Created by jrasmusson on 2022-03-29.
+//  Created by jrasmusson on 2022-03-31.
 //
 
-import Foundation
-
 // Model
+
+import Foundation
 
 struct MemoryGame<CardContent> where CardContent: Equatable {
     private(set) var cards: [Card]

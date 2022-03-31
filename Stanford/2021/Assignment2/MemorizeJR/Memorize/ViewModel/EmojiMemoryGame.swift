@@ -2,12 +2,12 @@
 //  EmojiMemoryGame.swift
 //  Memorize
 //
-//  Created by jrasmusson on 2022-03-29.
+//  Created by jrasmusson on 2022-03-31.
 //
 
-import SwiftUI
-
 // ViewModel
+
+import SwiftUI
 
 class EmojiMemoryGame: ObservableObject {
     static var emojis = ["🚲", "🚂", "🚁", "🚜", "🚕", "🏎", "🚑", "🚓", "🚒", "✈️", "🚀", "⛵️", "🛸", "🛶", "🚌", "🏍", "🚃", "🚡", "🛵", "🚗", "🚚", "🚇", "🛻", "🚄"]
@@ -28,4 +28,11 @@ class EmojiMemoryGame: ObservableObject {
     func choose(_ card: MemoryGame<String>.Card) {
         model.choose(card)
     }
+}
+
+struct Theme {
+    let name: String
+    let emojis: [String]
+    let numberOfPairs: Int
+    let color: UIColor
 }
