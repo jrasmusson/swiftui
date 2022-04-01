@@ -8,14 +8,10 @@
 import SwiftUI
 
 let themeData = [
-    Theme(name: "Halloween", emojis: ["💀", "👻", "🎃", "🍫"],
-          numberOfPairs: 3, color: .orange),
-    Theme(name: "Vehicles", emojis: ["🚗", "🚕", "🚙", "🚌", "🚎", "🏎", "🚡", "🚜", "🛴", "✈️"],
-          numberOfPairs: 8, color: .red),
-    Theme(name: "Fruit", emojis: ["🍏", "🍎", "🍐", "🍊", "🍌", "🍉", "🍇", "🍓", "🫐"],
-          numberOfPairs: 6, color: .green),
-    Theme(name: "Flags", emojis: ["🏴‍☠️", "🚩", "🏁", "🏳️‍🌈", "🇦🇽", "🇦🇺", "🇦🇹", "🇹🇩"],
-          numberOfPairs: 5, color: .blue),
+    Theme(name: "Halloween", emojis: ["💀", "👻", "🎃", "🍫"], color: .orange),
+    Theme(name: "Vehicles", emojis: ["🚗", "🚕", "🚙", "🚌"], color: .red),
+    Theme(name: "Fruit", emojis: ["🍏", "🍎", "🍐", "🍊"], color: .green),
+    Theme(name: "Flags", emojis: ["🏴‍☠️", "🚩", "🏁", "🏳️‍🌈"], color: .blue),
 ]
 
 @main

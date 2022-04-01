@@ -11,7 +11,6 @@ struct Theme: Identifiable {
     let id = UUID()
     let name: String
     let emojis: [String]
-    let numberOfPairs: Int
     let color: Color
 }
 
