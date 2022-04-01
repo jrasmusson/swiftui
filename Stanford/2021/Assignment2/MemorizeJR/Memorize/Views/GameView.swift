@@ -22,6 +22,7 @@ struct GameView: View {
             Spacer()
         }
         .padding(.horizontal)
+        .navigationBarTitle(Text("Halloween"))
     }
 }
 
