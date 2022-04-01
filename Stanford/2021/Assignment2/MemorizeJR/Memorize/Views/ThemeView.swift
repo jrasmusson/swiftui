@@ -16,6 +16,7 @@ struct Theme: Identifiable {
 }
 
 struct ThemeView: View {
+    @State private var showingAddScreen = false
 
     let themes: [Theme]
     var body: some View {
@@ -25,17 +26,19 @@ struct ThemeView: View {
                     ThemeCell(theme: theme)
                 }
             }
-            .navigationBarItems(leading: addButton,
-                                trailing: editButton)
+            .navigationBarItems(leading: addButton, trailing: editButton)
             .navigationBarTitle(Text("Memorize"))
+        }
+        .sheet(isPresented: $showingAddScreen) {
+            AddThemeView()
         }
     }
 
     var addButton: some View {
         Button(action: {
-            // Add action
+            self.showingAddScreen.toggle()
         }, label: {
-            Text("+")
+            Image(systemName: "plus")
         })
     }
 

@@ -26,5 +26,3 @@ struct MemorizeApp: App {
         }
     }
 }
-
-
