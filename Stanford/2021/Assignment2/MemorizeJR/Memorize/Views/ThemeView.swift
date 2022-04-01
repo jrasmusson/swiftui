@@ -7,7 +7,8 @@
 
 import SwiftUI
 
-struct Theme {
+struct Theme: Identifiable {
+    let id = UUID()
     let name: String
     let emojis: [String]
     let numberOfPairs: Int
@@ -15,10 +16,14 @@ struct Theme {
 }
 
 struct ThemeView: View {
+
+    let themes: [Theme]
     var body: some View {
         NavigationView {
             List {
-                ThemeCell()
+                ForEach(themes) { theme in
+                    ThemeCell(theme: theme)
+                }
             }
             .navigationBarItems(leading: addButton,
                                 trailing: editButton)
@@ -44,13 +49,16 @@ struct ThemeView: View {
 }
 
 struct ThemeCell: View {
+    let theme: Theme
     let game = EmojiMemoryGame()
 
     var body: some View {
         NavigationLink(
             destination: GameView(viewModel: game)) {
             VStack(alignment: .leading) {
-                Text("Theme Cell")
+                VStack {
+                    Text("Theme Cell")
+                }
             }
         }
     }
@@ -58,6 +66,6 @@ struct ThemeCell: View {
 
 struct ThemeView_Previews: PreviewProvider {
     static var previews: some View {
-        ThemeView()
+        ThemeView(themes: themeData)
     }
 }
