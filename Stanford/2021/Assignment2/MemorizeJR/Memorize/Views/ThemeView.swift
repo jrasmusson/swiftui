@@ -58,9 +58,7 @@ struct ThemeCell: View {
         NavigationLink(
             destination: GameView(viewModel: GameViewModel(theme: theme))) {
             VStack(alignment: .leading) {
-                VStack {
-                    Text(theme.name).foregroundColor(theme.color)
-                }
+                Text(theme.name).foregroundColor(theme.color)
             }
         }
     }
