@@ -81,10 +81,10 @@
 		717DF7CE27F0A29800B45C6A /* Memorize */ = {
 			isa = PBXGroup;
 			children = (
+				717DF7CF27F0A29800B45C6A /* MemorizeApp.swift */,
 				7183133727F72923000BE38A /* Views */,
 				7168C43727F6429200FE3328 /* ViewModel */,
 				7168C43A27F642B500FE3328 /* Model */,
-				717DF7CF27F0A29800B45C6A /* MemorizeApp.swift */,
 				717DF7D327F0A29900B45C6A /* Assets.xcassets */,
 				717DF7D527F0A29900B45C6A /* Preview Content */,
 			);
