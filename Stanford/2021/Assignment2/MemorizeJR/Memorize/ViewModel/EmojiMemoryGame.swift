@@ -21,13 +21,6 @@ class EmojiMemoryGame: ObservableObject {
     }
 }
 
-// MARK: Factory
-//extension EmojiMemoryGame {
-//    static func createMemoryGame() -> MemoryGame {
-//        MemoryGame()
-//    }
-//}
-
 // MARK: - Intent(s)
 extension EmojiMemoryGame {
     func choose(_ card: Card) {
