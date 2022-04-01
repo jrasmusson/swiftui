@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7168C43927F642A500FE3328 /* EmojiMemoryGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7168C43827F642A500FE3328 /* EmojiMemoryGame.swift */; };
+		7168C43927F642A500FE3328 /* GameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7168C43827F642A500FE3328 /* GameViewModel.swift */; };
 		7168C43C27F642C300FE3328 /* GameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7168C43B27F642C300FE3328 /* GameModel.swift */; };
 		717DF7D027F0A29800B45C6A /* MemorizeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717DF7CF27F0A29800B45C6A /* MemorizeApp.swift */; };
 		717DF7D227F0A29800B45C6A /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717DF7D127F0A29800B45C6A /* GameView.swift */; };
@@ -18,7 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		7168C43827F642A500FE3328 /* EmojiMemoryGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiMemoryGame.swift; sourceTree = "<group>"; };
+		7168C43827F642A500FE3328 /* GameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewModel.swift; sourceTree = "<group>"; };
 		7168C43B27F642C300FE3328 /* GameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameModel.swift; sourceTree = "<group>"; };
 		717DF7CC27F0A29800B45C6A /* Memorize.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Memorize.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		717DF7CF27F0A29800B45C6A /* MemorizeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemorizeApp.swift; sourceTree = "<group>"; };
@@ -43,7 +43,7 @@
 		7168C43727F6429200FE3328 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				7168C43827F642A500FE3328 /* EmojiMemoryGame.swift */,
+				7168C43827F642A500FE3328 /* GameViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -178,7 +178,7 @@
 				7168C43C27F642C300FE3328 /* GameModel.swift in Sources */,
 				7183133927F729B9000BE38A /* ThemeView.swift in Sources */,
 				7183133B27F78FB2000BE38A /* AddThemeView.swift in Sources */,
-				7168C43927F642A500FE3328 /* EmojiMemoryGame.swift in Sources */,
+				7168C43927F642A500FE3328 /* GameViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
