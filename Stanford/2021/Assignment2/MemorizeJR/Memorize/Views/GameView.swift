@@ -9,7 +9,6 @@ import SwiftUI
 
 struct GameView: View {
     @ObservedObject var viewModel: GameViewModel
-    @State private var emojis = ["🚗", "🚕", "🚙", "🚌", "🚎", "🏎", "🚡", "🚜", "🛴", "✈️"]
 
     var body: some View {
         VStack {
@@ -36,10 +35,6 @@ extension GameView {
         }
         .foregroundColor(.red)
     }
-
-    private func adaptiveWidth() -> CGFloat {
-        return UIScreen.main.bounds.width / CGFloat(emojis.count) * 2
-    }
 }
 
 struct CardView: View {
@@ -63,10 +58,9 @@ struct CardView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         let theme = themeData.first!
-        let game = GameViewModel(theme: theme)
+        let vm = GameViewModel(theme: theme)
         NavigationView {
-            GameView(viewModel: game)
-                .preferredColorScheme(.light)
+            GameView(viewModel: vm).preferredColorScheme(.light)
         }
     }
 }
