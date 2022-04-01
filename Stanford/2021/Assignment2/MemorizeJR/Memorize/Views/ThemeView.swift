@@ -12,7 +12,7 @@ struct Theme: Identifiable {
     let name: String
     let emojis: [String]
     let numberOfPairs: Int
-    let color: UIColor
+    let color: Color
 }
 
 struct ThemeView: View {
@@ -57,7 +57,7 @@ struct ThemeCell: View {
             destination: GameView(viewModel: game)) {
             VStack(alignment: .leading) {
                 VStack {
-                    Text("Theme Cell")
+                    Text(theme.name).foregroundColor(theme.color)
                 }
             }
         }

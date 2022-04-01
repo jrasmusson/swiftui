@@ -9,13 +9,13 @@ import SwiftUI
 
 let themeData = [
     Theme(name: "Halloween", emojis: ["💀", "👻", "🎃"],
-          numberOfPairs: 3, color: .systemOrange),
+          numberOfPairs: 3, color: .orange),
     Theme(name: "Vehicles", emojis: ["🚗", "🚕", "🚙", "🚌", "🚎", "🏎", "🚡", "🚜", "🛴", "✈️"],
-          numberOfPairs: 8, color: .systemRed),
+          numberOfPairs: 8, color: .red),
     Theme(name: "Fruit", emojis: ["🍏", "🍎", "🍐", "🍊", "🍌", "🍉", "🍇", "🍓", "🫐"],
-          numberOfPairs: 6, color: .systemGreen),
+          numberOfPairs: 6, color: .green),
     Theme(name: "Flags", emojis: ["🏴‍☠️", "🚩", "🏁", "🏳️‍🌈", "🇦🇽", "🇦🇺", "🇦🇹", "🇹🇩"],
-          numberOfPairs: 5, color: .systemOrange),
+          numberOfPairs: 5, color: .blue),
 ]
 
 @main
