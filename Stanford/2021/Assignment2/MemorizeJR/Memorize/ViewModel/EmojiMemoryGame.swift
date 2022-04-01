@@ -20,10 +20,7 @@ class EmojiMemoryGame: ObservableObject {
 // MARK: Factory
 extension EmojiMemoryGame {
     static func createMemoryGame() -> MemoryGame {
-        MemoryGame(numberOfPairsOfCards: 4) { pairIndex in
-//            EmojiMemoryGame.emojis[pairIndex]
-            ""
-        }
+        MemoryGame(numberOfPairsOfCards: 4)
     }
 }
 

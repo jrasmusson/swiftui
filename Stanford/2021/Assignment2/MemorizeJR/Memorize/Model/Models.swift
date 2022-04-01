@@ -23,7 +23,7 @@ struct MemoryGame {
     static var emojis = ["🚲", "🚂", "🚁", "🚜", "🚕", "🏎", "🚑", "🚓", "🚒", "✈️", "🚀", "⛵️", "🛸", "🛶", "🚌", "🏍", "🚃", "🚡", "🛵", "🚗", "🚚", "🚇", "🛻", "🚄"]
 
 
-    init(numberOfPairsOfCards: Int, createCardContent: (Int) -> String) {
+    init(numberOfPairsOfCards: Int) {
         cards = [Card]()
         // add numberOfPairsOfCards x 2 cards to cards array
         for pairIndex in 0..<numberOfPairsOfCards {
