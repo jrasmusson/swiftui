@@ -13,13 +13,16 @@ struct ThemeView: View {
             List {
                 Text("Halloween")
             }
-            .navigationBarItems(trailing:
-                                    Button(action: {
+            .navigationBarItems(leading: Button(action: {
+                // Add action
+            }, label: {
+                Text("+")
+            }),
+                                trailing: Button(action: {
                 // Add action
             }, label: {
                 Text("Edit")
-            })
-            )
+            }))
             .navigationBarTitle(Text("Memorize"))
         }
     }
