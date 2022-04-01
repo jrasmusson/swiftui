@@ -17,16 +17,16 @@ struct Card: Identifiable {
 }
 
 struct MemoryGame {
+
     var cards: [Card]
     var indexOfTheOneAndOnlyFaceUpCard: Int?
 
+
     static var emojis = ["🚲", "🚂", "🚁", "🚜", "🚕", "🏎", "🚑", "🚓", "🚒", "✈️", "🚀", "⛵️", "🛸", "🛶", "🚌", "🏍", "🚃", "🚡", "🛵", "🚗", "🚚", "🚇", "🛻", "🚄"]
 
-
-    init(numberOfPairsOfCards: Int) {
+    init() {
         cards = [Card]()
-        // add numberOfPairsOfCards x 2 cards to cards array
-        for pairIndex in 0..<numberOfPairsOfCards {
+        for pairIndex in 0..<4 {
             let content = MemoryGame.emojis[pairIndex]
             cards.append(Card(content: content, id: pairIndex*2))
             cards.append(Card(content: content, id: pairIndex*2 + 1))
