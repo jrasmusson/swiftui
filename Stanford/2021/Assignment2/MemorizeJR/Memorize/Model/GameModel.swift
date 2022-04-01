@@ -25,7 +25,6 @@ struct GameModel {
         self.theme = theme
         self.cards = [Card]()
         for pairIndex in 0..<4 {
-            print("pairInde: \(pairIndex)")
             let content = theme.emojis[pairIndex]
             self.cards.append(Card(content: content, id: pairIndex*2))
             self.cards.append(Card(content: content, id: pairIndex*2 + 1))

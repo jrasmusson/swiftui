@@ -17,16 +17,26 @@ struct AddThemeView: View {
             Form {
                 TextField("Name", text: $name)
             }
-            .navigationBarItems(trailing: doneButton)
+            .navigationBarItems(leading: saveButton, trailing: dismissButton)
             .navigationBarTitle(Text("New Theme"))
         }
     }
 
-    var doneButton: some View {
+    var dismissButton: some View {
         Button(action: {
             presentationMode.wrappedValue.dismiss()
         }, label: {
-            Text("Done")
+            Text("Dismiss")
+        })
+    }
+
+    var saveButton: some View {
+        Button(action: {
+            let theme = Theme(name: "New theme", emojis: ["😆"], numberOfPairs: 3, color: .red)
+            viewModel.add(theme)
+            presentationMode.wrappedValue.dismiss()
+        }, label: {
+            Text("Save")
         })
     }
 }
