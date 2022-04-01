@@ -18,7 +18,6 @@ struct GameView: View {
 
     var body: some View {
         VStack {
-            title
             cards
             Spacer()
         }
@@ -28,10 +27,6 @@ struct GameView: View {
 
 // MARK: Buttons
 extension GameView {
-    var title: some View {
-        Text("Memorize").font(.largeTitle)
-    }
-
     var cards: some View {
         ScrollView {
             LazyVGrid(columns: [GridItem(.adaptive(minimum: 65))]) {
