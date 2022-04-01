@@ -22,7 +22,8 @@ let themeData = [
 struct MemorizeApp: App {
     var body: some Scene {
         WindowGroup {
-            ThemeView(themes: themeData)
+            let viewModel = ThemeViewModel(themes: themeData)
+            ThemeView(viewModel: viewModel)
         }
     }
 }

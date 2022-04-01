@@ -17,12 +17,13 @@ struct Theme: Identifiable {
 
 struct ThemeView: View {
     @State private var showingAddScreen = false
+    @ObservedObject var viewModel: ThemeViewModel
 
-    let themes: [Theme]
+//    let themes: [Theme]
     var body: some View {
         NavigationView {
             List {
-                ForEach(themes) { theme in
+                ForEach(viewModel.themes) { theme in
                     ThemeCell(theme: theme)
                 }
             }
@@ -66,6 +67,7 @@ struct ThemeCell: View {
 
 struct ThemeView_Previews: PreviewProvider {
     static var previews: some View {
-        ThemeView(themes: themeData)
+        let viewModel = ThemeViewModel(themes: themeData)
+        ThemeView(viewModel: viewModel)
     }
 }
