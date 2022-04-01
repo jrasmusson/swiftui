@@ -21,9 +21,6 @@ struct MemoryGame {
     var cards: [Card]
     var indexOfTheOneAndOnlyFaceUpCard: Int?
 
-
-    static var emojis = ["🚲", "🚂", "🚁", "🚜", "🚕", "🏎", "🚑", "🚓", "🚒", "✈️", "🚀", "⛵️", "🛸", "🛶", "🚌", "🏍", "🚃", "🚡", "🛵", "🚗", "🚚", "🚇", "🛻", "🚄"]
-
     init(_ theme: Theme) {
         self.theme = theme
         self.cards = [Card]()
