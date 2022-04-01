@@ -12,7 +12,7 @@ struct ThemeModel {
 }
 
 extension ThemeModel {
-    func add(_ theme: Theme) {
-        print("Add theme")
+    mutating func add(_ theme: Theme) {
+        themes.append(theme)
     }
 }

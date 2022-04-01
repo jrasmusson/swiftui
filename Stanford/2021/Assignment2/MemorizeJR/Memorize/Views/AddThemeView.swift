@@ -32,7 +32,7 @@ struct AddThemeView: View {
 
     var saveButton: some View {
         Button(action: {
-            let theme = Theme(name: "New theme", emojis: ["😆"], numberOfPairs: 3, color: .red)
+            let theme = Theme(name: "New theme", emojis: ["😆", "🤩", "🤓", "🥰"], numberOfPairs: 3, color: .red)
             viewModel.add(theme)
             presentationMode.wrappedValue.dismiss()
         }, label: {
