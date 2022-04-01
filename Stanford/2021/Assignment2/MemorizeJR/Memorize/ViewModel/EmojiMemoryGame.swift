@@ -12,20 +12,20 @@ import SwiftUI
 class EmojiMemoryGame: ObservableObject {
     static var emojis = ["🚲", "🚂", "🚁", "🚜", "🚕", "🏎", "🚑", "🚓", "🚒", "✈️", "🚀", "⛵️", "🛸", "🛶", "🚌", "🏍", "🚃", "🚡", "🛵", "🚗", "🚚", "🚇", "🛻", "🚄"]
 
-    static func createMemoryGame() -> MemoryGame<String> {
-        MemoryGame<String>(numberOfPairsOfCards: 4) { pairIndex in
+    static func createMemoryGame() -> MemoryGame {
+        MemoryGame(numberOfPairsOfCards: 4) { pairIndex in
             EmojiMemoryGame.emojis[pairIndex]
         }
     }
 
-    @Published private var model: MemoryGame<String> = createMemoryGame()
+    @Published private var model: MemoryGame = createMemoryGame()
 
-    var cards: [MemoryGame<String>.Card] {
+    var cards: [MemoryGame.Card] {
         return model.cards
     }
 
     // MARK: - Intent(s)
-    func choose(_ card: MemoryGame<String>.Card) {
+    func choose(_ card: MemoryGame.Card) {
         model.choose(card)
     }
 }

@@ -97,7 +97,7 @@ extension GameView {
 }
 
 struct CardView: View {
-    let card: MemoryGame<String>.Card
+    let card: MemoryGame.Card
     var body: some View {
         ZStack {
             let shape = RoundedRectangle(cornerRadius: 20)
