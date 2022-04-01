@@ -31,7 +31,7 @@ struct ThemeView: View {
             .navigationBarTitle(Text("Memorize"))
         }
         .sheet(isPresented: $showingAddScreen) {
-            AddThemeView()
+            AddThemeView(viewModel: viewModel)
         }
     }
 

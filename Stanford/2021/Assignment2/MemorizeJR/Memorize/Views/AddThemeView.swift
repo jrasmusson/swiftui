@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct AddThemeView: View {
+    @ObservedObject var viewModel: ThemeViewModel
     @Environment(\.presentationMode) var presentationMode
     @State private var name = ""
 
@@ -32,6 +33,7 @@ struct AddThemeView: View {
 
 struct AddThemeView_Previews: PreviewProvider {
     static var previews: some View {
-        AddThemeView()
+        let viewModel = ThemeViewModel(themes: themeData)
+        AddThemeView(viewModel: viewModel)
     }
 }
