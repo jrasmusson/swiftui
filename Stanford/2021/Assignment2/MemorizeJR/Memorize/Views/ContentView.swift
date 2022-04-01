@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct GameView: View {
     @ObservedObject var viewModel: EmojiMemoryGame
 
     var vehicles = ["🚗", "🚕", "🚙", "🚌", "🚎", "🏎", "🚡", "🚜", "🛴", "✈️"]
@@ -27,7 +27,7 @@ struct ContentView: View {
 }
 
 // MARK: Buttons
-extension ContentView {
+extension GameView {
     var title: some View {
         Text("Memorize").font(.largeTitle)
     }
@@ -121,7 +121,7 @@ struct CardView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         let game = EmojiMemoryGame()
-        ContentView(viewModel: game)
+        GameView(viewModel: game)
             .preferredColorScheme(.light)
     }
 }
