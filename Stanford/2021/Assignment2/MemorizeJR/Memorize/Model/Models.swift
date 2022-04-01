@@ -20,11 +20,14 @@ struct MemoryGame {
     var cards: [Card]
     var indexOfTheOneAndOnlyFaceUpCard: Int?
 
+    static var emojis = ["🚲", "🚂", "🚁", "🚜", "🚕", "🏎", "🚑", "🚓", "🚒", "✈️", "🚀", "⛵️", "🛸", "🛶", "🚌", "🏍", "🚃", "🚡", "🛵", "🚗", "🚚", "🚇", "🛻", "🚄"]
+
+
     init(numberOfPairsOfCards: Int, createCardContent: (Int) -> String) {
         cards = [Card]()
         // add numberOfPairsOfCards x 2 cards to cards array
         for pairIndex in 0..<numberOfPairsOfCards {
-            let content = createCardContent(pairIndex)
+            let content = MemoryGame.emojis[pairIndex]
             cards.append(Card(content: content, id: pairIndex*2))
             cards.append(Card(content: content, id: pairIndex*2 + 1))
         }
