@@ -7,24 +7,39 @@
 
 import SwiftUI
 
+struct Theme {
+    let name: String
+    let emojis: [String]
+    let numberOfPairs: Int
+    let color: UIColor
+}
+
 struct ThemeView: View {
     var body: some View {
         NavigationView {
             List {
                 ThemeCell()
             }
-            .navigationBarItems(leading: Button(action: {
-                // Add action
-            }, label: {
-                Text("+")
-            }),
-                                trailing: Button(action: {
-                // Add action
-            }, label: {
-                Text("Edit")
-            }))
+            .navigationBarItems(leading: addButton,
+                                trailing: editButton)
             .navigationBarTitle(Text("Memorize"))
         }
+    }
+
+    var addButton: some View {
+        Button(action: {
+            // Add action
+        }, label: {
+            Text("+")
+        })
+    }
+
+    var editButton: some View {
+        Button(action: {
+            // Add action
+        }, label: {
+            Text("Edit")
+        })
     }
 }
 
