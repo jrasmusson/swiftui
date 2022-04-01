@@ -9,7 +9,7 @@
 
 import SwiftUI
 
-class EmojiMemoryGame: ObservableObject {
+class GameViewModel: ObservableObject {
     @Published private var model: GameModel
 
     var cards: [Card] {
@@ -22,7 +22,7 @@ class EmojiMemoryGame: ObservableObject {
 }
 
 // MARK: - Intent(s)
-extension EmojiMemoryGame {
+extension GameViewModel {
     func choose(_ card: Card) {
         model.choose(card)
     }

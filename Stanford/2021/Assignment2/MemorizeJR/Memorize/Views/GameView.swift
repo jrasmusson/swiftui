@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct GameView: View {
-    @ObservedObject var viewModel: EmojiMemoryGame
+    @ObservedObject var viewModel: GameViewModel
     @State private var emojis = ["🚗", "🚕", "🚙", "🚌", "🚎", "🏎", "🚡", "🚜", "🛴", "✈️"]
 
     var body: some View {
@@ -63,7 +63,7 @@ struct CardView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         let theme = themeData.first!
-        let game = EmojiMemoryGame(theme: theme)
+        let game = GameViewModel(theme: theme)
         NavigationView {
             GameView(viewModel: game)
                 .preferredColorScheme(.light)

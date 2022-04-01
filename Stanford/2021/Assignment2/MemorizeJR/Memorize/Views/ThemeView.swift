@@ -56,7 +56,7 @@ struct ThemeCell: View {
 
     var body: some View {
         NavigationLink(
-            destination: GameView(viewModel: EmojiMemoryGame(theme: theme))) {
+            destination: GameView(viewModel: GameViewModel(theme: theme))) {
             VStack(alignment: .leading) {
                 VStack {
                     Text(theme.name).foregroundColor(theme.color)
