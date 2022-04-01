@@ -42,11 +42,11 @@ struct MemoryGame {
             cards.append(Card(content: content, id: pairIndex*2 + 1))
         }
     }
+}
 
-    struct Card: Identifiable {
-        var isFaceUp: Bool = false
-        var isMatched: Bool = false
-        var content: String
-        var id: Int
-    }
+struct Card: Identifiable {
+    var isFaceUp: Bool = false
+    var isMatched: Bool = false
+    var content: String
+    var id: Int
 }

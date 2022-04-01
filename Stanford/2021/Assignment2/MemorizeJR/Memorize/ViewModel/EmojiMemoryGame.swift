@@ -20,12 +20,12 @@ class EmojiMemoryGame: ObservableObject {
 
     @Published private var model: MemoryGame = createMemoryGame()
 
-    var cards: [MemoryGame.Card] {
+    var cards: [Card] {
         return model.cards
     }
 
     // MARK: - Intent(s)
-    func choose(_ card: MemoryGame.Card) {
+    func choose(_ card: Card) {
         model.choose(card)
     }
 }
