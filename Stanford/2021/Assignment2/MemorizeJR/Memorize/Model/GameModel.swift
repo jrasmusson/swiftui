@@ -16,7 +16,7 @@ struct Card: Identifiable {
     var id: Int
 }
 
-struct MemoryGame {
+struct GameModel {
     var theme: Theme
     var cards: [Card]
     var indexOfTheOneAndOnlyFaceUpCard: Int?
@@ -34,7 +34,7 @@ struct MemoryGame {
 }
 
 // MARK: - Game play
-extension MemoryGame {
+extension GameModel {
     mutating func choose(_ card: Card) {
         if let chosenIndex = cards.firstIndex(where: { $0.id == card.id }),
            !cards[chosenIndex].isFaceUp,

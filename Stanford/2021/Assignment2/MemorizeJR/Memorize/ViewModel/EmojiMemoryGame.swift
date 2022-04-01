@@ -10,14 +10,14 @@
 import SwiftUI
 
 class EmojiMemoryGame: ObservableObject {
-    @Published private var model: MemoryGame
+    @Published private var model: GameModel
 
     var cards: [Card] {
         return model.cards
     }
 
     init(theme: Theme) {
-        model = MemoryGame(theme)
+        model = GameModel(theme)
     }
 }
 
