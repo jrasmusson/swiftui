@@ -5,8 +5,6 @@
 //  Created by jrasmusson on 2022-03-31.
 //
 
-// ViewModel
-
 import SwiftUI
 
 class GameViewModel: ObservableObject {

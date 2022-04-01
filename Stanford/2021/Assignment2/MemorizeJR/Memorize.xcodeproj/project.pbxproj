@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7165C11027F7A9AA008BAE1C /* ThemeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7165C10F27F7A9AA008BAE1C /* ThemeModel.swift */; };
 		7168C43927F642A500FE3328 /* GameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7168C43827F642A500FE3328 /* GameViewModel.swift */; };
 		7168C43C27F642C300FE3328 /* GameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7168C43B27F642C300FE3328 /* GameModel.swift */; };
 		717DF7D027F0A29800B45C6A /* MemorizeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717DF7CF27F0A29800B45C6A /* MemorizeApp.swift */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7165C10F27F7A9AA008BAE1C /* ThemeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeModel.swift; sourceTree = "<group>"; };
 		7168C43827F642A500FE3328 /* GameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewModel.swift; sourceTree = "<group>"; };
 		7168C43B27F642C300FE3328 /* GameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameModel.swift; sourceTree = "<group>"; };
 		717DF7CC27F0A29800B45C6A /* Memorize.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Memorize.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -52,6 +54,7 @@
 			isa = PBXGroup;
 			children = (
 				7168C43B27F642C300FE3328 /* GameModel.swift */,
+				7165C10F27F7A9AA008BAE1C /* ThemeModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -173,6 +176,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7165C11027F7A9AA008BAE1C /* ThemeModel.swift in Sources */,
 				717DF7D227F0A29800B45C6A /* GameView.swift in Sources */,
 				717DF7D027F0A29800B45C6A /* MemorizeApp.swift in Sources */,
 				7168C43C27F642C300FE3328 /* GameModel.swift in Sources */,
