@@ -10,19 +10,23 @@
 import SwiftUI
 
 class EmojiMemoryGame: ObservableObject {
-    @Published private var model: MemoryGame = createMemoryGame()
+    @Published private var model: MemoryGame
 
     var cards: [Card] {
         return model.cards
     }
+
+    init(theme: Theme) {
+        model = MemoryGame(theme)
+    }
 }
 
 // MARK: Factory
-extension EmojiMemoryGame {
-    static func createMemoryGame() -> MemoryGame {
-        MemoryGame()
-    }
-}
+//extension EmojiMemoryGame {
+//    static func createMemoryGame() -> MemoryGame {
+//        MemoryGame()
+//    }
+//}
 
 // MARK: - Intent(s)
 extension EmojiMemoryGame {

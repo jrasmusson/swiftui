@@ -62,7 +62,8 @@ struct CardView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        let game = EmojiMemoryGame()
+        let theme = themeData.first!
+        let game = EmojiMemoryGame(theme: theme)
         NavigationView {
             GameView(viewModel: game)
                 .preferredColorScheme(.light)

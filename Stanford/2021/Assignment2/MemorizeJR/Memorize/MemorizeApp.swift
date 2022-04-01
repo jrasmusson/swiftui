@@ -8,7 +8,7 @@
 import SwiftUI
 
 let themeData = [
-    Theme(name: "Halloween", emojis: ["💀", "👻", "🎃"],
+    Theme(name: "Halloween", emojis: ["💀", "👻", "🎃", "🍫"],
           numberOfPairs: 3, color: .orange),
     Theme(name: "Vehicles", emojis: ["🚗", "🚕", "🚙", "🚌", "🚎", "🏎", "🚡", "🚜", "🛴", "✈️"],
           numberOfPairs: 8, color: .red),
@@ -20,11 +20,8 @@ let themeData = [
 
 @main
 struct MemorizeApp: App {
-    let game = EmojiMemoryGame()
-
     var body: some Scene {
         WindowGroup {
-//            GameView(viewModel: game)
             ThemeView(themes: themeData)
         }
     }
