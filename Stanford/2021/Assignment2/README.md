@@ -8,6 +8,18 @@
 
 ![](images/2.png)
 
+### Navigation Titles
+
+Start by embedding the whole application within a `NavigationView`.
+
+![](images/4.png)
+
+Then to set the nav bar title for when you drill down, you need to go to the subview, add the title there, and even though you won't immediately see it on the subview, you can simulate it by adding it to your preview.
+
+![](images/5.png)
+
+![](images/6.png)
+
 ## Step 3: Edit a theme
 
 ![](images/3.png)
