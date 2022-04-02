@@ -12,11 +12,17 @@ struct AddThemeView: View {
 
     @ObservedObject var viewModel: ThemeViewModel
     @State private var name = ""
+    @State private var emojis = ""
 
     var body: some View {
         NavigationView {
             Form {
-                TextField("Name", text: $name)
+                Section(header: Text("Theme name")) {
+                    TextField("Name", text: $name)
+                }
+                Section(header: Text("Add Emoji")) {
+                    TextField("Emoji", text: $emojis)
+                }
             }
             .navigationBarItems(leading: saveButton, trailing: dismissButton)
             .navigationBarTitle(Text("New Theme"))
@@ -33,7 +39,8 @@ struct AddThemeView: View {
 
     var saveButton: some View {
         Button(action: {
-            let theme = Theme(name: name, emojis: ["😆", "🤩", "🤓", "🥰"], color: .red)
+            let emojisArray = emojis.map { String($0) }
+            let theme = Theme(name: name, emojis: emojisArray, color: .red)
             viewModel.add(theme)
             presentationMode.wrappedValue.dismiss()
         }, label: {
