@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct AddThemeView: View {
-    @ObservedObject var viewModel: ThemeViewModel
     @Environment(\.presentationMode) var presentationMode
+
+    @ObservedObject var viewModel: ThemeViewModel
     @State private var name = ""
 
     var body: some View {
@@ -32,7 +33,7 @@ struct AddThemeView: View {
 
     var saveButton: some View {
         Button(action: {
-            let theme = Theme(name: "New theme", emojis: ["😆", "🤩", "🤓", "🥰"], color: .red)
+            let theme = Theme(name: name, emojis: ["😆", "🤩", "🤓", "🥰"], color: .red)
             viewModel.add(theme)
             presentationMode.wrappedValue.dismiss()
         }, label: {

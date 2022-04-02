@@ -1,10 +1,6 @@
 # Assignment II: More Memorize
 
-## Step 1: View themes
-
-![](images/1.png)
-
-### Navigation Titles
+## Step 1: Navigation Titles
 
 Start by embedding the whole application within a `NavigationView`.
 
@@ -17,23 +13,17 @@ Then to set the nav bar title for when you drill down, you need to go to the sub
 ![](images/6.png)
 
 
-## Step 2: How to display a new view
-
-### Presenting a view
-
-Here we are going to display a new view when the user hits the `+` button.
+## Step 2: Presenting a view
 
 ![](images/demo1.gif)
 
-![](images/3.png)
-
-To do that we need to change our existing view's state. So instead of going:
+To present a view we need to change the view's state. So instead of tapping a button and going:
 
 ```swift
 present(view)
 ```
 
-when the add button is pressed. We are instead going to go change a flag in the views state, and let it update itself:
+we instead update the views state:
 
 ```swift
 struct ThemeView: View {
@@ -102,12 +92,27 @@ struct AddThemeView: View {
 ```
 
 
-## Step 3: Start a new game
+## Step 3: Adding a new theme
 
-![](images/2.png)
+To add a new theme we need to:
+
+- pass in the view model we want to update
+- bind elements on that page to be used in that themes creation
+
+[Apple docs: Managing User Inteface State](https://developer.apple.com/documentation/swiftui/managing-user-interface-state)
+
+
 
 
 ## Step 4: Edit a theme
+
+
+## Desired output
+
+![](images/1.png)
+![](images/3.png)
+![](images/2.png)
+
 
 
 ### Links that help
@@ -115,5 +120,6 @@ struct AddThemeView: View {
 - [Standford Lectures](https://cs193p.sites.stanford.edu/)
 - [Assignment II pdf](https://cs193p.sites.stanford.edu/sites/g/files/sbiybj16636/files/media/file/Assignment%202.pdf)
 - [Swift API Design Guidelines](https://www.swift.org/documentation/api-design-guidelines/)
+- [Managing User Interface State](https://developer.apple.com/documentation/swiftui/managing-user-interface-state)
 
 
