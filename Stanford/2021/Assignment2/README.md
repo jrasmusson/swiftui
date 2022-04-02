@@ -169,8 +169,11 @@ struct AddThemeView: View {
 ![](images/8.png)
 
 
-## Step 4: Edit a theme
+## Step 4: Keyboard avoidance
 
+[Keyboard Avoidance for SwiftUI Views](https://www.vadimbulavin.com/how-to-move-swiftui-view-when-keyboard-covers-text-field/)
+
+Let's create a view modifier that will adjust our view based on the appears of a keyboard.
 
 ## Desired output
 
@@ -178,13 +181,13 @@ struct AddThemeView: View {
 ![](images/3.png)
 ![](images/2.png)
 
-
-
 ### Links that help
 
 - [Standford Lectures](https://cs193p.sites.stanford.edu/)
 - [Assignment II pdf](https://cs193p.sites.stanford.edu/sites/g/files/sbiybj16636/files/media/file/Assignment%202.pdf)
 - [Swift API Design Guidelines](https://www.swift.org/documentation/api-design-guidelines/)
 - [Managing User Interface State](https://developer.apple.com/documentation/swiftui/managing-user-interface-state)
+- [Keyboard Avoidance for SwiftUI Views](https://www.vadimbulavin.com/how-to-move-swiftui-view-when-keyboard-covers-text-field/)
+
 
 

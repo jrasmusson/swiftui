@@ -39,6 +39,7 @@ struct AddThemeView: View {
             .navigationBarItems(leading: saveButton, trailing: dismissButton)
             .navigationBarTitle(Text("New Theme"))
         }
+//        .keyboardAdaptive()
     }
 
     var dismissButton: some View {

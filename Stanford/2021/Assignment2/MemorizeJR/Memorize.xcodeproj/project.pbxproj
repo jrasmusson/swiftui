@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		7165C11027F7A9AA008BAE1C /* ThemeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7165C10F27F7A9AA008BAE1C /* ThemeModel.swift */; };
 		7165C11227F7AA17008BAE1C /* ThemeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7165C11127F7AA17008BAE1C /* ThemeViewModel.swift */; };
+		7165C11527F87E5B008BAE1C /* Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7165C11427F87E5B008BAE1C /* Keyboard.swift */; };
 		7168C43927F642A500FE3328 /* GameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7168C43827F642A500FE3328 /* GameViewModel.swift */; };
 		7168C43C27F642C300FE3328 /* GameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7168C43B27F642C300FE3328 /* GameModel.swift */; };
 		717DF7D027F0A29800B45C6A /* MemorizeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717DF7CF27F0A29800B45C6A /* MemorizeApp.swift */; };
@@ -22,6 +23,7 @@
 /* Begin PBXFileReference section */
 		7165C10F27F7A9AA008BAE1C /* ThemeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeModel.swift; sourceTree = "<group>"; };
 		7165C11127F7AA17008BAE1C /* ThemeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeViewModel.swift; sourceTree = "<group>"; };
+		7165C11427F87E5B008BAE1C /* Keyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keyboard.swift; sourceTree = "<group>"; };
 		7168C43827F642A500FE3328 /* GameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewModel.swift; sourceTree = "<group>"; };
 		7168C43B27F642C300FE3328 /* GameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameModel.swift; sourceTree = "<group>"; };
 		717DF7CC27F0A29800B45C6A /* Memorize.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Memorize.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -44,6 +46,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7165C11327F87E45008BAE1C /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				7165C11427F87E5B008BAE1C /* Keyboard.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		7168C43727F6429200FE3328 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -85,6 +95,7 @@
 				7183133727F72923000BE38A /* Views */,
 				7168C43727F6429200FE3328 /* ViewModel */,
 				7168C43A27F642B500FE3328 /* Model */,
+				7165C11327F87E45008BAE1C /* Utils */,
 				717DF7D327F0A29900B45C6A /* Assets.xcassets */,
 				717DF7D527F0A29900B45C6A /* Preview Content */,
 			);
@@ -181,6 +192,7 @@
 			files = (
 				7165C11027F7A9AA008BAE1C /* ThemeModel.swift in Sources */,
 				717DF7D227F0A29800B45C6A /* GameView.swift in Sources */,
+				7165C11527F87E5B008BAE1C /* Keyboard.swift in Sources */,
 				717DF7D027F0A29800B45C6A /* MemorizeApp.swift in Sources */,
 				7168C43C27F642C300FE3328 /* GameModel.swift in Sources */,
 				7183133927F729B9000BE38A /* ThemeView.swift in Sources */,
