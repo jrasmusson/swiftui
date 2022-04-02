@@ -164,6 +164,8 @@ Is a list of views.
 
 ![](images/22.png)
 
+![](images/23.png)
+
 ### Links that help
 
 - [Lecture 5](https://www.youtube.com/watch?v=ayQl_F_uMS4&ab_channel=Stanford)
