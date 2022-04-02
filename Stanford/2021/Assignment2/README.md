@@ -96,12 +96,77 @@ struct AddThemeView: View {
 
 To add a new theme we need to:
 
-- pass in the view model we want to update
-- bind elements on that page to be used in that themes creation
+- create a new view model to store themes
+- pass in the view model to the view we want to update
+- bind elements on that page to be used in the theme we create
 
 [Apple docs: Managing User Inteface State](https://developer.apple.com/documentation/swiftui/managing-user-interface-state)
 
+**ThemeViewModel**
 
+```swift
+class ThemeViewModel: ObservableObject {
+    @Published private var model: ThemeModel
+
+    var themes: [Theme] {
+        return model.themes
+    }
+
+    init(themes: [Theme]) {
+        model = ThemeModel(themes: themes)
+    }
+}
+```
+
+**AddThemeView**
+
+```swift
+import SwiftUI
+
+struct AddThemeView: View {
+    @Environment(\.presentationMode) var presentationMode
+
+    @ObservedObject var viewModel: ThemeViewModel
+    @State private var name = ""
+    @State private var emojis = ""
+
+    var body: some View {
+        NavigationView {
+            Form {
+                Section(header: Text("Theme name")) {
+                    TextField("Name", text: $name)
+                }
+                Section(header: Text("Add Emoji")) {
+                    TextField("Emoji", text: $emojis)
+                }
+            }
+            .navigationBarItems(leading: saveButton, trailing: dismissButton)
+            .navigationBarTitle(Text("New Theme"))
+        }
+    }
+
+    var dismissButton: some View {
+        Button(action: {
+            presentationMode.wrappedValue.dismiss()
+        }, label: {
+            Text("Dismiss")
+        })
+    }
+
+    var saveButton: some View {
+        Button(action: {
+            let emojisArray = emojis.map { String($0) }
+            let theme = Theme(name: name, emojis: emojisArray, color: .red)
+            viewModel.add(theme)
+            presentationMode.wrappedValue.dismiss()
+        }, label: {
+            Text("Save")
+        })
+    }
+}
+```
+
+![](images/8.png)
 
 
 ## Step 4: Edit a theme

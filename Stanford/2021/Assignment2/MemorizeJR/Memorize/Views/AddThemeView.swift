@@ -13,6 +13,8 @@ struct AddThemeView: View {
     @ObservedObject var viewModel: ThemeViewModel
     @State private var name = ""
     @State private var emojis = ""
+    @State private var colors: [Color] = [.red, .blue, .yellow, .green, .orange]
+    @State private var selectedColor: Color?
 
     var body: some View {
         NavigationView {
@@ -22,6 +24,16 @@ struct AddThemeView: View {
                 }
                 Section(header: Text("Add Emoji")) {
                     TextField("Emoji", text: $emojis)
+                }
+                Section(header: Text("Color")) {
+                    LazyVGrid(columns: [GridItem(.adaptive(minimum: 24))]) {
+                        ForEach(colors, id: \.self) { color in
+                            ColorView(color: color).aspectRatio(2/3, contentMode: .fit)
+                                .onTapGesture {
+//                                    viewModel.choose(card)
+                                }
+                        }
+                    }
                 }
             }
             .navigationBarItems(leading: saveButton, trailing: dismissButton)
@@ -46,6 +58,20 @@ struct AddThemeView: View {
         }, label: {
             Text("Save")
         })
+    }
+}
+
+struct ColorItem {
+    let id = UUID()
+    let color: Color
+}
+
+struct ColorView: View {
+    let color: Color
+    var body: some View {
+        let shape = RoundedRectangle(cornerRadius: 20)
+        shape.foregroundColor(color)
+        shape.fill()
     }
 }
 
