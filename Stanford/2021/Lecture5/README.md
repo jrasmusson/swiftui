@@ -40,7 +40,7 @@ extension Array {
 
 ## Layout
 
-<!--![](images/6.png)
+![](images/6.png)
 
 ![](images/7.png)
 
@@ -64,24 +64,52 @@ Lazy versions don't build the bodies of what is not on screen. They only draw wh
 
 `List Form OutlineGroup` are awesome. More later.
 
--->
 ![](images/12.png)
 
-<!--![](images/13.png)-->
+`ZStack` sizes itself to children. If child fexible it will be flexible.
 
-<!--![](images/14.png)-->
+Alternative to `ZStack` is `.background` modifier. Difference is background only affect the thing it is backgrounding.
 
-<!--![](images/15.png)-->
+`overlay` is same thing but in other direction. It overlays the view.
 
-<!--![](images/16.png)-->
 
-<!--![](images/17.png)-->
+![](images/13.png)
 
-<!--![](images/18.png)-->
+With `backgroud` and `overlay` modifiers what you are seeing are view modifiers that are kind of acting like container views.
+
+Most modifiers just pass size onto the view they are modifying. But some are involved in the layout process. i.e. `padding`.
+
+`.aspectRatio` does this too. It affects the layout process.
+
+
+![](images/14.png)
+
+![](images/15.png)
 
 ## GeometryReader
 
-How to use `GeometryReader` to make the font better fit the size of our card.
+![](images/16.png)
+
+This thing let's you figure out how much spacing is being offered to a view. Handy for when you need to make your view dynamic, and resizable based on the space being offered.
+
+The way it works is you simply wrap the `Geometry` reader around the view you want to size, it's only input is a `ViewBuilder` so it can take anything.
+
+And it passes back `GeometryProxy` which contains are `size`.
+
+So now that view inside can draw normally, but it also know how much space it has.
+
+> Note: Geometry sizes itself to fit the space offered to it. It is maximum flexible. That means the view you put inside a GeometryReader wants to be big and flexible. Always contains "fully flexible" views.
+
+
+![](images/17.png)
+
+![](images/18.png)
+
+## How to make the card resize itself
+
+Let's use `GeometryReader` to make the font better fit the size of our card.
+
+![](images/19.png)
 
 ### Links that help
 
