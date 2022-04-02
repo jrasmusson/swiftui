@@ -11,7 +11,11 @@ class GameViewModel: ObservableObject {
     @Published private var model: GameModel
 
     var cards: [Card] {
-        return model.cards
+        model.cards
+    }
+
+    var title: String {
+        model.theme.name
     }
 
     init(theme: Theme) {
