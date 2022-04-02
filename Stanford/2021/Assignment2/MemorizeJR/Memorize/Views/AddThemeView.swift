@@ -71,7 +71,6 @@ struct ColorView: View {
     var body: some View {
         let shape = RoundedRectangle(cornerRadius: 20)
         shape.foregroundColor(color)
-        shape.fill()
     }
 }
 
