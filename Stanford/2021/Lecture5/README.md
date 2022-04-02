@@ -111,6 +111,59 @@ Let's use `GeometryReader` to make the font better fit the size of our card.
 
 ![](images/19.png)
 
+
+**EmojiMemoryGameView**
+
+```swift
+struct CardView: View {
+    let card: EmojiMemoryGame.Card
+    var body: some View {
+        GeometryReader(content: { geometry in
+            ZStack { ... }
+        })
+    }
+}
+```
+
+So we drop a `GeometryReader` in like this. And it is going to take the full size offered to it which is what the `ZStack` would do anyways.
+
+But now we can ue `GeometryReader` proxy to pick a better title size than `.largeTitle`.
+
+Here we can approximate and way the size of our `system` font to be the minimum of the width or height of the card.
+
+```swift
+struct CardView: View {
+    let card: EmojiMemoryGame.Card
+    var body: some View {
+        GeometryReader{ geometry in
+            ZStack {
+                let shape = RoundedRectangle(cornerRadius: 20)
+                if card.isFaceUp {
+                    shape.fill().foregroundColor(.white)
+                    shape.strokeBorder(lineWidth: 3)
+                    Text(card.content).font(Font.system(size: min(geometry.size.width, geometry.size.height)*0.8))
+                } else if card.isMatched {
+                    shape.opacity(0)
+                } else {
+                    shape.fill()
+                }
+            }
+        }
+    }
+}
+```
+
+## ViewBuilder
+
+Is a list of views.
+
+
+![](images/20.png)
+
+![](images/21.png)
+
+![](images/22.png)
+
 ### Links that help
 
 - [Lecture 5](https://www.youtube.com/watch?v=ayQl_F_uMS4&ab_channel=Stanford)
