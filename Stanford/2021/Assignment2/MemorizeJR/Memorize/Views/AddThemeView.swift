@@ -30,7 +30,7 @@ struct AddThemeView: View {
                         ForEach(colors, id: \.self) { color in
                             ColorView(color: color).aspectRatio(2/3, contentMode: .fit)
                                 .onTapGesture {
-//                                    viewModel.choose(card)
+                                    selectedColor = color
                                 }
                         }
                     }
@@ -52,7 +52,7 @@ struct AddThemeView: View {
     var saveButton: some View {
         Button(action: {
             let emojisArray = emojis.map { String($0) }
-            let theme = Theme(name: name, emojis: emojisArray, color: .red)
+            let theme = Theme(name: name, emojis: emojisArray, color: selectedColor ?? .red)
             viewModel.add(theme)
             presentationMode.wrappedValue.dismiss()
         }, label: {
