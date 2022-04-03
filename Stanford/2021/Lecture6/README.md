@@ -220,6 +220,18 @@ Now if you implement `Equatable`, and all of your `vars` are equatable, Swift wi
 
 ![](images/21.png)
 
+## Demo
+
+### Making the cards smaller so they don't scroll
+
+How could we make it so that when too many cards appear on the screen, our `ScrollView` doesn't scroll. Let's do this by making the cards smaller.
+
+![](images/22.png)
+
+Since there is no container with a `ViewBuilder` to do that for us, we will make one ourselves.
+
+
+
 
 
 
