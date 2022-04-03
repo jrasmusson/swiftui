@@ -218,6 +218,7 @@ Now if you implement `Equatable`, and all of your `vars` are equatable, Swift wi
 
 ![](images/20.png)
 
+![](images/21.png)
 
 
 
