@@ -230,9 +230,285 @@ How could we make it so that when too many cards appear on the screen, our `Scro
 
 Since there is no container with a `ViewBuilder` to do that for us, we will make one ourselves.
 
+**EmojiMemoryGame**
+
+```swift
+struct EmojiMemoryGameView: View {
+    @ObservedObject var game: EmojiMemoryGame
+
+    var body: some View {
+        AspectVGrid(items: game.cards, aspectRatio: 2/3) { card in
+            cardView(for: card)
+        }
+        .foregroundColor(.red)
+        .padding(.horizontal)
+    }
+}
+```
+
+**AspectGrid**
+
+```swift
+import SwiftUI
+
+struct AspectVGrid<Item, ItemView>: View where Item: Identifiable, ItemView: View  {
+    var items: [Item]
+    var aspectRatio: CGFloat
+    var content: (Item) -> ItemView
+
+    init(items: [Item], aspectRatio: CGFloat, @ViewBuilder content: @escaping (Item) -> ItemView) {
+        self.items = items
+        self.aspectRatio = aspectRatio
+        self.content = content
+    }
+
+    var body: some View {
+        GeometryReader { geometry in
+            VStack {
+                let width: CGFloat = widthThatFits(itemCount: items.count, in: geometry.size, itemAspectRatio: 2/3)
+                LazyVGrid(columns: [adaptiveGridItem(width: width)], spacing: 0) {
+                    ForEach(items) { item in
+                        content(item).aspectRatio(aspectRatio, contentMode: .fit)
+                    }
+                }
+                Spacer(minLength: 0)
+            }
+        }
+    }
+
+    private func adaptiveGridItem(width: CGFloat) -> GridItem {
+        var gridItem = GridItem(.adaptive(minimum: width))
+        gridItem.spacing = 0
+        return gridItem
+    }
+
+    private func widthThatFits(itemCount: Int, in size: CGSize, itemAspectRatio: CGFloat) -> CGFloat {
+        var columnCount = 1
+        var rowCount = itemCount
+
+        repeat {
+            let itemWidth = size.width / CGFloat(columnCount)
+            let itemHeight = itemWidth / itemAspectRatio
+            if CGFloat(rowCount) * itemHeight < size.height {
+                break
+            }
+            columnCount += 1
+            rowCount = (itemCount + (columnCount - 1)) / columnCount
+        } while columnCount < itemCount
+
+        if columnCount > itemCount {
+            columnCount = itemCount
+        }
+    return floor(size.width / CGFloat(columnCount))
+    }
+}
+```
+
+## Shape
+
+`Shape` is a protocol that inherits from `View`. All `Shapes` are also Views.
+
+![](images/23.png)
+
+By default Shapes draw themselves by filling with the current foreground color. They can be changed with `.stroke()` and `.fill()`. But the arguments to stroke and fill are pretty interesting.
+
+You might think there are different versions of the fill funciton that takes a color, and another that takes a gradient. But that's not quite the case.
+
+The fill function actually takes a don't care.
+
+```swift
+func fill<S>(_ whatToFilWith: S) -> some Viwe where S: ShapeStyle
+```
+
+Functions can be generic as well. `ShapeStyle` knows how to turn a `Shape` into a `View`.
+
+What if we want to create our own `Shape`?
 
 
+![](images/24.png)
 
+For that you implement the `Shape` protocol which forces you to return a `Path`. The `Path` struct has a ton of functions to support drawing.
+
+### Demo
+
+Let's start by adding a circle behind our face up card.
+
+
+![](images/25.png)
+
+Note how `Circle` is placed between the x3 views here:
+
+```swift
+shape.fill().foregroundColor(.white)
+shape.strokeBorder(lineWidth: DrawingConstants.lineWidth)
+Circle() // Add circle
+Text(card.content).font(font(in: geometry.size))
+```
+
+Get used to thinking of each line of code that modifies view as a new view. Not that we are doing something to the original. These are new views returned everytime.
+
+When we run this in preview mode we run into a bit of a problem. Every time we add a new line of code our preview refreshes itself making working with our current view hard.
+
+So to fix this remember you can use your `Preview` to always keep it up.
+
+```swift
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        let game = EmojiMemoryGame()
+        game.choose(game.cards.first!)
+        return EmojiMemoryGameView(game: game)
+            .preferredColorScheme(.light)
+    }
+}
+```
+
+Couple of things aren't great about this circle. 
+
+- Touches the sides too closely.
+- Wrong share of red
+
+![](images/26.png)
+
+So we can:
+
+- add padding
+- change the opacity
+
+```swift
+Circle().padding(5).opacity(0.5) // Add circle
+```
+
+#### Make a new Shape
+
+To make our pie let's create a new Shape.
+
+Note how this is a `struct` - not a `View`. `Path` is simply a struct containing a set of instructions on how to draw a Shape.
+
+**Pie**
+
+```swift
+import SwiftUI
+
+struct Pie: Shape {
+    func path(in rect: CGRect) -> Path {
+        var p = Path()
+
+        return p
+    }
+}
+```
+
+Simplest way to draw our pie is to:
+
+- move to the center 
+- draw a line up to the top (called `startPoint`)
+- then go around in an arc
+- then draw a line back to the center
+
+To do that we will need the center of the shape as well as the radius of the circle.
+
+![](images/27.png)
+
+Radius and start point really depend on how much space we are offered. Whenever you hear that think `GeometryReader`. Remember `GeometryReader` and its proxy give you the size offered for any given view.
+
+Radius will be half the width or height of space but the smaller of the two.
+
+One thing that is interesting is why are our variables defined for this `struct` not `lets`?
+
+![](images/28.png)
+
+The reason why these aren't `lets`
+
+```swift
+struct Pie: Shape {
+    var startAngle: Angle
+    var endAngle: Angle
+    var clockwise = false
+```
+
+is because these are going to change. 
+
+```swift
+    var startAngle: Angle
+    var endAngle: Angle
+```
+
+Are going to be animated. So these need to be `var`.
+
+`clockwise` is interesting because it we made it a `let`, then it would be instantly initialized before the initialization pass because it just got a value. They wouldn't be able to change. I don't quite understand Pauls point here. Will have to think about this one.
+
+#### Coordinate system
+
+We can define our angles as:
+
+```
+	270
+180		0
+	90
+```
+
+So you'd think we could draw it like this:
+
+![](images/29.png)
+
+But that's not quite right because this it is not our normal cartesian coordinate system.
+
+In iOS our origin is upper left increase down and to the right as x and y.
+
+```
+0,0 ----> x
+|
+|
+y
+```
+
+So we have to flip everything 180. Because it is upside down.
+
+Fix is to invert the `clockwise` setting.
+
+![](images/30.png)
+
+Finished product for shape.
+
+**Pie**
+
+```swift
+import SwiftUI
+
+struct Pie: Shape {
+    var startAngle: Angle
+    var endAngle: Angle
+    var clockwise = false
+
+    func path(in rect: CGRect) -> Path {
+        let center = CGPoint(x: rect.midX, y: rect.midY)
+        let radius = min(rect.width, rect.height) / 2
+
+        // need the angle to draw up and animate
+        // need to add start / end angle
+        // then do trigonometry to figure out where to start our arc
+
+        // the start point at the top will be:
+        let start = CGPoint(
+            x: center.x + radius * cos(startAngle.radians),
+            y: center.y + radius * sin(startAngle.radians)
+        )
+
+        var p = Path()
+        p.move(to: center)
+        p.addLine(to: start)
+        p.addArc(
+            center: center,
+            radius: radius,
+            startAngle: startAngle,
+            endAngle: endAngle,
+            clockwise: !clockwise
+        )
+        p.addLine(to: center)
+        return p
+    }
+}
+```
 
 
 ### Links that help
