@@ -172,7 +172,300 @@ CardView(card: card)
     }
 ```
 
-U R HERE
+By default, changing the state and animation the appears of view view over another is a fade.
+
+To do a real flip, it is like a 3D rotation thing. Tiles on end, and the flips back down. Need to flip in 3D towards us.
+
+Turns out there is a really easy way to do that in SwiftUI.
+
+```swift
+struct ContentView: View {
+    @State private var showDetail = false
+
+    var body: some View {
+        VStack {
+            Button("Animate") {
+                // explicit
+                withAnimation {
+                    showDetail.toggle()
+                }
+            }
+            Text(showDetail ? "👻" : "🎃")
+                .rotation3DEffect(Angle(degrees: showDetail ? 0 : 180), axis: (x: 0, y: 1, z: 0))
+        }
+    }
+}
+```
+
+![](images/demo6.gif)
+
+**Cardify**
+
+```swift
+struct Cardify: ViewModifier {
+    var isFaceUp: Bool
+
+    func body(content: Content) -> some View {
+        ZStack {
+            let shape = RoundedRectangle(cornerRadius: DrawingConstants.cornerRadius)
+            if isFaceUp {
+                shape.fill().foregroundColor(.white)
+                shape.strokeBorder(lineWidth: DrawingConstants.lineWidth)
+            } else {
+                shape.fill()
+            }
+            content.opacity(isFaceUp ? 1: 0)
+        }
+        .rotation3DEffect(Angle(degrees: isFaceUp ? 0 : 180), axis: (x: 0, y: 1, z: 0))
+    }
+}
+```
+
+![](images/demo7.gif)
+
+Not bad. It is flipping the card over. But it's animating the icon in a little bit early. You should not see the image until it really flips.
+
+What's going on here is choose is changing the model. And that eventually causes faceup to change. When we do that these two views come on screen:
+
+```swift
+if isFaceUp {
+    shape.fill().foregroundColor(.white)
+    shape.strokeBorder(lineWidth: DrawingConstants.lineWidth)
+}
+```
+
+And because they are in a ZStack already on screen, the appearance of these get animated. Then when we flip to the other side, the dissappearance of these gets animated.
+
+So this fading in and out are happening because of `transition` animations. Views coming or going because of views appearing in a container.
+
+The other thing being animated here is the `opacity` of the emoji or content itself:
+
+```swift
+content.opacity(isFaceUp ? 1: 0)
+```
+
+That's why these things are fading. The default transition is to fade when then come in/out, opactity, plus the rotation of the entire ZStack.
+
+So how to fix?
+
+We don't want these two animations to occur until the card is at 90 degrees:
+
+```swift
+if isFaceUp {
+    shape.fill().foregroundColor(.white)
+    shape.strokeBorder(lineWidth: DrawingConstants.lineWidth)
+}
+```
+
+Also we don't want any fading in or out. When the card hits 90 degress we want the face card and all its parts displayed in full.
+
+So that is quite a different thing going on. And there is no way to make these views do that with any standard modifiers.
+
+But we have our own view modifier. So we can do that work in there.
+
+### Tracking the 90° rotation
+
+To do this, we are going to have to track the 90° rotation. So we'll do that with a var.
+
+**Cardify**
+
+```swift
+struct Cardify: ViewModifier {
+    var isFaceUp: Bool
+    var rotation: Double // in degrees
+```
+
+And this is the thing that is going to drive what our user interface looks like. Not isFaceUp.
+
+For example isFaceUp isn't when we want to show the front. It is when the `rotation < 90`.
+
+```swift
+struct Cardify: ViewModifier {
+    var isFaceUp: Bool
+    var rotation: Double // in degrees
+
+    func body(content: Content) -> some View {
+        ZStack {
+            let shape = RoundedRectangle(cornerRadius: DrawingConstants.cornerRadius)
+            if rotation < 90 {
+                shape.fill().foregroundColor(.white)
+                shape.strokeBorder(lineWidth: DrawingConstants.lineWidth)
+            } else {
+                shape.fill()
+            }
+            content.opacity(rotation < 90 ? 1: 0)
+        }
+        .rotation3DEffect(Angle(degrees: rotation), axis: (x: 0, y: 1, z: 0))
+    }
+}
+```
+
+So the state of rotation is what's going to drive this thing.
+
+isFaceUp is no longer a var. It's something we just set in the `init()`.
+
+```swift
+struct Cardify: ViewModifier {
+    var rotation: Double // in degrees
+
+    init(isFaceUp: Bool) {
+        rotation = isFaceUp ? 0 : 180
+    }
+```
+
+So this is a good start but it's not enough. Because we have not yet animated the rotation through 90. It is only 0 or 180.
+
+We need to start out at 0 and animate to 90. 
+
+### Animatable
+
+We can do that by making our view modifier `Animatable`.
+
+```swift
+struct Cardify: ViewModifier, Animatable {
+```
+
+![](images/1.png)
+
+`Animatable` has one `var animateableData:` which is simply the data to animate.
+
+`Self` means things that are animatable are self referencing which means you can't use them as types. You can't have an array of `animatableData` you have to use them as where clauses.
+
+This associated type is `VectorArithmetic` is what can multiple and add vectors. Which is what we are doing with animations. Matrix multiplication.
+
+Things that implement `VectorArithmetic` are Doubles. If you go look at the documentation for `Double` you will see that it confoms to `VectoreArithmetic`.
+
+![](images/2.png)
+
+Same with `CGFloat`. And lots of others. `AnimatablePair` takes a first thing and a second thing.
+
+![](images/3.png)
+
+These are all abstractions SwiftUI has made to help us out with our animations. 
+
+So for our `ViewModifier` to be `Animatable` we need to implement that `var`. And while we could use that in our code as the animation amoung, it is better to use it purely as a wrapper for the variable we are animating. Almost like a rename:
+
+```swift
+struct Cardify: ViewModifier, Animatable {
+    var rotation: Double // in degrees
+
+    var animatableData: Double {
+        get { rotation }
+        set { rotation = newValue }
+    }
+```
+
+Now we just have to tell SwiftUi what data we want to animate. Because it is the `rotation` var that is driving the animation, we are going to be calling this view over and over and over creating a new view every time our animation runs.
+
+Then when it passes 90 we'll switch our background.
+
+**Cardify**
+
+```swift
+import SwiftUI
+
+struct Cardify: ViewModifier, Animatable {
+    var rotation: Double // in degrees
+
+    var animatableData: Double {
+        get { rotation }
+        set { rotation = newValue }
+    }
+
+    init(isFaceUp: Bool) {
+        rotation = isFaceUp ? 0 : 180
+    }
+
+    func body(content: Content) -> some View {
+        ZStack {
+            let shape = RoundedRectangle(cornerRadius: DrawingConstants.cornerRadius)
+            if rotation < 90 {
+                shape.fill().foregroundColor(.white)
+                shape.strokeBorder(lineWidth: DrawingConstants.lineWidth)
+            } else {
+                shape.fill()
+            }
+            content.opacity(rotation < 90 ? 1: 0)
+        }
+        .rotation3DEffect(Angle(degrees: rotation), axis: (x: 0, y: 1, z: 0))
+    }
+
+    private struct DrawingConstants {
+        static let cornerRadius: CGFloat = 10
+        static let lineWidth: CGFloat = 3
+    }
+}
+```
+
+![](images/demo8.gif)
+
+### What's going on here 🤔
+
+The key to understanding what's going on are these lines of code here:
+
+```swift
+struct Cardify: ViewModifier, Animatable {
+    var rotation: Double // in degrees
+
+    var animatableData: Double {
+        get { rotation }
+        set { rotation = newValue }
+    }
+
+    init(isFaceUp: Bool) {
+        rotation = isFaceUp ? 0 : 180
+    }
+
+    func body(content: Content) -> some View {
+        ZStack {
+            let shape = RoundedRectangle(cornerRadius: DrawingConstants.cornerRadius)
+            if rotation < 90 {
+```
+
+First, understand that the variable that drives our animation is `rotation`. Whatever the value `rotation` is, that is what we are going to apply in our `3D` rotation.
+
+```swift
+struct Cardify: ViewModifier, Animatable {
+    var rotation: Double // in degrees
+```
+
+Secondly, because our view modifier is `Animatable` we have an animation hook called:
+
+```swift
+var animatableData: Double {
+    get { rotation }
+    set { rotation = newValue }
+}
+```
+
+that is going to fetch and set our value as we animate. That is how it nows where it is at an the animation.
+
+Now here is the crux of it. The animation doesn't occur until the card flips:
+
+```swift
+rotation = isFaceUp ? 0 : 180
+```
+
+Only when the card becomes `isFaceUp` does the `rotation` value switch from `0` to `180`. When this happens, now the animation occurs. And SwiftUI will contantly call our view from `0, 1, 2, 3, 4, .... 180` degrees and we will draw it each time animating from one degrees to the next.
+
+Then internally, we use the value of `rotation` to decide things like `opactity`:
+
+```swift
+content.opacity(rotation < 90 ? 1: 0)
+```
+
+As well as where the rotation is in the `3DEffect`:
+
+```swift
+.rotation3DEffect(Angle(degrees: rotation), axis: (x: 0, y: 1, z: 0))
+```
+
+So the key takeway is `rotation` is `Animatable` data. And 
+
+
+
+
+
 
 ### Links that help
 
