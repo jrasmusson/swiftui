@@ -161,6 +161,132 @@ Exact same code. Exact same effect. Only extracted into a view modifier with an 
 
 ## AnimatableModifier
 
+Next step is making the animation how it would really work in real life:
+
+- only show face is rotated > 90°
+- only change the opocity if > 90°
+
+To make all this happen we need to track the angle of rotation and detect when it hits 90°.
+
+So what we can do to our view modifier is:
+
+- add a rotation var
+- change the logic to use that var to change properties
+- add an `init` method for setting `isFaceUp` 
+
+**Cardify**
+
+```swift
+struct Cardify: ViewModifier {
+    var rotation: Double // in degrees
+
+    init(isFaceUp: Bool) {
+        rotation = isFaceUp ? 0 : 180
+    }
+
+    func body(content: Content) -> some View {
+        ZStack {
+            let shape = RoundedRectangle(cornerRadius: 20)
+            shape
+                .foregroundColor(rotation < 90 ? Color.clear : .red)
+                .padding()
+            shape.stroke(lineWidth: 3)
+                .padding()
+
+            Text("🕹")
+                .font(.system(size: 200))
+                .opacity(rotation < 90 ? 1 : 0)
+        }
+        .rotation3DEffect(
+            Angle.degrees(rotation),
+            axis: (0,1,0),
+            perspective: 0.3
+        )
+    }
+}
+```
+
+That's good start. But its not enough. We need to track the animation from 0 - 90 and then from 90 - 180 and inimate it with the proper settings through each stage.
+
+To make our view modifier handle that, we need to make our view `Animatable`.
+
+### Animatable
+
+`Animatable` is a protocol with one property:
+
+- `var animatableData`
+
+```swift
+struct Cardify: ViewModifier, Animatable {
+    var rotation: Double // in degrees
+
+    var animatableData: Double {
+        get { rotation }
+        set { rotation = newValue }
+    }
+```
+
+By plugging this protocol in and hooking it up to our `rotation`, we can now track the animation and use rotation values of: 0, 1, 2, 3, 90, ... 180 and it will animate correctly and apply the right value each step of the way.
+
+Everything else stays exactly the same.
+
+```swift
+struct ContentView: View {
+    @State private var isFaceUp = false
+
+    var body: some View {
+        VStack {
+            Text("👻")
+                .cardify(isFaceUp: isFaceUp)
+                .onTapGesture {
+                    withAnimation(.easeInOut(duration: 2)) {
+                        isFaceUp.toggle()
+                    }
+                }
+        }
+    }
+}
+
+struct Cardify: ViewModifier, Animatable {
+    var rotation: Double // in degrees
+
+    var animatableData: Double {
+        get { rotation }
+        set { rotation = newValue }
+    }
+
+    init(isFaceUp: Bool) {
+        rotation = isFaceUp ? 0 : 180
+    }
+
+    func body(content: Content) -> some View {
+        ZStack {
+            let shape = RoundedRectangle(cornerRadius: 20)
+            shape
+                .foregroundColor(rotation < 90 ? Color.clear : .red)
+                .padding()
+            shape.stroke(lineWidth: 3)
+                .padding()
+
+            Text("🕹")
+                .font(.system(size: 200))
+                .opacity(rotation < 90 ? 1 : 0)
+        }
+        .rotation3DEffect(
+            Angle.degrees(rotation),
+            axis: (0,1,0),
+            perspective: 0.3
+        )
+    }
+}
+```
+
+Only now we get a beautiful trackable animation that doesn't fade in too early, and shows the card exactly how it should look.
+
+
+
+## AnimatableModifier
+
 ```swift
 struct ContentView: View {
     @State var isFaceUp = false
@@ -234,6 +360,8 @@ extension View {
     }
 }
 ```
+
+![](images/demo3.gif)
 
 ### Links that help
 
