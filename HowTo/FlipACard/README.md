@@ -13,7 +13,7 @@ An `implicit` animation is one where we make a change to a view modifier, and th
 Here for example we add a rotation effect to a `CardView` and then implicitly animate it with a call to `.animation()`.
 
 ```swift
-CarView(isFaceUp: $isFaceUp)
+CardView(isFaceUp: $isFaceUp)
     .rotation3DEffect(Angle(degrees: isFaceUp ? 0 : 180),
                       axis: (x: 0, y: 1, z: 0))
     // implicit
@@ -27,7 +27,7 @@ CarView(isFaceUp: $isFaceUp)
 So implicit are much more local and rare. We would only apply them on small things we want to animate. Explicit are for a change in view model. Something bigger. And those we wrap in `withAnimation`.
 
 ```swift
-CarView(isFaceUp: $isFaceUp)
+CardView(isFaceUp: $isFaceUp)
     .onTapGesture {
         // explicit
         withAnimation(.easeInOut(duration: 2)) {
@@ -62,7 +62,7 @@ struct ContentView: View {
 
     var body: some View {
         VStack {
-            CarView(isFaceUp: $isFaceUp)
+            CardView(isFaceUp: $isFaceUp)
                 .onTapGesture {
                     // explicit
                     withAnimation(.easeInOut(duration: 2)) {
@@ -78,7 +78,7 @@ struct ContentView: View {
     }
 }
 
-struct CarView: View {
+struct CardView: View {
     @Binding var isFaceUp: Bool
 
     var body: some View {
@@ -100,187 +100,44 @@ struct CarView: View {
 
 ![](images/demo2.gif)
 
+## Making a ViewModifer
 
+When you have an effect that you want to apply to any view, it can be handy to make a view modifier.
 
-## Drawing a card
-
-```swift
-struct ContentView: View {
-    var body: some View {
-        RoundedRectangle(cornerRadius: 20)
-            .stroke(lineWidth: 3)
-            .padding()
-    }
-}
-```
-
-![](images/1.png)
-
-
-## Initial shape
-
-Let's start with something simple. Like changing the color of a card.
+Here we just take the contents of the `CardView` we made and extract it into a view modifier passing on the `content`.
 
 ```swift
 struct ContentView: View {
-    @State var isFaceUp = false
+    @State private var isFaceUp = false
 
     var body: some View {
         VStack {
-            RoundedRectangle(cornerRadius: 20)
-                .fill(isFaceUp ? Color.blue : .red)
-                .frame(width:200, height:200)
-                .animation(.linear(duration: 1.0), value: isFaceUp)
-
-            Button("flip card") {
-                isFaceUp.toggle()
-            }
-        }
-    }
-}
-```
-
-![](images/demo1.gif)
-
-## Add an image
-
-Next let's add an image.
-
-```swift
-struct ContentView: View {
-    @State var isFaceUp = false
-
-    var body: some View {
-        VStack {
-            ZStack {
-                RoundedRectangle(cornerRadius: 20)
-                    .fill(isFaceUp ? Color.clear : .orange)
-                if isFaceUp {
-                    Color.orange.opacity(0.5).cornerRadius(20.0)
-                    Text("👻")
-                        .font(.system(size: 100))
-                        .scaledToFit()
-                        .clipped()
-                        .cornerRadius(15.0)
-                        .padding(10)
+            Text("👻")
+                .cardify(isFaceUp: isFaceUp)
+                .onTapGesture {
+                    withAnimation(.easeInOut(duration: 2)) {
+                        isFaceUp.toggle()
+                    }
                 }
-            }
-            .animation(.linear(duration: 1.0), value: isFaceUp)
-            .frame(width:200, height:200)
-
-            Button("flip card") {
-                isFaceUp.toggle()
-            }
-        }
-    }
-}
-```
-            
-## Rotate in 3D
-
-```swift
-struct ContentView: View {
-    @State var isFaceUp = false
-
-    var body: some View {
-        VStack {
-            HStack(spacing:40) {
-                VStack {
-                    CardView(isFaceUp: isFaceUp, content: "👻", axis: (0,1,0))
-                        .animation(.linear(duration: 1.0), value: isFaceUp)
-                        .frame(width:100, height:100)
-                }
-            }
-
-            Spacer().frame(height:40)
-
-            Button("flip card") {
-                isFaceUp.toggle()
-            }
-
-            Spacer()
         }
     }
 }
 
-struct CardView: View {
-    var isFaceUp: Bool
-    var content: String
-    var axis:(CGFloat,CGFloat,CGFloat) = (1.0,0.0,0.0)
-
-    var body: some View {
-        ZStack {
-            RoundedRectangle(cornerRadius: 20)
-                .fill(Color.orange.opacity(isFaceUp ? 0.5 : 1.0))
-            if isFaceUp {
-                Text(content)
-                    .font(.system(size: 50))
-                    .scaledToFit()
-                    .clipped()
-                    .cornerRadius(15.0)
-                    .padding(10)
-            }
-        }
-        .rotation3DEffect(
-            Angle.degrees(isFaceUp ? 0: 180),
-            axis: axis
-        )
-    }
-}
-```
-
-## Use a custom ViewModifier
-
-```swift
-import SwiftUI
-
-struct ContentView: View {
-    @State var isFaceUp = false
-
-    var body: some View {
-        VStack {
-            HStack(spacing:40) {
-                VStack {
-                    CardView(isFaceUp: isFaceUp, content: "👻")
-                        .animation(.linear(duration: 1.0), value: isFaceUp)
-                        .frame(width:100, height:100)
-                }
-            }
-
-            Spacer().frame(height:40)
-
-            Button("flip card") {
-                isFaceUp.toggle()
-            }
-
-            Spacer()
-        }
-    }
-}
-
-struct CardView: View {
-    var isFaceUp: Bool
-    var content: String
-
-    var body: some View {
-        Text(content)
-            .font(.system(size: 50))
-                .scaledToFit()
-                .clipped()
-                .cornerRadius(15.0)
-                .padding(10)
-                .cardFlip(isFaceUp: isFaceUp)
-    }
-}
-
-struct CardFlip: ViewModifier {
+struct Cardify: ViewModifier {
     var isFaceUp: Bool
 
     func body(content: Content) -> some View {
         ZStack {
-            RoundedRectangle(cornerRadius: 20)
-                .fill(Color.orange.opacity(isFaceUp ? 0.5 : 1.0))
-            content.opacity(isFaceUp ? 1.0 : 0.0)
+            let shape = RoundedRectangle(cornerRadius: 20)
+            shape
+                .foregroundColor(isFaceUp ? Color.clear : .red)
+                .padding()
+            shape.stroke(lineWidth: 3)
+                .padding()
+
+            Text("🕹")
+                .font(.system(size: 200))
+                .opacity(isFaceUp ? 1 : 0)
         }
         .rotation3DEffect(
             Angle.degrees(isFaceUp ? 0: 180),
@@ -292,11 +149,15 @@ struct CardFlip: ViewModifier {
 
 
 extension View {
-    func cardFlip(isFaceUp: Bool) -> some View {
-        modifier(CardFlip(isFaceUp: isFaceUp))
+    func cardify(isFaceUp: Bool) -> some View {
+        modifier(Cardify(isFaceUp: isFaceUp))
     }
 }
 ```
+
+Exact same code. Exact same effect. Only extracted into a view modifier with an extension and capable of taking any view and making it a flippable card.
+
+![](images/demo2.gif)
 
 ## AnimatableModifier
 
