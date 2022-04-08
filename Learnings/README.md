@@ -28,6 +28,31 @@ The second thing to appreciate is that the order you add the modifiers matters.
 
 Here you can see the outmost yellow modifier is the one that shades the outmost layer of the view. So if you are ever confused about why you are going `.fill()` and it covers your entire view (and not the smaller view inside) check your view modifier order.
 
+## Padding and background
+
+Where you really notice this is with padding and background.
+
+Here is some plain text.
+
+![](images/6.png)
+
+Let's see what happens when we add some background to it.
+
+![](images/7.png)
+
+No surprise. Adds the background nicely around the text. But watch what happens when we add padding before and after.
+
+Adding the padding before puts padding around the text, and then applies the background to the whole thing.
+
+![](images/8.png)
+
+Putting the padding after adds padding around the text and the background.
+
+![](images/9.png)
+
+So just be aware order matters.
+
+
 ### Link
 
 - [Why modifer order matters](https://www.hackingwithswift.com/books/ios-swiftui/why-modifier-order-matters)
