@@ -52,6 +52,16 @@ Putting the padding after adds padding around the text and the background.
 
 So just be aware order matters.
 
+```swift
+var body: some View {
+    Text("🥑🍞")
+        .font(.system(size: 100))
+        .background(.green).cornerRadius(12)
+        .padding()
+        .background(.yellow)
+}
+```
+
 
 ### Link
 
