@@ -1,6 +1,108 @@
 # Flip a Card
 
-## Adding a rectangle
+There are three ways to animation things in SwiftUI:
+
+- `implicit` the animation of view modifers
+- `explicit` the animation of intents
+- `transitions` the animations of views coming and going on screen
+
+## Implicit animation
+
+An `implicit` animation is one where we make a change to a view modifier, and then immedidately animate it.
+
+Here for example we add a rotation effect to a `CardView` and then implicitly animate it with a call to `.animation()`.
+
+```swift
+CarView(isFaceUp: $isFaceUp)
+    .rotation3DEffect(Angle(degrees: isFaceUp ? 0 : 180),
+                      axis: (x: 0, y: 1, z: 0))
+    // implicit
+    .animation(Animation.easeInOut(duration: 2), value: isFaceUp)
+```
+
+## Explicit animation
+
+`Explicit` animation can do the same thing, only here we modify an intent. An intent is a change in model. We want the animation to apply to the entier view container.
+
+So implicit are much more local and rare. We would only apply them on small things we want to animate. Explicit are for a change in view model. Something bigger. And those we wrap in `withAnimation`.
+
+```swift
+CarView(isFaceUp: $isFaceUp)
+    .onTapGesture {
+        // explicit
+        withAnimation(.easeInOut(duration: 2)) {
+            isFaceUp.toggle()
+        }
+    }
+
+    .rotation3DEffect(Angle(degrees: isFaceUp ? 0 : 180),
+                      axis: (x: 0, y: 1, z: 0))
+```
+
+Also note that it isn't the application of the animation that makes the animation occur. This just sets it up:
+
+```swift
+.rotation3DEffect(Angle(degrees: isFaceUp ? 0 : 180),
+                                  axis: (x: 0, y: 1, z: 0))
+```
+
+It is when the inputs to a view modifer or the state changes that cause the animation to occur. In the explicit case this line here:
+
+```swift
+withAnimation(.easeInOut(duration: 2)) {
+    isFaceUp.toggle() // trigger animation
+}
+```
+
+Source:
+
+```swift
+struct ContentView: View {
+    @State private var isFaceUp = false
+
+    var body: some View {
+        VStack {
+            CarView(isFaceUp: $isFaceUp)
+                .onTapGesture {
+                    // explicit
+                    withAnimation(.easeInOut(duration: 2)) {
+                        isFaceUp.toggle()
+                    }
+                }
+
+                .rotation3DEffect(Angle(degrees: isFaceUp ? 0 : 180),
+                                  axis: (x: 0, y: 1, z: 0))
+                // implicit
+                .animation(Animation.easeInOut(duration: 2), value: isFaceUp)
+        }
+    }
+}
+
+struct CarView: View {
+    @Binding var isFaceUp: Bool
+
+    var body: some View {
+        ZStack {
+            let shape = RoundedRectangle(cornerRadius: 20)
+            shape
+                .foregroundColor(isFaceUp ? Color.clear : .red)
+                .padding()
+            shape.stroke(lineWidth: 3)
+                .padding()
+
+            Text("🕹")
+                .font(.system(size: 200))
+                .opacity(isFaceUp ? 1 : 0)
+        }
+    }
+}
+```
+
+![](images/demo2.gif)
+
+
+
+## Drawing a card
 
 ```swift
 struct ContentView: View {
@@ -13,9 +115,6 @@ struct ContentView: View {
 ```
 
 ![](images/1.png)
-
-## Changing the color
-
 
 
 ## Initial shape
