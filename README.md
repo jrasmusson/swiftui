@@ -15,6 +15,10 @@ Deliberate practice with SwiftUI.
 - Command + View `see options for that view`
 - Control + Option + View `inspect view`
 
+## Learnings 🎓
+
+- [Learnings](Learnings/README.md)
+
 ## Controls 🕹
 
 ### Text
