@@ -1,5 +1,23 @@
 # Flip a Card
 
+## Adding a rectangle
+
+```swift
+struct ContentView: View {
+    var body: some View {
+        RoundedRectangle(cornerRadius: 20)
+            .stroke(lineWidth: 3)
+            .padding()
+    }
+}
+```
+
+![](images/1.png)
+
+## Changing the color
+
+
+
 ## Initial shape
 
 Let's start with something simple. Like changing the color of a card.
