@@ -463,10 +463,244 @@ As well as where the rotation is in the `3DEffect`:
 So the key takeway is `rotation` is `Animatable` data. And 
 
 
+## Transitions
+
+Transitions are the comings and goings of views. Just view modifiers for the coming and another set of view modifiers for going.
+
+Usually there are x4 precanned transitions we can use. 
+
+**AnyTransition**
+
+```swift
+extension AnyTransition {
+    public static var scale: AnyTransition { get }
+    public static let opacity: AnyTransition
+    public static var slide: AnyTransition { get }
+    public static let identity: AnyTransition
+}
+```
+
+Let's see where we have a view disappearing on us.
+
+When we have a match and we click on another card...the previously x2 matched cards fade away.
+
+![](images/4.png)
+
+That was a transtion animation. These views transitioned to not being in the UI anymore and when through a little transition animation.
+
+Let's go change that animation to something else so we can see how to control it.
+
+**EmojiMemoryGameView**
+
+```swift
+@ViewBuilder
+private func cardView(for card: EmojiMemoryGame.Card) -> some View {
+    if card.isMatched && !card.isFaceUp {
+        Color.clear
+    } else {
+        CardView(card: card)
+            .padding(4)
+            .transition(AnyTransition.scale) // add
+            .onTapGesture {
+                withAnimation {
+                    game.choose(card)
+                }
+            }
+    }
+}
+```
+
+This `AnyTransition` is a static struct we call a `typeerased` transition. Means it type is erased when used.
+
+`scale` is a transition that makes the view shrink down into nothing, or up into its full sized view.
+
+![](images/demo9.gif)
+
+You can make the animation longer also like this:
+
+```swift
+.transition(AnyTransition.scale.animation(Animation.easeInOut(duration: 2)))
+```
+
+![](images/demo10.gif)
+
+The places you most often see view coming and going is `if/then`.
+
+### Asymetric transitions
+
+Asymentric transitions are tranistions where you define the coming and going animations differently (there are not symetric).
+
+For example here we could define the coming animation one way, and the going animation another:
+
+```swift
+.transition(AnyTransition.asymmetric(insertion: .scale, removal: .opacity)
+```
+
+![](images/demo11.gif)
+
+Hmmm. This cards appeared on screen... but they didn't `scale` in 🤔. But the opactity worked - it faded out. Why no scale in?
+
+This is our old problem again where these views:
+
+```swift
+@ViewBuilder
+private func cardView(for card: EmojiMemoryGame.Card) -> some View {
+    if card.isMatched && !card.isFaceUp {
+        Color.clear
+    } else {
+        CardView(card: card)
+            .padding(4)
+            .transition(AnyTransition.asymmetric(insertion: .scale, removal: .opacity))
+            .onTapGesture {
+                withAnimation {
+                    game.choose(card)
+                }
+            }
+    }
+}
+```
+
+Did not appear/disappear on screen from a container that was already on screen.
+
+```swift
+var gameBody: some View {
+    AspectVGrid(items: game.cards, aspectRatio: 2/3) { card in
+        cardView(for: card)
+    }
+    .foregroundColor(.red)
+}
+```
+
+This `AspectVGrid` came on screen with these cards already there. So they're not appearing on screen inside a container already there. They appeared `with` their container. 
+
+So it's the transition of the `AspectVGrid` which is going to control that appearance or disappearce because it is the thing that's appearing.
+
+This shows a big difference between transitions and view modifiers. Transitions apply to the containers themselves. View modifiers on containers apply the animations to each individual view inside.
+
+So for us to animatie this `CardView` we really need to animate the `AspectVGrid`.
+
+So how can we scale in these cards on app startup? To do that the AsepctVGrid needs to come on first and then after the cards will appear.
+
+### Dealing the cards
+
+This is something we often want to do. We often want our containers to appear on screen first, and then have our subviews appear after. And there is a really good view modifer that can do that for us on any container called `onAppear`:
+
+```swift
+var gameBody: some View {
+    AspectVGrid(items: game.cards, aspectRatio: 2/3) { card in
+        cardView(for: card)
+    }
+    .onAppear {
+        // deal cards
+    }
+    .foregroundColor(.red)
+}
+```
+
+What we are going to do here is deal our cards out into our UI. Going to have to keep track of whether a card has been dealt. Could put into model. But here is it more a pure UI thing.
+
+So that's where `@State` comes in. It's a temporary state for this local UI control. This is only for use in our view (so make private). 
+
+We will track this by creating a `Set<Int>` of the identifiers for each card.
+
+**EmojiMemoryGameView**
+
+```swift
+struct EmojiMemoryGameView: View {
+    @ObservedObject var game: EmojiMemoryGame
+    @State private var dealt = Set<Int>()
+    
+    var gameBody: some View {
+    AspectVGrid(items: game.cards, aspectRatio: 2/3) { card in
+        cardView(for: card)
+    }
+    .onAppear {
+        // deal cards
+    }
+}
+```
+
+Adding some helpers...
+
+```swift
+struct EmojiMemoryGameView: View {
+    @ObservedObject var game: EmojiMemoryGame
+    @State private var dealt = Set<Int>() // 
+
+    private func deal(_ card: EmojiMemoryGame.Card) { // 
+        dealt.insert(card.id)
+    }
+
+    private func isUndealt(_ card: EmojiMemoryGame.Card) -> Bool { //
+        !dealt.contains(card.id)
+    }
+
+    var gameBody: some View {
+        AspectVGrid(items: game.cards, aspectRatio: 2/3) { card in
+            cardView(for: card)
+        }
+        .onAppear {
+            withAnimation { //
+                for card in game.cards {
+                    deal(card)
+                }
+            }
+        }
+        .foregroundColor(.red)
+    }
+
+    @ViewBuilder
+    private func cardView(for card: EmojiMemoryGame.Card) -> some View {
+        if isUndealt(card) ||  (card.isMatched && !card.isFaceUp) {
+            Color.clear
+        } else {
+            CardView(card: card)
+                .padding(4)
+                .transition(AnyTransition.asymmetric(insertion: .scale, removal: .opacity)) //
+                .onTapGesture {
+                    withAnimation {
+                        game.choose(card)
+                    }
+                }
+        }
+    }
+```
+
+So what we have really done here is:
+
+- Added `@State` to track change in our UI
+- Added the `CardViews` explicitly to our container separately in `onAppear`
+- Added an `explicit` animation to our container viw `withAnimation`
+- Added a `transition` animation to our `CardView`
+
+If we slow things down a bit:
+
+```swift
+CardView(card: card)
+    .padding(4)
+    .transition(AnyTransition.asymmetric(insertion: .scale, removal: .opacity).animation(.easeInOut(duration: 3)))
+```
+
+We should now see our `CardView` scale in.
+
+![](images/demo12.gif)
+
+And our fade out.
+
+![](images/demo13.gif)
+
+So we really learned x3 things here:
+
+- Transitions
+- OnAppear for containers
+- @State for controlling how UI operates
+
+## Dealing off of a deck
+
+Now as good as this looks, it would be really cool if we could deal these off of a deck.
 
 
 
 
-### Links that help
 
-- [Lecture 8 Video](https://www.youtube.com/watch?v=-N1UR7Y105g)
+
