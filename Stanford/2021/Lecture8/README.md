@@ -699,8 +699,385 @@ So we really learned x3 things here:
 
 Now as good as this looks, it would be really cool if we could deal these off of a deck.
 
+To do this we are going to create another view, a deck of cards, and then deal out our cards from there onto the screen.
 
+We already have the `onAppear` where we can deal.
 
+```swift
+var gameBody: some View {
+    AspectVGrid(items: game.cards, aspectRatio: 2/3) { card in
+        cardView(for: card)
+    }
+    .onAppear {
+        withAnimation {
+            for card in game.cards {
+                deal(card)
+            }
+        }
+    }
+}
+```
 
+But insted of doing it here, we are going to move this functionality to a new view. A deck of cards.
 
+Let's create a `var` called `deckBody`:
+
+```swift
+var deckBody: some View {
+    ZStack {
+        ForEach(game.cards.filter(isUndealt)) { card in
+            CardView(card: card)
+        }
+    }
+    .frame(width: CardConstants.underltWidth, height: CardConstants.undealtHeight)
+}
+```
+
+Adding a frame like this will cause the `ZStack` to stretch and fill as much of the space offered to it as it can.
+
+**EmojiMemoryGame**
+
+```swift
+struct EmojiMemoryGameView: View {
+    @ObservedObject var game: EmojiMemoryGame
+    @State private var dealt = Set<Int>()
+
+    private func deal(_ card: EmojiMemoryGame.Card) {
+        dealt.insert(card.id)
+    }
+
+    private func isUndealt(_ card: EmojiMemoryGame.Card) -> Bool {
+        !dealt.contains(card.id)
+    }
+
+    var body: some View {
+        VStack {
+            gameBody
+            deckBody
+            shuffleButton
+        }
+        .padding()
+    }
+
+    var gameBody: some View {
+        AspectVGrid(items: game.cards, aspectRatio: 2/3) { card in
+            cardView(for: card)
+        }
+        .onAppear {
+            withAnimation(.easeInOut(duration: 5)) {
+                for card in game.cards {
+                    deal(card)
+                }
+            }
+        }
+        .foregroundColor(CardConstants.color)
+    }
+
+    var deckBody: some View {
+        ZStack {
+            ForEach(game.cards.filter(isUndealt)) { card in
+                CardView(card: card)
+                    .transition(AnyTransition.asymmetric(insertion: .opacity, removal: .scale))
+            }
+        }
+        .frame(width: CardConstants.underltWidth, height: CardConstants.undealtHeight)
+        .foregroundColor(CardConstants.color)
+    }
+
+    var shuffleButton: some View {
+        Button("Shuffle") {
+            withAnimation {
+                game.shuffle()
+            }
+        }
+    }
+
+    @ViewBuilder
+    private func cardView(for card: EmojiMemoryGame.Card) -> some View {
+        if isUndealt(card) ||  (card.isMatched && !card.isFaceUp) {
+            Color.clear
+        } else {
+            CardView(card: card)
+                .padding(4)
+                .transition(AnyTransition.asymmetric(insertion: .scale, removal: .opacity))
+                .onTapGesture {
+                    withAnimation {
+                        game.choose(card)
+                    }
+                }
+        }
+    }
+
+    private struct CardConstants {
+        static let color = Color.red
+        static let aspectRatio: CGFloat = 2/3
+        static let dealDuration: Double = 0.5
+        static let totalDealDuration: Double = 2
+        static let undealtHeight: CGFloat = 90
+        static let underltWidth = undealtHeight * aspectRatio
+    }
+}
+
+struct CardView: View {
+    let card: EmojiMemoryGame.Card
+
+    var body: some View {
+        GeometryReader{ geometry in
+            ZStack {
+                Pie(startAngle: Angle(degrees: 270), endAngle: Angle(degrees: 30)).padding(4).opacity(0.6)
+                Text(card.content)
+                    .rotationEffect(Angle.degrees(card.isMatched ? 360 : 0))
+                    .animation(Animation.linear(duration: 1).repeatForever(autoreverses: false), value: card.isMatched)
+                    .font(font(in: geometry.size))
+            }
+            .cardify(isFaceUp: card.isFaceUp)
+        }
+    }
+
+    private func font(in size: CGSize) -> Font {
+        Font.system(size: min(size.width, size.height)*DrawingConstants.fontScale)
+    }
+
+    private struct DrawingConstants {
+        static let fontScale: CGFloat = 0.6
+    }
+}
+
+extension View {
+    func cardify(isFaceUp: Bool) -> some View {
+        return self.modifier(Cardify(isFaceUp: isFaceUp))
+    }
+}
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        let game = EmojiMemoryGame()
+        game.choose(game.cards.first!)
+        return EmojiMemoryGameView(game: game)
+            .preferredColorScheme(.light)
+    }
+}
+```
+
+![](images/demo14.gif)
+
+Good first step. But we don't want it to deal as soon as the app launches. We want it to deal when we tap on the deck.
+
+So let's move the `onAppear` down to the `deckBody` and make it a `tapGesture` instead.
+
+```swift
+var deckBody: some View {
+    ZStack {
+        ForEach(game.cards.filter(isUndealt)) { card in
+            CardView(card: card)
+                .transition(AnyTransition.asymmetric(insertion: .opacity, removal: .scale))
+        }
+    }
+    .frame(width: CardConstants.underltWidth, height: CardConstants.undealtHeight)
+    .foregroundColor(CardConstants.color)
+    .onTapGesture {
+        // "deal" cards
+        withAnimation(.easeInOut(duration: 5)) {
+            for card in game.cards {
+                deal(card)
+            }
+        }
+    }
+}
+```
+
+![](images/demo15.gif)
+
+### Making them fly
+
+OK not bad. But we really want the cards to fly off the deck and onto the screen. How can we do that?
+
+This is where that `matchGeometry` effect comes in. What we need to do is match the geometry of the cards in the deck with the cards out here.
+
+**EmojiMemoryGame**
+
+```swift
+struct EmojiMemoryGameView: View {
+    @Namespace private var dealingNameSpace
+
+	var gameBody: some View {
+   		CardView(card: card)
+        .matchedGeometryEffect(id: card.id, in: dealingNamespace)
+
+	var deckBody: some View {
+   		CardView(card: card)
+        .matchedGeometryEffect(id: card.id, in: dealingNamespace)
+
+```
+
+![](images/demo16.gif)
+
+```swift
+/// Defines a group of views with synchronized geometry using an
+/// identifier and namespace that you provide.
+///
+```
+
+This is really cool. It matches the geometry of two views as then animate in together so it looks like animate from one position to the other.
+
+One thing you'll notice that we left these transitions in here. We could match the transitions, but we don't want scale to occur when this occurs. 
+
+The animation system is doing the best it can but it won't ignore any other animations you already have going on.
+
+So we can either remove the transition. Or we can use `identity`.
+
+```swift
+@ViewBuilder
+private func cardView(for card: EmojiMemoryGame.Card) -> some View {
+    CardView(card: card)
+        .matchedGeometryEffect(id: card.id, in: dealingNamespace)
+        .transition(AnyTransition.asymmetric(insertion: .identity, removal: .opacity))
+}
+```
+
+Identity means don't scale or do anything. Put my back to my original shape.
+
+So when the cards are removed and added we'll put them back to their original shape and position like this:
+
+```swift
+.transition(AnyTransition.asymmetric(insertion: .identity, removal: .opacity))
+.transition(AnyTransition.asymmetric(insertion: .opacity, removal: .identity))
+```
+
+![](images/demo17.gif)
+
+Really good. One more thing we could do to to make it even more realistic is deal the cards one at a time.
+
+Way to do that is delay the animations as we go.
+
+```swift
+private func dealAnimation(for card: EmojiMemoryGame.Card) -> Animation {
+    var delay = 0.0
+    if let index = game.cards.firstIndex(where: { $0.id == card.id }) {
+        delay = Double(index) * CardConstants.totalDealDuration / Double(game.cards.count)
+    }
+    return Animation.easeInOut(duration: CardConstants.dealDuration).delay(delay)
+}
+
+.onTapGesture {
+    // "deal" cards
+    for card in game.cards {
+        withAnimation(dealAnimation(for: card)) {
+            deal(card)
+        }
+    }
+}
+```
+
+![](images/demo18.gif)
+
+### Dealing from the bottom
+
+One small deal Paul notices is that when the cards are faceup, it looks like the cards are dealt from the bottom of the deck.
+
+Two fix this he tweaks the `ZStack` order using `zIndex`:
+
+```swift
+CardView(card: card)
+    .matchedGeometryEffect(id: card.id, in: dealingNamespace)
+    .padding(4)
+    .transition(AnyTransition.asymmetric(insertion: .identity, removal: .opacity))
+    .zIndex(zIndex(of: card))
+```
+
+![](images/demo19.gif)
+
+Two more things that would be cool to do is:
+
+1. Restart the game.
+2. Start the count down timer.
+
+## Restart the game
+
+**EmojiMemoryGameView**
+
+```swift
+var restartButton: some View {
+    Button("Restart") {
+        withAnimation {
+            dealt = []
+            game.restart()
+        }
+    }
+}
+```
+
+Note: Because `dealt` is an `@State` this is going to cause the view to redraw itself and animation will occur. This should undeal everything.
+
+**EmojiMemotyGame**
+
+```swift
+func restart() {
+    model = EmojiMemoryGame.createMemoryGame()
+}
+```
+
+Resetting the model like this will also trigger a change in UI.
+
+![](images/demo20.gif)
+
+## Adjusting the extra space
+
+One problem in landscape is how much space is taken.
+
+![](images/5.png)
+
+Anytime we have mutually exclusive views like this is a good time to embed them both in a `ZStack`.
+
+Move `deckbody` from here:
+
+```swift
+var body: some View {
+    VStack {
+        gameBody
+        deckBody
+        HStack {
+```
+
+to here:
+
+```swift
+var body: some View {
+    ZStack {
+        VStack {
+            gameBody
+            HStack {
+                restartButton
+                Spacer()
+                shuffleButton
+            }
+            .padding(.horizontal)
+        }
+        deckBody
+    }
+    .padding()
+}
+```
+
+![](images/demo21.gif)
+
+### Moving the deck starting position down
+
+Not bad. But it would be nice of the deck starting position was down just a bit further.
+
+```swift
+var body: some View {
+    ZStack(alignment: .bottom) {
+        VStack {
+         ...
+        }
+        deckBody
+    }
+    .padding()
+}
+```
+
+![](images/demo22.gif)
+
+### Animating the pie
 
