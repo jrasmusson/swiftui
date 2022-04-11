@@ -1079,5 +1079,142 @@ var body: some View {
 
 ![](images/demo22.gif)
 
-### Animating the pie
+## Animating the pie
+
+After adding some bonus logic code, Paul adds some property observers to trigger the starting/stopping of bonus time when a matched card is found:
+
+**Card**
+
+```swift
+struct Card: Identifiable {
+    var isFaceUp = false {
+        didSet {
+            if isFaceUp {
+                startUsingBonsusTime()
+            } else {
+                stopUsingBonusTime()
+            }
+        }
+    }
+
+    var isMatched = false {
+        didSet {
+            stopUsingBonusTime()
+        }
+    }
+}
+```
+
+### Making the pie animatable
+
+`Shapes` just like `ViewModifiers` can be made animatable. Just like with `Cardify` view modifier, all we need to do is implement the `AnimatableModifier` and the animatable data that we want.
+
+Shapes are always assumed to be animatable.
+
+![](images/6.png)
+
+So we can just add the `var`. And we want to animate the start and end angle of our pie. Which we can do as a pair. Could do in degrees but for fun will do in radians.
+
+**Pie**
+
+```swift
+struct Pie: Shape {
+    var startAngle: Angle
+    var endAngle: Angle
+    var clockwise = false
+
+    var animatableData: AnimatablePair<Double, Double> {
+        get {
+            AnimatablePair(startAngle.radians, endAngle.radians)
+        }
+        set {
+            startAngle = Angle.radians(newValue.first)
+            endAngle = Angle.radians(newValue.second)
+        }
+    }
+}
+```
+
+And believe it or not, that's it. `path` will be repeatedly called with new angles which will redraw our paths.
+
+So now we can animate our pie.
+
+**CardView**
+
+```swift
+struct CardView: View {
+    let card: EmojiMemoryGame.Card
+
+    var body: some View {
+        GeometryReader{ geometry in
+            ZStack {
+                Pie(startAngle: Angle(degrees: 270), endAngle: Angle(degrees: 30)).padding(4).opacity(0.6)
+```
+
+Let's start by changing the angle of our pie.
+
+```swift
+Pie(startAngle: Angle(degrees: 270), endAngle: Angle(degrees: (1-card.bonusTimeRemaining)*360-90))
+```
+
+This works, it counts down, but we have a problem. Our pie isn't animating. Nothing is changing in our model causing it to animate.
+
+We can trigger this by adding some `@State` and only triggering is bonus time is being consumed.
+
+```swift
+struct CardView: View {
+    let card: EmojiMemoryGame.Card
+
+    @State private var animatedBonusRemaining: Double = 0
+
+    var body: some View {
+        GeometryReader{ geometry in
+            ZStack {
+                if card.isConsumingBonusTime {
+                    Pie(startAngle: Angle(degrees: 270), endAngle: Angle(degrees: (1-animatedBonusRemaining)*360-90))
+                        .padding(4)
+                        .opacity(0.6)
+                } else {
+                    Pie(startAngle: Angle(degrees: 270), endAngle: Angle(degrees: (1-card.bonusTimeRemaining)*360-90))
+                        .padding(4)
+                        .opacity(0.6)
+                }
+```
+
+Now instead of repeating the `padding` and `opacity` we can apply these to both instances of `Pie` by making these part of a `Group`.
+
+```swift
+Group {
+    if card.isConsumingBonusTime {
+        Pie(startAngle: Angle(degrees: 270), endAngle: Angle(degrees: (1-animatedBonusRemaining)*360-90))
+    } else {
+        Pie(startAngle: Angle(degrees: 270), endAngle: Angle(degrees: (1-card.bonusTimeRemaining)*360-90))
+    }
+}
+.padding(4)
+.opacity(0.6)
+```
+
+Convenient way to group things up and apply the same view modifiers to everything inside.
+
+Now we just need to update the `animatedBonusRemaining`. To kick off this animation we do that everytime `Pie` appears on screen.
+
+```swift
+Pie(startAngle: Angle(degrees: 270), endAngle: Angle(degrees: (1-animatedBonusRemaining)*360-90))
+    .onAppear {
+        animatedBonusRemaining = card.bonusRemaining
+        withAnimation(.linear(duration: card.bonusTimeRemaining)) {
+            animatedBonusRemaining = 0
+        }
+    }
+```
+
+### Links that help
+
+- [Lecture 8](https://www.youtube.com/watch?v=-N1UR7Y105g)
+
+
+
+
+
 
