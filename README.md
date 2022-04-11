@@ -146,4 +146,6 @@ SwiftUI by [example](https://www.hackingwithswift.com/quick-start/swiftui).
 - [Lecture 6: Protocols Shapes](Stanford/2021/Lecture6/README.md)
 - [Lecture 7: ViewModifier Animation](Stanford/2021/Lecture7/README.md)
 - [Lecture 8: Animatation Demonstration](Stanford/2021/Lecture8/README.md)
+- [Lecture 9: EmojiArt Drag/Drop](Stanford/2021/Lecture9/README.md)
+
 
