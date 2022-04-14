@@ -255,6 +255,38 @@ There are some really neat ones here:
 
 ## Cloud Kit
 
+![](images/9.png)
+
+![](images/10.png)
+
+![](images/11.png)
+
+![](images/12.png)
+
+![](images/13.png)
+
+![](images/14.png)
+
+![](images/15.png)
+
+![](images/16.png)
+
+## Core Data
+
+![](images/17.png)
+
+![](images/18.png)
+
+![](images/19.png)
+
+![](images/20.png)
+
+![](images/21.png)
+
+![](images/22.png)
+
+![](images/23.png)
+
 ### Links that help
 
 - [Lectures](https://cs193p.sites.stanford.edu/)
