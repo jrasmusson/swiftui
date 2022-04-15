@@ -83,7 +83,7 @@ Swift can figure out what is going on. So we can clean things up a bit. We don't
 ### Links that help
 
 - [Lecture 1](https://www.youtube.com/watch?v=bqu6BquVi2M&ab_channel=Stanford)
-- [Standford 2021](https://cs193p.sites.stanford.edu/)
+- [Stanford 2021](https://cs193p.sites.stanford.edu/)
 
 
 
