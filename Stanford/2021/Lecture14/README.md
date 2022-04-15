@@ -35,7 +35,7 @@
 
 ### Links that help
 
-- [Lecture 1](https://www.youtube.com/watch?v=bqu6BquVi2M&ab_channel=Stanford)
+- [Lecture 14](https://www.youtube.com/watch?v=Ou25reI71zU)
 - [Stanford 2021](https://cs193p.sites.stanford.edu/)
 
 
