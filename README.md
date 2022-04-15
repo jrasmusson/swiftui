@@ -147,5 +147,12 @@ SwiftUI by [example](https://www.hackingwithswift.com/quick-start/swiftui).
 - [Lecture 7: ViewModifier Animation](Stanford/2021/Lecture7/README.md)
 - [Lecture 8: Animatation Demonstration](Stanford/2021/Lecture8/README.md)
 - [Lecture 9: EmojiArt Drag/Drop](Stanford/2021/Lecture9/README.md)
+- [Lecture 10: Gestures](Stanford/2021/Lecture10/README.md)
+- [Lecture 11: Persistence Error Handling](Stanford/2021/Lecture11/README.md)
+- [Lecture 12: Binding Sheet Navigation EditMode](Stanford/2021/Lecture12/README.md)
+- [Lecture 13: Publisher More Persistence
+](Stanford/2021/Lecture13/README.md)
+- [Lecture 14: Document Architecture](Stanford/2021/Lecture14/README.md)
+- [Lecture 15: UIKit Integration](Stanford/2021/Lecture15/README.md)
 
 
