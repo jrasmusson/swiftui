@@ -50,18 +50,19 @@ struct ContentView: View {
     @StateObject var store: WeatherStore
         
     var body: some View {
-        VStack(alignment: .trailing) {
-            SearchView(store: store)
-            WeatherView(conditionName: store.weatherModel.conditionName)
-            TemperatureView(temperature: store.weatherModel.temperature)
-            Text(store.weatherModel.cityName).font(.largeTitle)
-            Spacer()
-        }.padding()
-        .background(Image("background")
-                        .resizable()
-                        .ignoresSafeArea()
-                        .scaledToFill()
-        )
+        ZStack {
+            Image("background")
+                .resizable()
+                .ignoresSafeArea()
+            VStack(alignment: .trailing) {
+                SearchView(store: store)
+                WeatherView(conditionName: store.weatherModel.conditionName)
+                TemperatureView(temperature: store.weatherModel.temperature)
+                Text(store.weatherModel.cityName).font(.largeTitle)
+                Spacer()
+            }
+            .padding()
+        }
     }
     
     struct ContentView_Previews: PreviewProvider {
