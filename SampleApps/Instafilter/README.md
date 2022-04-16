@@ -95,9 +95,7 @@ ShiftUI gives us:
 - `sheet()` for presenting whole views
 - `confirmationDialog()` which is like an alert but with more buttons
 
-![](images/2.png)
-
-![](images/3.png)
+![](images/demo1.gif)
 
 ```swift
 struct ContentView: View {
@@ -123,6 +121,104 @@ struct ContentView: View {
 }
 ```
 
+## Integrating Core Image with SwiftUI
+
+Apple has a framework that is really good for applying complex filtures to images called [Core Image](https://developer.apple.com/library/archive/documentation/GraphicsImaging/Conceptual/CoreImaging/ci_intro/ci_intro.html#//apple_ref/doc/uid/TP30001185).
+
+![](images/4.png)
+
+```swift
+import SwiftUI
+import CoreImage
+import CoreImage.CIFilterBuiltins
+
+struct ContentView: View {
+    @State private var image: Image?
+
+    var body: some View {
+        VStack {
+            image?
+                .resizable()
+                .scaledToFit()
+        }
+        .onAppear(perform: loadImage)
+    }
+
+    func loadImage() {
+        guard let inputImage = UIImage(named: "Example") else { return }
+        let beginImage = CIImage(image: inputImage)
+
+        let context = CIContext()
+        let currentFilter = CIFilter.sepiaTone()
+        currentFilter.inputImage = beginImage
+        currentFilter.intensity = 1
+
+        // get a CIImage from our filter or exit if that fails
+        guard let outputImage = currentFilter.outputImage else { return }
+
+        // attempt to get a CGImage from our CIImage
+        if let cgimg = context.createCGImage(outputImage, from: outputImage.extent) {
+            // convert that to a UIImage
+            let uiImage = UIImage(cgImage: cgimg)
+
+            // and convert that to a SwiftUI image
+            image = Image(uiImage: uiImage)
+        }
+    }
+}
+```
+
+## Wrapping a UIViewController in a SwiftUI view
+
+![](images/5.png)
+
+```swift
+import SwiftUI
+import CoreImage
+import CoreImage.CIFilterBuiltins
+import PhotosUI
+
+struct ContentView: View {
+    @State private var image: Image?
+    @State private var showingImagePicker = false
+
+    var body: some View {
+        VStack {
+            image?
+                .resizable()
+                .scaledToFit()
+
+            Button("Select Image") {
+               showingImagePicker = true
+            }
+        }
+        .sheet(isPresented: $showingImagePicker) {
+            ImagePicker()
+        }
+    }
+}
+
+struct ImagePicker: UIViewControllerRepresentable {
+
+    typealias UIViewControllerType = PHPickerViewController
+
+    func makeUIViewController(context: Context) -> PHPickerViewController {
+        var config = PHPickerConfiguration()
+        config.filter = .images
+
+        let picker = PHPickerViewController(configuration: config)
+        return picker
+    }
+
+    func updateUIViewController(_ uiViewController: PHPickerViewController, context: Context) {
+        // do nothing
+    }
+}
+```
+
+## Using coordinators to manage SwiftUI view controllers
+
+- Coordinators are designed to act as delegates for UIKit view controllers.
 
 ### Links that help
 
@@ -142,3 +238,8 @@ struct ContentView: View {
 ](https://www.hackingwithswift.com/books/ios-swiftui/customizing-our-filter-using-confirmationdialog)
 - [Saving the filtered image using UIImageWriteToSavedPhotosAlbum()](https://www.hackingwithswift.com/books/ios-swiftui/saving-the-filtered-image-using-uiimagewritetosavedphotosalbum)
 - [Wrap up](https://www.hackingwithswift.com/books/ios-swiftui/instafilter-wrap-up)
+
+
+### Others
+
+- [Core Image](https://developer.apple.com/library/archive/documentation/GraphicsImaging/Conceptual/CoreImaging/ci_intro/ci_intro.html#//apple_ref/doc/uid/TP30001185)
