@@ -7,61 +7,23 @@
 
 import SwiftUI
 
-struct WeatherModel {
-    let conditionId: Int
-    let cityName: String
-    let temperature: Double
-    
-    var temperatureString: String {
-        return String(format: "%.0f", temperature)
-    }
-    
-    var conditionName: String {
-        switch conditionId {
-        case 200...232:
-            return "cloud.bolt"
-        case 300...321:
-            return "cloud.drizzle"
-        case 500...531:
-            return "cloud.rain"
-        case 600...622:
-            return "cloud.snow"
-        case 701...781:
-            return "cloud.fog"
-        case 800:
-            return "sun.max"
-        case 801...804:
-            return "cloud.bolt"
-        default:
-            return "cloud"
-        }
-    }
-}
-
-class WeatherStore: ObservableObject {
-    @Published var weatherModel: WeatherModel
-    
-    init(weatherModel: WeatherModel) {
-        self.weatherModel = weatherModel
-    }
-}
-
 struct ContentView: View {
     @StateObject var store: WeatherStore
         
     var body: some View {
-        VStack(alignment: .trailing) {
-            SearchView(store: store)
-            WeatherView(conditionName: store.weatherModel.conditionName)
-            TemperatureView(temperature: store.weatherModel.temperature)
-            Text(store.weatherModel.cityName).font(.largeTitle)
-            Spacer()
-        }.padding()
-        .background(Image("background")
-                        .resizable()
-                        .ignoresSafeArea()
-                        .scaledToFill()
-        )
+        ZStack {
+            Image("background")
+                .resizable()
+                .ignoresSafeArea()
+            VStack(alignment: .trailing) {
+                SearchView(store: store)
+                WeatherView(conditionName: store.weatherModel.conditionName)
+                TemperatureView(temperature: store.weatherModel.temperature)
+                Text(store.weatherModel.cityName).font(.largeTitle)
+                Spacer()
+            }
+            .padding()
+        }
     }
     
     struct ContentView_Previews: PreviewProvider {
@@ -79,8 +41,6 @@ struct SearchView: View {
     
     var body: some View {
         HStack {
-            Image(systemName: "location.circle.fill")
-                .iconable(.medium)
             TextField("Search", text: $cityName,
                 onCommit: {
                     fetchWeather(for: cityName)
