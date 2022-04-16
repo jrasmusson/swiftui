@@ -156,6 +156,145 @@ struct Camera: UIViewControllerRepresentable {
 }
 ```
 
+## Presenting the view
+
+You can now use this integrated `UIKit` view controller like this:
+
+```swift
+struct ContentView: View {
+    @State private var showingSheet = false
+    @State private var selectedImage: Image?
+
+    var body: some View {
+        Button("Camera", action: camera)
+            .sheet(isPresented: $showingSheet) {
+                Camera(handlePickedImage: { image in handlePickedImage(image) } )
+            }
+    }
+
+    func camera() {
+        showingSheet.toggle()
+    }
+
+    private func handlePickedImage(_ image: UIImage?) {
+
+    }
+}
+```
+
+You present the new view controller in a `Sheet` via a change of state `showingSheet`.
+
+When you run this you will get an error.
+
+![](images/14.png)
+
+`'NSInvalidArgumentException', reason: 'Source type 1 not available'`
+
+Because the camera is not available on the simulator.
+
+We could hide this button on the simulator with this:
+
+```swift
+if Camera.isAvailable {
+   // show button
+}
+```
+
+But to really see it in action we need a real phone. Plugging our phone and selecting some signing capabilities:
+
+![](images/15.png)
+
+We can now run our app and get another error:
+
+`The app's Info.plist must contain an NSCameraUsageDescription key with a string value explaining to the user how the app uses this data.`
+
+Which we can fix by opening our `info.plist` and entering the following:
+
+```swift
+Privacy - Camera Usage Description / This app needs your camera.
+```
+
+![](images/16.png)
+
+> Note: info.plist doens't create created with Xcode 13 apps anymore. To get it to show up go into project settings and just add an entry on the `info` tab. That will trigger an info.plist to create.
+
+[Xcode info.plist missing](https://useyourloaf.com/blog/xcode-13-missing-info.plist/)
+
+If you try running now you will be asked for permission and then the camera will pop-up.
+
+![](images/17.png)
+
+```swift
+import SwiftUI
+
+struct ContentView: View {
+    @State private var showingSheet = false
+    @State private var selectedImage: Image?
+
+    var body: some View {
+        Button("Camera", action: camera)
+            .sheet(isPresented: $showingSheet) {
+                Camera(handlePickedImage: { image in handlePickedImage(image) } )
+            }
+    }
+
+    func camera() {
+        showingSheet.toggle()
+    }
+
+    private func handlePickedImage(_ image: UIImage?) {
+
+    }
+}
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+    }
+}
+
+struct Camera: UIViewControllerRepresentable {
+    typealias UIViewControllerType = UIImagePickerController
+    var handlePickedImage: (UIImage?) -> Void
+
+    func makeCoordinator() -> Coordinator {
+        Coordinator(handlePickedImage: handlePickedImage)
+    }
+
+    func makeUIViewController(context: Context) -> UIImagePickerController {
+        let picker = UIImagePickerController()
+        picker.sourceType = .camera
+        picker.allowsEditing = true
+        picker.delegate = context.coordinator
+        return picker
+    }
+
+    func updateUIViewController(_ uiViewController: UIImagePickerController, context: Context) {
+        // nothing to do
+    }
+
+    static var isAvailable: Bool {
+        UIImagePickerController.isSourceTypeAvailable(.camera)
+    }
+
+    class Coordinator: NSObject, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+        var handlePickedImage: (UIImage?) -> Void
+
+        init(handlePickedImage: @escaping (UIImage?) -> Void) {
+            self.handlePickedImage = handlePickedImage
+        }
+
+        func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+            handlePickedImage(nil)
+        }
+
+        func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+            handlePickedImage((info[.editedImage] ?? info[.originalImage]) as? UIImage)
+        }
+    }
+}
+```
+
 ### Links that help
 
 - [Lecture 15](https://www.youtube.com/watch?v=ba7sJ74vDtA)
