@@ -35,6 +35,7 @@ Deliberate practice with SwiftUI.
 
 - [Button](Controls/Button/README.md)
 - [EditButton](Controls/EditButton/README.md)
+- [ConfirmationDialog](Controls/ConfirmationDialog/README.md)
 
 ### Controls
 
