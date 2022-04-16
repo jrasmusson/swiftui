@@ -80,8 +80,6 @@ struct SearchView: View {
     
     var body: some View {
         HStack {
-            Image(systemName: "location.circle.fill")
-                .iconable(.medium)
             TextField("Search", text: $cityName,
                 onCommit: {
                     fetchWeather(for: cityName)
