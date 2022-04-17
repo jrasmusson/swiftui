@@ -122,7 +122,7 @@ SwiftUI by [example](https://www.hackingwithswift.com/quick-start/swiftui).
 
 ## UIKit Integration 🌉
 
-- [Representables](UIKitIntegration/Representables/README.md)
+- [Representables - ViewController in a SwiftUI View](UIKitIntegration/Representables/README.md)
 
 ## Sample Apps 🍭
 
