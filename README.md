@@ -120,6 +120,10 @@ SwiftUI by [example](https://www.hackingwithswift.com/quick-start/swiftui).
 - [Layout and Geometry](LayoutAndGeometry/README.md)
 - [Flip a card](HowTo/FlipACard/README.md)
 
+## UIKit Integration 🌉
+
+- [Representables](UIKitIntegration/Representables/README.md)
+
 ## Sample Apps 🍭
 
 - [BetterRest](SampleApps/BetterRest/README.md)
