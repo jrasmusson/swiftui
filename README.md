@@ -116,7 +116,7 @@ SwiftUI by [example](https://www.hackingwithswift.com/quick-start/swiftui).
 
 - [Dismiss a view](HowTo/DismissAView/README.md)
 - [UIKit Previews](HowTo/Preview/README.md)
-- [Wrap a UIViewController in a SwiftUI View](HowTo/WrapViewController/README.md)
+- [Integrate with UIKit](HowTo/IntegrateWithUIKit/README.md)
 - [Layout and Geometry](LayoutAndGeometry/README.md)
 - [Flip a card](HowTo/FlipACard/README.md)
 

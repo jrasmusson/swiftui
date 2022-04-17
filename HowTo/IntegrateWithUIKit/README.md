@@ -1,8 +1,17 @@
-# Wrapping a UIViewController in a SwiftUI view
+# Integrate with UIKit
 
-SwiftUI kind of blends `UIView` and `UIViewController` into a single `View `protocol, which makes our code much simpler.
+SwiftUI is great but it can't yet do everything. There are `UIKit` frameworks for working with the camera, MapKit, and Safari that simply aren't yet available in SwiftUI. So until they are here, we need to integrate with UIKit.
 
-The way to wrap an existing `UIViewController` into a SwiftUI view is as follows:
+## How does it work
+
+
+## Create a View to Represent a ViewController
+
+In this example we are going to create an `ImagePicker` view to wrap our UIKit `UIImagePickerController`.
+
+Do do this we create types the conform to the `UIViewRepresentable` and `UIViewControllerRepresentable` protocols.
+
+**ImagePicker**
 
 ```swift
 struct ImagePicker: UIViewControllerRepresentable {
@@ -87,6 +96,8 @@ struct ImagePicker: UIViewControllerRepresentable {
 
 - [Wrapping a UIViewController in a SwiftUI view](https://www.hackingwithswift.com/books/ios-swiftui/wrapping-a-uiviewcontroller-in-a-swiftui-view)
 - [Using coorindators to manage Swift UI view controllers](https://www.hackingwithswift.com/books/ios-swiftui/using-coordinators-to-manage-swiftui-view-controllers)
+- [Apple Interfacing with UIKit](https://developer.apple.com/tutorials/swiftui/interfacing-with-uikit)
+- [Stanford Lecture 15](https://github.com/jrasmusson/swiftui/blob/main/Stanford/2021/Lecture15/README.md)
 
 
 
