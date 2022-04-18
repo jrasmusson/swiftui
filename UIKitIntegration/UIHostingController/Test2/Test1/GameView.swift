@@ -17,8 +17,16 @@ struct GameView: View {
     @ObservedObject var delegate: ContentViewDelegate
 
     var body: some View {
-        VStack {
-            TextField("Enter name", text: self.$delegate.name)
+        List {
+            Button("Alice") {
+                delegate.name = "Alice"
+            }
+            Button("Bob") {
+
+            }
+            Button("Trudy") {
+
+            }
         }
     }
 }

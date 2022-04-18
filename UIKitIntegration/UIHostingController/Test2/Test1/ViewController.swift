@@ -26,12 +26,12 @@ class ViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
 
-        title = "Classic Games"
+        title = "Arcade Classics"
         view = tableView
 
         self.cancellable = delegate.$name.sink { name in
             print(name)
-            self.dismiss(animated: true, completion: nil)
+            self.navigationController?.popViewController(animated: true)
         }
     }
 }
@@ -39,6 +39,7 @@ class ViewController: UIViewController {
 extension ViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
+        cell.selectionStyle = .none
         cell.textLabel?.text = games[indexPath.row]
         return cell
     }
