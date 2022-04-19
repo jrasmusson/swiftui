@@ -9,7 +9,7 @@ import SwiftUI
 import Combine
 
 class GameViewDelegate: ObservableObject {
-    @Published var name: String = ""
+    @Published var rating: String = ""
 }
 
 struct GameView: View {
@@ -17,15 +17,18 @@ struct GameView: View {
     @ObservedObject var delegate: GameViewDelegate
 
     var body: some View {
-        List {
-            Button("Alice") {
-                delegate.name = "Alice"
-            }
-            Button("Bob") {
-
-            }
-            Button("Trudy") {
-
+        VStack {
+            Text(game)
+            List {
+                Button("⭐️") {
+                    delegate.rating = "⭐️"
+                }
+                Button("⭐️⭐️") {
+                    delegate.rating = "⭐️⭐️"
+                }
+                Button("⭐️⭐️⭐️") {
+                    delegate.rating = "⭐️⭐️⭐️"
+                }
             }
         }
     }

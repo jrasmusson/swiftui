@@ -9,6 +9,10 @@ import UIKit
 import SwiftUI
 import Combine
 
+struct Game {
+    
+}
+
 class ViewController: UIViewController {
     let games = [
         "Pacman",
@@ -32,7 +36,7 @@ class ViewController: UIViewController {
 
         // Subscriber bound to published property name
         // Note: The return value should be held, otherwise the stream will be canceled.
-        self.cancellable = delegate.$name.sink { name in
+        self.cancellable = delegate.$rating.sink { name in
             print(name)
             self.navigationController?.popViewController(animated: true)
         }
