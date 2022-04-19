@@ -17,7 +17,7 @@ struct Game {
 class ViewController: UIViewController {
     var games = [
         Game(name: "Pacman"),
-        Game(name: "Space Invaders"),
+        Game(name: "DigDug"),
         Game(name: "Q*Bert")
     ]
 
