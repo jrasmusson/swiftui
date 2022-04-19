@@ -36,14 +36,11 @@ class ViewController: UIViewController {
 
         // Subscriber bound to published property name
         // Note: The return value should be held, otherwise the stream will be canceled.
-        self.cancellable = delegate.$rating.sink { rating in
-
+        self.cancellable = delegate.$rating.sink { rating in    
             if let index = self.games.firstIndex(where: { $0.name == self.selectedGameName }) {
                 self.games[index].rating = "⭐️"
                 self.tableView.reloadData()
             }
-
-            self.navigationController?.popViewController(animated: true)
         }
     }
 }

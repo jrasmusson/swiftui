@@ -15,6 +15,7 @@ class GameViewDelegate: ObservableObject {
 struct GameView: View {
     let name: String
     @ObservedObject var delegate: GameViewDelegate
+    @Environment(\.dismiss) private var dismiss
 
     var body: some View {
         VStack {
@@ -22,12 +23,15 @@ struct GameView: View {
             List {
                 Button("⭐️") {
                     delegate.rating = "⭐️"
+                    dismiss()
                 }
                 Button("⭐️⭐️") {
                     delegate.rating = "⭐️⭐️"
+                    dismiss()
                 }
                 Button("⭐️⭐️⭐️") {
                     delegate.rating = "⭐️⭐️⭐️"
+                    dismiss()
                 }
             }
         }

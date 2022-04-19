@@ -1,17 +1,19 @@
 # Dismiss a View
 
 ```swift
-struct ItemDetail: View {
-        
-    @Environment(\.presentationMode) var presentationMode
-    
+private struct SheetContents: View {
+    @Environment(\.dismiss) private var dismiss
+
     var body: some View {
-        Button("Update") {
-            presentationMode.wrappedValue.dismiss()
+        Button("Done") {
+            dismiss()
         }
     }
 }
 ```
 
+### Links that help
+
+- [DismissAction](https://developer.apple.com/documentation/swiftui/dismissaction)
 
 
