@@ -16,7 +16,9 @@ struct Game {
 
 class ViewController: UIViewController {
     var games = [
-        Game(name: "Pacman")
+        Game(name: "Pacman"),
+        Game(name: "Space Invaders"),
+        Game(name: "Q*Bert")
     ]
 
     var tableView = UITableView()
@@ -38,7 +40,7 @@ class ViewController: UIViewController {
         // Note: The return value should be held, otherwise the stream will be canceled.
         self.cancellable = delegate.$rating.sink { rating in    
             if let index = self.games.firstIndex(where: { $0.name == self.selectedGameName }) {
-                self.games[index].rating = "⭐️"
+                self.games[index].rating = rating
                 self.tableView.reloadData()
             }
         }
