@@ -13,12 +13,12 @@ class GameViewDelegate: ObservableObject {
 }
 
 struct GameView: View {
-    let game: String
+    let name: String
     @ObservedObject var delegate: GameViewDelegate
 
     var body: some View {
         VStack {
-            Text(game)
+            Text(name)
             List {
                 Button("⭐️") {
                     delegate.rating = "⭐️"
@@ -37,7 +37,7 @@ struct GameView: View {
 struct GameView_Previews: PreviewProvider {
     static var previews: some View {
         let delegate = GameViewDelegate()
-        GameView(game: "Pacman", delegate: delegate)
+        GameView(name: "Pacman", delegate: delegate)
     }
 }
 

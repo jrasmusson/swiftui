@@ -10,17 +10,17 @@ import SwiftUI
 import Combine
 
 struct Game {
-    
+    let name: String
+    var rating: String? = nil
 }
 
 class ViewController: UIViewController {
-    let games = [
-        "Pacman",
-        "Space Invaders",
-        "Q*Bert",
+    var games = [
+        Game(name: "Pacman")
     ]
 
     var tableView = UITableView()
+    var selectedGameName = ""
 
     // SwiftUI
     var delegate = GameViewDelegate()
@@ -36,8 +36,13 @@ class ViewController: UIViewController {
 
         // Subscriber bound to published property name
         // Note: The return value should be held, otherwise the stream will be canceled.
-        self.cancellable = delegate.$rating.sink { name in
-            print(name)
+        self.cancellable = delegate.$rating.sink { rating in
+
+            if let index = self.games.firstIndex(where: { $0.name == self.selectedGameName }) {
+                self.games[index].rating = "⭐️"
+                self.tableView.reloadData()
+            }
+
             self.navigationController?.popViewController(animated: true)
         }
     }
@@ -47,7 +52,7 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
         cell.selectionStyle = .none
-        cell.textLabel?.text = games[indexPath.row]
+        cell.textLabel?.text = "\(games[indexPath.row].name)  \(games[indexPath.row].rating ?? "")"
         return cell
     }
 
@@ -56,8 +61,9 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // How we bridge UIKit > SwiftUI
-        let vc = UIHostingController(rootView: GameView(game: games[indexPath.row], delegate: delegate))
+        // UIKit > SwiftUI
+        selectedGameName = games[indexPath.row].name
+        let vc = UIHostingController(rootView: GameView(name: selectedGameName, delegate: delegate))
         navigationController?.pushViewController(vc, animated: true)
     }
 }
