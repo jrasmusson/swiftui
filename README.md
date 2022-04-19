@@ -122,7 +122,8 @@ SwiftUI by [example](https://www.hackingwithswift.com/quick-start/swiftui).
 
 ## UIKit Integration 🌉
 
-- [Representables - ViewController in a SwiftUI View](UIKitIntegration/Representables/README.md)
+- [View Controllers within SwiftUI View - Representables](UIKitIntegration/Representables/README.md)
+- [SwiftUI View within View Controllers - UIHostingController](UIKitIntegration/UIHostingController/README.md)
 
 ## Sample Apps 🍭
 
