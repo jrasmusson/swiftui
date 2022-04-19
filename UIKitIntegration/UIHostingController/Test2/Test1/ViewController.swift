@@ -18,8 +18,9 @@ class ViewController: UIViewController {
 
     var tableView = UITableView()
 
+    // SwiftUI
+    var delegate = GameViewDelegate()
     var cancellable: AnyCancellable!
-    var delegate = ContentViewDelegate()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +30,8 @@ class ViewController: UIViewController {
         title = "Arcade Classics"
         view = tableView
 
+        // Subscriber bound to published property name
+        // Note: The return value should be held, otherwise the stream will be canceled.
         self.cancellable = delegate.$name.sink { name in
             print(name)
             self.navigationController?.popViewController(animated: true)
@@ -49,14 +52,8 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // How we bridge UIKit > SwiftUI
         let vc = UIHostingController(rootView: GameView(game: games[indexPath.row], delegate: delegate))
         navigationController?.pushViewController(vc, animated: true)
-    }
-}
-
-class ViewController2: UIViewController {
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = .systemOrange
     }
 }

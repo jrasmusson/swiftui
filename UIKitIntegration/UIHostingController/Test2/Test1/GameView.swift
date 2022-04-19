@@ -8,13 +8,13 @@
 import SwiftUI
 import Combine
 
-class ContentViewDelegate: ObservableObject {
+class GameViewDelegate: ObservableObject {
     @Published var name: String = ""
 }
 
 struct GameView: View {
     let game: String
-    @ObservedObject var delegate: ContentViewDelegate
+    @ObservedObject var delegate: GameViewDelegate
 
     var body: some View {
         List {
@@ -33,7 +33,7 @@ struct GameView: View {
 
 struct GameView_Previews: PreviewProvider {
     static var previews: some View {
-        let delegate = ContentViewDelegate()
+        let delegate = GameViewDelegate()
         GameView(game: "Pacman", delegate: delegate)
     }
 }
