@@ -15,6 +15,10 @@ class ViewModel: ObservableObject {
         model.set(position, value)
     }
 
+    func get(_ position: Position) -> Value {
+        model.get(position)
+    }
+
     func reset() {
         model.reset()
     }

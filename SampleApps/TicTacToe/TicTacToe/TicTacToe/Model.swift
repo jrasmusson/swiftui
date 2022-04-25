@@ -74,6 +74,29 @@ struct Model: CustomStringConvertible {
         }
     }
 
+    mutating func get(_ position: Position) -> Value {
+        switch position {
+        case .upperLeft:
+            return state[0][0]
+        case .upperMiddle:
+            return state[0][1]
+        case .upperRight:
+            return state[0][2]
+        case .middleLeft:
+            return state[1][0]
+        case .middleMiddle:
+            return state[1][1]
+        case .middleRight:
+            return state[1][2]
+        case .lowerLeft:
+            return state[2][0]
+        case .lowerMiddle:
+            return state[2][1]
+        case .lowerRight:
+            return state[2][2]
+        }
+    }
+
     mutating func reset() {
         state = resetState
     }

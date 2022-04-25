@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct ContentView: View {
+    @ObservedObject var viewModel: ViewModel
+    // next add bool isXTurn
     var button: some View {
         Button(action: {}) {
             Image(systemName: "x.square.fill")
@@ -17,10 +19,20 @@ struct ContentView: View {
         }
     }
 
+    func textFor(position: Position) -> some View {
+        Text(viewModel.get(position).description)
+            .font(.largeTitle)
+            .frame(width: 50, height: 50)
+            .padding()
+    }
+
     var body: some View {
         VStack {
             HStack {
-                button
+                Button(action: {
+                }) {
+                    textFor(position: .upperLeft)
+                }
                 button
                 button
             }
@@ -40,6 +52,6 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        ContentView(viewModel: ViewModel())
     }
 }
