@@ -45,3 +45,6 @@ struct XOButton_Previews: PreviewProvider {
         XOButtonContainer()
     }
 }
+
+// Next figure out how to lock a value and make untappable
+// Create x2 vars XView OView and just return which ever set
