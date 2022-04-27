@@ -7,37 +7,41 @@
 
 import SwiftUI
 
-struct XOButton: View {
-    @State private var isXTurn: Bool = false
-
+struct XOButtonContainer: View {
     var body: some View {
         VStack {
             VStack {
-                XOButtonView(isXTurn: $isXTurn)
-                Toggle("Is X Turn", isOn: $isXTurn)
-                    .padding()
+                XOButtonView()
             }.padding()
         }
     }
 }
 
 struct XOButtonView: View {
-    @Binding var isXTurn: Bool
+    @State private var isSelected = false
+    @State private var isXTurn = false
 
     var body: some View {
         Button(action: {
-            self.isXTurn.toggle()
+            isSelected = true
+            isXTurn.toggle()
         }) {
-            Image(systemName: isXTurn ? "x.square.fill" : "o.square.fill")
-                .resizable()
-                .frame(width: 100, height: 100)
+            if isSelected {
+                Image(systemName: isXTurn ? "x.square.fill" : "o.square.fill")
+                    .resizable()
+                    .frame(width: 100, height: 100)
+            } else {
+                Image(systemName: "placeholdertext.fill")
+                    .resizable()
+                    .frame(width: 100, height: 100)
 
+            }
         }
     }
 }
 
 struct XOButton_Previews: PreviewProvider {
     static var previews: some View {
-        XOButton()
+        XOButtonContainer()
     }
 }
