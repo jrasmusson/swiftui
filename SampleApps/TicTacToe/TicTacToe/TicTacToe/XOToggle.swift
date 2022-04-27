@@ -7,13 +7,13 @@
 
 import SwiftUI
 
-struct XorOContainerView: View {
+struct XOToggle: View {
     @State private var isX: Bool = false
 
     var body: some View {
         VStack {
             VStack {
-                XorOView(isX: $isX)
+                XOToggleView(isX: $isX)
                 Toggle("Is X or O", isOn: $isX)
                     .padding()
             }.padding()
@@ -21,7 +21,7 @@ struct XorOContainerView: View {
     }
 }
 
-struct XorOView: View {
+struct XOToggleView: View {
     @Binding var isX: Bool
 
     var body: some View {
@@ -36,9 +36,9 @@ struct XorOView: View {
     }
 }
 
-struct TileView_Previews: PreviewProvider {
+struct XOToggle_Previews: PreviewProvider {
     static var previews: some View {
-        XorOContainerView()
+        XOToggle()
     }
 }
 
