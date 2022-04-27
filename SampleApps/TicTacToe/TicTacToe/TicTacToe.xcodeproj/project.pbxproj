@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		71201DAD281977AC00D60E26 /* OldCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71201DAC281977AC00D60E26 /* OldCode.swift */; };
+		71201DAF281978B800D60E26 /* XorOContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71201DAE281978B800D60E26 /* XorOContainerView.swift */; };
 		71534D132817432B00830B3B /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71534D122817432B00830B3B /* ViewModel.swift */; };
 		71534D1528174B8C00830B3B /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71534D1428174B8C00830B3B /* Model.swift */; };
 		71BE4F3A2816E3E300A216E4 /* TicTacToeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71BE4F392816E3E300A216E4 /* TicTacToeApp.swift */; };
@@ -16,6 +18,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		71201DAC281977AC00D60E26 /* OldCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OldCode.swift; sourceTree = "<group>"; };
+		71201DAE281978B800D60E26 /* XorOContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XorOContainerView.swift; sourceTree = "<group>"; };
 		71534D122817432B00830B3B /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		71534D1428174B8C00830B3B /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		71BE4F362816E3E300A216E4 /* TicTacToe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TicTacToe.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -55,12 +59,14 @@
 		71BE4F382816E3E300A216E4 /* TicTacToe */ = {
 			isa = PBXGroup;
 			children = (
+				71BE4F3D2816E3E400A216E4 /* Assets.xcassets */,
+				71BE4F3F2816E3E400A216E4 /* Preview Content */,
+				71201DAC281977AC00D60E26 /* OldCode.swift */,
 				71534D1428174B8C00830B3B /* Model.swift */,
 				71534D122817432B00830B3B /* ViewModel.swift */,
 				71BE4F392816E3E300A216E4 /* TicTacToeApp.swift */,
 				71BE4F3B2816E3E300A216E4 /* ContentView.swift */,
-				71BE4F3D2816E3E400A216E4 /* Assets.xcassets */,
-				71BE4F3F2816E3E400A216E4 /* Preview Content */,
+				71201DAE281978B800D60E26 /* XorOContainerView.swift */,
 			);
 			path = TicTacToe;
 			sourceTree = "<group>";
@@ -145,7 +151,9 @@
 			files = (
 				71BE4F3C2816E3E300A216E4 /* ContentView.swift in Sources */,
 				71534D132817432B00830B3B /* ViewModel.swift in Sources */,
+				71201DAD281977AC00D60E26 /* OldCode.swift in Sources */,
 				71BE4F3A2816E3E300A216E4 /* TicTacToeApp.swift in Sources */,
+				71201DAF281978B800D60E26 /* XorOContainerView.swift in Sources */,
 				71534D1528174B8C00830B3B /* Model.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
