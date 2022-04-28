@@ -66,6 +66,7 @@ struct GridView: View {
             return true
         }
 
+        gameOver = .oWins
         return false
     }
 
@@ -91,9 +92,16 @@ struct GridView: View {
             } else {
                 Text("Play on...")
             }
+            Button(action: {
+                gameOver = .xWins
+            }) {
+                Text("Tap me!")
+            }
         }
     }
 }
+
+// U R HERE figure out how to detect Xwins!
 
 struct GridButtonView: View {
     @Binding var tileState: TileState2
