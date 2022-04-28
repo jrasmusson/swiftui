@@ -15,6 +15,7 @@ enum Position1 {
 struct TileState1 {
     var value: Value
     var isLocked: Bool = false
+    var isX: Bool { value == .x }
 
     mutating func set(_ value: Value) {
         self.value = value
@@ -26,63 +27,40 @@ struct TileState1 {
     }
 }
 
-struct Model1 {
-    private var state: [[TileState1]] = [[TileState1.blank(), TileState1.blank()]]
-
-    mutating func set(_ position: Position1, _ value: Value) {
-        switch position {
-        case .upperLeft:
-            state[0][0].set(value)
-        case .upperMiddle:
-            state[0][1].set(value)
-        }
-    }
-}
-
-class ViewModel1: ObservableObject {
-    @Published private var model = Model1()
-
-    func set(_ position: Position1, _ value: Value) {
-        model.set(position, value)
-    }
-}
 
 struct LockableContainer: View {
-    @ObservedObject var viewModel: ViewModel1
-    @State var isXTurn = true // X goes first
+    @State var stateUpperLeft = TileState1.blank()
+    @State var isXTurn = false
 
     var body: some View {
         VStack {
-            LockableButtonView(isXTurn: $isXTurn)
-            LockableButtonView(isXTurn: $isXTurn)
-            LockableButtonView(isXTurn: $isXTurn)
+            LockableButtonView(tileState: $stateUpperLeft, isXTurn: $isXTurn)
         }
         .contentShape(Rectangle())
         .background(Color.orange)
         .onTapGesture {
-            print("foo")
             isXTurn.toggle()
         }
     }
 }
 
 struct LockableButtonView: View {
+    @Binding var tileState: TileState1
     @Binding var isXTurn: Bool
-    @State private var isLocked = false
 
     var body: some View {
         Button(action: {
-            isLocked = true
+            tileState.isLocked = true
+            tileState.value = isXTurn ? .x : .o
         }) {
-            if isLocked {
-                Image(systemName: isXTurn ? "x.square.fill" : "o.square.fill")
+            if tileState.isLocked {
+                Image(systemName: tileState.isX ? "x.square.fill" : "o.square.fill")
                     .resizable()
                     .frame(width: 100, height: 100)
             } else {
                 Image(systemName: "placeholdertext.fill")
                     .resizable()
                     .frame(width: 100, height: 100)
-
             }
         }
     }
