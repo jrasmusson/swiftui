@@ -42,6 +42,7 @@ struct LockableButtonView: View {
 
     var body: some View {
         Button(action: {
+            if tileState.isLocked { return }
             tileState.isLocked = true
             tileState.value = isXTurn ? .x : .o
             isXTurn.toggle()

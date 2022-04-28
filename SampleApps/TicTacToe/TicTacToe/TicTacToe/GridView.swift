@@ -10,6 +10,13 @@ import SwiftUI
 enum Position2 {
     case upperLeft
     case upperMiddle
+    case upperRight
+    case middleLeft
+    case middleMiddle
+    case middleRight
+    case lowerLeft
+    case lowerMiddle
+    case lowerRight
 }
 
 struct TileState2 {
@@ -24,13 +31,34 @@ struct TileState2 {
 
 struct GridView: View {
     @State var upperLeft = TileState2.blank()
-    @State var upperMid = TileState2.blank()
+    @State var upperMiddle = TileState2.blank()
+    @State var upperRight = TileState2.blank()
+    @State var middleLeft = TileState2.blank()
+    @State var middleMiddle = TileState2.blank()
+    @State var middleRight = TileState2.blank()
+    @State var bottomLeft = TileState2.blank()
+    @State var bottomMiddle = TileState2.blank()
+    @State var bottomRight = TileState2.blank()
+
     @State var isXTurn = false
 
     var body: some View {
         VStack {
-            GridButtonView(tileState: $upperLeft, isXTurn: $isXTurn)
-            GridButtonView(tileState: $upperMid, isXTurn: $isXTurn)
+            HStack {
+                GridButtonView(tileState: $upperLeft, isXTurn: $isXTurn)
+                GridButtonView(tileState: $upperMiddle, isXTurn: $isXTurn)
+                GridButtonView(tileState: $upperRight, isXTurn: $isXTurn)
+            }
+            HStack {
+                GridButtonView(tileState: $middleLeft, isXTurn: $isXTurn)
+                GridButtonView(tileState: $middleMiddle, isXTurn: $isXTurn)
+                GridButtonView(tileState: $middleRight, isXTurn: $isXTurn)
+            }
+            HStack {
+                GridButtonView(tileState: $bottomLeft, isXTurn: $isXTurn)
+                GridButtonView(tileState: $bottomMiddle, isXTurn: $isXTurn)
+                GridButtonView(tileState: $bottomRight, isXTurn: $isXTurn)
+            }
         }
     }
 }
@@ -41,6 +69,7 @@ struct GridButtonView: View {
 
     var body: some View {
         Button(action: {
+            if tileState.isLocked { return }
             tileState.isLocked = true
             tileState.value = isXTurn ? .x : .o
             isXTurn.toggle()
@@ -57,6 +86,7 @@ struct GridButtonView: View {
         }
     }
 }
+
 struct GridView_Previews: PreviewProvider {
     static var previews: some View {
         GridView()
