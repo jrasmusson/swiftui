@@ -29,6 +29,23 @@ struct TileState2 {
     }
 }
 
+enum GameOver: CustomStringConvertible {
+    case xWins
+    case oWins
+    case draw
+
+    var description: String {
+        switch self {
+        case .xWins:
+            return "X wins!"
+        case .oWins:
+            return "O wins!"
+        case .draw:
+            return "Draw!"
+        }
+    }
+}
+
 struct GridView: View {
     @State var upperLeft = TileState2.blank()
     @State var upperMiddle = TileState2.blank()
@@ -41,6 +58,16 @@ struct GridView: View {
     @State var bottomRight = TileState2.blank()
 
     @State var isXTurn = false
+    @State var gameOver: GameOver = .draw
+
+    var isGameOver: Bool {
+        if upperLeft.value == .x && upperMiddle.value == .x && upperRight.value == .x {
+            gameOver = .xWins
+            return true
+        }
+
+        return false
+    }
 
     var body: some View {
         VStack {
@@ -58,6 +85,11 @@ struct GridView: View {
                 GridButtonView(tileState: $bottomLeft, isXTurn: $isXTurn)
                 GridButtonView(tileState: $bottomMiddle, isXTurn: $isXTurn)
                 GridButtonView(tileState: $bottomRight, isXTurn: $isXTurn)
+            }
+            if isGameOver {
+                Text("\(gameOver.description)")
+            } else {
+                Text("Play on...")
             }
         }
     }
