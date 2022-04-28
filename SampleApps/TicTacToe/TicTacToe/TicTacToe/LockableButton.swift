@@ -29,17 +29,14 @@ struct TileState1 {
 
 
 struct LockableContainer: View {
-    @State var stateUpperLeft = TileState1.blank()
+    @State var upperLeft = TileState1.blank()
+    @State var upperMid = TileState1.blank()
     @State var isXTurn = false
 
     var body: some View {
         VStack {
-            LockableButtonView(tileState: $stateUpperLeft, isXTurn: $isXTurn)
-        }
-        .contentShape(Rectangle())
-        .background(Color.orange)
-        .onTapGesture {
-            isXTurn.toggle()
+            LockableButtonView(tileState: $upperLeft, isXTurn: $isXTurn)
+            LockableButtonView(tileState: $upperMid, isXTurn: $isXTurn)
         }
     }
 }
@@ -52,6 +49,7 @@ struct LockableButtonView: View {
         Button(action: {
             tileState.isLocked = true
             tileState.value = isXTurn ? .x : .o
+            isXTurn.toggle()
         }) {
             if tileState.isLocked {
                 Image(systemName: tileState.isX ? "x.square.fill" : "o.square.fill")
