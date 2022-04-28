@@ -1,5 +1,5 @@
 //
-//  LockableButton.swift
+//  GridView.swift
 //  TicTacToe
 //
 //  Created by jrasmusson on 2022-04-28.
@@ -7,37 +7,36 @@
 
 import SwiftUI
 
-enum Position1 {
+enum Position2 {
     case upperLeft
     case upperMiddle
 }
 
-struct TileState1 {
+struct TileState2 {
     var value: Value
     var isLocked: Bool = false
     var isX: Bool { value == .x }
 
-    static func blank() -> TileState1 {
-        TileState1(value: .b)
+    static func blank() -> TileState2 {
+        TileState2(value: .b)
     }
 }
 
-
-struct LockableContainer: View {
-    @State var upperLeft = TileState1.blank()
-    @State var upperMid = TileState1.blank()
+struct GridView: View {
+    @State var upperLeft = TileState2.blank()
+    @State var upperMid = TileState2.blank()
     @State var isXTurn = false
 
     var body: some View {
         VStack {
-            LockableButtonView(tileState: $upperLeft, isXTurn: $isXTurn)
-            LockableButtonView(tileState: $upperMid, isXTurn: $isXTurn)
+            GridButtonView(tileState: $upperLeft, isXTurn: $isXTurn)
+            GridButtonView(tileState: $upperMid, isXTurn: $isXTurn)
         }
     }
 }
 
-struct LockableButtonView: View {
-    @Binding var tileState: TileState1
+struct GridButtonView: View {
+    @Binding var tileState: TileState2
     @Binding var isXTurn: Bool
 
     var body: some View {
@@ -58,9 +57,8 @@ struct LockableButtonView: View {
         }
     }
 }
-
-struct LockableButton_Previews: PreviewProvider {
+struct GridView_Previews: PreviewProvider {
     static var previews: some View {
-        LockableContainer()
+        GridView()
     }
 }

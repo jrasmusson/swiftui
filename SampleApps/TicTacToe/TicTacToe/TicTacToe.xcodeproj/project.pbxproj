@@ -17,6 +17,7 @@
 		71BE4F3E2816E3E400A216E4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 71BE4F3D2816E3E400A216E4 /* Assets.xcassets */; };
 		71BE4F412816E3E400A216E4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 71BE4F402816E3E400A216E4 /* Preview Assets.xcassets */; };
 		71EFD1A2281AB4B50019BB36 /* LockableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71EFD1A1281AB4B50019BB36 /* LockableButton.swift */; };
+		71EFD1A4281AC3ED0019BB36 /* GridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71EFD1A3281AC3ED0019BB36 /* GridView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +32,7 @@
 		71BE4F3D2816E3E400A216E4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		71BE4F402816E3E400A216E4 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		71EFD1A1281AB4B50019BB36 /* LockableButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockableButton.swift; sourceTree = "<group>"; };
+		71EFD1A3281AC3ED0019BB36 /* GridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +75,7 @@
 				71201DAE281978B800D60E26 /* XOToggle.swift */,
 				71201DB228197CC000D60E26 /* XOButton.swift */,
 				71EFD1A1281AB4B50019BB36 /* LockableButton.swift */,
+				71EFD1A3281AC3ED0019BB36 /* GridView.swift */,
 			);
 			path = TicTacToe;
 			sourceTree = "<group>";
@@ -162,6 +165,7 @@
 				71201DB328197CC000D60E26 /* XOButton.swift in Sources */,
 				71BE4F3A2816E3E300A216E4 /* TicTacToeApp.swift in Sources */,
 				71201DAF281978B800D60E26 /* XOToggle.swift in Sources */,
+				71EFD1A4281AC3ED0019BB36 /* GridView.swift in Sources */,
 				71534D1528174B8C00830B3B /* Model.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
