@@ -36,12 +36,12 @@ enum Position {
 
 struct Model: CustomStringConvertible {
     private var state: [[Value]] = [[.b, .b, .b],
-                            [.b, .b, .b],
-                            [.b, .b, .b]]
+                                    [.b, .b, .b],
+                                    [.b, .b, .b]]
 
     private var resetState: [[Value]] = [[.b, .b, .b],
-                                 [.b, .b, .b],
-                                 [.b, .b, .b]]
+                                         [.b, .b, .b],
+                                         [.b, .b, .b]]
 
     var description: String {
         return """
