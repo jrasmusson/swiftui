@@ -59,6 +59,7 @@ struct GridView: View {
 
     @State var isXTurn = false
     @State var gameOver: GameOver = .draw
+    @State private var username = "No name"
 
     var isGameOver: Bool {
         if upperLeft.value == .x && upperMiddle.value == .x && upperRight.value == .x {
@@ -87,16 +88,12 @@ struct GridView: View {
                 GridButtonView(tileState: $bottomMiddle, isXTurn: $isXTurn)
                 GridButtonView(tileState: $bottomRight, isXTurn: $isXTurn)
             }
-            if isGameOver {
-                Text("\(gameOver.description)")
-            } else {
-                Text("Play on...")
-            }
             Button(action: {
-                gameOver = .xWins
+                username = "Peter"
             }) {
                 Text("Tap me!")
             }
+            Text(username)
         }
     }
 }
