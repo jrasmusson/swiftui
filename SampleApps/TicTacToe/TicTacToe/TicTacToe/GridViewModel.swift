@@ -1,13 +1,13 @@
 //
-//  GridView.swift
+//  GridViewModel.swift
 //  TicTacToe
 //
-//  Created by jrasmusson on 2022-04-28.
+//  Created by jrasmusson on 2022-04-30.
 //
 
 import SwiftUI
 
-enum Position2 {
+enum Position3 {
     case upperLeft
     case upperMiddle
     case upperRight
@@ -19,7 +19,7 @@ enum Position2 {
     case lowerRight
 }
 
-struct TileState2 {
+struct TileState3 {
     var value: Value
     var isLocked: Bool = false
     var isX: Bool { value == .x }
@@ -29,7 +29,7 @@ struct TileState2 {
     }
 }
 
-enum GameOver: CustomStringConvertible {
+enum GameOver3: CustomStringConvertible {
     case xWins
     case oWins
     case draw
@@ -46,21 +46,27 @@ enum GameOver: CustomStringConvertible {
     }
 }
 
-struct GridView: View {
-    @State var upperLeft = TileState2.blank()
-    @State var upperMiddle = TileState2.blank()
-    @State var upperRight = TileState2.blank()
-    @State var middleLeft = TileState2.blank()
-    @State var middleMiddle = TileState2.blank()
-    @State var middleRight = TileState2.blank()
-    @State var bottomLeft = TileState2.blank()
-    @State var bottomMiddle = TileState2.blank()
-    @State var bottomRight = TileState2.blank()
+class ViewModel3: ObservableObject {
+    @Published var xScore = 0
+}
+
+struct GridView3: View {
+    @ObservedObject var viewModel: ViewModel3
+
+    @State var upperLeft = TileState3.blank()
+    @State var upperMiddle = TileState3.blank()
+    @State var upperRight = TileState3.blank()
+    @State var middleLeft = TileState3.blank()
+    @State var middleMiddle = TileState3.blank()
+    @State var middleRight = TileState3.blank()
+    @State var bottomLeft = TileState3.blank()
+    @State var bottomMiddle = TileState3.blank()
+    @State var bottomRight = TileState3.blank()
 
     @State var isXTurn = false
     @State var xScore = 0
 
-    var gameState: GameOver {
+    var gameState: GameOver3 {
         if upperLeft.value == .x && upperMiddle.value == .x && upperRight.value == .x {
             xScore += 1
             return .xWins
@@ -80,19 +86,19 @@ struct GridView: View {
                 Spacer()
             }
             HStack {
-                GridButtonView(tileState: $upperLeft, isXTurn: $isXTurn)
-                GridButtonView(tileState: $upperMiddle, isXTurn: $isXTurn)
-                GridButtonView(tileState: $upperRight, isXTurn: $isXTurn)
+                GridButtonView3(tileState: $upperLeft, isXTurn: $isXTurn)
+                GridButtonView3(tileState: $upperMiddle, isXTurn: $isXTurn)
+                GridButtonView3(tileState: $upperRight, isXTurn: $isXTurn)
             }
             HStack {
-                GridButtonView(tileState: $middleLeft, isXTurn: $isXTurn)
-                GridButtonView(tileState: $middleMiddle, isXTurn: $isXTurn)
-                GridButtonView(tileState: $middleRight, isXTurn: $isXTurn)
+                GridButtonView3(tileState: $middleLeft, isXTurn: $isXTurn)
+                GridButtonView3(tileState: $middleMiddle, isXTurn: $isXTurn)
+                GridButtonView3(tileState: $middleRight, isXTurn: $isXTurn)
             }
             HStack {
-                GridButtonView(tileState: $bottomLeft, isXTurn: $isXTurn)
-                GridButtonView(tileState: $bottomMiddle, isXTurn: $isXTurn)
-                GridButtonView(tileState: $bottomRight, isXTurn: $isXTurn)
+                GridButtonView3(tileState: $bottomLeft, isXTurn: $isXTurn)
+                GridButtonView3(tileState: $bottomMiddle, isXTurn: $isXTurn)
+                GridButtonView3(tileState: $bottomRight, isXTurn: $isXTurn)
             }
             Button(action: {
                 reset()
@@ -109,24 +115,22 @@ struct GridView: View {
     }
 
     func reset() {
-        upperLeft = TileState2.blank()
-        upperMiddle = TileState2.blank()
-        upperRight = TileState2.blank()
-        middleLeft = TileState2.blank()
-        middleMiddle = TileState2.blank()
-        middleRight = TileState2.blank()
-        bottomLeft = TileState2.blank()
-        bottomMiddle = TileState2.blank()
-        bottomRight = TileState2.blank()
+        upperLeft = TileState3.blank()
+        upperMiddle = TileState3.blank()
+        upperRight = TileState3.blank()
+        middleLeft = TileState3.blank()
+        middleMiddle = TileState3.blank()
+        middleRight = TileState3.blank()
+        bottomLeft = TileState3.blank()
+        bottomMiddle = TileState3.blank()
+        bottomRight = TileState3.blank()
 
         isXTurn = false
         xScore = 0
     }
 }
 
-// U R HERE figure out how to detect Xwins!
-
-struct GridButtonView: View {
+struct GridButtonView3: View {
     @Binding var tileState: TileState2
     @Binding var isXTurn: Bool
 
@@ -150,8 +154,9 @@ struct GridButtonView: View {
     }
 }
 
-struct GridView_Previews: PreviewProvider {
+struct GridModelView_Previews: PreviewProvider {
     static var previews: some View {
-        GridView()
+        let viewModel = ViewModel3()
+        GridView3(viewModel: ViewModel3)
     }
 }

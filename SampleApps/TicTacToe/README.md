@@ -76,6 +76,8 @@ Each tile already knows its current value and state. All I need to do it react t
 
 So instead of tracking a win condition as a `var`, create a computed `var` and react to it.
 
+**GridView**
+
 ```swift
 // How we react
 var gameState: GameOver {
@@ -97,12 +99,6 @@ Text("Game over: \(gameState.description)")
 Full source:
 
 ```swift
-//
-//  GridView.swift
-//  TicTacToe
-//
-//  Created by jrasmusson on 2022-04-28.
-//
 
 import SwiftUI
 
@@ -187,11 +183,6 @@ struct GridView: View {
                 GridButtonView(tileState: $bottomMiddle, isXTurn: $isXTurn)
                 GridButtonView(tileState: $bottomRight, isXTurn: $isXTurn)
             }
-            Button(action: {
-
-            }) {
-                Text("Tap me!")
-            }
             // Don't think of setting state / think of reacting to it
             Text("Game over: \(gameState.description)")
         }
@@ -228,3 +219,69 @@ struct GridView_Previews: PreviewProvider {
     }
 }
 ```
+
+## Keeping track of score
+
+At this point I believe I have most of the game mechanics worked out. I can track the number of wins for each with a simple counter, along with a reset button to simulate the end of a match.
+
+### Reset
+
+```swift
+Button(action: {
+    reset()
+}) {
+    Text("Reset")
+}
+
+func reset() {
+    upperLeft = TileState2.blank()
+    upperMiddle = TileState2.blank()
+    upperRight = TileState2.blank()
+    middleLeft = TileState2.blank()
+    middleMiddle = TileState2.blank()
+    middleRight = TileState2.blank()
+    bottomLeft = TileState2.blank()
+    bottomMiddle = TileState2.blank()
+    bottomRight = TileState2.blank()
+}
+```
+
+### Incrementing the score
+
+Let's start by adding some text, and verifying we can increment it with a button action.
+
+```swift
+@State var xScore = 0
+
+Button(action: {
+    xScore += 1
+}) {
+    Text("+1 X")
+}
+```
+
+With that working, let's know increment the score when x wins:
+
+```swift
+var gameState: GameOver {
+if upperLeft.value == .x && upperMiddle.value == .x && upperRight.value == .x {
+    xScore += 1 //
+    return .xWins
+}
+```
+
+OK that doesn't work. There is some difference between incrementing `@State var` in an action and a computed `var`.
+
+What I realized here is that views are OK for tracking local state with local actions, but they're terrible at tracking overall game state of things that are bigger that the view (like the score).
+
+What I really need here is some `Observable` state object that can track my app state, and then draw the view everything that app state changes.
+
+So let's try introducing a `ViewModel` and increment the score that way.
+
+## Introducing the view model
+
+To start let's simply track the score:
+
+
+
+
