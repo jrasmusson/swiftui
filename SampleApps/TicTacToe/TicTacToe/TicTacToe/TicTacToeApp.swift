@@ -11,7 +11,8 @@ import SwiftUI
 struct TicTacToeApp: App {
     var body: some Scene {
         WindowGroup {
-            GridView()
+            let viewModel = ViewModel3()
+            GridView3(viewModel: viewModel)
         }
     }
 }

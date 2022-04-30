@@ -280,8 +280,112 @@ So let's try introducing a `ViewModel` and increment the score that way.
 
 ## Introducing the view model
 
-To start let's simply track the score:
+```swift
+class ViewModel3: ObservableObject {
+    @Published var xScore = 0
+}
 
+struct GridView3: View {
+    @ObservedObject var viewModel: ViewModel3
 
+struct GridModelView_Previews: PreviewProvider {
+    static var previews: some View {
+        let viewModel = ViewModel3()
+        GridView3(viewModel: viewModel)
+    }
+}
+```
+
+And then let's increment it everytime X wins:
+
+```swift
+var gameState: GameOver3 {
+    if upperLeft.value == .x && upperMiddle.value == .x && upperRight.value == .x {
+        xScore += 1
+        viewModel.xScore += 1
+        return .xWins
+    }
+```
+
+If you try to incrment the score like this you will create an infinite loop resulting in undefined behavior. Xcode will even warn you with a warning message like this:
+
+![](images/2.png)
+
+What's going on here is we are attempting to change the views state, which in turn causes it to re-render itself, and again change it's state. So chaning an `Observable` var in something that is part of a views update is not something we want to do.
+
+So again... back to the question... where can we detect an `xWin` and react to it?
+
+### Put all your data and processing in the view model
+
+What you are struggling with here is the fact that SwiftUi `Views` aren't places for processing. They are dumb structs.
+
+To track state, react to changes in state, and update state values you really need to collect and do all of that in your view model.
+
+That means:
+
+- putting everything into the view model
+- doing all your checks and processing in there, and then
+- simply allow the view to update itself base on that change
+
+Let's setup a simple example to see how all this could work.
+
+### Complete rewrite
+
+Notice how this is a complete rewrite from what you had before. You are now pulling all the logic out of the views, and moving it to the `viewModel`. This feels much better and more natural with how SwiftUI works. Views are dumb. Processing is in the model.
+
+```swift
+class ViewModel3: ObservableObject {
+    @Published var tileState = TileState3(value: .b)
+    @Published var isXTurn = false
+
+    func choose(_ position: Position3) {
+        if isXTurn {
+            tileState = TileState3(value: .x, isLocked: true)
+        } else {
+            tileState = TileState3(value: .o, isLocked: true)
+        }
+    }
+}
+
+struct GridView3: View {
+    @ObservedObject var viewModel: ViewModel3
+
+    var body: some View {
+        VStack {
+            HStack {
+                GridButtonView3(tileState: viewModel.tileState)
+                    .onTapGesture {
+                        viewModel.choose(.upperLeft)
+                    }
+            }
+        }
+    }
+}
+
+struct GridButtonView3: View {
+    let tileState: TileState3
+
+    var body: some View {
+        if tileState.isLocked {
+            Image(systemName: tileState.isX ? "x.square.fill" : "o.square.fill")
+                .resizable()
+                .frame(width: 100, height: 100)
+        } else {
+            Image(systemName: "placeholdertext.fill")
+                .resizable()
+                .frame(width: 100, height: 100)
+        }
+    }
+}
+
+struct GridModelView_Previews: PreviewProvider {
+    static var previews: some View {
+        let viewModel = ViewModel3()
+        GridView3(viewModel: viewModel)
+    }
+}
+```
+
+This is it. It feel much more natural. All our processing can happen in view model. Let's expand and go with this.
 
 
