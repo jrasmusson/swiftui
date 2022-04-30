@@ -88,18 +88,11 @@ struct GridView: View {
                 GridButtonView(tileState: $bottomMiddle, isXTurn: $isXTurn)
                 GridButtonView(tileState: $bottomRight, isXTurn: $isXTurn)
             }
-            Button(action: {
-
-            }) {
-                Text("Tap me!")
-            }
             // Don't think of setting state / think of reacting to it
             Text("Game over: \(gameState.description)")
         }
     }
 }
-
-// U R HERE figure out how to detect Xwins!
 
 struct GridButtonView: View {
     @Binding var tileState: TileState2
