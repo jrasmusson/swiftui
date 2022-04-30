@@ -58,17 +58,17 @@ struct GridView: View {
     @State var bottomRight = TileState2.blank()
 
     @State var isXTurn = false
-    @State var gameOver: GameOver = .draw
-    @State private var username = "No name"
 
-    var isGameOver: Bool {
+    var gameState: GameOver {
         if upperLeft.value == .x && upperMiddle.value == .x && upperRight.value == .x {
-            gameOver = .xWins
-            return true
+            return .xWins
         }
 
-        gameOver = .oWins
-        return false
+        if upperLeft.value == .o && upperMiddle.value == .o && upperRight.value == .o {
+            return .oWins
+        }
+
+        return .draw
     }
 
     var body: some View {
@@ -89,11 +89,12 @@ struct GridView: View {
                 GridButtonView(tileState: $bottomRight, isXTurn: $isXTurn)
             }
             Button(action: {
-                username = "Peter"
+
             }) {
                 Text("Tap me!")
             }
-            Text(username)
+            // Don't think of setting state / think of reacting to it
+            Text("Game over: \(gameState.description)")
         }
     }
 }
