@@ -82,10 +82,12 @@ struct GridButtonView3: View {
             Image(systemName: tileState.isX ? "x.square.fill" : "o.square.fill")
                 .resizable()
                 .frame(width: 100, height: 100)
+                .foregroundColor(.blue)
         } else {
             Image(systemName: "placeholdertext.fill")
                 .resizable()
                 .frame(width: 100, height: 100)
+                .foregroundColor(.blue)
         }
     }
 }
