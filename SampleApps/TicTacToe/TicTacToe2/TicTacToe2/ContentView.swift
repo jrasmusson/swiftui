@@ -18,8 +18,7 @@ class ViewModel: ObservableObject {
         } else {
             tileState = TileState(value: .o, isLocked: true)
         }
-        print(tileState)
-        model.set(.upperLeft, tileState)
+        model.set(position, tileState)
     }
 
     func set(_ position: Position, _ state: TileState) {
@@ -37,12 +36,18 @@ struct ContentView: View {
     var body: some View {
         VStack {
             HStack {
-                GridButtonView(tileState: viewModel.get(.upperLeft))
-                    .onTapGesture {
-                        viewModel.choose(.upperLeft)
-                    }
+                button(for: .upperLeft)
+                button(for: .upperMiddle)
+                button(for: .upperRight)
             }
         }
+    }
+
+    func button(for position: Position) -> some View {
+        GridButtonView(tileState: viewModel.get(position))
+            .onTapGesture {
+                viewModel.choose(position)
+            }
     }
 }
 
