@@ -55,8 +55,8 @@
 			children = (
 				71833481281EC131008D5522 /* Files */,
 				71833473281EC0F7008D5522 /* TicTacToe2App.swift */,
-				71833475281EC0F7008D5522 /* ContentView.swift */,
 				71833486281EC1B3008D5522 /* Model.swift */,
+				71833475281EC0F7008D5522 /* ContentView.swift */,
 			);
 			path = TicTacToe2;
 			sourceTree = "<group>";

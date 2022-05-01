@@ -37,7 +37,7 @@ struct Model {
         }
     }
 
-    mutating func get(_ position: Position) -> TileState {
+    func get(_ position: Position) -> TileState {
         switch position {
         case .upperLeft:
             return state[0][0]
