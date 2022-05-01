@@ -11,7 +11,6 @@
 		71833476281EC0F7008D5522 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71833475281EC0F7008D5522 /* ContentView.swift */; };
 		71833478281EC0F8008D5522 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 71833477281EC0F8008D5522 /* Assets.xcassets */; };
 		7183347B281EC0F8008D5522 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7183347A281EC0F8008D5522 /* Preview Assets.xcassets */; };
-		71833485281EC191008D5522 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71833484281EC191008D5522 /* ViewModel.swift */; };
 		71833487281EC1B3008D5522 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71833486281EC1B3008D5522 /* Model.swift */; };
 /* End PBXBuildFile section */
 
@@ -21,7 +20,6 @@
 		71833475281EC0F7008D5522 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		71833477281EC0F8008D5522 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7183347A281EC0F8008D5522 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		71833484281EC191008D5522 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		71833486281EC1B3008D5522 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -58,7 +56,6 @@
 				71833481281EC131008D5522 /* Files */,
 				71833473281EC0F7008D5522 /* TicTacToe2App.swift */,
 				71833475281EC0F7008D5522 /* ContentView.swift */,
-				71833484281EC191008D5522 /* ViewModel.swift */,
 				71833486281EC1B3008D5522 /* Model.swift */,
 			);
 			path = TicTacToe2;
@@ -152,7 +149,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				71833476281EC0F7008D5522 /* ContentView.swift in Sources */,
-				71833485281EC191008D5522 /* ViewModel.swift in Sources */,
 				71833474281EC0F7008D5522 /* TicTacToe2App.swift in Sources */,
 				71833487281EC1B3008D5522 /* Model.swift in Sources */,
 			);

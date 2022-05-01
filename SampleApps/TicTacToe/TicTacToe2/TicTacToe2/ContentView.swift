@@ -8,15 +8,25 @@
 import SwiftUI
 
 class ViewModel: ObservableObject {
-    @Published var tileState = TileState(value: .b)
+    @Published private var model = Model()
     @Published var isXTurn = false
 
     func choose(_ position: Position) {
+        var tileState: TileState
         if isXTurn {
             tileState = TileState(value: .x, isLocked: true)
         } else {
             tileState = TileState(value: .o, isLocked: true)
         }
+        model.set(.upperLeft, tileState)
+    }
+
+    func set(_ position: Position, _ state: TileState) {
+        model.set(position, state)
+    }
+
+    func get(_ position: Position) -> TileState {
+        model.get(position)
     }
 }
 
@@ -26,7 +36,7 @@ struct ContentView: View {
     var body: some View {
         VStack {
             HStack {
-                GridButtonView(tileState: viewModel.tileState)
+                GridButtonView(tileState: viewModel.get(.upperLeft))
                     .onTapGesture {
                         viewModel.choose(.upperLeft)
                     }
