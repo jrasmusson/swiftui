@@ -33,17 +33,14 @@ class ViewModel: ObservableObject {
 
 struct ContentView: View {
     @ObservedObject var viewModel: ViewModel
-    @State var username: String = "Peter"
 
     var body: some View {
         VStack {
             HStack {
                 GridButtonView(tileState: viewModel.get(.upperLeft))
                     .onTapGesture {
-                        username = "Paul"
                         viewModel.choose(.upperLeft)
                     }
-                Text(username)
             }
         }
     }
