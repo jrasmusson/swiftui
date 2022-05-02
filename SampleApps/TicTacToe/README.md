@@ -6,6 +6,9 @@
 - Store state in the View Model
 - Choose
 - Toggle Turn
-- Handle win condition
+- Handle win conditions
+ - Winner
+ - Draw 
 - Reset
+- Keeping score
 

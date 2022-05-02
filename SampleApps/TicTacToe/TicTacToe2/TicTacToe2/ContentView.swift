@@ -9,7 +9,6 @@ import SwiftUI
 
 class ViewModel: ObservableObject {
     @Published private var model = Model()
-    @Published var isXTurn = false
 
     func choose(_ position: Position) {
         var tileState: TileState
@@ -27,6 +26,10 @@ class ViewModel: ObservableObject {
 
     func get(_ position: Position) -> TileState {
         model.get(position)
+    }
+
+    var isXTurn: Bool {
+        model.isXTurn
     }
 
     func toggleTurn() {
@@ -73,7 +76,7 @@ struct ContentView: View {
         GridButtonView(tileState: viewModel.get(position))
             .onTapGesture {
                 viewModel.choose(position)
-                viewModel.isXTurn.toggle()
+                viewModel.toggleTurn()
             }
     }
 

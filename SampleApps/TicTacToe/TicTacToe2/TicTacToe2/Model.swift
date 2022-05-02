@@ -66,13 +66,32 @@ struct Model {
         }
     }
 
-    private var isXTurn = false
+    private var _isXTurn = false
+
+    var isXTurn: Bool {
+        _isXTurn
+    }
+
     mutating func toggleTurn() {
-        self.isXTurn.toggle()
+        self._isXTurn.toggle()
     }
 
     var hasWinCondition: Bool {
         valueWins(.x) || valueWins(.o)
+    }
+
+    var isDraw: Bool {
+        let row0 = state[0]
+        let row1 = state[1]
+        let row2 = state[2]
+
+        let row0Locked = row0.filter { $0.isLocked }.count == 3
+        let row1Locked = row1.filter { $0.isLocked }.count == 3
+        let row2Locked = row2.filter { $0.isLocked }.count == 3
+
+        let allRowsLocked = row0Locked && row1Locked && row2Locked
+
+        return !hasWinCondition && allRowsLocked
     }
 
     private func valueWins(_ v: Value) -> Bool {
@@ -84,8 +103,13 @@ struct Model {
         if state[2][0].value == v && state[2][1].value == v && state[2][2].value == v { return true }
 
         // cols
+        if state[0][0].value == v && state[1][0].value == v && state[2][0].value == v { return true }
+        if state[0][1].value == v && state[1][1].value == v && state[2][1].value == v { return true }
+        if state[0][2].value == v && state[1][2].value == v && state[2][2].value == v { return true }
 
         // diagonals
+        if state[0][0].value == v && state[1][1].value == v && state[2][2].value == v { return true }
+        if state[0][2].value == v && state[1][1].value == v && state[0][2].value == v { return true }
 
         return false
     }
