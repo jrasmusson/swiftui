@@ -10,7 +10,8 @@
  - GameState
 - Reset
 - Keeping score
+- Dynamically sizing views
 
 # Discussion
 
-- Model struct vs class
+- Model struct vs classxc

@@ -106,6 +106,8 @@ struct ContentView: View {
     }
 }
 
+// U R HERE use geometry reader to figure out view space
+
 struct GridButtonView: View {
     let tileState: TileState
 
