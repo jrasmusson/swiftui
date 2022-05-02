@@ -11,6 +11,9 @@ class ViewModel: ObservableObject {
     @Published private var model = Model()
 
     func choose(_ position: Position) {
+        let currentState = model.get(position)
+        guard !currentState.isLocked else { return }
+
         var tileState: TileState
         if isXTurn {
             tileState = TileState(value: .x, isLocked: true)
