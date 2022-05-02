@@ -47,6 +47,7 @@ struct ContentView: View {
         GridButtonView(tileState: viewModel.get(position))
             .onTapGesture {
                 viewModel.choose(position)
+                viewModel.isXTurn.toggle()
             }
     }
 }

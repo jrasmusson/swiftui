@@ -59,6 +59,27 @@ struct Model {
             return state[2][2]
         }
     }
+
+    private var isGameOver = false
+    private var xWon = false
+    private var yWon = false
+    private var hasWinCondition = false
+
+    mutating func setGameOver(_ isGameOver: Bool) {
+        self.isGameOver = isGameOver
+    }
+
+    mutating func setXWon(_ xWon: Bool) {
+        self.xWon = xWon
+    }
+
+    mutating func setYWon(_ yWon: Bool) {
+        self.yWon = yWon
+    }
+
+    mutating func setHasWinCondition(_ hasWinCondition: Bool) {
+        self.hasWinCondition = hasWinCondition
+    }
 }
 
 
