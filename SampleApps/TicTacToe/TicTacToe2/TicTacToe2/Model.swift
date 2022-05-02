@@ -45,14 +45,10 @@ struct Model {
         if isGameOver {
             if isDraw {
                 setGameState(.draw)
-                print("set isDraw")
-            }
-            if valueWins(.x) {
+            } else if valueWins(.x) {
                 setGameState(.XWon)
                 incrementXScore()
-                print("set XWon")
-            }
-            if valueWins(.o) {
+            } else if valueWins(.o) {
                 setGameState(.OWon)
                 increment0Score()
             }
@@ -93,7 +89,6 @@ struct Model {
     }
 
     var isGameOver: Bool {
-        print("hasWinCondition: \(hasWinCondition) isDraw: \(isDraw)")
         return hasWinCondition || isDraw
     }
 
@@ -147,18 +142,9 @@ struct Model {
         guard v != .b else { return false }
 
         // rows
-        if state[0][0].value == v && state[0][1].value == v && state[0][2].value == v {
-            print("1")
-            return true
-        }
-        if state[1][0].value == v && state[1][1].value == v && state[1][2].value == v {
-            print("2")
-            return true
-        }
-        if state[2][0].value == v && state[2][1].value == v && state[2][2].value == v {
-            print("2")
-            return true
-        }
+        if state[0][0].value == v && state[0][1].value == v && state[0][2].value == v { return true }
+        if state[1][0].value == v && state[1][1].value == v && state[1][2].value == v { return true }
+        if state[2][0].value == v && state[2][1].value == v && state[2][2].value == v { return true }
 
         // cols
         if state[0][0].value == v && state[1][0].value == v && state[2][0].value == v { return true }
