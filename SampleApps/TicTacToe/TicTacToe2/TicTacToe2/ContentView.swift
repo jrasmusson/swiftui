@@ -40,6 +40,10 @@ class ViewModel: ObservableObject {
         model.hasWinCondition
     }
 
+    var gameState: GameState {
+        model.gameState
+    }
+
     func reset() {
         model.reset()
     }
@@ -65,10 +69,8 @@ struct ContentView: View {
                 button(for: .lowerMiddle)
                 button(for: .lowerRight)
             }
+            Text(viewModel.gameState.description)
             resetButton
-            if viewModel.hasWinCondition {
-                Text("Winner!")
-            }
         }
     }
 

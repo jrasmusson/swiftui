@@ -7,8 +7,7 @@
 - Choose
 - Toggle Turn
 - Handle win conditions
- - Winner
- - Draw 
+ - GameState
 - Reset
 - Keeping score
 

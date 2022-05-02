@@ -41,6 +41,12 @@ struct Model {
         case .lowerRight:
             state[2][2] = tileState
         }
+
+        if isGameOver {
+            if isDraw { setGameState(.draw) }
+            if valueWins(.x) { setGameState(.XWon) }
+            if valueWins(.o) { setGameState(.OWon) }
+        }
     }
 
     func get(_ position: Position) -> TileState {
@@ -67,9 +73,15 @@ struct Model {
     }
 
     private var _isXTurn = false
+    private var _isGameOver = false
+    private var _gameState = GameState.newGame
 
     var isXTurn: Bool {
         _isXTurn
+    }
+
+    var isGameOver: Bool {
+        hasWinCondition || isDraw
     }
 
     mutating func toggleTurn() {
@@ -78,6 +90,14 @@ struct Model {
 
     var hasWinCondition: Bool {
         valueWins(.x) || valueWins(.o)
+    }
+
+    private mutating func setGameState(_ gameState: GameState) {
+        _gameState = gameState
+    }
+
+    var gameState: GameState {
+        _gameState
     }
 
     var isDraw: Bool {
@@ -116,6 +136,7 @@ struct Model {
 
     mutating func reset() {
         state = resetState
+        setGameState(.newGame)
     }
 }
 
@@ -125,12 +146,9 @@ enum Value: CustomStringConvertible {
 
     var description: String {
         switch self {
-        case .b:
-            return "-"
-        case .x:
-            return "X"
-        case .o:
-            return "O"
+        case .b: return "-"
+        case .x: return "X"
+        case .o: return "O"
         }
     }
 }
@@ -145,6 +163,19 @@ enum Position {
     case lowerLeft
     case lowerMiddle
     case lowerRight
+}
+
+enum GameState: CustomStringConvertible {
+    case newGame, draw, XWon, OWon
+
+    var description: String {
+        switch self {
+        case .newGame: return "Game on!"
+        case .draw: return "Draw!"
+        case .XWon: return "X wins!"
+        case .OWon: return "O wins!"
+        }
+    }
 }
 
 struct TileState {
