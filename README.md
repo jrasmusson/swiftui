@@ -148,7 +148,7 @@ SwiftUI by [example](https://www.hackingwithswift.com/quick-start/swiftui).
 - [Lecture 3: MVVM](Stanford/2021/Lecture3/README.md)
 - [Lecture 4: More MVVM enum Optionals](Stanford/2021/Lecture4/README.md)
 - [Assignment 2](Stanford/2021/Assignment2/README.md)
-- [Lecture 5: Properties Layout @ViewBuilder](Stanford/2021/Lecture5/README.md)
+- [Lecture 5: Properties Layout @ViewBuilder / GeometryReader](Stanford/2021/Lecture5/README.md)
 - [Lecture 6: Protocols Shapes](Stanford/2021/Lecture6/README.md)
 - [Lecture 7: ViewModifier Animation](Stanford/2021/Lecture7/README.md)
 - [Lecture 8: Animatation Demonstration](Stanford/2021/Lecture8/README.md)

@@ -303,13 +303,15 @@ struct ContentView: View {
 
     func button(for position: Position) -> some View {
         let tileState = viewModel.get(position)
-        return GridButtonView(tileState: tileState)
-            .onTapGesture {
-                if !viewModel.isGameOver && !tileState.isLocked {
-                    viewModel.choose(position)
-                    viewModel.toggleTurn()
+//        return GeometryReader { proxy in
+            return GridButtonView(tileState: tileState, width: 100)
+                .onTapGesture {
+                    if !viewModel.isGameOver && !tileState.isLocked {
+                        viewModel.choose(position)
+                        viewModel.toggleTurn()
+                    }
                 }
-            }
+//        }
     }
 
     var footer: some View {
@@ -328,6 +330,7 @@ struct ContentView: View {
 
 struct GridButtonView: View {
     let tileState: TileState
+    let width: CGFloat
 
     var body: some View {
         if tileState.isLocked {
