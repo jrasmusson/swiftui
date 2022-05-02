@@ -374,6 +374,45 @@ struct ContentView_Previews: PreviewProvider {
 
 # Dynamically sizing views
 
+Would be nice if our app could dynamically resize itself based on the space offered. For that we have `GeometryReader`.
+
+> Note: Using `GeometryRead` itself changes view.
+
+Because `GeometryReader` always wants to take all the space affored to it, wrapping your dynamically size view in one will change the layout itself. Can see this in the before and after.
+
+```
+func button(for position: Position) -> some View {
+    let tileState = viewModel.get(position)
+    let reduceFactor = 0.8
+    return GeometryReader { proxy in
+        GridButtonView(tileState: tileState, width: proxy.size.width * reduceFactor)
+            .onTapGesture {
+                if !viewModel.isGameOver && !tileState.isLocked {
+                    viewModel.choose(position)
+                    viewModel.toggleTurn()
+                }
+            }
+            .frame(width: proxy.size.width, height: proxy.size.height)
+    }
+}
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        NavigationView {
+            ContentView(viewModel: ViewModel())
+                .previewDevice(PreviewDevice(rawValue: "iPhone 12"))
+                .previewDisplayName("iPhone 12")
+        }
+
+        NavigationView {
+            ContentView(viewModel: ViewModel())
+                .previewDevice(PreviewDevice(rawValue: "iPhone SE (2nd generation)"))
+                .previewDisplayName("iPhone SE (2nd generation)")
+        }
+    }
+}
+```
+
 # Discussion
 
 - Model struct vs class

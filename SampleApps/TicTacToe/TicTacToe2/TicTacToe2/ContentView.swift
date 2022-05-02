@@ -291,6 +291,7 @@ struct ContentView: View {
             }
             footer
         }
+        .navigationTitle("TicTacToe")
     }
 
     var header: some View {
@@ -303,15 +304,17 @@ struct ContentView: View {
 
     func button(for position: Position) -> some View {
         let tileState = viewModel.get(position)
-//        return GeometryReader { proxy in
-            return GridButtonView(tileState: tileState, width: 100)
+        let reduceFactor = 0.9
+        return GeometryReader { proxy in
+            GridButtonView(tileState: tileState, width: proxy.size.width * reduceFactor)
                 .onTapGesture {
                     if !viewModel.isGameOver && !tileState.isLocked {
                         viewModel.choose(position)
                         viewModel.toggleTurn()
                     }
                 }
-//        }
+                .frame(width: proxy.size.width, height: proxy.size.height)
+        }
     }
 
     var footer: some View {
@@ -326,8 +329,6 @@ struct ContentView: View {
     }
 }
 
-// U R HERE use geometry reader to figure out view space
-
 struct GridButtonView: View {
     let tileState: TileState
     let width: CGFloat
@@ -336,12 +337,12 @@ struct GridButtonView: View {
         if tileState.isLocked {
             Image(systemName: tileState.isX ? "x.square.fill" : "o.square.fill")
                 .resizable()
-                .frame(width: 100, height: 100)
+                .frame(width: width, height: width)
                 .foregroundColor(.blue)
         } else {
             Image(systemName: "placeholdertext.fill")
                 .resizable()
-                .frame(width: 100, height: 100)
+                .frame(width: width, height: width)
                 .foregroundColor(.blue)
         }
     }
@@ -349,7 +350,16 @@ struct GridButtonView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        let viewModel = ViewModel()
-        ContentView(viewModel: viewModel)
+        NavigationView {
+            ContentView(viewModel: ViewModel())
+                .previewDevice(PreviewDevice(rawValue: "iPhone 12"))
+                .previewDisplayName("iPhone 12")
+        }
+
+        NavigationView {
+            ContentView(viewModel: ViewModel())
+                .previewDevice(PreviewDevice(rawValue: "iPhone SE (2nd generation)"))
+                .previewDisplayName("iPhone SE (2nd generation)")
+        }
     }
 }
