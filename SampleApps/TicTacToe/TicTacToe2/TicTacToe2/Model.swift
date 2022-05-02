@@ -44,8 +44,14 @@ struct Model {
 
         if isGameOver {
             if isDraw { setGameState(.draw) }
-            if valueWins(.x) { setGameState(.XWon) }
-            if valueWins(.o) { setGameState(.OWon) }
+            if valueWins(.x) {
+                setGameState(.XWon)
+                incrementXScore()
+            }
+            if valueWins(.o) {
+                setGameState(.OWon)
+                increment0Score()
+            }
         }
     }
 
@@ -75,6 +81,8 @@ struct Model {
     private var _isXTurn = false
     private var _isGameOver = false
     private var _gameState = GameState.newGame
+    private var _xScore = 0
+    private var _oScore = 0
 
     var isXTurn: Bool {
         _isXTurn
@@ -98,6 +106,22 @@ struct Model {
 
     var gameState: GameState {
         _gameState
+    }
+
+    var xScore: Int {
+        _xScore
+    }
+
+    var oScore: Int {
+        _oScore
+    }
+
+    mutating func incrementXScore() {
+        _xScore += 1
+    }
+
+    mutating func increment0Score() {
+        _oScore += 1
     }
 
     var isDraw: Bool {

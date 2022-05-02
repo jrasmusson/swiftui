@@ -40,8 +40,20 @@ class ViewModel: ObservableObject {
         model.hasWinCondition
     }
 
+    var isGameOver: Bool {
+        model.isGameOver
+    }
+
     var gameState: GameState {
         model.gameState
+    }
+
+    var xScore: Int {
+        model.xScore
+    }
+
+    var oScore: Int {
+        model.oScore
     }
 
     func reset() {
@@ -54,6 +66,11 @@ struct ContentView: View {
 
     var body: some View {
         VStack {
+            HStack {
+                Text("X: \(viewModel.xScore)")
+                Spacer()
+                Text("O: \(viewModel.oScore)")
+            }.padding()
             HStack {
                 button(for: .upperLeft)
                 button(for: .upperMiddle)
@@ -77,8 +94,10 @@ struct ContentView: View {
     func button(for position: Position) -> some View {
         GridButtonView(tileState: viewModel.get(position))
             .onTapGesture {
-                viewModel.choose(position)
-                viewModel.toggleTurn()
+                if !viewModel.isGameOver {
+                    viewModel.choose(position)
+                    viewModel.toggleTurn()
+                }
             }
     }
 

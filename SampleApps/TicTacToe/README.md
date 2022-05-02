@@ -11,3 +11,6 @@
 - Reset
 - Keeping score
 
+# Discussion
+
+- Model struct vs class
