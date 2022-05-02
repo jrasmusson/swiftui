@@ -28,6 +28,14 @@ class ViewModel: ObservableObject {
     func get(_ position: Position) -> TileState {
         model.get(position)
     }
+
+    func toggleTurn() {
+        model.toggleTurn()
+    }
+
+    var hasWinCondition: Bool {
+        model.hasWinCondition
+    }
 }
 
 struct ContentView: View {
@@ -39,6 +47,14 @@ struct ContentView: View {
                 button(for: .upperLeft)
                 button(for: .upperMiddle)
                 button(for: .upperRight)
+            }
+            HStack {
+                button(for: .middleLeft)
+                button(for: .middleMiddle)
+                button(for: .middleRight)
+            }
+            if viewModel.hasWinCondition {
+                Text("Winner!")
             }
         }
     }

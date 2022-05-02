@@ -60,10 +60,33 @@ struct Model {
         }
     }
 
+    private var isXTurn = false
     private var isGameOver = false
     private var xWon = false
     private var yWon = false
-    private var hasWinCondition = false
+
+    mutating func toggleTurn() {
+        self.isXTurn.toggle()
+    }
+
+    var hasWinCondition: Bool {
+        valueWins(.x) || valueWins(.o)
+    }
+
+    private func valueWins(_ v: Value) -> Bool {
+        guard v != .b else { return false }
+
+        // rows
+        if state[0][0].value == v && state[0][1].value == v && state[0][2].value == v { return true }
+        if state[1][0].value == v && state[1][1].value == v && state[1][2].value == v { return true }
+        if state[2][0].value == v && state[2][1].value == v && state[2][2].value == v { return true }
+
+        // cols
+
+        // diagonals
+
+        return false
+    }
 
     mutating func setGameOver(_ isGameOver: Bool) {
         self.isGameOver = isGameOver
@@ -77,9 +100,6 @@ struct Model {
         self.yWon = yWon
     }
 
-    mutating func setHasWinCondition(_ hasWinCondition: Bool) {
-        self.hasWinCondition = hasWinCondition
-    }
 }
 
 
@@ -120,21 +140,21 @@ struct TileState {
     }
 }
 
-enum GameOver: CustomStringConvertible {
-    case xWins
-    case oWins
-    case draw
-
-    var description: String {
-        switch self {
-        case .xWins:
-            return "X wins!"
-        case .oWins:
-            return "O wins!"
-        case .draw:
-            return "Draw!"
-        }
-    }
-}
+//enum GameOver: CustomStringConvertible {
+//    case xWins
+//    case oWins
+//    case draw
+//
+//    var description: String {
+//        switch self {
+//        case .xWins:
+//            return "X wins!"
+//        case .oWins:
+//            return "O wins!"
+//        case .draw:
+//            return "Draw!"
+//        }
+//    }
+//}
 
 
