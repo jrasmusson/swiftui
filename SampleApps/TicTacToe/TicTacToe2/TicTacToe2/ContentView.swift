@@ -98,10 +98,11 @@ struct ContentView: View {
     }
 
     func button(for position: Position) -> some View {
-        GridButtonView(tileState: viewModel.get(position))
+        let tileState = viewModel.get(position)
+        return GridButtonView(tileState: tileState)
             .onTapGesture {
-                print("tap: \(viewModel.get(position))")
-                if !viewModel.isGameOver {
+                print("tap: \(tileState) isXTurn: \(viewModel.isXTurn)")
+                if !viewModel.isGameOver && !tileState.isLocked {
                     print("Game not over")
                     viewModel.choose(position)
                     viewModel.toggleTurn()
