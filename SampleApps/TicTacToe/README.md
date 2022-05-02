@@ -7,5 +7,5 @@
 - Choose
 - Toggle Turn
 - Handle win condition
-
+- Reset
 

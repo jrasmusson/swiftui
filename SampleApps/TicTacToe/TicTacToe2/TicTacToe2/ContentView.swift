@@ -36,6 +36,10 @@ class ViewModel: ObservableObject {
     var hasWinCondition: Bool {
         model.hasWinCondition
     }
+
+    func reset() {
+        model.reset()
+    }
 }
 
 struct ContentView: View {
@@ -53,6 +57,12 @@ struct ContentView: View {
                 button(for: .middleMiddle)
                 button(for: .middleRight)
             }
+            HStack {
+                button(for: .lowerLeft)
+                button(for: .lowerMiddle)
+                button(for: .lowerRight)
+            }
+            resetButton
             if viewModel.hasWinCondition {
                 Text("Winner!")
             }
@@ -65,6 +75,10 @@ struct ContentView: View {
                 viewModel.choose(position)
                 viewModel.isXTurn.toggle()
             }
+    }
+
+    var resetButton: some View {
+        Button("Reset", action: { viewModel.reset() })
     }
 }
 

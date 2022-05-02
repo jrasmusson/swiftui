@@ -14,6 +14,12 @@ struct Model {
         [TileState.blank(), TileState.blank(), TileState.blank()]
     ]
 
+    private var resetState: [[TileState]] = [
+        [TileState.blank(), TileState.blank(), TileState.blank()],
+        [TileState.blank(), TileState.blank(), TileState.blank()],
+        [TileState.blank(), TileState.blank(), TileState.blank()]
+    ]
+
     mutating func set(_ position: Position, _ tileState: TileState) {
         switch position {
         case .upperLeft:
@@ -61,10 +67,6 @@ struct Model {
     }
 
     private var isXTurn = false
-    private var isGameOver = false
-    private var xWon = false
-    private var yWon = false
-
     mutating func toggleTurn() {
         self.isXTurn.toggle()
     }
@@ -88,18 +90,9 @@ struct Model {
         return false
     }
 
-    mutating func setGameOver(_ isGameOver: Bool) {
-        self.isGameOver = isGameOver
+    mutating func reset() {
+        state = resetState
     }
-
-    mutating func setXWon(_ xWon: Bool) {
-        self.xWon = xWon
-    }
-
-    mutating func setYWon(_ yWon: Bool) {
-        self.yWon = yWon
-    }
-
 }
 
 
@@ -139,22 +132,3 @@ struct TileState {
         TileState(value: .b)
     }
 }
-
-//enum GameOver: CustomStringConvertible {
-//    case xWins
-//    case oWins
-//    case draw
-//
-//    var description: String {
-//        switch self {
-//        case .xWins:
-//            return "X wins!"
-//        case .oWins:
-//            return "O wins!"
-//        case .draw:
-//            return "Draw!"
-//        }
-//    }
-//}
-
-
