@@ -66,11 +66,7 @@ struct ContentView: View {
 
     var body: some View {
         VStack {
-            HStack {
-                Text("X: \(viewModel.xScore)")
-                Spacer()
-                Text("O: \(viewModel.oScore)")
-            }.padding()
+            header
             HStack {
                 button(for: .upperLeft)
                 button(for: .upperMiddle)
@@ -86,19 +82,35 @@ struct ContentView: View {
                 button(for: .lowerMiddle)
                 button(for: .lowerRight)
             }
-            Text(viewModel.gameState.description)
-            resetButton
+            footer
         }
+    }
+
+    var header: some View {
+        HStack {
+            Text("X: \(viewModel.xScore)")
+            Spacer()
+            Text("O: \(viewModel.oScore)")
+        }.padding()
     }
 
     func button(for position: Position) -> some View {
         GridButtonView(tileState: viewModel.get(position))
             .onTapGesture {
+                print("tap: \(viewModel.get(position))")
                 if !viewModel.isGameOver {
+                    print("Game not over")
                     viewModel.choose(position)
                     viewModel.toggleTurn()
                 }
             }
+    }
+
+    var footer: some View {
+        VStack {
+            Text(viewModel.gameState.description)
+            resetButton
+        }
     }
 
     var resetButton: some View {
