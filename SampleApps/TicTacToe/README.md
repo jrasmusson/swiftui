@@ -1,21 +1,152 @@
 # TicTacToe
 
-Demo of game.
+In this tutorial, together, we are going to build tic-tac-toe. Along the way you are going to learn about:
 
-Why this is such a good tutorial.
+- SwiftUI
+- Views
+- State management
+- General mechanics, along with 
+- How to think about building SwiftUI applications
+- thought processes that need to change when building SwiftUI 
 
-Follow along, then try yourself. You will learn a tonne more. Can always come back and see what I did (but even better if you gain new insight first by trying on your own.
 
-- Draw out the UI
-- Change to X/O
-- Lock the X/O
+
+If you want to just get the app up and running, scroll down to the bottom and look for a section called `Full Source`.
+
+If you want to build the app from scratch with me, follow along. Let's start with the UI.
+
+## Drawing a tile
+
+Everything is a view in SwiftUI. So here will will define some `Positions` for our game, implement the tile as something that looks like a button, and put it in in a series of stacks.
+
+**ContentView**
+
+```swift
+import SwiftUI
+
+enum Position {
+    case upperLeft
+    case upperMiddle
+    case upperRight
+    case middleLeft
+    case middleMiddle
+    case middleRight
+    case lowerLeft
+    case lowerMiddle
+    case lowerRight
+}
+
+struct ContentView: View {
+
+    var body: some View {
+        VStack {
+            header
+            HStack {
+                button(for: .upperLeft)
+                button(for: .upperMiddle)
+                button(for: .upperRight)
+            }
+            HStack {
+                button(for: .middleLeft)
+                button(for: .middleMiddle)
+                button(for: .middleRight)
+            }
+            HStack {
+                button(for: .lowerLeft)
+                button(for: .lowerMiddle)
+                button(for: .lowerRight)
+            }
+            footer
+        }
+        .navigationTitle("TicTacToe")
+    }
+
+    var header: some View {
+        HStack {
+            Text("X: 0")
+            Spacer()
+            Text("O: 0")
+        }.padding()
+    }
+
+    func button(for position: Position) -> some View {
+        GridButtonView()
+    }
+
+    var footer: some View {
+        VStack {
+            Text("Game on!")
+            resetButton
+        }
+    }
+
+    var resetButton: some View {
+        Button("Reset", action: {  })
+    }
+}
+
+struct GridButtonView: View {
+
+    var body: some View {
+        Image(systemName: "x.square.fill")
+            .resizable()
+            .foregroundColor(.blue)
+    }
+}
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+    }
+}
+```
+
+## Selecting an X or an O
+
+Everything in SwiftUI is state driven:
+
+- You want to change your layout? Change your state.
+- You want update your view? Change your state.
+- You want an animation to occur? Change your state.
+
+There are many ways to track and manage state in Swift UI (see this [write-up](https://github.com/jrasmusson/swiftui/tree/main/Dataflow/HowItWorks) on data flow).
+
+He are going to pull all our state in to a `ViewModel` and back it with a `Model` object.
+
+![](images/1.png)
+
+When an `event` occurs in the UI, we are going to capture that and pass that message as an `intent` to our viewModel. The viewModel will take that `intent` and `delegate` it to the model which in turn updates the game state. Because the state has changed, and because we pass the viewModel into the view, the view can observe this change of state and update its UI approprirately.
+
+Let's take a look at an example. Let's add enough state to remember whether it is X or Os turn, and update the UI appropriately when someone taps a tile view.
+
+
+
+
+
+
+
+- Using state to lock the selection
 - Store state in the View Model
-- Choose
-- Toggle Turn
+- Choosing a tile
+- Taking turns
 - Handle win conditions
- - GameState
 - Reset
 - Keeping score
+- Adapting to screen size
+- Full source
+
+## Drawing a tile
+
+Let start by drawing a single tile.
+
+- Create new SwiftUI project
+- Add the following view.
+
+```swift
+
+```
+
+## Full source
 
 ```
 //
@@ -343,8 +474,6 @@ struct ContentView: View {
         Button("Reset", action: { viewModel.reset() })
     }
 }
-
-// U R HERE use geometry reader to figure out view space
 
 struct GridButtonView: View {
     let tileState: TileState

@@ -30,6 +30,25 @@ VStack {
 
 ![](images/8.png)
 
+## Adjusting layout
+
+Because `GeometryReader` wants to take all the space offered, adding one to your view will change the layout.
+
+## Layout not centered
+
+If your layout looks off after wrapping, your can center it like this:
+
+```swift
+func button(for position: Position) -> some View {
+    let tileState = viewModel.get(position)
+    let reduceFactor = 0.9
+    return GeometryReader { proxy in
+    		GridButtonView()
+            .frame(width: proxy.size.width, height: proxy.size.height)
+    }
+}
+```
+
 ## Stanford
 
 ![](images/9.png)
