@@ -86,6 +86,7 @@ Deliberate practice with SwiftUI.
 - [Section](Controls/Section/README.md)
 - [Sheet](Controls/Sheet/README.md)
 - [Stacks](Controls/Stacks/README.md)
+- [Function Builders](Misc/FunctionBuilders/README.md)
 
 
 List of every type of [View](https://developer.apple.com/documentation/swiftui/view).
