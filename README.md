@@ -66,9 +66,9 @@ Deliberate practice with SwiftUI.
 - [Label](Controls/Label/README.md)
 - [ProgressView](Controls/ProgressView/README.md)
 
+
 ### Misc 
 
-- [Animations](Controls/Animations/README.md)
 - [Badges](Controls/Badges/README.md)
 - [Color](Controls/Color/README.md)
 - [ContextMenu](Controls/ContextMenu/README.md)
@@ -93,6 +93,11 @@ List of every type of [View](https://developer.apple.com/documentation/swiftui/v
 
 SwiftUI by [example](https://www.hackingwithswift.com/quick-start/swiftui).
 
+
+## Animations 🖼
+
+- [Intro](Animations/Intro/README.md)
+
 ## Data Flow 🔁
 - [How it works](Dataflow/HowItWorks/README.md)
 - [Examples](Dataflow/zExamples.md)
@@ -103,6 +108,7 @@ SwiftUI by [example](https://www.hackingwithswift.com/quick-start/swiftui).
 ## Layout ↔️
 - [How it works](Layout/HowItWorks/README.md)
 - [ViewBuilder](Layout/ViewBuilder/README.md)
+
 
 ## Combine ➡️
 - [Getting Started](Combine/GettingStarted/README.md)
