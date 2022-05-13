@@ -274,6 +274,13 @@ The animations are always paired. When goes goes to `0` the other goes to `+/- 9
 
 Voila 🎉
 
+## Key points
+
+- Animations are driving by state
+- You change state with taps and gestures
+- Stop thinking about doing animations 
+ - Instead think of setting them up for when certain things happen
+
 
 ### Links that help
 

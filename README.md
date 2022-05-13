@@ -94,9 +94,10 @@ List of every type of [View](https://developer.apple.com/documentation/swiftui/v
 SwiftUI by [example](https://www.hackingwithswift.com/quick-start/swiftui).
 
 
-## Animations 🖼
+## Animations 🍒
 
 - [Intro](Animations/Intro/README.md)
+- [Card Flip](Animations/CardFlip/README.md)
 
 ## Data Flow 🔁
 - [How it works](Dataflow/HowItWorks/README.md)
