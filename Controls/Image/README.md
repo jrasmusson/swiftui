@@ -101,6 +101,24 @@ Image("Tron")
 ![](images/2.png)
 
 
+## Circular Image
+
+![](images/5.png)
+
+```swift
+struct CircularImage: View {
+    var body: some View {
+        Image("turtlerock")
+            .clipShape(Circle())
+            .overlay {
+                Circle().stroke(.white, lineWidth: 4)
+            }
+            .shadow(radius: 7)
+    }
+}
+```
+
+- [Link](https://developer.apple.com/tutorials/swiftui/creating-and-combining-views)
 
 
 ### Links that help
