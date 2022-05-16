@@ -54,3 +54,25 @@ NavigationView {
 ### Links that help
 
 - [Navigation Bar](https://www.hackingwithswift.com/books/ios-swiftui/adding-a-navigation-bar)
+
+
+## NavigationView with NavigationLink
+
+![](images/4.png)
+
+```swift
+struct LandmarkList: View {
+    var body: some View {
+        NavigationView {
+            List(landmarks) { landmark in
+                NavigationLink {
+                    LandmarkDetail()
+                } label: {
+                    LandmarkRow(landmark: landmark)
+                }
+            }
+            .navigationTitle("Landmarks")
+        }
+    }
+}
+```
