@@ -52,6 +52,49 @@ struct LandmarksApp: App {
 
 ![](images/5.png)
 
+## Create a Favorite Button
+
+![](images/6.png)
+
+When you need to set someting `true` or `false` on a binding use `.constant`.
+
+```swift
+struct FavoriteButton: View {
+    @Binding var isSet: Bool
+
+    var body: some View {
+		Text("Hello, World!")    
+	}
+}
+
+struct FavoriteButton_Previews: PreviewProvider {
+    static var previews: some View {
+        FavoriteButton(isSet: .constant(true))
+    }
+}
+```
+
+Now this is interesting. Look at how Apple passes in the `modelData` to a subview, while keeping the data powering that view `Landmark` independent as a `var`. Along with the helper `landmarIndex: Int`:
+
+![](images/7.png)
+
+They need the index helper because that is what they use to access the landmark they need as a reference from the `modelData`.
+
+```swift
+struct LandmarkDetail: View {
+    @EnvironmentObject var modelData: ModelData
+    var landmark: Landmark
+
+    var landmarkIndex: Int {
+        modelData.landmarks.firstIndex(where: { $0.id == landmark.id })!
+    }
+
+	HStack {
+        Text(landmark.name).font(.title)
+        FavoriteButton(isSet: $modelData.landmarks[landmarkIndex].isFavorite)
+    }
+```
+
 ### Links that help
 
 - [Handling User Input](https://developer.apple.com/tutorials/swiftui/handling-user-input)
