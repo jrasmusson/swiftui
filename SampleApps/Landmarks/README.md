@@ -24,6 +24,33 @@ In order to combine dynamic and static views together, we need to do what the tu
 
 which `NavigationView` will then combine into a single view.
 
+## Use an Observable Object for Storage
+
+![](images/4.png)
+
+```swift
+final class ModelData: ObservableObject {
+    @Published var landmarks: [Landmark] = load("landmarkData.json")
+}
+
+struct LandmarkList: View {
+    @EnvironmentObject var modelData: ModelData
+}
+
+@main
+struct LandmarksApp: App {
+    @StateObject private var modelData = ModelData()
+
+    var body: some Scene {
+        WindowGroup {
+            ContentView()
+                .environmentObject(modelData)
+        }
+    }
+}
+```
+
+![](images/5.png)
 
 ### Links that help
 
