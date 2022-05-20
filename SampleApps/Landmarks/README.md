@@ -102,3 +102,50 @@ struct LandmarkDetail: View {
 ## Animating Views and Transitions
 
 ![](images/8.png)
+
+If the view is equatable, SwiftUI can animate the following with `animation(_:)`:
+
+- color
+- opacity
+- rotation
+- size
+
+If the view is no equatable, you can animate on any value change using `animation(_:value:)`.
+
+For example, to rotate and scale the system image on a `Label`, you tie the effect to the stage of the `showDetail` boolean, and then add a `animation(_:value:)` to animate the change of state.
+
+```swift
+struct HikeView: View {
+    var hike: Hike
+    @State private var showDetail = false
+
+    var body: some View {
+        Button {
+            showDetail.toggle()
+        } label: {
+            Label("Graph", systemImage: "chevron.right.circle")
+                .rotationEffect(.degrees(showDetail ? 90 : 0))
+                .scaleEffect(showDetail ? 1.5 : 1)
+                .animation(.easeInOut, value: showDetail) //
+        }
+    }
+}
+```
+
+The animation modifier applies to all animatable changes withing the views it wraps.
+
+![](images/demo2.gif)
+
+This is an example of an `implicit` animation. One where we apply animations to views via `ViewModifiers` and animate around changes in values.
+
+- [Stanford animation lectecture](https://github.com/jrasmusson/swiftui/blob/main/Stanford/2021/Lecture7/README.md)
+
+![](images/10.png)
+
+### Links that help
+
+- [Animating Views and Transitions](https://developer.apple.com/tutorials/swiftui/animating-views-and-transitions)
+
+
+
+

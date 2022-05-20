@@ -33,6 +33,7 @@ struct HikeView: View {
                         .imageScale(.large)
                         .rotationEffect(.degrees(showDetail ? 90 : 0))
                         .padding()
+                        .animation(.easeInOut, value: showDetail)
                 }
             }
 
