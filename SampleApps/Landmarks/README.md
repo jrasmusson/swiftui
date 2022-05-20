@@ -98,3 +98,7 @@ struct LandmarkDetail: View {
 ### Links that help
 
 - [Handling User Input](https://developer.apple.com/tutorials/swiftui/handling-user-input)
+
+## Animating Views and Transitions
+
+![](images/8.png)
