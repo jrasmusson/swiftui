@@ -101,6 +101,8 @@ struct LandmarkDetail: View {
 
 ## Animating Views and Transitions
 
+### Add Animations to Individual Views
+
 ![](images/8.png)
 
 If the view is equatable, SwiftUI can animate the following with `animation(_:)`:
@@ -141,6 +143,167 @@ This is an example of an `implicit` animation. One where we apply animations to 
 - [Stanford animation lectecture](https://github.com/jrasmusson/swiftui/blob/main/Stanford/2021/Lecture7/README.md)
 
 ![](images/10.png)
+
+### Animate the Effects of State Changes
+
+![](images/11.png)
+
+![](images/12.png)
+
+
+State change animations are examples of explicit animations. We do those using the function:
+
+- `withAnimation { ... }`
+
+Take the action the causes the state changes and wrap it in this:
+
+```swift
+Button {
+    withAnimation {
+        showDetail.toggle()
+    }
+}
+```
+
+By doing this, all views affected by this change of state will now be included in the animation.
+
+![](images/demo3.gif)
+
+You can slow it down even more by doing this:
+
+```swift
+withAnimation(.easeInOut(duration: 4)) {
+    showDetail.toggle()
+}
+```
+
+### Customize View Transtions
+
+![](images/13.png)
+
+```swift
+if showDetail {
+    HikeDetail(hike: hike)
+        .transition(.slide)
+}
+```
+
+![](images/demo4.gif)
+
+For reuse you can extract this as a `static` extension:
+
+```swift
+HikeDetail(hike: hike)
+    .transition(.moveAndFade)
+
+extension AnyTransition {
+    static var moveAndFade: AnyTransition {
+        AnyTransition.slide
+    }
+}
+```
+
+You can also try other things like:
+
+```swift
+AnyTransition.move(edge: .trailing)
+```
+
+![](images/demo5.gif)
+
+Or more complicated things like:
+
+```swift
+extension AnyTransition {
+    static var moveAndFade: AnyTransition {
+        .asymmetric(
+            insertion: .move(edge: .trailing).combined(with: .opacity),
+            removal: .scale.combined(with: .opacity)
+        )
+    }
+}
+```
+
+![](images/demo6.gif)
+
+
+## Compose Animations for Complex Effects
+
+![](images/14.png)
+
+Let's add a ripple effect to the `GraphCapsule` in the `HikeGraph` view:
+
+### Default
+
+**HikeGraph**
+
+```swift
+extension Animation {
+    static func ripple() -> Animation {
+        Animation.default
+    }
+}
+
+GraphCapsule(
+    index: index,
+    color: color,
+    height: proxy.size.height,
+    range: observation[keyPath: path],
+    overallRange: overallRange
+)
+.animation(.ripple())
+```
+
+![](images/demo8.gif)
+
+### Spring
+
+```swift
+extension Animation {
+    static func ripple() -> Animation {
+        Animation.spring(dampingFraction: 0.5)
+    }
+}
+```
+
+![](images/demo7.gif)
+
+This is an implicit animation that is tied to the appearance of the capsule. When the capsule appears, it animations from the old to the new using this ripple effect.
+
+Note how it also changes and animates the color. All automtically.
+
+### Speed
+
+![](images/15.png)
+
+```swift
+extension Animation {
+    static func ripple() -> Animation {
+        Animation.spring(dampingFraction: 0.5)
+            .speed(0.25)
+    }
+}
+```
+
+![](images/demo9.gif)
+
+### Delay
+
+![](images/16.png)
+
+```swift
+extension Animation {
+    static func ripple(index: Int) -> Animation {
+        Animation.spring(dampingFraction: 0.5)
+            .speed(2)
+            .delay(0.03 * Double(index))
+    }
+}
+
+.animation(.ripple(index: index))
+```
+
+![](images/demo10.gif)
 
 ### Links that help
 
