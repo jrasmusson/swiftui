@@ -309,6 +309,139 @@ extension Animation {
 
 - [Animating Views and Transitions](https://developer.apple.com/tutorials/swiftui/animating-views-and-transitions)
 
+## Composing Complex Interfaces
+
+![](images/17.png)
+
+### NavigationView with Title
+
+Not how we set the navigation title as a simple text label with the `navigationTitle` view modifier.
+
+![](images/18.png)
+
+**CategoryHome**
+
+```swift
+struct CategoryHome: View {
+    var body: some View {
+        NavigationView {
+            Text("Hello, World!")
+                .navigationTitle("Featured")
+        }
+    }
+}
+```
+
+### Create a Category List
+
+![](images/19.png)
+
+Add a model data environemnt object:
+
+**CategoryHome**
+
+```swift
+struct CategoryHome: View {
+    @EnvironmentObject var modelData: ModelData
+
+    var body: some View {
+        Text("Hello World")
+    }
+}
+
+struct CategoryHome_Previews: PreviewProvider {
+    static var previews: some View {
+        CategoryHome()
+            .environmentObject(ModelData())
+    }
+}
+```
+
+Create a `List` with a `ForEach` inside to more rows for each category.
+
+![](images/20.png)
+
+**CategoryHome**
+
+```swift
+struct CategoryHome: View {
+    @EnvironmentObject var modelData: ModelData
+
+    var body: some View {
+        NavigationView {
+            List {
+                ForEach(modelData.categories.keys.sorted(), id: \.self) { key in
+                    Text(key)
+                }
+            }
+            .navigationTitle("Featured")
+        }
+    }
+}
+```
+
+## Creating a Category Row
+
+![](images/21.png)
+
+Here is a pattern for making data availabe in a view - use a `static var`:
+
+**CategoryRow**
+
+```swift
+struct CategoryRow: View {
+    var categoryName: String
+    var items: [Landmark]
+
+    var body: some View {
+        Text("Hello, World!")
+    }
+}
+
+struct CategoryRow_Previews: PreviewProvider {
+    static var landmarks = ModelData().landmarks
+    static var previews: some View {
+        CategoryRow(
+            categoryName: landmarks[0].category.rawValue,
+            items: Array(landmarks.prefix(3))
+        )
+    }
+}
+```
+
+So we start by embedded the horizontal elements in an `HStack` and then we embed that and the title in a `VStack`:
+
+![](images/22.png)
+
+It's interested how these tutorials seem to be OK with hardcoded values for heights like `frame(height: 185)`. 
+
+But note how we can make our `HStack` scrollable by embedding it in a `ScrollView`:
+
+![](images/23.png)
+
+Let's now create an item for our horizontal scroll.
+
+![](images/24.png)
+
+And then use it in our view:
+
+![](images/25.png)
+
+## Complete the Category View
+
+![](images/demo11.gif)
+
+Pass in the data to the row:
+
+![](images/26.png)
+
+Add `isFeatured` to `ModelData` and display the first `isFeatured` like this:
+
+### ![](images/27.png)
+
+### Links that help
+
+- [Composing Complex Interfaces](https://developer.apple.com/tutorials/swiftui/composing-complex-interfaces)
 
 
 

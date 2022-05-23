@@ -1,34 +1,24 @@
-//
-//  ModelData.swift
-//  Landmarks
-//
-//  Created by jrasmusson on 2022-05-16.
-//
+/*
+See LICENSE folder for this sample’s licensing information.
+
+Abstract:
+Storage for model data.
+*/
 
 import Foundation
+import Combine
 
 final class ModelData: ObservableObject {
     @Published var landmarks: [Landmark] = load("landmarkData.json")
     var hikes: [Hike] = load("hikeData.json")
-
-    var features: [Landmark] {
-        landmarks.filter { $0.isFeatured }
-    }
-
-    var categories: [String: [Landmark]] {
-        Dictionary(
-            grouping: landmarks,
-            by: { $0.category.rawValue }
-        )
-    }
 }
 
 func load<T: Decodable>(_ filename: String) -> T {
     let data: Data
 
     guard let file = Bundle.main.url(forResource: filename, withExtension: nil)
-    else {
-        fatalError("Couldn't find \(filename) in main bundle.")
+        else {
+            fatalError("Couldn't find \(filename) in main bundle.")
     }
 
     do {
@@ -44,3 +34,4 @@ func load<T: Decodable>(_ filename: String) -> T {
         fatalError("Couldn't parse \(filename) as \(T.self):\n\(error)")
     }
 }
+
