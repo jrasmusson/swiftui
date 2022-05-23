@@ -1,5 +1,7 @@
 # Lankmarks
 
+![](images/demo12.gif)
+
 ## Handling user input
 
 ![](images/1.png)
@@ -437,7 +439,756 @@ Pass in the data to the row:
 
 Add `isFeatured` to `ModelData` and display the first `isFeatured` like this:
 
-### ![](images/27.png)
+![](images/27.png)
+
+## Add Navigation Between Sections
+
+![](images/28.png)
+
+Here we use `NavigationLink` to create a name for the label and then provide a view to display for when the user taps:
+
+![](images/29.png)
+
+Add some styling...
+
+![](images/30.png)
+
+### Tabs
+
+Here we will define some tabs, along with some state to track the selected tab, and then we'll switch views in a `TabView` like this:
+
+**ContentView**
+
+```swift
+struct ContentView: View {
+    @State private var selection: Tab = .featured
+
+    enum Tab {
+        case featured
+        case list
+    }
+
+    var body: some View {
+        TabView(selection: $selection) {
+            CategoryHome()
+                .tabItem {
+                    Label("Featured", systemImage: "star")
+                }
+                .tag(Tab.featured)
+
+            LandmarkList()
+                .tabItem {
+                    Label("List", systemImage: "list.bullet")
+                }
+                .tag(Tab.list)
+        }
+    }
+}
+```
+
+![](images/31.png)
+
+![](images/demo12.gif)
+
+## Full Source
+
+### Model
+
+**ModelData**
+
+```swift
+//
+//  ModelData.swift
+//  Landmarks
+//
+//  Created by jrasmusson on 2022-05-16.
+//
+
+import Foundation
+
+final class ModelData: ObservableObject {
+    @Published var landmarks: [Landmark] = load("landmarkData.json")
+    var hikes: [Hike] = load("hikeData.json")
+
+    var features: [Landmark] {
+        landmarks.filter { $0.isFeatured }
+    }
+
+    var categories: [String: [Landmark]] {
+        Dictionary(
+            grouping: landmarks,
+            by: { $0.category.rawValue }
+        )
+    }
+}
+
+func load<T: Decodable>(_ filename: String) -> T {
+    let data: Data
+
+    guard let file = Bundle.main.url(forResource: filename, withExtension: nil)
+    else {
+        fatalError("Couldn't find \(filename) in main bundle.")
+    }
+
+    do {
+        data = try Data(contentsOf: file)
+    } catch {
+        fatalError("Couldn't load \(filename) from main bundle:\n\(error)")
+    }
+
+    do {
+        let decoder = JSONDecoder()
+        return try decoder.decode(T.self, from: data)
+    } catch {
+        fatalError("Couldn't parse \(filename) as \(T.self):\n\(error)")
+    }
+}
+```
+
+**Landmark**
+
+```swift
+//
+//  Landmark.swift
+//  Landmarks
+//
+//  Created by jrasmusson on 2022-05-16.
+//
+
+import Foundation
+import SwiftUI
+import MapKit
+
+struct Landmark: Hashable, Codable, Identifiable {
+    var id: Int
+    var name: String
+    var park: String
+    var state: String
+    var description: String
+    var isFavorite: Bool
+    var isFeatured: Bool
+
+    var category: Category
+    enum Category: String, CaseIterable, Codable {
+        case lakes = "Lakes"
+        case rivers = "Rivers"
+        case mountains = "Mountains"
+    }
+    
+    private var imageName: String
+    var image: Image {
+        Image(imageName)
+    }
+
+    private var coordinates: Coordinates
+    var locationCoordinate: CLLocationCoordinate2D {
+        CLLocationCoordinate2D(
+            latitude: coordinates.latitude,
+            longitude: coordinates.longitude)
+    }
+
+    struct Coordinates: Hashable, Codable {
+        var latitude: Double
+        var longitude: Double
+    }
+}
+```
+
+**Hike**
+
+```swift
+//
+//  Hike.swift
+//  Landmarks
+//
+//  Created by jrasmusson on 2022-05-20.
+//
+
+import Foundation
+
+struct Hike: Codable, Hashable, Identifiable {
+    var id: Int
+    var name: String
+    var distance: Double
+    var difficulty: Int
+    var observations: [Observation]
+
+    static var formatter = LengthFormatter()
+
+    var distanceText: String {
+        Hike.formatter
+            .string(fromValue: distance, unit: .kilometer)
+    }
+
+    struct Observation: Codable, Hashable {
+        var distanceFromStart: Double
+
+        var elevation: Range<Double>
+        var pace: Range<Double>
+        var heartRate: Range<Double>
+    }
+}
+```
+
+### Views - Categories
+
+![](images/32.png)
+
+**CategoryHome**
+
+```swift
+//
+//  CategoryHome.swift
+//  Landmarks
+//
+//  Created by jrasmusson on 2022-05-23.
+//
+
+import SwiftUI
+
+struct CategoryHome: View {
+    @EnvironmentObject var modelData: ModelData
+
+    var body: some View {
+        NavigationView {
+            List {
+                modelData.features[0].image
+                    .resizable()
+                    .scaledToFill()
+                    .frame(height: 200)
+                    .clipped()
+                
+                ForEach(modelData.categories.keys.sorted(), id: \.self) { key in
+                    CategoryRow(categoryName: key, items: modelData.categories[key]!)
+                }
+            }
+            .navigationTitle("Featured")
+        }
+    }
+}
+
+struct CategoryHome_Previews: PreviewProvider {
+    static var previews: some View {
+        CategoryHome()
+            .environmentObject(ModelData())
+    }
+}
+```
+
+**CategoryRow**
+
+![](images/33.png)
+
+```swift
+//
+//  CategoryRow.swift
+//  Landmarks
+//
+//  Created by jrasmusson on 2022-05-23.
+//
+
+import SwiftUI
+
+struct CategoryRow: View {
+    var categoryName: String
+    var items: [Landmark]
+
+    var body: some View {
+        VStack(alignment: .leading) {
+            Text(categoryName)
+                .font(.headline)
+                .padding(.leading, 15)
+                .padding(.top, 5)
+            
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(alignment: .top, spacing: 0) {
+                    ForEach(items) { landmark in
+                        NavigationLink {
+                            LandmarkDetail(landmark: landmark)
+                        } label: {
+                            CategoryItem(landmark: landmark)
+                        }
+                    }
+                }
+            }
+            .frame(height: 185)
+        }
+    }
+}
+
+struct CategoryRow_Previews: PreviewProvider {
+    static var landmarks = ModelData().landmarks
+    static var previews: some View {
+        CategoryRow(
+            categoryName: landmarks[0].category.rawValue,
+            items: Array(landmarks.prefix(3))
+        )
+    }
+}
+```
+
+**CategoryItem**
+
+![](images/34.png)
+
+```swift
+//
+//  CategoryItem.swift
+//  Landmarks
+//
+//  Created by jrasmusson on 2022-05-23.
+//
+
+import SwiftUI
+
+struct CategoryItem: View {
+    var landmark: Landmark
+
+    var body: some View {
+        VStack(alignment: .leading) {
+            landmark.image
+                .renderingMode(.original)
+                .resizable()
+                .frame(width: 155, height: 155)
+                .cornerRadius(5)
+            Text(landmark.name)
+                .foregroundColor(.primary)
+                .font(.caption)
+        }
+        .padding(.leading, 15)
+    }
+}
+
+struct CategoryItem_Previews: PreviewProvider {
+    static var previews: some View {
+        CategoryItem(landmark: ModelData().landmarks[0])
+    }
+}
+```
+
+### Views - Landmarks
+
+![](images/35.png)
+
+**LandmarkRow**
+
+```swift
+//
+//  LandmarkRow.swift
+//  Landmarks
+//
+//  Created by jrasmusson on 2022-05-16.
+//
+
+import SwiftUI
+
+struct LandmarkRow: View {
+    var landmark: Landmark
+
+    var body: some View {
+        HStack {
+            landmark.image
+                .resizable()
+                .frame(width: 50, height: 50)
+            Text(landmark.name)
+            Spacer()
+            if landmark.isFavorite {
+                Image(systemName: "star.fill")
+                    .foregroundColor(.yellow)
+            }
+        }
+    }
+}
+
+struct LandmarkRow_Previews: PreviewProvider {
+    static var landmarks = ModelData().landmarks
+    
+    static var previews: some View {
+        Group {
+            LandmarkRow(landmark: landmarks[0])
+            LandmarkRow(landmark: landmarks[1])
+        }
+        .previewLayout(.fixed(width: 300, height: 70))
+    }
+}
+```
+
+**LandmarkList**
+
+![](images/36.png)
+
+```swift
+//
+//  LandmarkList.swift
+//  Landmarks
+//
+//  Created by jrasmusson on 2022-05-16.
+//
+
+import SwiftUI
+
+struct LandmarkList: View {
+    @EnvironmentObject var modelData: ModelData
+    @State private var showFavoritesOnly = false
+
+    var filteredLandmarks: [Landmark] {
+        modelData.landmarks.filter { landmark in
+            (!showFavoritesOnly || landmark.isFavorite)
+        }
+    }
+
+    var body: some View {
+        NavigationView {
+            List {
+                Toggle(isOn: $showFavoritesOnly) {
+                    Text("Favorites only")
+                }
+                ForEach(filteredLandmarks) { landmark in
+                    NavigationLink {
+                        LandmarkDetail(landmark: landmark)
+                    } label: {
+                        LandmarkRow(landmark: landmark)
+                    }
+                }
+            }
+            .navigationTitle("Landmarks")
+        }
+    }
+}
+
+struct LandmarkList_Previews: PreviewProvider {
+    static var previews: some View {
+        ForEach(["iPhone SE (2nd generation)"], id: \.self) { deviceName in
+            LandmarkList()
+                .previewDevice(PreviewDevice(rawValue: deviceName))
+                .previewDisplayName(deviceName)
+        }
+    }
+}
+```
+
+**LandmarkDetail**
+
+![](images/37.png)
+
+```swift
+//
+//  LandmarkDetail.swift
+//  Landmarks
+//
+//  Created by jrasmusson on 2022-05-16.
+//
+
+import SwiftUI
+
+struct LandmarkDetail: View {
+    @EnvironmentObject var modelData: ModelData
+    var landmark: Landmark
+
+    var landmarkIndex: Int {
+        modelData.landmarks.firstIndex(where: { $0.id == landmark.id })!
+    }
+    
+    var body: some View {
+        VStack {
+            MapView(coordinate: landmark.locationCoordinate)
+                .ignoresSafeArea(edges: .top)
+                .frame(height: 300)
+            
+            CircleImage(image: landmark.image)
+                .offset(y: -130)
+                .padding(.bottom, -130)
+            
+            VStack(alignment: .leading) {
+                HStack {
+                    Text(landmark.name)
+                        .font(.title)
+                    FavoriteButton(isSet: $modelData.landmarks[landmarkIndex].isFavorite)
+                }
+                HStack {
+                    Text(landmark.park)
+                    Spacer()
+                    Text(landmark.state)
+                }
+                .font(.subheadline)
+                .foregroundColor(.secondary)
+                
+                Divider()
+                
+                Text("About \(landmark.name)")
+                    .font(.title2)
+                Text(landmark.description)
+            }
+            .padding()
+            
+            Spacer()
+        }
+    }
+}
+
+struct LandmarkDetail_Previews: PreviewProvider {
+    static var previews: some View {
+        LandmarkDetail(landmark: ModelData().landmarks[0])
+    }
+}
+```
+
+### Views - Badges
+
+**HexagonParameters**
+
+```swift
+//
+//  HexagonParameters.swift
+//  Landmarks
+//
+//  Created by jrasmusson on 2022-05-20.
+//
+
+import CoreGraphics
+
+struct HexagonParameters {
+    struct Segment {
+        let line: CGPoint
+        let curve: CGPoint
+        let control: CGPoint
+    }
+
+    static let adjustment: CGFloat = 0.085
+
+    static let segments = [
+        Segment(
+            line:    CGPoint(x: 0.60, y: 0.05),
+            curve:   CGPoint(x: 0.40, y: 0.05),
+            control: CGPoint(x: 0.50, y: 0.00)
+        ),
+        Segment(
+            line:    CGPoint(x: 0.05, y: 0.20 + adjustment),
+            curve:   CGPoint(x: 0.00, y: 0.30 + adjustment),
+            control: CGPoint(x: 0.00, y: 0.25 + adjustment)
+        ),
+        Segment(
+            line:    CGPoint(x: 0.00, y: 0.70 - adjustment),
+            curve:   CGPoint(x: 0.05, y: 0.80 - adjustment),
+            control: CGPoint(x: 0.00, y: 0.75 - adjustment)
+        ),
+        Segment(
+            line:    CGPoint(x: 0.40, y: 0.95),
+            curve:   CGPoint(x: 0.60, y: 0.95),
+            control: CGPoint(x: 0.50, y: 1.00)
+        ),
+        Segment(
+            line:    CGPoint(x: 0.95, y: 0.80 - adjustment),
+            curve:   CGPoint(x: 1.00, y: 0.70 - adjustment),
+            control: CGPoint(x: 1.00, y: 0.75 - adjustment)
+        ),
+        Segment(
+            line:    CGPoint(x: 1.00, y: 0.30 + adjustment),
+            curve:   CGPoint(x: 0.95, y: 0.20 + adjustment),
+            control: CGPoint(x: 1.00, y: 0.25 + adjustment)
+        )
+    ]
+}
+```
+
+**BadgeBackground**
+
+```swift
+//
+//  BadgeBackground.swift
+//  Landmarks
+//
+//  Created by jrasmusson on 2022-05-20.
+//
+
+import SwiftUI
+
+struct BadgeBackground: View {
+    var body: some View {
+        GeometryReader { geometry in
+            Path { path in
+                var width: CGFloat = min(geometry.size.width, geometry.size.height)
+                let height = width
+                let xScale: CGFloat = 0.832
+                let xOffset = (width * (1.0 - xScale)) / 2.0
+                width *= xScale
+                path.move(
+                    to: CGPoint(
+                        x: width * 0.95 + xOffset,
+                        y: height * (0.20 + HexagonParameters.adjustment)
+                    )
+                )
+
+                HexagonParameters.segments.forEach { segment in
+                    path.addLine(
+                        to: CGPoint(
+                            x: width * segment.line.x + xOffset,
+                            y: height * segment.line.y
+                        )
+                    )
+
+                    path.addQuadCurve(
+                        to: CGPoint(
+                            x: width * segment.curve.x + xOffset,
+                            y: height * segment.curve.y
+                        ),
+                        control: CGPoint(
+                            x: width * segment.control.x + xOffset,
+                            y: height * segment.control.y
+                        )
+                    )
+                }
+            }
+            .fill(.linearGradient(
+                Gradient(colors: [Self.gradientStart, Self.gradientEnd]),
+                startPoint: UnitPoint(x: 0.5, y: 0),
+                endPoint: UnitPoint(x: 0.5, y: 0.6)
+            ))
+        }
+        .aspectRatio(1, contentMode: .fit)
+    }
+    static let gradientStart = Color(red: 239.0 / 255, green: 120.0 / 255, blue: 221.0 / 255)
+    static let gradientEnd = Color(red: 239.0 / 255, green: 172.0 / 255, blue: 120.0 / 255)
+}
+
+struct BadgeBackground_Previews: PreviewProvider {
+    static var previews: some View {
+        BadgeBackground()
+    }
+}
+```
+
+**BadgeSymbol**
+
+![](images/38.png)
+
+```swift
+//
+//  BadgeSymbol.swift
+//  Landmarks
+//
+//  Created by jrasmusson on 2022-05-20.
+//
+
+import SwiftUI
+
+struct BadgeSymbol: View {
+    static let symbolColor = Color(red: 79.0 / 255, green: 79.0 / 255, blue: 191.0 / 255)
+
+    var body: some View {
+        GeometryReader { geometry in
+            Path { path in
+                let width = min(geometry.size.width, geometry.size.height)
+                let height = width * 0.75
+                let spacing = width * 0.030
+                let middle = width * 0.5
+                let topWidth = width * 0.226
+                let topHeight = height * 0.488
+
+                path.addLines([
+                    CGPoint(x: middle, y: spacing),
+                    CGPoint(x: middle - topWidth, y: topHeight - spacing),
+                    CGPoint(x: middle, y: topHeight / 2 + spacing),
+                    CGPoint(x: middle + topWidth, y: topHeight - spacing),
+                    CGPoint(x: middle, y: spacing)
+                ])
+
+                path.move(to: CGPoint(x: middle, y: topHeight / 2 + spacing * 3))
+                path.addLines([
+                    CGPoint(x: middle - topWidth, y: topHeight + spacing),
+                    CGPoint(x: spacing, y: height - spacing),
+                    CGPoint(x: width - spacing, y: height - spacing),
+                    CGPoint(x: middle + topWidth, y: topHeight + spacing),
+                    CGPoint(x: middle, y: topHeight / 2 + spacing * 3)
+                ])
+            }
+            .fill(Self.symbolColor)
+        }
+    }
+}
+
+struct BadgeSymbol_Previews: PreviewProvider {
+    static var previews: some View {
+        BadgeSymbol()
+    }
+}
+```
+
+**RotatedBadgeSymbol**
+
+![](images/39.png)
+
+```swift
+//
+//  RotatedBadgeSymbol.swift
+//  Landmarks
+//
+//  Created by jrasmusson on 2022-05-20.
+//
+
+import SwiftUI
+
+struct RotatedBadgeSymbol: View {
+    let angle: Angle
+
+    var body: some View {
+        BadgeSymbol()
+            .padding(-60)
+            .rotationEffect(angle, anchor: .bottom)
+    }
+}
+
+struct RotatedBadgeSymbol_Previews: PreviewProvider {
+    static var previews: some View {
+        RotatedBadgeSymbol(angle: Angle(degrees: 5))
+    }
+}
+```
+
+**Badge**
+
+![](images/40.png)
+
+```swift
+//
+//  Badge.swift
+//  Landmarks
+//
+//  Created by jrasmusson on 2022-05-20.
+//
+
+import SwiftUI
+
+struct Badge: View {
+    var badgeSymbols: some View {
+        ForEach(0..<8) { index in
+            RotatedBadgeSymbol(
+                angle: .degrees(Double(index) / Double(8)) * 360.0
+            )
+        }
+        .opacity(0.5)
+    }
+
+    var body: some View {
+        ZStack {
+            BadgeBackground()
+
+            GeometryReader { geometry in
+                badgeSymbols
+                    .scaleEffect(1.0 / 4.0, anchor: .top)
+                    .position(x: geometry.size.width / 2.0, y: (3.0 / 4.0) * geometry.size.height)
+            }
+        }
+    }
+}
+
+struct Badge_Previews: PreviewProvider {
+    static var previews: some View {
+        Badge()
+    }
+}
+```
+
 
 ### Links that help
 
