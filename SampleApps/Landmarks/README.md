@@ -1701,3 +1701,16 @@ This setups a `min` and `max` date for the picker using a `ClosedRange<Date>`:
 
 ## Delay Edit Propogation
 
+![](images/60.png)
+
+OK this looks really cool...can't wait to see how we are going to do this.
+
+First we add a `cancel` button that doesn't save any changes, it simply resets them to what we had before:
+
+![](images/61.png)
+
+Then use the `onAppear` `onDisappear` to load the profile to edit and save the current one back (even if no changes have been made):
+
+![](images/62.png)
+
+
