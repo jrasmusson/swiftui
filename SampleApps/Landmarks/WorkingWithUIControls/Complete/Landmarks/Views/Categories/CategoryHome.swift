@@ -1,9 +1,9 @@
-//
-//  CategoryHome.swift
-//  Landmarks
-//
-//  Created by jrasmusson on 2022-05-23.
-//
+/*
+See LICENSE folder for this sample’s licensing information.
+
+Abstract:
+A view showing featured landmarks above a list of landmarks grouped by category.
+*/
 
 import SwiftUI
 
@@ -19,11 +19,14 @@ struct CategoryHome: View {
                     .scaledToFill()
                     .frame(height: 200)
                     .clipped()
-                
+                    .listRowInsets(EdgeInsets())
+
                 ForEach(modelData.categories.keys.sorted(), id: \.self) { key in
                     CategoryRow(categoryName: key, items: modelData.categories[key]!)
                 }
+                .listRowInsets(EdgeInsets())
             }
+            .listStyle(.inset)
             .navigationTitle("Featured")
             .toolbar {
                 Button {

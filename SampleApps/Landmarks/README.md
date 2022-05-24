@@ -1577,3 +1577,127 @@ struct HikeView_Previews: PreviewProvider {
 
 
 
+# Working with UI Controls
+
+![](images/48.png)
+
+## Display a user Profile
+
+![](images/49.png)
+
+## Add an Edit Mode
+
+![](images/50.png)
+
+![](images/51.png)
+
+So this is interesting, SwiftUI has a dedicated `editMode` stored as a key value pair in its `@Environment` view property.
+
+**ProfileHost**
+
+```swift
+struct ProfileHost: View {
+    @Environment(\.editMode) var editMode
+```
+
+Add it is automatically hooked up to a dedicated SwiftUI `EditButton` that can be displayed like this:
+
+```swift
+var body: some View {
+    VStack(alignment: .leading, spacing: 20) {
+        HStack {
+            Spacer()
+            EditButton() //
+        }
+    }
+}
+```
+
+![](images/52.png)
+
+Tapping the `EditButton` toggles the `editMode` value on and off.
+
+![](images/53.png)
+
+So note that `@Environment` and `@EnvironmentObject` are two different things:
+
+```swift
+struct ProfileHost: View {
+    @Environment(\.editMode) var editMode // key-pair store
+    @State private var draftProfile = Profile.default
+    @EnvironmentObject var modelData: ModelData // anything
+    
+    var body: some View {
+        if editMode?.wrappedValue == .inactive {
+            ProfileSummary(profile: modelData.profile)
+        } else {
+            Text("Profile Editor")
+        }
+    }
+}
+```
+
+`EditMode` is an enum:
+
+**EditMode**
+
+```swift
+public enum EditMode {
+
+    /// The view content cannot be edited.
+    case inactive
+
+    /// The view is in a temporary edit mode.
+    ///
+    /// The definition of temporary might vary by platform or specific control.
+    /// As an example, temporary edit mode may be engaged over the duration of a
+    /// swipe gesture.
+    case transient
+
+    /// The view content can be edited.
+    case active
+```
+
+## Define the Profile Editor
+
+![](images/54.png)
+
+Note that you provide a label and a binding to a string when creating a text field.
+
+![](images/55.png)
+
+Note also how you can bind to `struct` - not just primitive string, bool, and ints.
+
+![](images/56.png)
+
+Look at this cool way to create a segmented picker:
+
+![](images/57.png)
+
+Then look at this cool way of setting up a `DatePicker`:
+
+**ProfileEditor**
+
+```swift
+struct ProfileEditor: View {
+    @Binding var profile: Profile
+
+    var dateRange: ClosedRange<Date> {
+        let min = Calendar.current.date(byAdding: .year, value: -1, to: profile.goalDate)!
+        let max = Calendar.current.date(byAdding: .year, value: 1, to: profile.goalDate)!
+        return min...max
+    }
+
+	DatePicker(selection: $profile.goalDate, in: dateRange, displayedComponents: .date) {
+                Text("Goal Date").bold()
+            }
+```
+
+![](images/58.png)
+
+This setups a `min` and `max` date for the picker using a `ClosedRange<Date>`:
+
+![](images/59.png)
+
+## Delay Edit Propogation
+
