@@ -1,4 +1,6 @@
-# Navigation Bar
+# Navigation Bar (Deprecated)
+
+Use `NavigationStack` instead.
 
 ```swift
 NavigationView {
