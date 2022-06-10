@@ -47,8 +47,8 @@ Deliberate practice with SwiftUI.
 - [Form](Controls/Form/README.md)
 - [Group](Controls/Group/README.md)
 - [List](Controls/Lists/README.md)
-- [NavigationView](Controls/NavigationView/README.md)
-- OutlineGroup
+- [NavigationView - Deprecated](Controls/NavigationView/README.md)
+- [NavigationStack](Controls/NavigationStack/README.md)
 - [TabView](Controls/TabView/README.md)
 
 
