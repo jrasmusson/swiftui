@@ -51,5 +51,65 @@ func load<T: Decodable>(_ filename: String) -> T {
 let md = ModelData()
 ```
 
+# Examples
+
+## Struct
+
+**recipeData.json**
+
+```swift
+struct Recipe: Hashable, Codable, Identifiable {
+    let id: Int
+    let name: String
+    let ingredients: [String]
+}
+```
+
+**Recipe**
+
+```swift
+{
+    "id": 1,
+    "name": "Apple Pie",
+    "ingredients": [
+        "3/4 cup white suguar",
+        "2 tablespoons all-purpose flour"
+    ],
+}
+```
+
+## Array
+
+**Category**
+
+```swift
+struct Category: Codable {
+    let name: String
+    let recipies: [Recipe]
+}
+```
+
+**categoryData.json**
+
+```swift
+[
+    {
+        "name": "Desserts",
+        "recipies": [
+            {
+                "id": 1,
+                "name": "Apple Pie",
+                "ingredients": [
+                    "3/4 cup white suguar",
+                    "2 tablespoons all-purpose flour"
+                ],
+                "relatedRecipes": [
+                    "Baklava"
+                ]
+            }
+        ]
+    }
+]
+```
 
 
