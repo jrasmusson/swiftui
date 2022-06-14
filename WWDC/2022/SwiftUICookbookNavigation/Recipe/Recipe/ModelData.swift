@@ -15,13 +15,27 @@ struct Recipe: Hashable, Codable, Identifiable {
     let relatedRecipes: [String]
 }
 
-enum Category: CaseIterable {
+enum Category: CaseIterable, Identifiable {
     case dessert, pancake
+
+    var id: Self { self }
+    var localizedName: String {
+        switch self {
+        case .dessert:
+            return "Dessert"
+        case .pancake:
+            return "Pancake"
+        }
+    }
 }
 
 final class ModelData: ObservableObject {
     var recipe: Recipe = load("recipeData.json")
     var recipes: [Recipe] = load("recipesData.json")
+
+    func myRecipes(in category: Category) -> [Recipe] {
+        recipes.filter { $0.category == category.localizedName }
+    }
 }
 
 func load<T: Decodable>(_ filename: String) -> T {

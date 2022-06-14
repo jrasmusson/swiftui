@@ -111,7 +111,6 @@
 				71E13CD428328FB900A02E01 /* Model */,
 				71E13CD328328FAB00A02E01 /* Views */,
 				71E13CCA283273A500A02E01 /* Files */,
-				718AF35828326EC4004BCD5A /* LandmarksApp.swift */,
 			);
 			path = Landmarks;
 			sourceTree = "<group>";
@@ -200,6 +199,7 @@
 		71E13CD328328FAB00A02E01 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				718AF35828326EC4004BCD5A /* LandmarksApp.swift */,
 				718AF35A28326EC4004BCD5A /* ContentView.swift */,
 				71CF44AB283BBEB9001AC94B /* Categories */,
 				71A24DF72833D9C80023E9CB /* Landmarks */,

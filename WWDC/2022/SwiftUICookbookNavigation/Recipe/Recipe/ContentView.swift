@@ -8,12 +8,19 @@
 import SwiftUI
 
 struct ContentView: View {
+    @EnvironmentObject var modelData: ModelData
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+        NavigationStack {
+            List(Category.allCases) { category in
+                Section(category.localizedName) {
+                    ForEach(modelData.myRecipes(in: category)) { recipe in
+                        NavigationLink(recipe.name) {
+                            Text(recipe.name)
+                        }
+                    }
+                }
+            }
         }
     }
 }
