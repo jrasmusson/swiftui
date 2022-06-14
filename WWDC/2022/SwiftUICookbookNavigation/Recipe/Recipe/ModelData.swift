@@ -10,19 +10,18 @@ import Foundation
 struct Recipe: Hashable, Codable, Identifiable {
     let id: Int
     let name: String
+    let category: String
     let ingredients: [String]
     let relatedRecipes: [String]
 }
 
-struct Category: Codable {
-    let name: String
-    let recipies: [Recipe]
+enum Category: CaseIterable {
+    case dessert, pancake
 }
-
 
 final class ModelData: ObservableObject {
     var recipe: Recipe = load("recipeData.json")
-    var categories: [Category] = load("categoryData.json")
+    var recipes: [Recipe] = load("recipesData.json")
 }
 
 func load<T: Decodable>(_ filename: String) -> T {

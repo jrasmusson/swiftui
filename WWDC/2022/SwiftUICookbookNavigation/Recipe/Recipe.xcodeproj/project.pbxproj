@@ -7,16 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		716418772858C11C0026ACEE /* recipesData.json in Resources */ = {isa = PBXBuildFile; fileRef = 716418762858C10B0026ACEE /* recipesData.json */; };
 		7194359828576BF600EFF2E2 /* RecipeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7194359728576BF600EFF2E2 /* RecipeApp.swift */; };
 		7194359A28576BF600EFF2E2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7194359928576BF600EFF2E2 /* ContentView.swift */; };
 		7194359C28576BF800EFF2E2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7194359B28576BF800EFF2E2 /* Assets.xcassets */; };
 		7194359F28576BF800EFF2E2 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7194359E28576BF800EFF2E2 /* Preview Assets.xcassets */; };
 		719435A62858AC0D00EFF2E2 /* ModelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 719435A52858AC0D00EFF2E2 /* ModelData.swift */; };
 		719435A82858B0C300EFF2E2 /* recipeData.json in Resources */ = {isa = PBXBuildFile; fileRef = 719435A72858AD8300EFF2E2 /* recipeData.json */; };
-		719435AB2858BB4200EFF2E2 /* categoryData.json in Resources */ = {isa = PBXBuildFile; fileRef = 719435AA2858BB4200EFF2E2 /* categoryData.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		716418762858C10B0026ACEE /* recipesData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = recipesData.json; sourceTree = "<group>"; };
 		7194359428576BF600EFF2E2 /* Recipe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Recipe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7194359728576BF600EFF2E2 /* RecipeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeApp.swift; sourceTree = "<group>"; };
 		7194359928576BF600EFF2E2 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -24,7 +25,6 @@
 		7194359E28576BF800EFF2E2 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		719435A52858AC0D00EFF2E2 /* ModelData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelData.swift; sourceTree = "<group>"; };
 		719435A72858AD8300EFF2E2 /* recipeData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = recipeData.json; sourceTree = "<group>"; };
-		719435AA2858BB4200EFF2E2 /* categoryData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = categoryData.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,11 +57,10 @@
 		7194359628576BF600EFF2E2 /* Recipe */ = {
 			isa = PBXGroup;
 			children = (
+				719435AD2858BDBE00EFF2E2 /* Files */,
 				719435A92858BADB00EFF2E2 /* Resources */,
 				7194359728576BF600EFF2E2 /* RecipeApp.swift */,
 				7194359928576BF600EFF2E2 /* ContentView.swift */,
-				7194359B28576BF800EFF2E2 /* Assets.xcassets */,
-				7194359D28576BF800EFF2E2 /* Preview Content */,
 				719435A52858AC0D00EFF2E2 /* ModelData.swift */,
 			);
 			path = Recipe;
@@ -79,9 +78,18 @@
 			isa = PBXGroup;
 			children = (
 				719435A72858AD8300EFF2E2 /* recipeData.json */,
-				719435AA2858BB4200EFF2E2 /* categoryData.json */,
+				716418762858C10B0026ACEE /* recipesData.json */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		719435AD2858BDBE00EFF2E2 /* Files */ = {
+			isa = PBXGroup;
+			children = (
+				7194359B28576BF800EFF2E2 /* Assets.xcassets */,
+				7194359D28576BF800EFF2E2 /* Preview Content */,
+			);
+			name = Files;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -143,7 +151,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				719435A82858B0C300EFF2E2 /* recipeData.json in Resources */,
-				719435AB2858BB4200EFF2E2 /* categoryData.json in Resources */,
+				716418772858C11C0026ACEE /* recipesData.json in Resources */,
 				7194359F28576BF800EFF2E2 /* Preview Assets.xcassets in Resources */,
 				7194359C28576BF800EFF2E2 /* Assets.xcassets in Resources */,
 			);

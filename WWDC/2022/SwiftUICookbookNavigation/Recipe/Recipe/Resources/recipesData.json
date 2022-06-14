@@ -1,0 +1,50 @@
+[
+    {
+        "id": 1,
+        "name": "Apple Pie",
+        "category": "Dessert",
+        "ingredients": [
+            "3/4 cup white suguar",
+            "2 tablespoons all-purpose flour"
+        ],
+        "relatedRecipes": [
+            "Baklava"
+        ]
+    },
+    {
+        "id": 2,
+        "name": "Chocolate Cake",
+        "category": "Dessert",
+        "ingredients": [
+            "3/4 cup white suguar",
+            "2 tablespoons all-purpose flour"
+        ],
+        "relatedRecipes": [
+            "Baklava"
+        ]
+    },
+    {
+        "id": 3,
+        "name": "American",
+        "category": "Pancake",
+        "ingredients": [
+            "3/4 cup white suguar",
+            "2 tablespoons all-purpose flour"
+        ],
+        "relatedRecipes": [
+            "Baklava"
+        ]
+    },
+    {
+        "id": 4,
+        "name": "Crepe",
+        "category": "Pancake",
+        "ingredients": [
+            "3/4 cup white suguar",
+            "2 tablespoons all-purpose flour"
+        ],
+        "relatedRecipes": [
+            "Baklava"
+        ]
+    }
+]
