@@ -2,18 +2,9 @@
 
 Deliberate practice with SwiftUI. 
 
-## Shortcuts
+## New project
 
-### Preview
-- Option + Command + Enter `Show Preview`
-- Command + Enter `Hide Preview`
-- Option + Command + P `Resume Preview`
-- Pin preview by clicking thumbnail
-
-### Views
-- Command + Shift + L `Code snippet`
-- Command + View `see options for that view`
-- Control + Option + View `inspect view`
+- [Load data](HowTo/LoadData/README.md)
 
 ## Learnings 🎓
 
@@ -170,4 +161,16 @@ SwiftUI by [example](https://www.hackingwithswift.com/quick-start/swiftui).
 - [Lecture 14: Document Architecture](Stanford/2021/Lecture14/README.md)
 - [Lecture 15: UIKit Integration](Stanford/2021/Lecture15/README.md)
 
+## Shortcuts
+
+### Preview
+- Option + Command + Enter `Show Preview`
+- Command + Enter `Hide Preview`
+- Option + Command + P `Resume Preview`
+- Pin preview by clicking thumbnail
+
+### Views
+- Command + Shift + L `Code snippet`
+- Command + View `see options for that view`
+- Control + Option + View `inspect view`
 
