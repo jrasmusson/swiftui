@@ -7,26 +7,6 @@
 
 import SwiftUI
 
-struct FoodItem: Hashable, Codable, Identifiable {
-    let id: Int
-    let title: String
-    let count: Int
-    let description: String
-
-    init(id: Int = 1, title: String = "Flan", count: Int = 1, descriptin: String = "What is a flan? That which we call milk...") {
-        self.id = id
-        self.title = title
-        self.count = count
-        self.description = descriptin
-    }
-}
-
-final class ModelData: ObservableObject {
-    var foodItems: [FoodItem] = [
-        FoodItem(id: 1),
-    ]
-}
-
 struct ContentView: View {
     @EnvironmentObject var modelData: ModelData
 

@@ -23,6 +23,7 @@ struct FoodDetailView: View {
 
 struct FoodDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        FoodDetailView(item: FoodItem(id: 1))
+        let md = ModelData()
+        FoodDetailView(item: md.foodItems[0])
     }
 }
