@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		716418772858C11C0026ACEE /* recipesData.json in Resources */ = {isa = PBXBuildFile; fileRef = 716418762858C10B0026ACEE /* recipesData.json */; };
+		716418792859FA1C0026ACEE /* RecipeDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 716418782859FA1C0026ACEE /* RecipeDetail.swift */; };
 		7194359828576BF600EFF2E2 /* RecipeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7194359728576BF600EFF2E2 /* RecipeApp.swift */; };
 		7194359A28576BF600EFF2E2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7194359928576BF600EFF2E2 /* ContentView.swift */; };
 		7194359C28576BF800EFF2E2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7194359B28576BF800EFF2E2 /* Assets.xcassets */; };
@@ -18,6 +19,7 @@
 
 /* Begin PBXFileReference section */
 		716418762858C10B0026ACEE /* recipesData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = recipesData.json; sourceTree = "<group>"; };
+		716418782859FA1C0026ACEE /* RecipeDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetail.swift; sourceTree = "<group>"; };
 		7194359428576BF600EFF2E2 /* Recipe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Recipe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7194359728576BF600EFF2E2 /* RecipeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeApp.swift; sourceTree = "<group>"; };
 		7194359928576BF600EFF2E2 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -61,7 +63,7 @@
 				719435A92858BADB00EFF2E2 /* Resources */,
 				7194359728576BF600EFF2E2 /* RecipeApp.swift */,
 				7194359928576BF600EFF2E2 /* ContentView.swift */,
-				719435A52858AC0D00EFF2E2 /* ModelData.swift */,
+				716418782859FA1C0026ACEE /* RecipeDetail.swift */,
 			);
 			path = Recipe;
 			sourceTree = "<group>";
@@ -77,6 +79,7 @@
 		719435A92858BADB00EFF2E2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				719435A52858AC0D00EFF2E2 /* ModelData.swift */,
 				719435A72858AD8300EFF2E2 /* recipeData.json */,
 				716418762858C10B0026ACEE /* recipesData.json */,
 			);
@@ -164,6 +167,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				716418792859FA1C0026ACEE /* RecipeDetail.swift in Sources */,
 				7194359A28576BF600EFF2E2 /* ContentView.swift in Sources */,
 				7194359828576BF600EFF2E2 /* RecipeApp.swift in Sources */,
 				719435A62858AC0D00EFF2E2 /* ModelData.swift in Sources */,

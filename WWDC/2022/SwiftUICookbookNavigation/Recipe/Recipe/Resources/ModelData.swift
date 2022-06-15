@@ -12,7 +12,7 @@ struct Recipe: Hashable, Codable, Identifiable {
     let name: String
     let category: String
     let ingredients: [String]
-    let relatedRecipes: [String]
+    let relatedRecipes: [Recipe]
 }
 
 enum Category: CaseIterable, Identifiable {

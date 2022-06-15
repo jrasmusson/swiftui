@@ -8,7 +8,26 @@
             "2 tablespoons all-purpose flour"
         ],
         "relatedRecipes": [
-            "Baklava"
+            {
+                "id": 1,
+                "name": "Related 1",
+                "category": "Dessert",
+                "ingredients": [
+                    "3/4 cup white suguar",
+                    "2 tablespoons all-purpose flour"
+                ],
+                "relatedRecipes": []
+            },
+            {
+                "id": 1,
+                "name": "Related 2",
+                "category": "Dessert",
+                "ingredients": [
+                    "3/4 cup white suguar",
+                    "2 tablespoons all-purpose flour"
+                ],
+                "relatedRecipes": []
+            }
         ]
     },
     {
@@ -20,7 +39,26 @@
             "2 tablespoons all-purpose flour"
         ],
         "relatedRecipes": [
-            "Baklava"
+            {
+                "id": 1,
+                "name": "Related 1",
+                "category": "Dessert",
+                "ingredients": [
+                    "3/4 cup white suguar",
+                    "2 tablespoons all-purpose flour"
+                ],
+                "relatedRecipes": []
+            },
+            {
+                "id": 1,
+                "name": "Related 2",
+                "category": "Dessert",
+                "ingredients": [
+                    "3/4 cup white suguar",
+                    "2 tablespoons all-purpose flour"
+                ],
+                "relatedRecipes": []
+            }
         ]
     },
     {
@@ -32,7 +70,26 @@
             "2 tablespoons all-purpose flour"
         ],
         "relatedRecipes": [
-            "Baklava"
+            {
+                "id": 1,
+                "name": "Related 1",
+                "category": "Dessert",
+                "ingredients": [
+                    "3/4 cup white suguar",
+                    "2 tablespoons all-purpose flour"
+                ],
+                "relatedRecipes": []
+            },
+            {
+                "id": 1,
+                "name": "Related 2",
+                "category": "Dessert",
+                "ingredients": [
+                    "3/4 cup white suguar",
+                    "2 tablespoons all-purpose flour"
+                ],
+                "relatedRecipes": []
+            }
         ]
     },
     {
@@ -44,7 +101,26 @@
             "2 tablespoons all-purpose flour"
         ],
         "relatedRecipes": [
-            "Baklava"
+            {
+                "id": 1,
+                "name": "Related 1",
+                "category": "Dessert",
+                "ingredients": [
+                    "3/4 cup white suguar",
+                    "2 tablespoons all-purpose flour"
+                ],
+                "relatedRecipes": []
+            },
+            {
+                "id": 1,
+                "name": "Related 2",
+                "category": "Dessert",
+                "ingredients": [
+                    "3/4 cup white suguar",
+                    "2 tablespoons all-purpose flour"
+                ],
+                "relatedRecipes": []
+            }
         ]
     }
 ]

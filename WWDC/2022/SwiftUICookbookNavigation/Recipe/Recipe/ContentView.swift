@@ -15,11 +15,13 @@ struct ContentView: View {
             List(Category.allCases) { category in
                 Section(category.localizedName) {
                     ForEach(modelData.myRecipes(in: category)) { recipe in
-                        NavigationLink(recipe.name) {
-                            Text(recipe.name)
-                        }
+                        NavigationLink(recipe.name, value: recipe)
                     }
                 }
+            }
+            .navigationTitle("Categories")
+            .navigationDestination(for: Recipe.self) { recipe in
+                RecipeDetail(recipe: recipe)
             }
         }
     }
