@@ -53,6 +53,25 @@ func load<T: Decodable>(_ filename: String) -> T {
 let md = ModelData()
 ```
 
+**ContentView**
+
+```swift
+struct ContentView: View {
+    @EnvironmentObject var modelData: ModelData
+
+    var body: some View {
+        Text(modelDate.recipe.id)
+    }
+}
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+            .environmentObject(ModelData())
+    }
+}
+```
+
 # Examples
 
 ## Struct
