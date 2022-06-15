@@ -17,6 +17,9 @@ struct RecipeDetail: View {
             }
         }
         .navigationTitle(recipe.name)
+        .navigationDestination(for: Recipe.self) { related in
+            RecipeDetail(recipe: related)
+        }
     }
 }
 

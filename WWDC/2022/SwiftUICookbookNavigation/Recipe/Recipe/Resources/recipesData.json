@@ -9,18 +9,30 @@
         ],
         "relatedRecipes": [
             {
-                "id": 1,
-                "name": "Related 1",
+                "id": 22,
+                "name": "Related 22",
                 "category": "Dessert",
                 "ingredients": [
                     "3/4 cup white suguar",
                     "2 tablespoons all-purpose flour"
                 ],
-                "relatedRecipes": []
+                "relatedRecipes": [
+                    {
+                        "id": 222,
+                        "name": "Related 222",
+                        "category": "Dessert",
+                        "ingredients": [
+                            "3/4 cup white suguar",
+                            "2 tablespoons all-purpose flour"
+                        ],
+                        "relatedRecipes": [
+
+                        ]
+                    }]
             },
             {
-                "id": 1,
-                "name": "Related 2",
+                "id": 33,
+                "name": "Related 33",
                 "category": "Dessert",
                 "ingredients": [
                     "3/4 cup white suguar",
