@@ -137,3 +137,7 @@ struct FoodDetailView_Previews: PreviewProvider {
     }
 }
 ```
+
+![](images/3.png)
+
+![](images/4.png)
