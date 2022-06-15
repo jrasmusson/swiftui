@@ -7,25 +7,38 @@
 
 ![](images/2.png)
 
-**Resources/recipeData.json**
+**Resources/foodData.json**
 
 ```swift
-{
-    "id": 1
-}
+[
+    {
+        "id": 1,
+        "title": "Flan",
+        "description": "What is this thing we call a flan?"
+    }
+]
 ```
 
 **ModelData**
 
 ```swift
-import UIKit
+//
+//  ModelData.swift
+//  PartyFood
+//
+//  Created by jrasmusson on 2022-06-15.
+//
 
-struct Recipe: Hashable, Codable, Identifiable {
+import Foundation
+
+struct FoodItem: Hashable, Codable, Identifiable {
     let id: Int
+    let title: String
+    let description: String
 }
 
 final class ModelData: ObservableObject {
-    var recipe: Recipe = load("recipeData.json")
+    var foodItems: [FoodItem] = load("foodData.json")
 }
 
 func load<T: Decodable>(_ filename: String) -> T {
@@ -51,30 +64,11 @@ func load<T: Decodable>(_ filename: String) -> T {
 }
 ```
 
-**ContentView**
-
-```swift
-struct ContentView: View {
-    @EnvironmentObject var modelData: ModelData
-
-    var body: some View {
-        Text(modelDate.recipe.id)
-    }
-}
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-            .environmentObject(ModelData())
-    }
-}
-```
-
 **App**
 
 ```swift
 @main
-struct RecipeApp: App {
+struct PartyFoodApp: App {
     @StateObject private var modelData = ModelData()
 
     var body: some Scene {
@@ -86,65 +80,60 @@ struct RecipeApp: App {
 }
 ```
 
-# Examples
-
-## Struct
-
-**recipeData.json**
+**ContentView**
 
 ```swift
-struct Recipe: Hashable, Codable, Identifiable {
-    let id: Int
-    let name: String
-    let ingredients: [String]
-}
-```
+import SwiftUI
 
-**Recipe**
+struct ContentView: View {
+    @EnvironmentObject var modelData: ModelData
 
-```swift
-{
-    "id": 1,
-    "name": "Apple Pie",
-    "ingredients": [
-        "3/4 cup white suguar",
-        "2 tablespoons all-purpose flour"
-    ],
-}
-```
-
-## Array
-
-**Category**
-
-```swift
-struct Category: Codable {
-    let name: String
-    let recipies: [Recipe]
-}
-```
-
-**categoryData.json**
-
-```swift
-[
-    {
-        "name": "Desserts",
-        "recipies": [
-            {
-                "id": 1,
-                "name": "Apple Pie",
-                "ingredients": [
-                    "3/4 cup white suguar",
-                    "2 tablespoons all-purpose flour"
-                ],
-                "relatedRecipes": [
-                    "Baklava"
-                ]
+    var body: some View {
+        NavigationStack {
+            List(modelData.foodItems) { item in
+                NavigationLink(value: item) {
+                    Text(item.title)
+                }
             }
-        ]
+            .navigationTitle("Party Food")
+            .navigationDestination(for: FoodItem.self) { item in
+                FoodDetailView(item: item)
+            }
+        }
     }
-]
+}
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+            .environmentObject(ModelData())
+    }
+}
 ```
 
+**FoodDetailView**
 
+```swift
+import SwiftUI
+
+struct FoodDetailView: View {
+    let item: FoodItem
+
+    var body: some View {
+        VStack {
+            Text(item.title)
+                .font(.headline)
+            Text(item.description)
+                .font(.subheadline)
+            Spacer()
+        }
+    }
+}
+
+struct FoodDetailView_Previews: PreviewProvider {
+    static var previews: some View {
+        let md = ModelData()
+        FoodDetailView(item: md.foodItems[0])
+    }
+}
+```
