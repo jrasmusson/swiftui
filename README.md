@@ -168,4 +168,5 @@ SwiftUI by [example](https://www.hackingwithswift.com/quick-start/swiftui).
 - [Explore navigation design for iOS](WWDC/2022/Navigation/README.md)
 - [Swift UI Cookbook Navigation](WWDC/2022/SwiftUICookbookNavigation/README.md)
 - [What's new SwiftUI 2022](WWDC/2022/WhatsNewSwiftUI2022/README.md)
+- [Compose custom layouts with SwiftUI](WWDC/2022/ComposeCustomLayouts/README.md)
 
