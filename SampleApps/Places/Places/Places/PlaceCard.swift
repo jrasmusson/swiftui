@@ -8,27 +8,29 @@
 import SwiftUI
 
 struct PlaceCard: View {
+    let place: Place
+
     var body: some View {
         VStack {
             HStack {
-                Text("Colorado, US")
+                Text(place.location)
                 Spacer()
                 Image(systemName: "ellipsis.circle")
             }
 
             VStack(alignment: .leading) {
                 HStack {
-                    Text("Aspen")
+                    Text(place.title)
                     Spacer()
                 }
 
                 HStack {
                     Image(systemName: "map")
-                    Text("12 Routes · Mountainous")
+                    Text(place.description)
                     Spacer()
                 }
 
-                Image("aspen")
+                Image(place.imageName)
                     .resizable()
                     .scaledToFit()
                     .cornerRadius(10)
@@ -41,6 +43,6 @@ struct PlaceCard: View {
 
 struct PlaceCard_Previews: PreviewProvider {
     static var previews: some View {
-        PlaceCard()
+        PlaceCard(place: place)
     }
 }
