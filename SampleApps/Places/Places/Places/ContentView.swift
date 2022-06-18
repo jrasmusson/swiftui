@@ -12,9 +12,9 @@ struct ContentView: View {
 
     var body: some View {
         NavigationStack {
-            List(modelData.places) { place in
+            ForEach(modelData.places) { place in
                 NavigationLink(value: place) {
-                    Text(place.title)
+                    PlaceCard(place: place)
                 }
             }
             .navigationTitle("Places")
@@ -28,6 +28,13 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+            .preferredColorScheme(.dark)
             .environmentObject(ModelData())
     }
 }
+
+//List(modelData.places) { place in
+//    NavigationLink(value: place) {
+//        PlaceCard(place: place)
+//    }
+//}
