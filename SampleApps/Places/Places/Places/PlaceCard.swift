@@ -17,6 +17,7 @@ struct PlaceCard: View {
                     .foregroundColor(.secondary)
                 Spacer()
                 Image(systemName: "ellipsis.circle")
+                    .tint(.primary)
             }
 
             VStack(alignment: .leading, spacing: 10) {
@@ -37,6 +38,7 @@ struct PlaceCard: View {
                     .scaledToFit()
                     .cornerRadius(10)
             }
+            .foregroundColor(.primary)
         }
         .padding()
         .background(.thinMaterial)
