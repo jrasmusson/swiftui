@@ -12,9 +12,11 @@ struct ContentView: View {
 
     var body: some View {
         NavigationStack {
-            ForEach(modelData.places) { place in
-                NavigationLink(value: place) {
-                    PlaceCard(place: place)
+            ScrollView {
+                ForEach(modelData.places) { place in
+                    NavigationLink(value: place) {
+                        PlaceCard(place: place)
+                    }
                 }
             }
             .navigationTitle("Places")
