@@ -1,5 +1,7 @@
 # Swift UI Cookbook for navigation
 
+- [Video](https://developer.apple.com/videos/play/wwdc2022/10054/)
+
 Old `NavigationLink` you needed an property on each item to decide whether to show:
 
 ![](images/1.png)
@@ -103,11 +105,6 @@ Or pop back to the root, simply by resetting the path:
 And that is an example of how to create a pushable stack:
 
 ![](images/20.png)
-
-### Links that help
-
-- [Video](https://developer.apple.com/videos/play/wwdc2022/10054/)
-
 
 ## Source
 
