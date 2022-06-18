@@ -32,9 +32,3 @@ struct ContentView_Previews: PreviewProvider {
             .environmentObject(ModelData())
     }
 }
-
-//List(modelData.places) { place in
-//    NavigationLink(value: place) {
-//        PlaceCard(place: place)
-//    }
-//}

@@ -11,16 +11,18 @@ struct PlaceCard: View {
     let place: Place
 
     var body: some View {
-        VStack {
+        VStack(spacing: 6) {
             HStack {
                 Text(place.location)
+                    .foregroundColor(.secondary)
                 Spacer()
                 Image(systemName: "ellipsis.circle")
             }
 
-            VStack(alignment: .leading) {
+            VStack(alignment: .leading, spacing: 10) {
                 HStack {
                     Text(place.title)
+                        .font(.title)
                     Spacer()
                 }
 
@@ -34,15 +36,17 @@ struct PlaceCard: View {
                     .resizable()
                     .scaledToFit()
                     .cornerRadius(10)
-
             }
         }
-        .padding()
+
+        .background(.thinMaterial)
+        .cornerRadius(10)
     }
 }
 
 struct PlaceCard_Previews: PreviewProvider {
     static var previews: some View {
         PlaceCard(place: place)
+            .preferredColorScheme(.dark)
     }
 }
