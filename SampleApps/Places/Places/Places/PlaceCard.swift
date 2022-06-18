@@ -38,7 +38,7 @@ struct PlaceCard: View {
                     .cornerRadius(10)
             }
         }
-
+        .padding()
         .background(.thinMaterial)
         .cornerRadius(10)
     }
