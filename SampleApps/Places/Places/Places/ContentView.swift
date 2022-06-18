@@ -12,14 +12,14 @@ struct ContentView: View {
 
     var body: some View {
         NavigationStack {
-            List(modelData.foodItems) { item in
-                NavigationLink(value: item) {
-                    Text(item.title)
+            List(modelData.places) { place in
+                NavigationLink(value: place) {
+                    Text(place.title)
                 }
             }
-            .navigationTitle("Party Food")
-            .navigationDestination(for: FoodItem.self) { item in
-                FoodDetailView(item: item)
+            .navigationTitle("Places")
+            .navigationDestination(for: Place.self) { item in
+                PlaceDetail(place: place)
             }
         }
     }

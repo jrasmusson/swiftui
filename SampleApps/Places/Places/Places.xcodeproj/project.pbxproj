@@ -12,8 +12,8 @@
 		71C8B0D1285DFF4100DF9F85 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 71C8B0D0285DFF4100DF9F85 /* Assets.xcassets */; };
 		71C8B0D4285DFF4100DF9F85 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 71C8B0D3285DFF4100DF9F85 /* Preview Assets.xcassets */; };
 		71C8B0DC285DFFB900DF9F85 /* ModelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C8B0DB285DFFB900DF9F85 /* ModelData.swift */; };
-		71C8B0DE285E006200DF9F85 /* FoodDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C8B0DD285E006200DF9F85 /* FoodDetailView.swift */; };
 		71C8B0E0285E026700DF9F85 /* PlaceCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C8B0DF285E026700DF9F85 /* PlaceCard.swift */; };
+		71C8B0E2285E087400DF9F85 /* PlaceDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C8B0E1285E087400DF9F85 /* PlaceDetail.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,8 +23,8 @@
 		71C8B0D0285DFF4100DF9F85 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		71C8B0D3285DFF4100DF9F85 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		71C8B0DB285DFFB900DF9F85 /* ModelData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelData.swift; sourceTree = "<group>"; };
-		71C8B0DD285E006200DF9F85 /* FoodDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDetailView.swift; sourceTree = "<group>"; };
 		71C8B0DF285E026700DF9F85 /* PlaceCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceCard.swift; sourceTree = "<group>"; };
+		71C8B0E1285E087400DF9F85 /* PlaceDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceDetail.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,8 +61,8 @@
 				71C8B0DB285DFFB900DF9F85 /* ModelData.swift */,
 				71C8B0CC285DFF3F00DF9F85 /* PlacesApp.swift */,
 				71C8B0CE285DFF3F00DF9F85 /* ContentView.swift */,
-				71C8B0DD285E006200DF9F85 /* FoodDetailView.swift */,
 				71C8B0DF285E026700DF9F85 /* PlaceCard.swift */,
+				71C8B0E1285E087400DF9F85 /* PlaceDetail.swift */,
 			);
 			path = Places;
 			sourceTree = "<group>";
@@ -154,8 +154,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				71C8B0E2285E087400DF9F85 /* PlaceDetail.swift in Sources */,
 				71C8B0CF285DFF3F00DF9F85 /* ContentView.swift in Sources */,
-				71C8B0DE285E006200DF9F85 /* FoodDetailView.swift in Sources */,
 				71C8B0E0285E026700DF9F85 /* PlaceCard.swift in Sources */,
 				71C8B0CD285DFF3F00DF9F85 /* PlacesApp.swift in Sources */,
 				71C8B0DC285DFFB900DF9F85 /* ModelData.swift in Sources */,
