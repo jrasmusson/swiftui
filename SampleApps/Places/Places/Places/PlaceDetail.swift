@@ -10,23 +10,56 @@ import SwiftUI
 struct PlaceDetail: View {
     let place: Place
     var body: some View {
-        
-        Text("Hello, World!").padding()
-            .toolbar {
-                ToolbarItemGroup(placement: .navigationBarTrailing) {
-                    Button(action: {
-                        print("Share")
-                    }) {
-                        Image(systemName: "square.and.arrow.up")
+
+        VStack {
+            Image("sf-detail")
+                .resizable()
+                .scaledToFit()
+
+            VStack(spacing: 6) {
+                HStack {
+                    Text(place.location)
+                        .foregroundColor(.secondary)
+                    Spacer()
+                }
+
+                VStack(alignment: .leading, spacing: 10) {
+                    HStack {
+                        Text(place.title)
+                            .font(.title)
+                        Spacer()
                     }
 
-                    Button(action: {
-                        print("Like")
-                    }) {
-                        Image(systemName: "heart")
+                    HStack {
+                        Image(systemName: "map")
+                        Text(place.description)
+                        Spacer()
                     }
                 }
+                .foregroundColor(.primary)
             }
+            .padding()
+
+            Spacer()
+        }
+        .edgesIgnoringSafeArea(.top)
+
+        .toolbar {
+            ToolbarItemGroup(placement: .navigationBarTrailing) {
+                Button(action: {
+                    print("Share")
+                }) {
+                    Image(systemName: "square.and.arrow.up")
+                }
+
+                Button(action: {
+                    print("Like")
+                }) {
+                    Image(systemName: "heart")
+                }
+            }
+        }
+        .tint(.primary)
     }
 }
 

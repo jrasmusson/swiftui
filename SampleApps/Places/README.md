@@ -275,5 +275,23 @@ struct PlaceDetail_Previews: PreviewProvider {
 
 Thinking here is `VStack` ignoring safe area with details pulled up overlapping background image.
 
+![](images/9.png)
+
+
+### Overlapping details
+
+It is possible to pull content up and make it overlap with negative spacing:
+
+![](images/10.png)
+
+But that relies on the background picture being dark. So we won't here:
+
+![](images/11.png)
+
+### Noteworthy
+
+![](images/12.png)
+
+This we can to with a list and navigation link:
 
 

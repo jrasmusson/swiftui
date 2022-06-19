@@ -15,6 +15,7 @@
 		71C8B0E0285E026700DF9F85 /* PlaceCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C8B0DF285E026700DF9F85 /* PlaceCard.swift */; };
 		71C8B0E2285E087400DF9F85 /* PlaceDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C8B0E1285E087400DF9F85 /* PlaceDetail.swift */; };
 		71C8B0E4285F50C000DF9F85 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C8B0E3285F50C000DF9F85 /* MenuView.swift */; };
+		71C8B0E8285F676000DF9F85 /* NoteworthyRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C8B0E7285F676000DF9F85 /* NoteworthyRow.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +28,7 @@
 		71C8B0DF285E026700DF9F85 /* PlaceCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceCard.swift; sourceTree = "<group>"; };
 		71C8B0E1285E087400DF9F85 /* PlaceDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceDetail.swift; sourceTree = "<group>"; };
 		71C8B0E3285F50C000DF9F85 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
+		71C8B0E7285F676000DF9F85 /* NoteworthyRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteworthyRow.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +67,7 @@
 				71C8B0CE285DFF3F00DF9F85 /* ContentView.swift */,
 				71C8B0DF285E026700DF9F85 /* PlaceCard.swift */,
 				71C8B0E1285E087400DF9F85 /* PlaceDetail.swift */,
+				71C8B0E7285F676000DF9F85 /* NoteworthyRow.swift */,
 			);
 			path = Places;
 			sourceTree = "<group>";
@@ -158,6 +161,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				71C8B0E2285E087400DF9F85 /* PlaceDetail.swift in Sources */,
+				71C8B0E8285F676000DF9F85 /* NoteworthyRow.swift in Sources */,
 				71C8B0E4285F50C000DF9F85 /* MenuView.swift in Sources */,
 				71C8B0CF285DFF3F00DF9F85 /* ContentView.swift in Sources */,
 				71C8B0E0285E026700DF9F85 /* PlaceCard.swift in Sources */,

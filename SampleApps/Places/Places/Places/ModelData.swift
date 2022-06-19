@@ -24,3 +24,12 @@ final class ModelData: ObservableObject {
 
 let place = Place(location: "Colorado, US", title: "Aspen", description: "14 Routes · Mountainous", imageName: "aspen")
 let place2 = Place(location: "California, US", title: "San Francisco", description: "12 Routes · Coastal", imageName: "sf")
+
+struct Noteworthy: Hashable, Identifiable {
+    let id = UUID()
+    let title: String
+    let description: String
+    let iconName: String
+}
+
+let notworthy1 = Noteworthy(title: "Carl the Fog", description: "Layering for rides is an art with the microclimages of the Bay. Here's tips from the locals.", iconName: "cloud.fog")
