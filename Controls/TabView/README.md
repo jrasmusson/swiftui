@@ -5,39 +5,31 @@ SwiftUI’s TabView doubles up as the equivalent to a `UIPageViewController`, le
 ## Tabs
 
 ```swift
-import SwiftUI
-
 struct ContentView: View {
+    @State private var selection: Tab = .featured
+
+    enum Tab {
+        case featured
+        case list
+    }
+
     var body: some View {
-        TabView {
-            Text("The First Tab")
-                .badge(10)
+        TabView(selection: $selection) {
+            CategoryHome()
                 .tabItem {
-                    Image(systemName: "1.square.fill")
-                    Text("First")
+                    Label("Featured", systemImage: "star")
                 }
-            Text("Another Tab")
+                .tag(Tab.featured)
+
+            LandmarkList()
                 .tabItem {
-                    Image(systemName: "2.square.fill")
-                    Text("Second")
+                    Label("List", systemImage: "list.bullet")
                 }
-            Text("The Last Tab")
-                .tabItem {
-                    Image(systemName: "3.square.fill")
-                    Text("Third")
-                }
+                .tag(Tab.list)
         }
     }
 }
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-    }
-}
 ```
-
-![](images/2.png)
 
 ## Page Style
 
