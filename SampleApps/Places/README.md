@@ -212,3 +212,37 @@ struct ContentView_Previews: PreviewProvider {
     }
 }
 ```
+
+### PlaceCard with Menu
+
+![](images/3.png)
+
+**PlaceCard**
+
+```swift
+import SwiftUI
+
+struct PlaceCard: View {
+    let place: Place
+
+    var body: some View {
+        VStack(spacing: 6) {
+            HStack {
+                Text(place.location)
+                    .foregroundColor(.secondary)
+                Spacer()
+                Menu {
+                    Button("Share", action: share)
+                    Button("Save as PDF", action: saveAsPDF)
+                } label: {
+                    Image(systemName: "ellipsis.circle")
+                        .tint(.primary)
+                }
+            }
+    }
+
+    func share() {  }
+    func saveAsPDF() {  }
+}
+```
+

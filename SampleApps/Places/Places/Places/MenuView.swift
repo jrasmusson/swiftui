@@ -13,8 +13,9 @@ struct MenuView: View {
             Button("Open in Preview", action: openInPreview)
             Button("Save as PDF", action: saveAsPDF)
         } label: {
-            Label("PDF", systemImage: "doc.fill")
-        }    }
+            Label("", systemImage: "doc.fill")
+        }
+    }
 
     func openInPreview() {  }
     func saveAsPDF() {  }

@@ -16,8 +16,13 @@ struct PlaceCard: View {
                 Text(place.location)
                     .foregroundColor(.secondary)
                 Spacer()
-                Image(systemName: "ellipsis.circle")
-                    .tint(.primary)
+                Menu {
+                    Button("Share", action: share)
+                    Button("Save as PDF", action: saveAsPDF)
+                } label: {
+                    Image(systemName: "ellipsis.circle")
+                        .tint(.primary)
+                }
             }
 
             VStack(alignment: .leading, spacing: 10) {
@@ -44,6 +49,9 @@ struct PlaceCard: View {
         .background(.thinMaterial)
         .cornerRadius(10)
     }
+
+    func share() {  }
+    func saveAsPDF() {  }
 }
 
 struct PlaceCard_Previews: PreviewProvider {
