@@ -110,7 +110,7 @@ import SwiftUI
 struct PlaceDetail: View {
     let place: Place
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Text("Hello, World!")
     }
 }
 
@@ -217,4 +217,13 @@ struct PlaceCard: View {
     func saveAsPDF() {  }
 }
 ```
+
+
+## Place Detail
+
+![](images/5.png)
+
+### Nav Bar Buttons
+
+![](images/6.png)
 
