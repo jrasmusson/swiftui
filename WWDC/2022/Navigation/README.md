@@ -2,6 +2,11 @@
 
 Familiar navigation patterns can help people easily explore the information within your app — and save them from unnecessary confusion.
 
+- [Video](https://developer.apple.com/videos/play/wwdc2022/10001/)
+
+
+![](images/0.png)
+
 ## Tab bar Navigation
 
 ### Say no to home tabs
@@ -121,10 +126,6 @@ Also note how the intent colors here all indicate that something is tappable and
 ![](images/13.png)
 
 ![](images/14.png)
-
-### Links that help
-
-- [Video](https://developer.apple.com/videos/play/wwdc2022/10001/)
 
 
 
