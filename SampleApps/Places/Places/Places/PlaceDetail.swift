@@ -10,6 +10,7 @@ import SwiftUI
 struct PlaceDetail: View {
     let place: Place
     var body: some View {
+        
         Text("Hello, World!").padding()
             .toolbar {
                 ToolbarItemGroup(placement: .navigationBarTrailing) {

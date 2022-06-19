@@ -269,4 +269,11 @@ struct PlaceDetail_Previews: PreviewProvider {
 }
 ```
 
+### Background Image
+
+![](images/8.png)
+
+Thinking here is `VStack` ignoring safe area with details pulled up overlapping background image.
+
+
 
