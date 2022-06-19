@@ -1,8 +1,10 @@
 # Places
 
-## Home screen
+## Building the Home screen
 
-![](images/1.png)
+![](images/0.png)
+
+### Data
 
 **ModelData**
 
@@ -44,39 +46,9 @@ struct PlacesApp: App {
 }
 ```
 
-**ContentView**
+### PlaceCard
 
-```swift
-import SwiftUI
-
-struct ContentView: View {
-    @EnvironmentObject var modelData: ModelData
-
-    var body: some View {
-        NavigationStack {
-            ScrollView {
-                ForEach(modelData.places) { place in
-                    NavigationLink(value: place) {
-                        PlaceCard(place: place)
-                    }
-                }
-            }
-            .navigationTitle("Places")
-            .navigationDestination(for: Place.self) { item in
-                PlaceDetail(place: place)
-            }
-        }
-    }
-}
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-            .preferredColorScheme(.dark)
-            .environmentObject(ModelData())
-    }
-}
-```
+![](images/4.png)
 
 **PlaceCard**
 
@@ -149,7 +121,7 @@ struct PlaceDetail_Previews: PreviewProvider {
 }
 ```
 
-## With Tab View
+## Scrollable TabView
 
 ![](images/2.png)
 
@@ -213,7 +185,7 @@ struct ContentView_Previews: PreviewProvider {
 }
 ```
 
-### PlaceCard with Menu
+### Adding the Menu
 
 ![](images/3.png)
 
