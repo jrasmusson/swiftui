@@ -16,6 +16,7 @@
 		71C8B0E2285E087400DF9F85 /* PlaceDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C8B0E1285E087400DF9F85 /* PlaceDetail.swift */; };
 		71C8B0E4285F50C000DF9F85 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C8B0E3285F50C000DF9F85 /* MenuView.swift */; };
 		71C8B0E8285F676000DF9F85 /* NoteworthyRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C8B0E7285F676000DF9F85 /* NoteworthyRow.swift */; };
+		71C8B1112860A8B700DF9F85 /* NoteworthyDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C8B1102860A8B700DF9F85 /* NoteworthyDetail.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +30,7 @@
 		71C8B0E1285E087400DF9F85 /* PlaceDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceDetail.swift; sourceTree = "<group>"; };
 		71C8B0E3285F50C000DF9F85 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		71C8B0E7285F676000DF9F85 /* NoteworthyRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteworthyRow.swift; sourceTree = "<group>"; };
+		71C8B1102860A8B700DF9F85 /* NoteworthyDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteworthyDetail.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,8 +104,17 @@
 			children = (
 				71C8B0E1285E087400DF9F85 /* PlaceDetail.swift */,
 				71C8B0E7285F676000DF9F85 /* NoteworthyRow.swift */,
+				71C8B10D2860A88D00DF9F85 /* Noteworthy */,
 			);
 			path = Detail;
+			sourceTree = "<group>";
+		};
+		71C8B10D2860A88D00DF9F85 /* Noteworthy */ = {
+			isa = PBXGroup;
+			children = (
+				71C8B1102860A8B700DF9F85 /* NoteworthyDetail.swift */,
+			);
+			path = Noteworthy;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -183,6 +194,7 @@
 				71C8B0E0285E026700DF9F85 /* PlaceCard.swift in Sources */,
 				71C8B0CD285DFF3F00DF9F85 /* PlacesApp.swift in Sources */,
 				71C8B0DC285DFFB900DF9F85 /* ModelData.swift in Sources */,
+				71C8B1112860A8B700DF9F85 /* NoteworthyDetail.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

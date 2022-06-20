@@ -49,7 +49,18 @@ struct PlaceDetail: View {
             title
 
             // noteworthy
-            
+            NavigationStack {
+                ForEach(place.noteworthy) { worthy in
+                    NavigationLink(value: worthy) {
+                        NoteworthyDetail()
+                    }
+    //                .navigationTitle(worthy.title)
+                    .navigationDestination(for: NoteworthyDetail.self) { item in
+                        NoteworthyDetail()
+                    }
+                }
+            }
+
             Spacer()
         }
         .edgesIgnoringSafeArea(.top)
