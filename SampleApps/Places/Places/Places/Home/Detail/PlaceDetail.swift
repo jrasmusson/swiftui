@@ -32,7 +32,7 @@ struct PlaceDetail: View {
 
                     HStack {
                         Image(systemName: "map")
-                        Text(place.description)
+                        Text(place.subTitle)
                         Spacer()
                     }
                 }

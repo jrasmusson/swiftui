@@ -12,7 +12,7 @@ struct Place: Hashable, Identifiable {
     let id: UUID = UUID()
     let location: String
     let title: String
-    let description: String
+    let subTitle: String
     let imageName: String
 }
 
@@ -25,8 +25,8 @@ final class ModelData: ObservableObject {
     ]
 }
 
-let place = Place(location: "Colorado, US", title: "Aspen", description: "14 Routes · Mountainous", imageName: "aspen")
-let place2 = Place(location: "California, US", title: "San Francisco", description: "12 Routes · Coastal", imageName: "sf")
+let place = Place(location: "Colorado, US", title: "Aspen", subTitle: "14 Routes · Mountainous", imageName: "aspen")
+let place2 = Place(location: "California, US", title: "San Francisco", subTitle: "12 Routes · Coastal", imageName: "sf")
 
 struct Noteworthy: Hashable, Identifiable {
     let id = UUID()
