@@ -35,7 +35,7 @@ struct NoteworthyRow: View {
 
 struct NoteworthyRow_Previews: PreviewProvider {
     static var previews: some View {
-        NoteworthyRow(noteworthy: notworthy1)
+        NoteworthyRow(noteworthy: noteworthy1)
             .preferredColorScheme(.dark)
     }
 }
