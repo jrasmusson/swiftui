@@ -55,7 +55,7 @@ ZStack {
 ## Specific color
 
 ```swift
-Color(red: 1, green: 0.8, blue: 0)
+let appColor = Color(red: 128/255, green: 165/255, blue: 117/255)
 ```
 
 
