@@ -1,129 +1,6 @@
-# Places
+# Places Home
 
-## Building the Home screen
-
-![](images/0.png)
-
-### Data
-
-**ModelData**
-
-```swift
-import Foundation
-
-struct Place: Hashable, Identifiable {
-    let id: UUID = UUID()
-    let location: String
-    let title: String
-    let description: String
-    let imageName: String
-}
-
-final class ModelData: ObservableObject {
-    var places: [Place] = [
-        place,
-        place2
-    ]
-}
-
-let place = Place(location: "Colorado, US", title: "Aspen", description: "14 Routes · Mountainous", imageName: "aspen")
-let place2 = Place(location: "California, US", title: "San Francisco", description: "12 Routes · Coastal", imageName: "sf")
-```
-
-**PlacesApp**
-
-```swift
-@main
-struct PlacesApp: App {
-    @StateObject private var modelData = ModelData()
-
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-                .environmentObject(modelData)
-        }
-    }
-}
-```
-
-### PlaceCard
-
-![](images/4.png)
-
-**PlaceCard**
-
-```swift
-import SwiftUI
-
-struct PlaceCard: View {
-    let place: Place
-
-    var body: some View {
-        VStack(spacing: 6) {
-            HStack {
-                Text(place.location)
-                    .foregroundColor(.secondary)
-                Spacer()
-                Image(systemName: "ellipsis.circle")
-                    .tint(.primary)
-            }
-
-            VStack(alignment: .leading, spacing: 10) {
-                HStack {
-                    Text(place.title)
-                        .font(.title)
-                    Spacer()
-                }
-
-                HStack {
-                    Image(systemName: "map")
-                    Text(place.description)
-                    Spacer()
-                }
-
-                Image(place.imageName)
-                    .resizable()
-                    .scaledToFit()
-                    .cornerRadius(10)
-            }
-            .foregroundColor(.primary)
-        }
-        .padding()
-        .background(.thinMaterial)
-        .cornerRadius(10)
-    }
-}
-
-struct PlaceCard_Previews: PreviewProvider {
-    static var previews: some View {
-        PlaceCard(place: place)
-            .preferredColorScheme(.dark)
-    }
-}
-```
-
-**PlaceDetail**
-
-```swift
-import SwiftUI
-
-struct PlaceDetail: View {
-    let place: Place
-    var body: some View {
-        Text("Hello, World!")
-    }
-}
-
-struct PlaceDetail_Previews: PreviewProvider {
-    static var previews: some View {
-        PlaceDetail(place: place)
-    }
-}
-```
-
-## Scrollable TabView
-
-![](images/2.png)
+![](images/1.png)
 
 **ContentView**
 
@@ -172,7 +49,7 @@ struct ContentView: View {
                 }
                 .tag(Tab.profile)
         }
-
+        .accentColor(appColor)
     }
 }
 
@@ -185,9 +62,7 @@ struct ContentView_Previews: PreviewProvider {
 }
 ```
 
-### Adding the Menu
-
-![](images/3.png)
+![](images/2.png)
 
 **PlaceCard**
 
@@ -211,51 +86,126 @@ struct PlaceCard: View {
                         .tint(.primary)
                 }
             }
+
+            VStack(alignment: .leading, spacing: 10) {
+                HStack {
+                    Text(place.title)
+                        .font(.title)
+                    Spacer()
+                }
+
+                HStack {
+                    Image(systemName: "map")
+                    Text(place.subTitle)
+                    Spacer()
+                }
+
+                Image(place.imageName)
+                    .resizable()
+                    .scaledToFit()
+                    .cornerRadius(10)
+            }
+            .foregroundColor(.primary)
+        }
+        .padding()
+        .background(.thinMaterial)
+        .cornerRadius(10)
     }
 
     func share() {  }
     func saveAsPDF() {  }
 }
+
+struct PlaceCard_Previews: PreviewProvider {
+    static var previews: some View {
+        PlaceCard(place: place)
+            .preferredColorScheme(.dark)
+    }
+}
 ```
 
-
-## Place Detail
-
-![](images/5.png)
-
-
-### Nav Bar Buttons
-
-![](images/6.png)
-
-Trick here is to place preview in a `NavigationStack` that would have been set in the parent so you can preview:
+![](images/3.png)
 
 **PlaceDetail**
-
-![](images/7.png)
 
 ```swift
 import SwiftUI
 
 struct PlaceDetail: View {
     let place: Place
-    var body: some View {
-        Text("Hello, World!").padding()
-            .toolbar {
-                ToolbarItemGroup(placement: .navigationBarTrailing) {
-                    Button(action: {
-                        print("Share")
-                    }) {
-                        Image(systemName: "square.and.arrow.up")
-                    }
 
-                    Button(action: {
-                        print("Like")
-                    }) {
-                        Image(systemName: "heart")
-                    }
+    var body: some View {
+        VStack {
+            header
+            title
+            noteworthy
+            Spacer()
+        }
+        .edgesIgnoringSafeArea(.top)
+        .toolbar {
+            toolBarItems
+        }
+        .tint(.primary)
+    }
+
+    var header: some View {
+        Image("sf-detail")
+            .resizable()
+            .scaledToFit()
+    }
+
+    var title: some View {
+        VStack(spacing: 6) {
+            HStack {
+                Text(place.location)
+                    .foregroundColor(.secondary)
+                Spacer()
+            }
+
+            VStack(alignment: .leading, spacing: 10) {
+                HStack {
+                    Text(place.title)
+                        .font(.title)
+                    Spacer()
+                }
+
+                HStack {
+                    Image(systemName: "map")
+                    Text(place.subTitle)
+                    Spacer()
                 }
             }
+            .foregroundColor(.primary)
+        }
+        .padding()
+    }
+
+    var noteworthy: some View {
+        List(place.noteworthy) { worthy in
+            NavigationLink(value: worthy) {
+                NoteworthyRow(noteworthy: worthy)
+            }
+            .navigationDestination(for: Noteworthy.self) { detail in
+                NoteworthyDetail(noteworthy: detail)
+            }
+        }
+        .scrollDisabled(true)
+    }
+
+    var toolBarItems: ToolbarItemGroup<TupleView<(Button<Image>, Button<Image>)>> {
+        ToolbarItemGroup(placement: .navigationBarTrailing) {
+            Button(action: {
+                print("Share")
+            }) {
+                Image(systemName: "square.and.arrow.up")
+            }
+
+            Button(action: {
+                print("Like")
+            }) {
+                Image(systemName: "heart")
+            }
+        }
     }
 }
 
@@ -269,33 +219,67 @@ struct PlaceDetail_Previews: PreviewProvider {
 }
 ```
 
-### Background Image
+![](images/4.png)
 
-![](images/8.png)
+**NoteworthyRow**
 
-Thinking here is `VStack` ignoring safe area with details pulled up overlapping background image.
+```swift
+import SwiftUI
 
-![](images/9.png)
+struct NoteworthyRow: View {
+    let noteworthy: Noteworthy
+    let size: CGFloat = 48
 
+    var body: some View {
+        HStack {
+            Image(systemName: noteworthy.iconName)
+                .foregroundColor(appColor)
+                .frame(width: size, height: size)
+                .background(.ultraThinMaterial)
+                .cornerRadius(10)
 
-### Overlapping details
+            VStack(alignment: .leading) {
+                Text(noteworthy.title)
+                    .font(.headline)
+                Text(noteworthy.description)
+                    .font(.subheadline)
+                    .foregroundColor(.secondary)
+            }
+        }
+        .cornerRadius(10)
+    }
+}
 
-It is possible to pull content up and make it overlap with negative spacing:
+struct NoteworthyRow_Previews: PreviewProvider {
+    static var previews: some View {
+        NoteworthyRow(noteworthy: noteworthy1)
+            .preferredColorScheme(.dark)
+    }
+}
+```
 
-![](images/10.png)
+![](images/5.png)
 
-But that relies on the background picture being dark. So we won't here:
+**NoteworthyDetail**
 
-![](images/11.png)
+```swift
+import SwiftUI
 
-### Noteworthy
+struct NoteworthyDetail: View {
+    let noteworthy: Noteworthy
+    var body: some View {
+        Text("Hello \(noteworthy.title)!")
+            .navigationTitle(noteworthy.title)
+    }
+}
 
-![](images/12.png)
-
-#### Row
-
-![](images/13.png)
-
-![](images/14.png)
-
+struct NoteworthyDetail_Previews: PreviewProvider {
+    static var previews: some View {
+        NavigationStack {
+            NoteworthyDetail(noteworthy: noteworthy1)
+        }
+        .preferredColorScheme(.dark)
+    }
+}
+```
 

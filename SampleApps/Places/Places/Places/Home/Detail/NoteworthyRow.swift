@@ -1,10 +1,3 @@
-//
-//  NoteworthyRow.swift
-//  Places
-//
-//  Created by jrasmusson on 2022-06-19.
-//
-
 import SwiftUI
 
 struct NoteworthyRow: View {
