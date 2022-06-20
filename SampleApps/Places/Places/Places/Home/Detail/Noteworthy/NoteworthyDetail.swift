@@ -11,7 +11,6 @@ struct NoteworthyDetail: View {
     let noteworthy: Noteworthy
     var body: some View {
         Text("Hello \(noteworthy.title)!")
-            .navigationTitle(noteworthy.title)
     }
 }
 

@@ -47,8 +47,8 @@ struct PlaceDetail: View {
             NavigationLink(value: worthy) {
                 NoteworthyRow(noteworthy: worthy)
             }
-            .navigationDestination(for: Noteworthy.self) { item in
-                NoteworthyDetail(noteworthy: worthy)
+            .navigationDestination(for: Noteworthy.self) { detail in
+                NoteworthyDetail(noteworthy: detail)
             }
         }
     }
