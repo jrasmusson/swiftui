@@ -10,6 +10,20 @@ import SwiftUI
 struct PlaceDetail: View {
     let place: Place
 
+    var body: some View {
+        VStack {
+            header
+            title
+            noteworthy
+            Spacer()
+        }
+        .edgesIgnoringSafeArea(.top)
+        .toolbar {
+            toolBarItems
+        }
+        .tint(.primary)
+    }
+
     var header: some View {
         Image("sf-detail")
             .resizable()
@@ -51,35 +65,23 @@ struct PlaceDetail: View {
                 NoteworthyDetail(noteworthy: detail)
             }
         }
+        .scrollDisabled(true)
     }
 
-    var body: some View {
+    var toolBarItems: ToolbarItemGroup<TupleView<(Button<Image>, Button<Image>)>> {
+        ToolbarItemGroup(placement: .navigationBarTrailing) {
+            Button(action: {
+                print("Share")
+            }) {
+                Image(systemName: "square.and.arrow.up")
+            }
 
-        VStack {
-            header
-            title
-            noteworthy
-
-            Spacer()
-        }
-        .edgesIgnoringSafeArea(.top)
-
-        .toolbar {
-            ToolbarItemGroup(placement: .navigationBarTrailing) {
-                Button(action: {
-                    print("Share")
-                }) {
-                    Image(systemName: "square.and.arrow.up")
-                }
-
-                Button(action: {
-                    print("Like")
-                }) {
-                    Image(systemName: "heart")
-                }
+            Button(action: {
+                print("Like")
+            }) {
+                Image(systemName: "heart")
             }
         }
-        .tint(.primary)
     }
 }
 
