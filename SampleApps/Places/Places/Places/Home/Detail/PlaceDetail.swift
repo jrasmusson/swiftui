@@ -42,24 +42,24 @@ struct PlaceDetail: View {
         .padding()
     }
 
+    var noteworthy: some View {
+        List(place.noteworthy) { worthy in
+            NavigationLink(value: worthy) {
+                NoteworthyRow(noteworthy: worthy)
+            }
+            .navigationTitle(worthy.title)
+            .navigationDestination(for: Noteworthy.self) { item in
+                NoteworthyDetail()
+            }
+        }
+    }
+
     var body: some View {
 
         VStack {
             header
             title
-
-            // noteworthy
-            NavigationStack {
-                ForEach(place.noteworthy) { worthy in
-                    NavigationLink(value: worthy) {
-                        NoteworthyRow(noteworthy: worthy)
-                    }
-    //                .navigationTitle(worthy.title)
-                    .navigationDestination(for: NoteworthyDetail.self) { item in
-                        NoteworthyDetail()
-                    }
-                }
-            }
+            noteworthy
 
             Spacer()
         }

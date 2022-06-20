@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct NoteworthyDetail: View, Hashable {
+struct NoteworthyDetail: View {
     var body: some View {
         Text("Hello, World!")
     }
