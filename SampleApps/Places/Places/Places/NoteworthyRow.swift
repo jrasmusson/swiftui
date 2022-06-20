@@ -14,12 +14,7 @@ struct NoteworthyRow: View {
     var body: some View {
         HStack {
             Image(systemName: noteworthy.iconName)
-                .tint(.green)
-//                .resizable()
-//                .scaledToFit()
-//                .padding(10)
-
-
+                .foregroundColor(appColor)
                 .frame(width: size, height: size)
                 .background(.secondary)
                 .cornerRadius(10)

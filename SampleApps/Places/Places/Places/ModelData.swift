@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 struct Place: Hashable, Identifiable {
     let id: UUID = UUID()
@@ -14,6 +15,8 @@ struct Place: Hashable, Identifiable {
     let description: String
     let imageName: String
 }
+
+let appColor = Color(red: 128/255, green: 165/255, blue: 117/255)
 
 final class ModelData: ObservableObject {
     var places: [Place] = [
