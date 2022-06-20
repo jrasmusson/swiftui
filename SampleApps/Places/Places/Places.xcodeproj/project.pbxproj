@@ -64,10 +64,7 @@
 				71C8B0DA285DFF8F00DF9F85 /* Files */,
 				71C8B0DB285DFFB900DF9F85 /* ModelData.swift */,
 				71C8B0CC285DFF3F00DF9F85 /* PlacesApp.swift */,
-				71C8B0CE285DFF3F00DF9F85 /* ContentView.swift */,
-				71C8B0DF285E026700DF9F85 /* PlaceCard.swift */,
-				71C8B0E1285E087400DF9F85 /* PlaceDetail.swift */,
-				71C8B0E7285F676000DF9F85 /* NoteworthyRow.swift */,
+				71C8B10B2860A2D300DF9F85 /* Home */,
 			);
 			path = Places;
 			sourceTree = "<group>";
@@ -88,6 +85,25 @@
 				71C8B0E3285F50C000DF9F85 /* MenuView.swift */,
 			);
 			name = Files;
+			sourceTree = "<group>";
+		};
+		71C8B10B2860A2D300DF9F85 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				71C8B0CE285DFF3F00DF9F85 /* ContentView.swift */,
+				71C8B0DF285E026700DF9F85 /* PlaceCard.swift */,
+				71C8B10C2860A30B00DF9F85 /* Detail */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		71C8B10C2860A30B00DF9F85 /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				71C8B0E1285E087400DF9F85 /* PlaceDetail.swift */,
+				71C8B0E7285F676000DF9F85 /* NoteworthyRow.swift */,
+			);
+			path = Detail;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
