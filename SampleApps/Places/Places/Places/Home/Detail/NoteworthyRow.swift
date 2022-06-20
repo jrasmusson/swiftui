@@ -16,7 +16,7 @@ struct NoteworthyRow: View {
             Image(systemName: noteworthy.iconName)
                 .foregroundColor(appColor)
                 .frame(width: size, height: size)
-                .background(.secondary)
+                .background(.ultraThinMaterial)
                 .cornerRadius(10)
 
             VStack(alignment: .leading) {
@@ -27,8 +27,6 @@ struct NoteworthyRow: View {
                     .foregroundColor(.secondary)
             }
         }
-        .padding()
-        .background(.ultraThinMaterial)
         .cornerRadius(10)
     }
 }
