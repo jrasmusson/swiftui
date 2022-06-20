@@ -49,7 +49,7 @@ struct ContentView: View {
                 }
                 .tag(Tab.profile)
         }
-
+        .accentColor(appColor)
     }
 }
 
