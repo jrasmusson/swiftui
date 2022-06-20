@@ -52,7 +52,7 @@ struct PlaceDetail: View {
             NavigationStack {
                 ForEach(place.noteworthy) { worthy in
                     NavigationLink(value: worthy) {
-                        NoteworthyDetail()
+                        NoteworthyRow(noteworthy: worthy)
                     }
     //                .navigationTitle(worthy.title)
                     .navigationDestination(for: NoteworthyDetail.self) { item in
