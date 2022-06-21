@@ -29,16 +29,6 @@ struct ItinerariesView: View {
                 }
                 .foregroundColor(appColor)
             }
-//            .toolbar {
-//                ToolbarItemGroup(placement: .navigationBarTrailing) {
-//                    Button(action: {
-//                        self.showingAddItinerary.toggle()
-//                    }) {
-//                        Image(systemName: "plus")
-//                    }
-//                    .foregroundColor(appColor)
-//                }
-//            }
             .navigationTitle("Itineraries")
             .navigationDestination(for: Itinerary.self) { item in
                 ItineraryDetail()
