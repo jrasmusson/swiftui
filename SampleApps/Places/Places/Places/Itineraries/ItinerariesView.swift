@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ItinerariesView: View {
     @EnvironmentObject var modelData: ModelData
+    @State var showingAddItinerary = false
 
     var body: some View {
         NavigationStack {
@@ -20,9 +21,22 @@ struct ItinerariesView: View {
                     }
                 }
             }
+            .toolbar {
+                ToolbarItemGroup(placement: .navigationBarTrailing) {
+                    Button(action: {
+                        self.showingAddItinerary.toggle()
+                    }) {
+                        Image(systemName: "plus")
+                    }
+                    .foregroundColor(appColor)
+                }
+            }
             .navigationTitle("Itineraries")
             .navigationDestination(for: Itinerary.self) { item in
                 ItineraryDetail()
+            }
+            .sheet(isPresented: $showingAddItinerary) {
+//                AddBookView().environment(\.managedObjectContext, self.moc)
             }
         }
     }
