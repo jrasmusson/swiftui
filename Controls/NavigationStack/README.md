@@ -9,15 +9,16 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-            NavigationStack {
-                List(1..<20) { i in
-                    NavigationLink("Detail \(i)") {
-                        Text("Detail \(i)")
-                    }
+        NavigationStack {
+            List(1..<20) { i in
+                NavigationLink("Detail \(i)") {
+                    Text("Detail \(i)")
                 }
-                .navigationTitle("NavigationStack")
             }
-        }}
+            .navigationTitle("NavigationStack")
+        }
+    }
+}
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {

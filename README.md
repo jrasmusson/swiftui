@@ -28,18 +28,19 @@ Deliberate practice with SwiftUI.
 - [EditButton](Controls/EditButton/README.md)
 - [ConfirmationDialog](Controls/ConfirmationDialog/README.md)
 
-### Controls
+### Navigation
 
+- [NavigationView - Deprecated](Controls/NavigationView/README.md)
+- [NavigationStack](Controls/NavigationStack/README.md)
 - [Link](Controls/Link/README.md)
 - [Menu](Controls/Menu/README.md)
+- [Toolbar](Controls/Toolbar/README.md)
 
 ### Containers
 
 - [Form](Controls/Form/README.md)
 - [Group](Controls/Group/README.md)
 - [List](Controls/Lists/README.md)
-- [NavigationView - Deprecated](Controls/NavigationView/README.md)
-- [NavigationStack](Controls/NavigationStack/README.md)
 - [TabView](Controls/TabView/README.md)
 
 
