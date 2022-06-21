@@ -9,27 +9,30 @@ import SwiftUI
 
 struct AddItineraryView: View {
     var body: some View {
-        Text("Hello, World!")
-            .toolbar {
-                ToolbarItemGroup(placement: .bottomBar) {
-                    Button("First") {
-                        print("Pressed")
+        NavigationStack {
+            Text("Hello, World!")
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        Button("Add") {
+                            print("Trailing")
+                        }
                     }
-
-                    Button("Second") {
-                        print("Pressed")
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        Button("Cancel") {
+                            print("Pressed")
+                        }
                     }
-                    Spacer()
                 }
-            }
+                .navigationTitle("New Itinerary")
+        }
     }
 }
 
 struct AddItineraryView_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationStack {
+//        NavigationStack {
             AddItineraryView()
                 .preferredColorScheme(.dark)
-        }
+//        }
     }
 }
