@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct FriendDetails: View {
+    @State var showingAddFriend = false
+
     var body: some View {
         List {
             Section(header: Text("Friends")) {
@@ -21,8 +23,17 @@ struct FriendDetails: View {
                 } label: {
                     FriendRow(fullname: "Jeremy Sheldon")
                 }
+                Button(action: {
+                    self.showingAddFriend.toggle()
+                }) {
+                    AddFriendRow()
+                }
+                .foregroundColor(appColor)
             }
             .headerProminence(.increased)
+        }
+        .sheet(isPresented: $showingAddFriend) {
+            Text("Add friend")
         }
     }
 }

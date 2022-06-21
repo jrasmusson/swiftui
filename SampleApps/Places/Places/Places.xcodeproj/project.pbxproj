@@ -17,6 +17,7 @@
 		717B7231286263FA00B9BC63 /* DateRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717B7230286263FA00B9BC63 /* DateRow.swift */; };
 		717B723428626AAE00B9BC63 /* FriendDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717B723328626AAE00B9BC63 /* FriendDetails.swift */; };
 		717B723728626AF700B9BC63 /* FriendRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717B723628626AF700B9BC63 /* FriendRow.swift */; };
+		717B7239286272F700B9BC63 /* AddFriendRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717B7238286272F700B9BC63 /* AddFriendRow.swift */; };
 		71C8B0CD285DFF3F00DF9F85 /* PlacesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C8B0CC285DFF3F00DF9F85 /* PlacesApp.swift */; };
 		71C8B0CF285DFF3F00DF9F85 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C8B0CE285DFF3F00DF9F85 /* ContentView.swift */; };
 		71C8B0D1285DFF4100DF9F85 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 71C8B0D0285DFF4100DF9F85 /* Assets.xcassets */; };
@@ -40,6 +41,7 @@
 		717B7230286263FA00B9BC63 /* DateRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateRow.swift; sourceTree = "<group>"; };
 		717B723328626AAE00B9BC63 /* FriendDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendDetails.swift; sourceTree = "<group>"; };
 		717B723628626AF700B9BC63 /* FriendRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendRow.swift; sourceTree = "<group>"; };
+		717B7238286272F700B9BC63 /* AddFriendRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFriendRow.swift; sourceTree = "<group>"; };
 		71C8B0C9285DFF3F00DF9F85 /* Places.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Places.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		71C8B0CC285DFF3F00DF9F85 /* PlacesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesApp.swift; sourceTree = "<group>"; };
 		71C8B0CE285DFF3F00DF9F85 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -124,6 +126,7 @@
 			isa = PBXGroup;
 			children = (
 				717B723628626AF700B9BC63 /* FriendRow.swift */,
+				717B7238286272F700B9BC63 /* AddFriendRow.swift */,
 			);
 			path = Rows;
 			sourceTree = "<group>";
@@ -291,6 +294,7 @@
 				71C8B0DC285DFFB900DF9F85 /* ModelData.swift in Sources */,
 				717B7231286263FA00B9BC63 /* DateRow.swift in Sources */,
 				71C8B1112860A8B700DF9F85 /* NoteworthyDetail.swift in Sources */,
+				717B7239286272F700B9BC63 /* AddFriendRow.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
