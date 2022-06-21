@@ -1,6 +1,45 @@
 # Sheet
 
-Modal sheet that can't be swiped to dismiss.
+## Present with state
+
+![](images/demo1.gif)
+
+```swift
+struct ItinerariesView: View {
+    @EnvironmentObject var modelData: ModelData
+    @State var showingAddItinerary = false
+
+    var body: some View {
+        NavigationStack {
+            ScrollView {
+                ForEach(modelData.itineraries) { itinerary in
+                    NavigationLink(value: itinerary) {
+                        ItineraryCard(itinerary: itinerary)
+                            .padding()
+                    }
+                }
+            }
+            .toolbar {
+                Button(action: {
+                    self.showingAddItinerary.toggle()
+                }) {
+                    Image(systemName: "plus")
+                }
+                .foregroundColor(appColor)
+            }
+            .navigationTitle("Itineraries")
+            .navigationDestination(for: Itinerary.self) { item in
+                ItineraryDetail()
+            }
+            .fullScreenCover(isPresented: $showingAddItinerary) {
+                AddItineraryView()
+            }
+        }
+    }
+}
+```
+
+## Modal sheet that can't be swiped
 
 ```swift
 import SwiftUI
