@@ -145,3 +145,7 @@ struct AddItineraryView: View {
     }
 }
 ```
+
+### Links that help
+
+- [Paul](https://www.hackingwithswift.com/quick-start/swiftui/how-to-create-a-toolbar-and-add-buttons-to-it)
