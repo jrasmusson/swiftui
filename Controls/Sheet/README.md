@@ -85,3 +85,13 @@ struct ContentView_Previews: PreviewProvider {
 ```
 
 ![](images/2.gif)
+
+# fullScreenCover
+
+Same as `sheet` but full screen.
+
+```swift
+.fullScreenCover(isPresented: $showingAddItinerary) {
+    AddItineraryView()
+}
+```
