@@ -58,6 +58,50 @@ struct ContentView_Previews: PreviewProvider {
 }
 ```
 
+## How to Style Navigation Link
+
+Style your row without the chevron:
+
+![](images/8.png)
+
+**FriendRow**
+
+```swift
+struct FriendRow: View {
+    var body: some View {
+        HStack {
+            Image(systemName: "person")
+            Text("Kate Grella")
+            Spacer()
+        }
+    }
+}
+```
+
+Then add the chevron via a `NavigationLink` using your row view in the `Label`:
+
+![](images/7.png)
+
+**FriendDetails**
+
+```swift
+struct FriendDetails: View {
+    var body: some View {
+        List {
+            Section(header: Text("Friends")) {
+                NavigationLink {
+                    Text("Detail")
+                } label: {
+                    FriendRow()
+                }
+            }
+            .headerProminence(.increased)
+        }
+    }
+}
+```
+
+
 ## List within a List
 
 You define your stack once at the top:
