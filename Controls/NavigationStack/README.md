@@ -1,5 +1,33 @@
 # NavigationStack
 
+## Simple
+
+![](images/5.png)
+
+```swift
+import SwiftUI
+
+struct ContentView: View {
+    var body: some View {
+            NavigationStack {
+                List(1..<20) { i in
+                    NavigationLink("Detail \(i)") {
+                        Text("Detail \(i)")
+                    }
+                }
+                .navigationTitle("NavigationStack")
+            }
+        }}
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+    }
+}
+```
+
+## Value
+
 ```swift
 import SwiftUI
 

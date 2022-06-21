@@ -14,12 +14,13 @@ struct ContentView: View {
         TabView(selection: $selection) {
             PlacesView()
                 .environmentObject(ModelData())
-            .tabItem {
-                Label("Places", systemImage: "rectangle.fill.on.rectangle.angled.fill")
-            }
+                .tabItem {
+                    Label("Places", systemImage: "rectangle.fill.on.rectangle.angled.fill")
+                }
             .tag(Tab.places)
 
-            Text("Itineraries")
+            ItinerariesView()
+                .environmentObject(ModelData())
                 .tabItem {
                     Label("Itineraries", systemImage: "list.bullet")
                 }
