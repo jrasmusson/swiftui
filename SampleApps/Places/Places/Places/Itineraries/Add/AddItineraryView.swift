@@ -10,7 +10,7 @@ import SwiftUI
 struct AddItineraryView: View {
     var body: some View {
         NavigationStack {
-            Text("Hello, World!")
+            TripDetailsView()
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {
                         Button("Add") {
