@@ -12,19 +12,7 @@ struct ContentView: View {
 
     var body: some View {
         TabView(selection: $selection) {
-            NavigationStack {
-                ScrollView {
-                    ForEach(modelData.places) { place in
-                        NavigationLink(value: place) {
-                            PlaceCard(place: place)
-                        }
-                    }
-                }
-                .navigationTitle("Places")
-                .navigationDestination(for: Place.self) { item in
-                    PlaceDetail(place: place)
-                }
-            }
+            places
             .tabItem {
                 Label("Places", systemImage: "rectangle.fill.on.rectangle.angled.fill")
             }
@@ -43,6 +31,22 @@ struct ContentView: View {
                 .tag(Tab.profile)
         }
         .accentColor(appColor)
+    }
+
+    var places: some View {
+        NavigationStack {
+            ScrollView {
+                ForEach(modelData.places) { place in
+                    NavigationLink(value: place) {
+                        PlaceCard(place: place)
+                    }
+                }
+            }
+            .navigationTitle("Places")
+            .navigationDestination(for: Place.self) { item in
+                PlaceDetail(place: place)
+            }
+        }
     }
 }
 
