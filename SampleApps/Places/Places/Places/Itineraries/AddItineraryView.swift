@@ -15,12 +15,12 @@ struct AddItineraryView: View {
                     ToolbarItem(placement: .navigationBarTrailing) {
                         Button("Add") {
                             print("Trailing")
-                        }
+                        }.foregroundColor(appColor)
                     }
                     ToolbarItem(placement: .navigationBarLeading) {
                         Button("Cancel") {
                             print("Pressed")
-                        }
+                        }.foregroundColor(appColor)
                     }
                 }
                 .navigationTitle("New Itinerary")
