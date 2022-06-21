@@ -59,10 +59,26 @@
 			children = (
 				7100B1592861E66C00654CC2 /* ItinerariesView.swift */,
 				7100B15D2861EA3A00654CC2 /* ItineraryCard.swift */,
-				7100B15F2861F0E100654CC2 /* ItineraryDetail.swift */,
-				7100B1632861F52800654CC2 /* AddItineraryView.swift */,
+				7100B18128625F8600654CC2 /* Detail */,
+				7100B18028625F7100654CC2 /* Add */,
 			);
 			path = Itineraries;
+			sourceTree = "<group>";
+		};
+		7100B18028625F7100654CC2 /* Add */ = {
+			isa = PBXGroup;
+			children = (
+				7100B1632861F52800654CC2 /* AddItineraryView.swift */,
+			);
+			path = Add;
+			sourceTree = "<group>";
+		};
+		7100B18128625F8600654CC2 /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				7100B15F2861F0E100654CC2 /* ItineraryDetail.swift */,
+			);
+			path = Detail;
 			sourceTree = "<group>";
 		};
 		71C8B0C0285DFF3F00DF9F85 = {
