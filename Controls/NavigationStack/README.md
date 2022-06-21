@@ -310,41 +310,16 @@ struct ContentView: View {
 
 ![](images/demo2.gif)
 
-## Toolbar / NavBar Items
+## Titles
 
-![](images/2.png)
+### Inline
 
-Place buttons in the nav ba using `ToolBar`:
+![](images/6.png)
 
 ```swift
-import SwiftUI
-
-struct PlaceDetail: View {
-    let place: Place
-    var body: some View {
-        Text("Hello, World!").padding()
-            .toolbar {
-                ToolbarItemGroup(placement: .navigationBarTrailing) {
-                    Button("First") {
-                        print("Pressed")
-                    }
-
-                    Button("Second") {
-                        print("Pressed")
-                    }
-                }
-            }
-    }
-}
-
-struct PlaceDetail_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationStack {
-            PlaceDetail(place: place)
-        }
-    }
-}
+.navigationBarTitleDisplayMode(.inline)
 ```
+
 
 ### Links that help
 

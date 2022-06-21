@@ -24,15 +24,14 @@ struct AddItineraryView: View {
                     }
                 }
                 .navigationTitle("New Itinerary")
+                .navigationBarTitleDisplayMode(.inline)
         }
     }
 }
 
 struct AddItineraryView_Previews: PreviewProvider {
     static var previews: some View {
-//        NavigationStack {
-            AddItineraryView()
-                .preferredColorScheme(.dark)
-//        }
+        AddItineraryView()
+            .preferredColorScheme(.dark)
     }
 }

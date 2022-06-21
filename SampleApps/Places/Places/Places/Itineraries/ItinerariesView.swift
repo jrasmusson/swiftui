@@ -33,7 +33,7 @@ struct ItinerariesView: View {
             .navigationDestination(for: Itinerary.self) { item in
                 ItineraryDetail()
             }
-            .sheet(isPresented: $showingAddItinerary) {
+            .fullScreenCover(isPresented: $showingAddItinerary) {
                 AddItineraryView()
             }
         }
