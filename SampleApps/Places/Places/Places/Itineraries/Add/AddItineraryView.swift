@@ -12,7 +12,9 @@ struct AddItineraryView: View {
         NavigationStack {
             VStack(alignment: .leading) {
                 TripDetailsView()
+                    .frame(width: .infinity, height: 200)
                 FriendDetails()
+                    .frame(width: .infinity, height: 200)
                 Spacer()
             }
                 .toolbar {
