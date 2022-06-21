@@ -10,26 +10,10 @@ import SwiftUI
 struct AddItineraryView: View {
     var body: some View {
         NavigationStack {
-            List {
-                Section(header: Text("Trip Details")) {
-                    Label("Foo", image: "sf")
-                    Text("Static row 2")
-                }
-
-                Section(header: Text("Section 2")) {
-                    ForEach(0..<5) {
-                        Text("Dynamic row \($0)")
-                    }
-                }
-
-                Section(header: Text("Section 3")) {
-                    Text("Static row 3")
-                    Text("Static row 4")
-                }
-            }
+            Text("Hello, World!")
                 .toolbar {
                     addButton
-                    cancelButton
+                    cancel
                 }
                 .navigationTitle("New Itinerary")
                 .navigationBarTitleDisplayMode(.inline)

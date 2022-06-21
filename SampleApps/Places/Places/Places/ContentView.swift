@@ -8,7 +8,7 @@ enum Tab {
 
 struct ContentView: View {
     @EnvironmentObject var modelData: ModelData
-    @State var selection: Tab = .places
+    @State var selection: Tab = .itineraries
 
     var body: some View {
         TabView(selection: $selection) {
