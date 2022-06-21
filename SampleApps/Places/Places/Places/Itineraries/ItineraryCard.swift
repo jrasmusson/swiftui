@@ -8,19 +8,21 @@
 import SwiftUI
 
 struct ItineraryCard: View {
+    let itinerary: Itinerary
+
     var body: some View {
         VStack(alignment: .leading) {
-            Image("itinerary1")
+            Image(itinerary.imageName)
                 .resizable()
                 .scaledToFit()
             VStack(alignment: .leading) {
-                Text("San Francisco · July 22-30, 2022")
+                Text(itinerary.subtitle)
                     .font(.subheadline)
                     .foregroundColor(.secondary)
-                Text("Santa Cruz")
+                Text(itinerary.title)
                     .font(.title)
                     .foregroundColor(.primary)
-                Text("kate, Jeremy, Dave, Matt, and 2 others")
+                Text(itinerary.friends)
                     .font(.subheadline)
                     .foregroundColor(.secondary)
             }
@@ -33,7 +35,7 @@ struct ItineraryCard: View {
 
 struct ItineraryCard_Previews: PreviewProvider {
     static var previews: some View {
-        ItineraryCard()
+        ItineraryCard(itinerary: itinerary1)
             .preferredColorScheme(.dark)
     }
 }

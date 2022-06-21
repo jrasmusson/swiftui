@@ -44,6 +44,7 @@ struct Itinerary: Hashable, Identifiable {
     let imageName: String
 }
 
+let itinerary1 = Itinerary(title: "Santa Cruz", subtitle: "San Francisco · July 22-30, 2022", friends: "Kate, Jeremy, Dave, Matt, and 2 others", imageName: "itinerary1")
 
 final class ModelData: ObservableObject {
     var places: [Place] = [
