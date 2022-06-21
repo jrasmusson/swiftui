@@ -8,10 +8,11 @@
 import SwiftUI
 
 struct FriendRow: View {
+    let fullname: String
     var body: some View {
         HStack {
             Image(systemName: "person")
-            Text("Kate Grella")
+            Text(fullname)
             Spacer()
         }
     }
@@ -19,7 +20,7 @@ struct FriendRow: View {
 
 struct FriendRow_Previews: PreviewProvider {
     static var previews: some View {
-        FriendRow()
+        FriendRow(fullname: "Kate Grella")
             .preferredColorScheme(.dark)
     }
 }

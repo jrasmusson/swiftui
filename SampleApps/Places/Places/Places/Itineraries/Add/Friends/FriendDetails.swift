@@ -12,9 +12,14 @@ struct FriendDetails: View {
         List {
             Section(header: Text("Friends")) {
                 NavigationLink {
-                    Text("Detail")
+                    Text("Kate Grella")
                 } label: {
-                    FriendRow()
+                    FriendRow(fullname: "Kate Grella")
+                }
+                NavigationLink {
+                    Text("Jeremy Sheldon")
+                } label: {
+                    FriendRow(fullname: "Jeremy Sheldon")
                 }
             }
             .headerProminence(.increased)
