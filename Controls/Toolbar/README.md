@@ -40,6 +40,35 @@ struct ContentView_Previews: PreviewProvider {
 }
 ```
 
+## Single Placement
+
+![](images/2.png)
+
+```swift
+struct AddItineraryView: View {
+    var body: some View {
+        Text("Hello, World!")
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button("Trailing") {
+                        print("Trailing")
+                    }
+                }
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button("Leading") {
+                        print("Pressed")
+                    }
+                }
+                ToolbarItem(placement: .bottomBar) {
+                    Button("Bottom") {
+                        print("Pressed")
+                    }
+                }
+            }
+    }
+}
+```
+
 ## Multi
 
 ![](images/1.png)
@@ -89,6 +118,30 @@ struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
             .preferredColorScheme(.dark)
+    }
+}
+```
+
+## Multi Placement
+
+![](images/3.png)
+
+```swift
+struct AddItineraryView: View {
+    var body: some View {
+        Text("Hello, World!")
+            .toolbar {
+                ToolbarItemGroup(placement: .bottomBar) {
+                    Button("First") {
+                        print("Pressed")
+                    }
+
+                    Button("Second") {
+                        print("Pressed")
+                    }
+                    Spacer()
+                }
+            }
     }
 }
 ```

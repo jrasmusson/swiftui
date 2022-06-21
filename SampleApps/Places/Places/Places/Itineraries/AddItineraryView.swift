@@ -9,13 +9,27 @@ import SwiftUI
 
 struct AddItineraryView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Text("Hello, World!")
+            .toolbar {
+                ToolbarItemGroup(placement: .bottomBar) {
+                    Button("First") {
+                        print("Pressed")
+                    }
+
+                    Button("Second") {
+                        print("Pressed")
+                    }
+                    Spacer()
+                }
+            }
     }
 }
 
 struct AddItineraryView_Previews: PreviewProvider {
     static var previews: some View {
-        AddItineraryView()
-            .preferredColorScheme(.dark)
+        NavigationStack {
+            AddItineraryView()
+                .preferredColorScheme(.dark)
+        }
     }
 }
