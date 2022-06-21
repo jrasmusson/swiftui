@@ -45,11 +45,10 @@ struct Itinerary: Hashable, Identifiable {
 }
 
 let itinerary1 = Itinerary(title: "Santa Cruz", subtitle: "San Francisco · July 22-30, 2022", friends: "Kate, Jeremy, Dave, Matt, and 2 others", imageName: "itinerary1")
+let itinerary2 = Itinerary(title: "Gamla Stan", subtitle: "Stockholm · August 15-30, 2022", friends: "Bjorne, Markus, Oskar, Ingrid and 3 others", imageName: "itinerary2")
 
 final class ModelData: ObservableObject {
-    var places: [Place] = [
-        place,
-        place2
-    ]
+    var places = [place, place2]
+    var itineraries = [itinerary1, itinerary2]
 }
 

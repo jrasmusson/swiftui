@@ -8,17 +8,30 @@
 import SwiftUI
 
 struct ItinerariesView: View {
+    @EnvironmentObject var modelData: ModelData
+
     var body: some View {
-        VStack(alignment: .leading) {
-            Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationStack {
+            ScrollView {
+                ForEach(modelData.itineraries) { itinerary in
+                    NavigationLink(value: itinerary) {
+                        ItineraryCard(itinerary: itinerary)
+                            .padding()
+                    }
+                }
+            }
+            .navigationTitle("Itineraries")
+            .navigationDestination(for: Itinerary.self) { item in
+                ItineraryDetail()
+            }
         }
     }
 }
 
 struct ItinerariesView_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationStack {
-            ItinerariesView()
-        }
+        ItinerariesView()
+            .preferredColorScheme(.dark)
+            .environmentObject(ModelData())
     }
 }
