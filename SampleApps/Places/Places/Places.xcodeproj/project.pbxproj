@@ -12,6 +12,9 @@
 		7100B15E2861EA3A00654CC2 /* ItineraryCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7100B15D2861EA3A00654CC2 /* ItineraryCard.swift */; };
 		7100B1602861F0E100654CC2 /* ItineraryDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7100B15F2861F0E100654CC2 /* ItineraryDetail.swift */; };
 		7100B1642861F52800654CC2 /* AddItineraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7100B1632861F52800654CC2 /* AddItineraryView.swift */; };
+		7100B1832862600B00654CC2 /* TripDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7100B1822862600B00654CC2 /* TripDetailsView.swift */; };
+		717B722F2862638A00B9BC63 /* CityRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717B722E2862638A00B9BC63 /* CityRow.swift */; };
+		717B7231286263FA00B9BC63 /* DateRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717B7230286263FA00B9BC63 /* DateRow.swift */; };
 		71C8B0CD285DFF3F00DF9F85 /* PlacesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C8B0CC285DFF3F00DF9F85 /* PlacesApp.swift */; };
 		71C8B0CF285DFF3F00DF9F85 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C8B0CE285DFF3F00DF9F85 /* ContentView.swift */; };
 		71C8B0D1285DFF4100DF9F85 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 71C8B0D0285DFF4100DF9F85 /* Assets.xcassets */; };
@@ -30,6 +33,9 @@
 		7100B15D2861EA3A00654CC2 /* ItineraryCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItineraryCard.swift; sourceTree = "<group>"; };
 		7100B15F2861F0E100654CC2 /* ItineraryDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItineraryDetail.swift; sourceTree = "<group>"; };
 		7100B1632861F52800654CC2 /* AddItineraryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItineraryView.swift; sourceTree = "<group>"; };
+		7100B1822862600B00654CC2 /* TripDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripDetailsView.swift; sourceTree = "<group>"; };
+		717B722E2862638A00B9BC63 /* CityRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityRow.swift; sourceTree = "<group>"; };
+		717B7230286263FA00B9BC63 /* DateRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateRow.swift; sourceTree = "<group>"; };
 		71C8B0C9285DFF3F00DF9F85 /* Places.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Places.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		71C8B0CC285DFF3F00DF9F85 /* PlacesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesApp.swift; sourceTree = "<group>"; };
 		71C8B0CE285DFF3F00DF9F85 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -69,6 +75,7 @@
 			isa = PBXGroup;
 			children = (
 				7100B1632861F52800654CC2 /* AddItineraryView.swift */,
+				7100B184286262D000654CC2 /* TripDetails */,
 			);
 			path = Add;
 			sourceTree = "<group>";
@@ -79,6 +86,24 @@
 				7100B15F2861F0E100654CC2 /* ItineraryDetail.swift */,
 			);
 			path = Detail;
+			sourceTree = "<group>";
+		};
+		7100B184286262D000654CC2 /* TripDetails */ = {
+			isa = PBXGroup;
+			children = (
+				7100B1822862600B00654CC2 /* TripDetailsView.swift */,
+				717B722D2862637E00B9BC63 /* Rows */,
+			);
+			path = TripDetails;
+			sourceTree = "<group>";
+		};
+		717B722D2862637E00B9BC63 /* Rows */ = {
+			isa = PBXGroup;
+			children = (
+				717B722E2862638A00B9BC63 /* CityRow.swift */,
+				717B7230286263FA00B9BC63 /* DateRow.swift */,
+			);
+			path = Rows;
 			sourceTree = "<group>";
 		};
 		71C8B0C0285DFF3F00DF9F85 = {
@@ -231,13 +256,16 @@
 				71C8B0E4285F50C000DF9F85 /* MenuView.swift in Sources */,
 				71C8B0CF285DFF3F00DF9F85 /* ContentView.swift in Sources */,
 				7100B15A2861E66C00654CC2 /* ItinerariesView.swift in Sources */,
+				717B722F2862638A00B9BC63 /* CityRow.swift in Sources */,
 				7100B15E2861EA3A00654CC2 /* ItineraryCard.swift in Sources */,
+				7100B1832862600B00654CC2 /* TripDetailsView.swift in Sources */,
 				7100B1602861F0E100654CC2 /* ItineraryDetail.swift in Sources */,
 				71C8B0E0285E026700DF9F85 /* PlaceCard.swift in Sources */,
 				7100B1642861F52800654CC2 /* AddItineraryView.swift in Sources */,
 				7100B15C2861E90B00654CC2 /* PlacesView.swift in Sources */,
 				71C8B0CD285DFF3F00DF9F85 /* PlacesApp.swift in Sources */,
 				71C8B0DC285DFFB900DF9F85 /* ModelData.swift in Sources */,
+				717B7231286263FA00B9BC63 /* DateRow.swift in Sources */,
 				71C8B1112860A8B700DF9F85 /* NoteworthyDetail.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

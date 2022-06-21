@@ -1,6 +1,39 @@
 # Lists
 
-`List` is the equivalent of `UITableView`. Provides a scrollable table of data. Very similar to `Form`, except it's used for presentation of data rather than requesting user input.
+Lists are great. You can throw anything in there and it will be scrollable:
+
+![](images/13.png)
+
+```swift
+struct TripDetailsView: View {
+    var body: some View {
+        List {
+            Section(header: Text("Section 2")) {
+                CityRow()
+                DateRow(titleKey: "Start Date")
+                DateRow(titleKey: "End Date")
+            }
+        }
+    }
+}
+```
+
+## Section header styling
+
+You can style your headers like this:
+
+![](images/14.png)
+
+```swift
+Section(header: Text("Section 2")) {
+    Text("Row")
+}
+.headerProminence(.increased)
+```
+
+## Examples
+
+Provides a scrollable table of data. Very similar to `Form`, except it's used for presentation of data rather than requesting user input.
 
 ```swift
 List {
