@@ -63,8 +63,8 @@
 				71ED18322863396600E3F8D7 /* ModelData.swift */,
 				7108AF4D286336F700796EE4 /* BankeyApp.swift */,
 				71ED183B2863464800E3F8D7 /* Onboarding */,
-				71ED183928633BFF00E3F8D7 /* LoginView.swift */,
-				71ED1834286339FD00E3F8D7 /* MainView.swift */,
+				71ED183F28634CC200E3F8D7 /* Login */,
+				71ED183E28634CAC00E3F8D7 /* Main */,
 			);
 			path = Bankey;
 			sourceTree = "<group>";
@@ -93,6 +93,22 @@
 				71ED183C2863466700E3F8D7 /* Page.swift */,
 			);
 			name = Onboarding;
+			sourceTree = "<group>";
+		};
+		71ED183E28634CAC00E3F8D7 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				71ED1834286339FD00E3F8D7 /* MainView.swift */,
+			);
+			name = Main;
+			sourceTree = "<group>";
+		};
+		71ED183F28634CC200E3F8D7 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				71ED183928633BFF00E3F8D7 /* LoginView.swift */,
+			);
+			name = Login;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
