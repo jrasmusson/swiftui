@@ -13,6 +13,7 @@
 		71ED18332863396600E3F8D7 /* ModelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71ED18322863396600E3F8D7 /* ModelData.swift */; };
 		71ED1835286339FD00E3F8D7 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71ED1834286339FD00E3F8D7 /* MainView.swift */; };
 		71ED183728633A0F00E3F8D7 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71ED183628633A0F00E3F8D7 /* OnboardingView.swift */; };
+		71ED183A28633BFF00E3F8D7 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71ED183928633BFF00E3F8D7 /* LoginView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +24,7 @@
 		71ED18322863396600E3F8D7 /* ModelData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelData.swift; sourceTree = "<group>"; };
 		71ED1834286339FD00E3F8D7 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		71ED183628633A0F00E3F8D7 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		71ED183928633BFF00E3F8D7 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +61,7 @@
 				71ED18322863396600E3F8D7 /* ModelData.swift */,
 				7108AF4D286336F700796EE4 /* BankeyApp.swift */,
 				71ED183628633A0F00E3F8D7 /* OnboardingView.swift */,
+				71ED183928633BFF00E3F8D7 /* LoginView.swift */,
 				71ED1834286339FD00E3F8D7 /* MainView.swift */,
 			);
 			path = Bankey;
@@ -154,6 +157,7 @@
 				7108AF4E286336F700796EE4 /* BankeyApp.swift in Sources */,
 				71ED183728633A0F00E3F8D7 /* OnboardingView.swift in Sources */,
 				71ED1835286339FD00E3F8D7 /* MainView.swift in Sources */,
+				71ED183A28633BFF00E3F8D7 /* LoginView.swift in Sources */,
 				71ED18332863396600E3F8D7 /* ModelData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
