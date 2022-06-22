@@ -9,9 +9,17 @@ import SwiftUI
 
 @main
 struct BankeyApp: App {
+    @StateObject var modelData = ModelData(hasOnboarded: false)
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            if modelData.hasOnboarded {
+                MainView()
+                    .environmentObject(modelData)
+            } else {
+                OnboardingView()
+                    .environmentObject(modelData)
+            }
         }
     }
 }
