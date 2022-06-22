@@ -8,15 +8,15 @@
 import SwiftUI
 
 struct OnboardingView: View {
-    @EnvironmentObject var appState: ModelData
+    @EnvironmentObject var modelData: ModelData
 
     var body: some View {
         TabView {
-            Text("First")
+            Page1().environmentObject(modelData)
             Text("Second")
             Text("Third")
             Button("Done") {
-                appState.hasOnboarded = true // change
+                modelData.hasOnboarded = true // change
             }
         }
         .tabViewStyle(.page)
@@ -27,5 +27,6 @@ struct OnboardingView: View {
 struct OnboardingView_Previews: PreviewProvider {
     static var previews: some View {
         OnboardingView()
+            .environmentObject(ModelData())
     }
 }

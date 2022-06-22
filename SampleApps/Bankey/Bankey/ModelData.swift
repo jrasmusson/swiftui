@@ -8,10 +8,10 @@
 import Foundation
 
 class ModelData: ObservableObject {
-    @Published var hasOnboarded: Bool
-    @Published var isLoggedIn: Bool = false
+    @Published var hasOnboarded = false
+    @Published var isLoggedIn = false
 
-     init(hasOnboarded: Bool) {
+     init(hasOnboarded: Bool = false) {
          self.hasOnboarded = hasOnboarded
      }
 }
