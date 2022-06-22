@@ -17,11 +17,7 @@ let account2 = Account(name: "No-Fee All-In Chequing")
 let account3 = Account(name: "Visa Avion Card")
 
 class ModelData: ObservableObject {
-    @Published var hasOnboarded = false
-    @Published var isLoggedIn = false
+    @Published var hasOnboarded = true
+    @Published var isLoggedIn = true
     @Published var accounts = [account1, account2, account3]
-
-     init(hasOnboarded: Bool = false) {
-         self.hasOnboarded = hasOnboarded
-     }
 }

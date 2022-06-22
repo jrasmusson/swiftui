@@ -9,7 +9,7 @@ import SwiftUI
 
 @main
 struct BankeyApp: App {
-    @StateObject var modelData = ModelData(hasOnboarded: false)
+    @StateObject var modelData = ModelData()
     
     var body: some Scene {
         WindowGroup {
