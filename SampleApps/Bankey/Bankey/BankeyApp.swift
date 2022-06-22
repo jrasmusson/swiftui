@@ -14,11 +14,13 @@ struct BankeyApp: App {
     var body: some Scene {
         WindowGroup {
             if modelData.hasOnboarded {
-                MainView()
-                    .environmentObject(modelData)
+                if modelData.isLoggedIn {
+                    MainView().environmentObject(modelData)
+                } else {
+                    LoginView().environmentObject(modelData)
+                }
             } else {
-                OnboardingView()
-                    .environmentObject(modelData)
+                OnboardingView().environmentObject(modelData)
             }
         }
     }

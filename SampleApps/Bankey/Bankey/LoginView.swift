@@ -10,9 +10,12 @@
 import SwiftUI
 
 struct LoginView: View {
+    @EnvironmentObject var modelData: ModelData
+    
     @State var username: String = ""
     @State var password: String = ""
     @State var authenticationDidFail = false
+    @State var authenticationDidSucceed = true
 
     var body: some View {
         VStack {
@@ -20,13 +23,22 @@ struct LoginView: View {
             HeroImage()
             UsernameTextField(username: $username)
             PasswordTextField(password: $password)
+            if authenticationDidFail {
+                Text("Login failed. Try again.")
+                    .offset(y: -10)
+                    .foregroundColor(.red)
+            }
             Button {
-                print("Tapped")
+                modelData.isLoggedIn = true
             } label: {
                 LoginText()
             }
         }
         .padding()
+    }
+
+    private var isAuthenticated: Bool {
+        username == "" && password == ""
     }
 }
 

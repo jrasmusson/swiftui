@@ -8,13 +8,13 @@
 import SwiftUI
 
 struct MainView: View {
-    @EnvironmentObject var appState: ModelData
+    @EnvironmentObject var modelData: ModelData
 
     var body: some View {
         VStack {
             Text("Main")
             Button("Reset") {
-                appState.hasOnboarded = false // change
+                modelData.hasOnboarded = false // change
             }
         }
     }
