@@ -13,7 +13,7 @@ enum Tab {
     case more
 }
 
-struct MainView: View {
+struct AccountsView: View {
     @EnvironmentObject var modelData: ModelData
     @State var selection: Tab = .accounts
 
@@ -32,14 +32,14 @@ struct AccountsTab: View {
     var body: some View {
         NavigationStack {
             ScrollView {
-                VStack(alignment: .leading) {
-                    Text("Good morning Kevin")
-                    Text(Date.now.formatted())
-                }
-                .background(.green)
+//                VStack(alignment: .leading) {
+//                    Text("Good morning Kevin")
+//                    Text(Date.now.formatted())
+//                }
+//                .background(.green)
                 ForEach(modelData.accounts) { account in
                     NavigationLink(value: account) {
-                        Text(account.name)
+                        AccountRow(account: account)
                     }
                 }
             }
@@ -77,6 +77,7 @@ struct MoreTab: View {
 
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
-        MainView()
+        AccountsView()
+            .environmentObject(ModelData())
     }
 }

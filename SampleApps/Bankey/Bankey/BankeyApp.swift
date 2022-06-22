@@ -15,7 +15,7 @@ struct BankeyApp: App {
         WindowGroup {
             if modelData.hasOnboarded {
                 if modelData.isLoggedIn {
-                    MainView().environmentObject(modelData)
+                    AccountsView().environmentObject(modelData)
                 } else {
                     LoginView().environmentObject(modelData)
                 }

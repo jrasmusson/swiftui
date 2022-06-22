@@ -11,10 +11,11 @@
 		7108AF52286336F800796EE4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7108AF51286336F800796EE4 /* Assets.xcassets */; };
 		7108AF55286336F800796EE4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7108AF54286336F800796EE4 /* Preview Assets.xcassets */; };
 		71ED18332863396600E3F8D7 /* ModelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71ED18322863396600E3F8D7 /* ModelData.swift */; };
-		71ED1835286339FD00E3F8D7 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71ED1834286339FD00E3F8D7 /* MainView.swift */; };
+		71ED1835286339FD00E3F8D7 /* AccountsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71ED1834286339FD00E3F8D7 /* AccountsView.swift */; };
 		71ED183728633A0F00E3F8D7 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71ED183628633A0F00E3F8D7 /* OnboardingView.swift */; };
 		71ED183A28633BFF00E3F8D7 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71ED183928633BFF00E3F8D7 /* LoginView.swift */; };
 		71ED183D2863466700E3F8D7 /* Page.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71ED183C2863466700E3F8D7 /* Page.swift */; };
+		71ED18412863BAA600E3F8D7 /* AccountRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71ED18402863BAA600E3F8D7 /* AccountRow.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,10 +24,11 @@
 		7108AF51286336F800796EE4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7108AF54286336F800796EE4 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		71ED18322863396600E3F8D7 /* ModelData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelData.swift; sourceTree = "<group>"; };
-		71ED1834286339FD00E3F8D7 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		71ED1834286339FD00E3F8D7 /* AccountsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsView.swift; sourceTree = "<group>"; };
 		71ED183628633A0F00E3F8D7 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		71ED183928633BFF00E3F8D7 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		71ED183C2863466700E3F8D7 /* Page.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Page.swift; sourceTree = "<group>"; };
+		71ED18402863BAA600E3F8D7 /* AccountRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountRow.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,7 +66,7 @@
 				7108AF4D286336F700796EE4 /* BankeyApp.swift */,
 				71ED183B2863464800E3F8D7 /* Onboarding */,
 				71ED183F28634CC200E3F8D7 /* Login */,
-				71ED183E28634CAC00E3F8D7 /* Main */,
+				71ED183E28634CAC00E3F8D7 /* Acounts */,
 			);
 			path = Bankey;
 			sourceTree = "<group>";
@@ -95,12 +97,13 @@
 			name = Onboarding;
 			sourceTree = "<group>";
 		};
-		71ED183E28634CAC00E3F8D7 /* Main */ = {
+		71ED183E28634CAC00E3F8D7 /* Acounts */ = {
 			isa = PBXGroup;
 			children = (
-				71ED1834286339FD00E3F8D7 /* MainView.swift */,
+				71ED1834286339FD00E3F8D7 /* AccountsView.swift */,
+				71ED18402863BAA600E3F8D7 /* AccountRow.swift */,
 			);
-			name = Main;
+			name = Acounts;
 			sourceTree = "<group>";
 		};
 		71ED183F28634CC200E3F8D7 /* Login */ = {
@@ -184,9 +187,10 @@
 				7108AF4E286336F700796EE4 /* BankeyApp.swift in Sources */,
 				71ED183728633A0F00E3F8D7 /* OnboardingView.swift in Sources */,
 				71ED183D2863466700E3F8D7 /* Page.swift in Sources */,
-				71ED1835286339FD00E3F8D7 /* MainView.swift in Sources */,
+				71ED1835286339FD00E3F8D7 /* AccountsView.swift in Sources */,
 				71ED183A28633BFF00E3F8D7 /* LoginView.swift in Sources */,
 				71ED18332863396600E3F8D7 /* ModelData.swift in Sources */,
+				71ED18412863BAA600E3F8D7 /* AccountRow.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

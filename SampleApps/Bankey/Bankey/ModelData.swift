@@ -7,14 +7,32 @@
 
 import Foundation
 
+enum AccountType: String, CustomStringConvertible {
+    case banking
+    case creditCard
+    case investment
+
+    var description: String {
+        switch self {
+        case .banking:
+            return "Banking"
+        case .creditCard:
+            return "Credit Card"
+        case .investment:
+            return "Investment"
+        }
+    }
+}
+
 struct Account: Identifiable, Hashable {
     let id = UUID()
     let name: String
+    let type: AccountType
 }
 
-let account1 = Account(name: "Basic Savings")
-let account2 = Account(name: "No-Fee All-In Chequing")
-let account3 = Account(name: "Visa Avion Card")
+let account1 = Account(name: "Basic Savings", type: .banking)
+let account2 = Account(name: "Visa Avion Card", type: .creditCard)
+let account3 = Account(name: "Balanced Fund", type: .investment)
 
 class ModelData: ObservableObject {
     @Published var hasOnboarded = true
