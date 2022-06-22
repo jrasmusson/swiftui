@@ -31,15 +31,11 @@ struct AccountsTab: View {
 
     var body: some View {
         NavigationStack {
-            ScrollView {
-                ForEach(modelData.accounts) { account in
-                    NavigationLink(value: account) {
-                        AccountRow(account: account)
-                    }
-                    .background(.green)
+            List(modelData.accounts) { account in
+                NavigationLink(value: account) {
+                    AccountRow(account: account)
                 }
             }
-
             .navigationTitle("Accounts")
             .navigationDestination(for: Account.self) { item in
                 Text(item.name)
