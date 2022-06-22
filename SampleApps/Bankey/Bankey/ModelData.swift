@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 enum AccountType: String, CustomStringConvertible {
     case banking
@@ -28,11 +29,12 @@ struct Account: Identifiable, Hashable {
     let id = UUID()
     let name: String
     let type: AccountType
+    let color: Color
 }
 
-let account1 = Account(name: "Basic Savings", type: .banking)
-let account2 = Account(name: "Visa Avion Card", type: .creditCard)
-let account3 = Account(name: "Balanced Fund", type: .investment)
+let account1 = Account(name: "Basic Savings", type: .banking, color: .teal)
+let account2 = Account(name: "Visa Avion Card", type: .creditCard, color: .orange)
+let account3 = Account(name: "Balanced Fund", type: .investment, color: .purple)
 
 class ModelData: ObservableObject {
     @Published var hasOnboarded = true
