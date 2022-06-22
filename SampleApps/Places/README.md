@@ -1,10 +1,12 @@
-# Places Home
+# Places
 
 - [Video](https://developer.apple.com/videos/play/wwdc2022/10001/)
 
-![](images/1.png)
+## Home
 
 **ContentView**
+
+![](images/1.png)
 
 ```swift
 import SwiftUI
@@ -64,9 +66,9 @@ struct ContentView_Previews: PreviewProvider {
 }
 ```
 
-![](images/2.png)
-
 **PlaceCard**
+
+![](images/2.png)
 
 ```swift
 import SwiftUI
@@ -126,9 +128,9 @@ struct PlaceCard_Previews: PreviewProvider {
 }
 ```
 
-![](images/3.png)
-
 **PlaceDetail**
+
+![](images/3.png)
 
 ```swift
 import SwiftUI
@@ -221,9 +223,9 @@ struct PlaceDetail_Previews: PreviewProvider {
 }
 ```
 
-![](images/4.png)
-
 **NoteworthyRow**
+
+![](images/4.png)
 
 ```swift
 import SwiftUI
@@ -260,28 +262,242 @@ struct NoteworthyRow_Previews: PreviewProvider {
 }
 ```
 
-![](images/5.png)
+## Itinerary
 
-**NoteworthyDetail**
+**ItinerariesView**
+
+![](images/5.png)
 
 ```swift
 import SwiftUI
 
-struct NoteworthyDetail: View {
-    let noteworthy: Noteworthy
-    var body: some View {
-        Text("Hello \(noteworthy.title)!")
-            .navigationTitle(noteworthy.title)
-    }
-}
+struct ItinerariesView: View {
+    @EnvironmentObject var modelData: ModelData
+    @State var showingAddItinerary = false
 
-struct NoteworthyDetail_Previews: PreviewProvider {
-    static var previews: some View {
+    var body: some View {
         NavigationStack {
-            NoteworthyDetail(noteworthy: noteworthy1)
+            ScrollView {
+                ForEach(modelData.itineraries) { itinerary in
+                    NavigationLink(value: itinerary) {
+                        ItineraryCard(itinerary: itinerary)
+                            .padding()
+                    }
+                }
+            }
+            .toolbar {
+                Button(action: {
+                    self.showingAddItinerary.toggle()
+                }) {
+                    Image(systemName: "plus")
+                }
+                .foregroundColor(appColor)
+            }
+            .navigationTitle("Itineraries")
+            .navigationDestination(for: Itinerary.self) { item in
+                ItineraryDetail()
+            }
+            .fullScreenCover(isPresented: $showingAddItinerary) {
+                AddItineraryView()
+            }
         }
-        .preferredColorScheme(.dark)
     }
 }
 ```
 
+**ItineraryCard**
+
+![](images/6.png)
+
+```swift
+struct ItineraryCard: View {
+    let itinerary: Itinerary
+
+    var body: some View {
+        VStack(alignment: .leading) {
+            Image(itinerary.imageName)
+                .resizable()
+                .scaledToFit()
+            VStack(alignment: .leading) {
+                Text(itinerary.subtitle)
+                    .font(.subheadline)
+                    .foregroundColor(.secondary)
+                Text(itinerary.title)
+                    .font(.title)
+                    .foregroundColor(.primary)
+                Text(itinerary.friends)
+                    .font(.subheadline)
+                    .foregroundColor(.secondary)
+            }
+            .padding()
+        }
+        .background(.thinMaterial)
+        .cornerRadius(10)
+    }
+}
+```
+**AddItineraryView**
+
+![](images/7.png)
+
+Because containers always want to fill the space provided to them, we can use `frame()` here to limit the height of each view.
+
+```swift
+struct AddItineraryView: View {
+    var body: some View {
+        NavigationStack {
+            VStack(alignment: .leading) {
+                TripDetailsView()
+                    .frame(width: .infinity, height: 200)
+                FriendDetails()
+                    .frame(width: .infinity, height: 200)
+                Spacer()
+            }
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        Button("Add") {
+                            print("Trailing")
+                        }.foregroundColor(appColor)
+                    }
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        Button("Cancel") {
+                            print("Pressed")
+                        }.foregroundColor(appColor)
+                    }
+                }
+                .navigationTitle("New Itinerary")
+                .navigationBarTitleDisplayMode(.inline)
+        }
+    }
+}
+```
+
+**TripDetailsView**
+
+![](images/8.png)
+
+```swift
+struct TripDetailsView: View {
+    var body: some View {
+        List {
+            Section(header: Text("Trip Details")) {
+                CityRow()
+                DateRow(titleKey: "Start Date")
+                DateRow(titleKey: "End Date")
+            }
+            .headerProminence(.increased)
+        }
+    }
+}
+```
+
+**CityRow**
+
+![](images/9.png)
+
+```swift
+struct CityRow: View {
+    var body: some View {
+        HStack {
+            Text("City")
+            Spacer()
+            Text("San Francisco")
+                .foregroundColor(.secondary)
+        }
+    }
+}
+```
+
+**DateRow**
+
+![](images/10.png)
+
+```swift
+struct DateRow: View {
+    @State private var date = Date()
+    let titleKey: String
+
+    var body: some View {
+        DatePicker(
+            titleKey,
+            selection: $date,
+            displayedComponents: [.date]
+        )
+    }
+}
+```
+
+**FriendDetails**
+
+![](images/11.png)
+
+Here the chevoron gets added because we embed the `FriendRow` inside a `NavigationLink`. So no need to add manually.
+
+```swift
+struct FriendDetails: View {
+    @State var showingAddFriend = false
+
+    var body: some View {
+        List {
+            Section(header: Text("Friends")) {
+                NavigationLink {
+                    Text("Kate Grella")
+                } label: {
+                    FriendRow(fullname: "Kate Grella")
+                }
+                NavigationLink {
+                    Text("Jeremy Sheldon")
+                } label: {
+                    FriendRow(fullname: "Jeremy Sheldon")
+                }
+                Button(action: {
+                    self.showingAddFriend.toggle()
+                }) {
+                    AddFriendRow()
+                }
+                .foregroundColor(appColor)
+            }
+            .headerProminence(.increased)
+        }
+        .sheet(isPresented: $showingAddFriend) {
+            Text("Add friend")
+        }
+    }
+}
+```
+
+**FriendRow**
+
+![](images/12.png)
+
+```swift
+struct FriendRow: View {
+    let fullname: String
+    var body: some View {
+        HStack {
+            Image(systemName: "person")
+            Text(fullname)
+            Spacer()
+        }
+    }
+}
+```
+
+**AddFriendRow**
+
+![](images/13.png)
+
+No chevron added here.
+
+```swift
+struct AddFriendRow: View {
+    var body: some View {
+        HStack {
+            Image(systemName: "plus.circle.fill")
+            Text("Add People")
+            Spacer()
+        }
+        .foregroundColor(appColor)
+    }
+}
+```
