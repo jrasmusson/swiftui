@@ -37,7 +37,7 @@ struct FoodItem: Hashable, Codable, Identifiable {
     let description: String
 }
 
-final class ModelData: ObservableObject {
+class ModelData: ObservableObject {
     var foodItems: [FoodItem] = load("foodData.json")
 }
 
