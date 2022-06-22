@@ -7,16 +7,19 @@
 
 import SwiftUI
 
-struct Page1: View {
+struct Page: View {
     @EnvironmentObject var modelData: ModelData
+
+    let imageName: String
+    let text: String
     
     var body: some View {
         NavigationStack {
             VStack {
-                Image("delorean")
+                Image(imageName)
                     .resizable()
                     .scaledToFit()
-                Text("Bankey is faster, easier, and fun!")
+                Text(text)
                     .font(.title)
                     .padding(.top, 20)
             }
@@ -32,9 +35,10 @@ struct Page1: View {
     }
 }
 
-struct Page1_Previews: PreviewProvider {
+struct Page_Previews: PreviewProvider {
     static var previews: some View {
-        Page1()
+        Page(imageName: "delorean",
+              text: "Bankey is faster, easier, and fun!")
             .environmentObject(ModelData())
     }
 }

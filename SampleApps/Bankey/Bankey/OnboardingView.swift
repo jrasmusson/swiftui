@@ -12,12 +12,12 @@ struct OnboardingView: View {
 
     var body: some View {
         TabView {
-            Page1().environmentObject(modelData)
-            Text("Second")
-            Text("Third")
-            Button("Done") {
-                modelData.hasOnboarded = true // change
-            }
+            Page(imageName: "delorean", text: "Bankey is faster, easier, and fun!")
+            .environmentObject(modelData)
+            Page(imageName: "world", text: "Move money quickly and safely.")
+            .environmentObject(modelData)
+            Page(imageName: "thumbs", text: "Learn more at bankey.com.")
+            .environmentObject(modelData)
         }
         .tabViewStyle(.page)
         .indexViewStyle(.page(backgroundDisplayMode: .always))
