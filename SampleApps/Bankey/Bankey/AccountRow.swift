@@ -12,13 +12,7 @@ struct AccountRow: View {
 
     var body: some View {
         HStack {
-            VStack(alignment: .leading) {
-                Text(account.type.description)
-                    .font(.subheadline)
-                AccountDivider(color: account.color)
-                Text(account.name)
-                Spacer()
-            }
+            MiniHeaderView(account: account)
             Spacer()
             VStack(alignment: .trailing) {
                 Text("Current balance")
@@ -41,5 +35,18 @@ struct AccountDivider: View {
     var body: some View {
         Rectangle().frame(width: 100, height: 5)
             .foregroundColor(color)
+    }
+}
+
+struct MiniHeaderView: View {
+    let account: Account
+    var body: some View {
+        VStack(alignment: .leading) {
+            Text(account.type.description)
+                .font(.subheadline)
+            AccountDivider(color: account.color)
+            Text(account.name)
+            Spacer()
+        }
     }
 }
