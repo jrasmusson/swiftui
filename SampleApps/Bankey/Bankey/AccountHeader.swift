@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AccountHeader: View {
-    let size: CGFloat = 120
+    let size: CGFloat = 100
     var body: some View {
         HStack {
             VStack(alignment: .leading) {

@@ -31,6 +31,8 @@ struct AccountsTab: View {
 
     var body: some View {
         NavigationStack {
+            AccountHeader()
+                .padding()
             List(modelData.accounts) { account in
                 NavigationLink(value: account) {
                     AccountRow(account: account)
