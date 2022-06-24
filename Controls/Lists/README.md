@@ -18,6 +18,41 @@ struct TripDetailsView: View {
 }
 ```
 
+## Headers
+
+If you want a non-scrollable header, leave it outside the list:
+
+![](images/15.png)
+
+```swift
+NavigationStack {
+    AccountHeader()
+        .padding()
+    List(modelData.accounts) { account in
+        NavigationLink(value: account) {
+            AccountRow(account: account)
+        }
+    }
+}
+```
+
+If you want it to scroll with the list, put it inside and add the rows with a `ForEach`:
+
+![](images/16.png)
+
+```swift
+NavigationStack {
+    List {
+        AccountHeader()
+        ForEach(modelData.accounts) { account in
+            NavigationLink(value: account) {
+                AccountRow(account: account)
+            }
+        }
+    }
+}
+```
+
 ## Section header styling
 
 You can style your headers like this:

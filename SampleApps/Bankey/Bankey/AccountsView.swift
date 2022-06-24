@@ -31,12 +31,14 @@ struct AccountsTab: View {
 
     var body: some View {
         NavigationStack {
-            AccountHeader()
-                .padding()
-            List(modelData.accounts) { account in
-                NavigationLink(value: account) {
-                    AccountRow(account: account)
+            List {
+                AccountHeader()
+                ForEach(modelData.accounts) { account in
+                    NavigationLink(value: account) {
+                        AccountRow(account: account)
+                    }
                 }
+
             }
             .navigationTitle("Accounts")
             .navigationDestination(for: Account.self) { item in
@@ -49,6 +51,29 @@ struct AccountsTab: View {
         .tag(Tab.accounts)
     }
 }
+//struct AccountsTab: View {
+//    @EnvironmentObject var modelData: ModelData
+//
+//    var body: some View {
+//        NavigationStack {
+//            AccountHeader()
+//                .padding()
+//            List(modelData.accounts) { account in
+//                NavigationLink(value: account) {
+//                    AccountRow(account: account)
+//                }
+//            }
+//            .navigationTitle("Accounts")
+//            .navigationDestination(for: Account.self) { item in
+//                Text(item.name)
+//            }
+//        }
+//        .tabItem {
+//            Label("Accounts", systemImage: "list.dash.header.rectangle")
+//        }
+//        .tag(Tab.accounts)
+//    }
+//}
 
 struct MoveMoneyTab: View {
     var body: some View {
