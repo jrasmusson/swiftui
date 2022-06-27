@@ -21,7 +21,7 @@ struct AccountDetailView: View {
             ForEach(modelData.sortedTxSections) { section in
                 Section(header: Text(section.title)) {
                     ForEach(section.transactions) { tx in
-                        Text("Hi")
+                        AccountDetailRow(transaction: tx)
                     }
                 }
             }

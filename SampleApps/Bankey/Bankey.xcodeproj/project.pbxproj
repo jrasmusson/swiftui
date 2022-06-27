@@ -127,8 +127,8 @@
 		71ED183E28634CAC00E3F8D7 /* Accounts */ = {
 			isa = PBXGroup;
 			children = (
-				71A840F42865DAAF008AB2B1 /* AccountHeader.swift */,
 				71ED1834286339FD00E3F8D7 /* AccountsView.swift */,
+				71A840F42865DAAF008AB2B1 /* AccountHeader.swift */,
 				71ED18402863BAA600E3F8D7 /* AccountRow.swift */,
 				71A840F82865E970008AB2B1 /* Detail */,
 			);

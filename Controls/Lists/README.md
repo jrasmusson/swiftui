@@ -53,6 +53,26 @@ NavigationStack {
 }
 ```
 
+`ForEach` is your friend for dynamically building views instide your `List`:
+
+![](images/17.png)
+
+```swift
+List {
+    VStack(alignment: .leading) {
+        AccountDetailHeader(account: account)
+        AccountDetailHeaderBalance()
+    }
+    ForEach(modelData.sortedTxSections) { section in
+        Section(header: Text(section.title)) {
+            ForEach(section.transactions) { tx in
+                Text("Hi")
+            }
+        }
+    }
+}
+```
+
 ## Section header styling
 
 You can style your headers like this:

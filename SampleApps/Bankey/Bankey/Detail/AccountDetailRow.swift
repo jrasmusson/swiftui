@@ -8,13 +8,19 @@
 import SwiftUI
 
 struct AccountDetailRow: View {
+    let transaction: Transaction
+
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        HStack {
+            Text(transaction.description)
+            Spacer()
+            Text(transaction.amount)
+        }
     }
 }
 
 struct DetailRow_Previews: PreviewProvider {
     static var previews: some View {
-        AccountDetailRow()
+        AccountDetailRow(transaction: tx1)
     }
 }
