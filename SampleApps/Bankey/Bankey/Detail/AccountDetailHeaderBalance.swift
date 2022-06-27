@@ -27,7 +27,7 @@ struct AccountDetailHeaderBalance: View {
     }
 }
 
-struct AcountDetailHeaderBalance_Previews: PreviewProvider {
+struct AccountDetailHeaderBalance_Previews: PreviewProvider {
     static var previews: some View {
         AccountDetailHeaderBalance()
     }

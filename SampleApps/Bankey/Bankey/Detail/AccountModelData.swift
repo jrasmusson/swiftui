@@ -40,7 +40,8 @@ let trans = [tx1, tx21, tx22, tx31, tx32, tx33]
 
 let grouped: [Date: [Transaction]] = Dictionary(grouping: trans, by: { $0.date.cutTimestamp() })
 
-struct TxSection: Comparable {
+struct TxSection: Comparable, Identifiable {
+    let id = UUID()
     let date: Date
     var title: String {
         return date.monthDayYearString

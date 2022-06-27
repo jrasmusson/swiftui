@@ -15,6 +15,14 @@ struct AccountDetailView: View {
     var body: some View {
         VStack(alignment: .leading) {
             AccountDetailHeader(account: account)
+            AccountDetailHeaderBalance()
+        }
+        List(modelData.sortedTxSections) { section in
+            Section(header: Text(section.title)) {
+                ForEach(section.transactions) { tx in
+                    Text("Hi")
+                }
+            }
         }
     }
 }
