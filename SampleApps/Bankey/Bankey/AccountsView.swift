@@ -40,7 +40,8 @@ struct AccountsTab: View {
             }
             .navigationTitle("Overview")
             .navigationDestination(for: Account.self) { item in
-                AccountDetailView(modelData: AccountModelData())
+                AccountDetailView(account: account1,
+                                  modelData: AccountModelData())
             }
         }
         .tabItem {

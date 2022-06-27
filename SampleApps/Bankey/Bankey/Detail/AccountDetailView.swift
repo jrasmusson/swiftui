@@ -8,15 +8,20 @@
 import SwiftUI
 
 struct AccountDetailView: View {
+    let account: Account
+
     @StateObject var modelData: AccountModelData
 
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack(alignment: .leading) {
+            AccountDetailHeader(account: account)
+        }
     }
 }
 
 struct AccountDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        AccountDetailView(modelData: AccountModelData())
+        AccountDetailView(account: account1,
+                          modelData: AccountModelData())
     }
 }
