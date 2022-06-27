@@ -41,10 +41,3 @@ class ModelData: ObservableObject {
     @Published var isLoggedIn = true
     @Published var accounts = [account1, account2, account3]
 }
-
-struct Transaction: Identifiable, Hashable {
-    let id = UUID()
-    let date: Date
-    let description: String
-    let amount: String
-}

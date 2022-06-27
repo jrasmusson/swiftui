@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-struct DetailHeader: View {
+struct AccountDetailHeader: View {
     let account: Account
-    let size: CGFloat = 100
+    let size: CGFloat = 60
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -25,7 +25,7 @@ struct DetailHeader: View {
                     .aspectRatio(contentMode: .fit)
                     .frame(width: size, height: size)
             }
-            DetailHeaderBalance()
+            AccountDetailHeaderBalance()
             Rectangle().frame(width: .infinity, height: 1)
                 .foregroundColor(.secondary)
                 .padding([.top, .bottom], 8)
@@ -35,8 +35,8 @@ struct DetailHeader: View {
     }
 }
 
-struct DetailHeader_Previews: PreviewProvider {
+struct AccountDetailHeader_Previews: PreviewProvider {
     static var previews: some View {
-        DetailHeader(account: account1)
+        AccountDetailHeader(account: account1)
     }
 }

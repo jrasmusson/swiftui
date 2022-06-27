@@ -38,9 +38,9 @@ struct AccountsTab: View {
                     AccountRow(account: account)
                 }
             }
-            .navigationTitle("Accounts")
+            .navigationTitle("Overview")
             .navigationDestination(for: Account.self) { item in
-                Text(item.name)
+                AccountDetailView(modelData: AccountModelData())
             }
         }
         .tabItem {

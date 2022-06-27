@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct DetailHeaderBalance: View {
+struct AccountDetailHeaderBalance: View {
     var body: some View {
         HStack {
             VStack(alignment: .leading) {
@@ -27,8 +27,8 @@ struct DetailHeaderBalance: View {
     }
 }
 
-struct DetailHeaderBalance_Previews: PreviewProvider {
+struct AcountDetailHeaderBalance_Previews: PreviewProvider {
     static var previews: some View {
-        DetailHeaderBalance()
+        AccountDetailHeaderBalance()
     }
 }
