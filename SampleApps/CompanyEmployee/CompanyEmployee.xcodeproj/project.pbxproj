@@ -38,6 +38,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		712CA172286DD310003CE122 /* Company */ = {
+			isa = PBXGroup;
+			children = (
+				71924A69286DC7D500B4DD02 /* ContentView.swift */,
+				71850967286DCB6E007108C1 /* CompanyView.swift */,
+			);
+			name = Company;
+			sourceTree = "<group>";
+		};
+		712CA173286DD33E003CE122 /* Employee */ = {
+			isa = PBXGroup;
+			children = (
+				712CA170286DCE31003CE122 /* EmployeeView.swift */,
+			);
+			name = Employee;
+			sourceTree = "<group>";
+		};
 		71924A5B286DC7D500B4DD02 = {
 			isa = PBXGroup;
 			children = (
@@ -60,9 +77,8 @@
 				71D8EAD9286DC92600470C17 /* Files */,
 				71D8EADA286DC95200470C17 /* ModelData.swift */,
 				71924A67286DC7D500B4DD02 /* MainApp.swift */,
-				71924A69286DC7D500B4DD02 /* ContentView.swift */,
-				71850967286DCB6E007108C1 /* CompanyView.swift */,
-				712CA170286DCE31003CE122 /* EmployeeView.swift */,
+				712CA172286DD310003CE122 /* Company */,
+				712CA173286DD33E003CE122 /* Employee */,
 			);
 			path = CompanyEmployee;
 			sourceTree = "<group>";
