@@ -1,21 +1,27 @@
-//
-//  ContentView.swift
-//  CompanyEmployee
-//
-//  Created by jrasmusson on 2022-06-30.
-//
-
 import SwiftUI
 
 struct ContentView: View {
+    @EnvironmentObject var modelData: ModelData
+
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        NavigationStack {
+            List(modelData.companies) { company in
+                NavigationLink(value: company) {
+                    Text(company.name)
+                }
+            }
+            .navigationTitle("Party Food")
+            .navigationDestination(for: Company.self) { company in
+                CompanyView(company: company)
+            }
+        }
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+            .environmentObject(ModelData())
+            .preferredColorScheme(.dark)
     }
 }
