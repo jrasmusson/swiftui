@@ -27,7 +27,7 @@ struct ContentView_Previews: PreviewProvider {
 }
 ```
 
-## Value
+## With Value
 
 ```swift
 import SwiftUI
@@ -58,51 +58,7 @@ struct ContentView_Previews: PreviewProvider {
 }
 ```
 
-## How to Style Navigation Link
-
-Style your row without the chevron:
-
-![](images/8.png)
-
-**FriendRow**
-
-```swift
-struct FriendRow: View {
-    var body: some View {
-        HStack {
-            Image(systemName: "person")
-            Text("Kate Grella")
-            Spacer()
-        }
-    }
-}
-```
-
-Then add the chevron via a `NavigationLink` using your row view in the `Label`:
-
-![](images/7.png)
-
-**FriendDetails**
-
-```swift
-struct FriendDetails: View {
-    var body: some View {
-        List {
-            Section(header: Text("Friends")) {
-                NavigationLink {
-                    Text("Detail")
-                } label: {
-                    FriendRow()
-                }
-            }
-            .headerProminence(.increased)
-        }
-    }
-}
-```
-
-
-## List within a List
+## Company / Employee 
 
 You define your stack once at the top:
 
@@ -248,52 +204,6 @@ struct EmployeeView_Previews: PreviewProvider {
 
 ![](images/demo3.gif)
 
-## Examples
-
-
-![](images/1.png)
-
-
-```swift
-struct ContentView: View {
-    var body: some View {
-        NavigationStack {
-            List(1..<20) { i in
-                NavigationLink {
-                    Text("Detail \(i)")
-                } label: {
-                    Label("Row \(i)", systemImage: "\(i).circle")
-                }
-            }
-            .navigationTitle("NavigationStack")
-        }
-    }
-}
-```
-
-You can attach a `value` to a `NavigationLink` like this:
-
-```swift
-struct ContentView: View {
-    var body: some View {
-        NavigationStack {
-            List(1..<20) { i in
-                NavigationLink(value: i) {
-                    Label("Row \(i)", systemImage: "\(i).circle")
-                }
-            }
-            .navigationDestination(for: Int.self) { i in
-                Text("Detail \(i)")
-            }
-            .navigationTitle("NavigationStack")
-        }
-    }
-}
-```
-
-- This method gives you state restoration out of the box
-- Can do more advanced navigation like pop to root view controller
-
 ## Preselect rows from layout
 
 ```swift
@@ -354,9 +264,8 @@ struct ContentView: View {
 
 ![](images/demo2.gif)
 
-## Titles
 
-### Inline
+## Inline title
 
 ![](images/6.png)
 
