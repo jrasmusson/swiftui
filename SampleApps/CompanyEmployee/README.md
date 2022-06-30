@@ -134,3 +134,33 @@ struct EmployeeView_Previews: PreviewProvider {
 ```
 
 ![](images/demo1.gif)
+
+## Add Company
+
+Add a `Toolbar` with `@State` variable to toggle `.sheet` display:
+
+**ContentView**
+
+```swift
+struct ContentView: View {
+    @State var showingAddCompany = false
+
+    var body: some View {
+        NavigationStack {
+            .navigationTitle("Companies")
+            .toolbar {
+                Button(action: {
+                    self.showingAddCompany.toggle()
+                }) {
+                    Image(systemName: "plus")
+                }
+            }
+            .sheet(isPresented: $showingAddCompany) {
+                Text("Add Company")
+            }
+        }
+    }
+}
+```
+
+![](images/demo2.gif)

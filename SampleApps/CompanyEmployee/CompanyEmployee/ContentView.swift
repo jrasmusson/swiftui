@@ -2,6 +2,7 @@ import SwiftUI
 
 struct ContentView: View {
     @EnvironmentObject var modelData: ModelData
+    @State var showingAddCompany = false
 
     var body: some View {
         NavigationStack {
@@ -13,6 +14,16 @@ struct ContentView: View {
             .navigationTitle("Companies")
             .navigationDestination(for: Company.self) { company in
                 CompanyView(company: company)
+            }
+            .toolbar {
+                Button(action: {
+                    self.showingAddCompany.toggle()
+                }) {
+                    Image(systemName: "plus")
+                }
+            }
+            .sheet(isPresented: $showingAddCompany) {
+                Text("Add Company")
             }
         }
     }
