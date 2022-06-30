@@ -17,6 +17,7 @@ struct AddCompany: View {
                         Text("Save")
                     }
                 }
+                .padding()
         }
     }
 }
