@@ -1,99 +1,136 @@
-# Family Pool
+# Company / Employee 
 
-## Setting team name
+## Basic Setup
 
-### Data
-
-Define `ObservableObject`. When `teamIndex` changes, update `team1Name`.
+**ModelData**
 
 ```swift
 import Foundation
 
-var teams = ["Choose team", "Edmonton Oilers", "Calgary Flames", "Winnipeg Jets", "Montreal Canadians"]
-
-struct Player {
+struct Employee: Hashable, Identifiable {
+    let id = UUID()
     let name: String
-    
-    var team1Index: Int = 0 {
-        didSet {
-            if team1Index != 0 { // Ignore "Choose team"
-                team1Name = teams[team1Index]
-            }
-        }
-    }
-    var team2Index: Int = 0
-    
-    var team1Name = teams[0]
-    var team2Name = teams[0]
 }
 
-class Pool: ObservableObject {
-    @Published var name: String = ""
-    @Published var player1: Player = Player(name: "Player1")
-    @Published var player2: Player = Player(name: "Player2")
-    init() {}
+struct Company: Hashable, Identifiable {
+    let id = UUID()
+    let name: String
+    let employees: [Employee]
+}
+
+let employee1 = Employee(name: "Peter")
+let employee2 = Employee(name: "Paul")
+let employee3 = Employee(name: "Mary")
+let employees = [employee1, employee2, employee3]
+
+let company1 = Company(name: "Apple", employees: employees)
+let company2 = Company(name: "IBM", employees: employees)
+let company3 = Company(name: "Microsoft", employees: employees)
+
+final class ModelData: ObservableObject {
+    var companies = [company1, company2, company3]
 }
 ```
 
-Inject into view.
+**App**
 
-```swit
+```swift
+import SwiftUI
+
+@main
+struct NavigationLinksApp: App {
+    @StateObject private var modelData = ModelData()
+
+    var body: some Scene {
+        WindowGroup {
+            ContentView()
+                .environmentObject(modelData)
+        }
+    }
+}
+```
+
+**ContentView**
+
+```swift
 import SwiftUI
 
 struct ContentView: View {
+    @EnvironmentObject var modelData: ModelData
     var body: some View {
-        TabView() {
-            IntroView()
-            ChooseTeamsView()
-            Text("Start your pool!")
+        NavigationStack {
+            List(modelData.companies) { company in
+                NavigationLink(value: company) {
+                    Text(company.name)
+                }
+            }
+            .navigationDestination(for: Company.self) { company in
+                CompanyView(company: company)
+            }
+            .navigationTitle("Companies")
         }
-        .tabViewStyle(.page)
-        .indexViewStyle(.page(backgroundDisplayMode: .always))
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        let pool = Pool()
         ContentView()
-            .environmentObject(pool)
+            .preferredColorScheme(.dark)
+            .environmentObject(ModelData())
     }
 }
 ```
 
-### Flow
-
-By binding to 
-
-```swift
-Picker("Select team1", selection: $pool.player1.team1Index)
-```
-
-We can propogate the index back up to the pool, and update our team name there.
+**CompanyView**
 
 ```swift
 import SwiftUI
 
-struct ChooseTeamsView: View {
-    @EnvironmentObject var pool: Pool
-    @State private var selectedTeamIndex = 0
-    
+struct CompanyView: View {
+    let company: Company
+
     var body: some View {
-        NavigationView {
-            Form {
-                Section(header: Text("Player1 team")) {
-                    Picker("Select team1", selection: $pool.player1.team1Index) {
-                        ForEach(0..<teams.count) {
-                            Text(teams[$0])
-                        }
-                    }
-                    ...
-                }
+        List(company.employees) { employee in
+            NavigationLink(value: employee) {
+                Text(employee.name)
             }
+        }
+        .navigationDestination(for: Employee.self) { employee in
+            EmployeeView(employee: employee)
+        }
+        .navigationTitle("Employees")
+    }
+}
+
+struct CompanyView_Previews: PreviewProvider {
+    static var previews: some View {
+        NavigationStack {
+            CompanyView(company: company1)
+                .preferredColorScheme(.dark)
         }
     }
 }
 ```
 
-### Links that help
+**EmployeeView**
 
+```swift
+import SwiftUI
+
+struct EmployeeView: View {
+    let employee: Employee
+
+    var body: some View {
+        Text("Hello \(employee.name)")
+    }
+}
+
+struct EmployeeView_Previews: PreviewProvider {
+    static var previews: some View {
+        EmployeeView(employee: employee1)
+            .preferredColorScheme(.dark)
+    }
+}
+```
+
+![](images/demo1.gif)
