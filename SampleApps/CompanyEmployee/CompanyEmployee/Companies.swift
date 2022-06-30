@@ -21,5 +21,5 @@ let company2 = Company(name: "IBM", employees: employees)
 let company3 = Company(name: "Microsoft", employees: employees)
 
 final class Companies: ObservableObject {
-    var items = [company1, company2, company3]
+    @Published var items = [company1, company2, company3]
 }

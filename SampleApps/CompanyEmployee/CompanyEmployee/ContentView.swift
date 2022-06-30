@@ -23,7 +23,7 @@ struct ContentView: View {
                 }
             }
             .sheet(isPresented: $showingAddCompany) {
-                Text("Add Company")
+                AddCompany(companies: self.companies)
             }
         }
     }

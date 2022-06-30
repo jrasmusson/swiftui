@@ -28,7 +28,7 @@ let company2 = Company(name: "IBM", employees: employees)
 let company3 = Company(name: "Microsoft", employees: employees)
 
 final class Companies: ObservableObject {
-    var items = [company1, company2, company3]
+    @Published var items = [company1, company2, company3]
 }
 ```
 
@@ -145,7 +145,7 @@ struct EmployeeView_Previews: PreviewProvider {
 
 ![](images/demo1.gif)
 
-## Add Company
+## Add Company as Modal
 
 Add a `Toolbar` with `@State` variable to toggle `.sheet` display:
 
@@ -174,3 +174,40 @@ struct ContentView: View {
 ```
 
 ![](images/demo2.gif)
+
+## Save Company
+
+**AddCompany**
+
+```swift
+import SwiftUI
+
+struct AddCompany: View {
+    @StateObject var companies: Companies
+    @State var name = ""
+    @Environment(\.presentationMode) var presentationMode
+
+    var body: some View {
+        NavigationStack {
+            TextField("New company name", text: $name)
+                .toolbar {
+                    Button(action: {
+                        let company = Company(name: name, employees: [])
+                        self.companies.items.append(company)
+                        self.presentationMode.wrappedValue.dismiss()
+                    }) {
+                        Text("Save")
+                    }
+                }
+        }
+    }
+}
+
+struct AddCompany_Previews: PreviewProvider {
+    static var previews: some View {
+        AddCompany(companies: Companies())
+    }
+}
+```
+
+![](images/demo3.gif)
