@@ -27,6 +27,6 @@ let company1 = Company(name: "Apple", employees: employees)
 let company2 = Company(name: "IBM", employees: employees)
 let company3 = Company(name: "Microsoft", employees: employees)
 
-final class ModelData: ObservableObject {
-    var companies = [company1, company2, company3]
+final class Companies: ObservableObject {
+    var items = [company1, company2, company3]
 }

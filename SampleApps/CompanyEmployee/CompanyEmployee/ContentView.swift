@@ -1,12 +1,12 @@
 import SwiftUI
 
 struct ContentView: View {
-    @EnvironmentObject var modelData: ModelData
+    @StateObject var companies: Companies
     @State var showingAddCompany = false
 
     var body: some View {
         NavigationStack {
-            List(modelData.companies) { company in
+            List(companies.items) { company in
                 NavigationLink(value: company) {
                     Text(company.name)
                 }
@@ -31,8 +31,7 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
-            .environmentObject(ModelData())
+        ContentView(companies: Companies())
             .preferredColorScheme(.dark)
     }
 }
