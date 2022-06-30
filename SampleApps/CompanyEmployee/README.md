@@ -2,7 +2,7 @@
 
 ## Basic Setup
 
-**ModelData**
+**Companies**
 
 ```swift
 import Foundation
@@ -27,24 +27,23 @@ let company1 = Company(name: "Apple", employees: employees)
 let company2 = Company(name: "IBM", employees: employees)
 let company3 = Company(name: "Microsoft", employees: employees)
 
-final class ModelData: ObservableObject {
-    var companies = [company1, company2, company3]
+final class Companies: ObservableObject {
+    var items = [company1, company2, company3]
 }
 ```
 
-**App**
+**MainApp**
 
 ```swift
 import SwiftUI
 
 @main
-struct NavigationLinksApp: App {
-    @StateObject private var modelData = ModelData()
+struct MainApp: App {
+    @StateObject private var companies = Companies()
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                .environmentObject(modelData)
+            ContentView(companies: companies)
         }
     }
 }
@@ -56,27 +55,38 @@ struct NavigationLinksApp: App {
 import SwiftUI
 
 struct ContentView: View {
-    @EnvironmentObject var modelData: ModelData
+    @StateObject var companies: Companies
+    @State var showingAddCompany = false
+
     var body: some View {
         NavigationStack {
-            List(modelData.companies) { company in
+            List(companies.items) { company in
                 NavigationLink(value: company) {
                     Text(company.name)
                 }
             }
+            .navigationTitle("Companies")
             .navigationDestination(for: Company.self) { company in
                 CompanyView(company: company)
             }
-            .navigationTitle("Companies")
+            .toolbar {
+                Button(action: {
+                    self.showingAddCompany.toggle()
+                }) {
+                    Image(systemName: "plus")
+                }
+            }
+            .sheet(isPresented: $showingAddCompany) {
+                Text("Add Company")
+            }
         }
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        ContentView(companies: Companies())
             .preferredColorScheme(.dark)
-            .environmentObject(ModelData())
     }
 }
 ```

@@ -1,10 +1,3 @@
-//
-//  ModelData.swift
-//  CompanyEmployee
-//
-//  Created by jrasmusson on 2022-06-30.
-//
-
 import Foundation
 
 struct Employee: Hashable, Identifiable {
