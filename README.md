@@ -139,6 +139,7 @@ SwiftUI by [example](https://www.hackingwithswift.com/quick-start/swiftui).
 - [WordScramble](SampleApps/WordScramble/README.md)
 - [Landmarks](SampleApps/Landmarks/README.md)
 - [Places](SampleApps/Places/README.md)
+- [Company/Employee](SampleApps/CompanyEmployee/README.md)
 
 ## Stanford 🎓
 
