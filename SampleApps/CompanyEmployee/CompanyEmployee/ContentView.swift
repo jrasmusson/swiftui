@@ -10,7 +10,7 @@ struct ContentView: View {
                     Text(company.name)
                 }
             }
-            .navigationTitle("Party Food")
+            .navigationTitle("Companies")
             .navigationDestination(for: Company.self) { company in
                 CompanyView(company: company)
             }

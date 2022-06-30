@@ -7,14 +7,26 @@
 
 import Foundation
 
-struct Company: Hashable, Identifiable {
+struct Employee: Hashable, Identifiable {
     let id = UUID()
     let name: String
 }
 
-let company1 = Company(name: "Apple")
-let company2 = Company(name: "Microsoft")
+struct Company: Hashable, Identifiable {
+    let id = UUID()
+    let name: String
+    let employees: [Employee]
+}
 
-class ModelData: ObservableObject {
-    var companies = [company1, company2]
+let employee1 = Employee(name: "Peter")
+let employee2 = Employee(name: "Paul")
+let employee3 = Employee(name: "Mary")
+let employees = [employee1, employee2, employee3]
+
+let company1 = Company(name: "Apple", employees: employees)
+let company2 = Company(name: "IBM", employees: employees)
+let company3 = Company(name: "Microsoft", employees: employees)
+
+final class ModelData: ObservableObject {
+    var companies = [company1, company2, company3]
 }
