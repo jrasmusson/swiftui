@@ -10,7 +10,7 @@ struct AddCompany: View {
             TextField("New company name", text: $name)
                 .toolbar {
                     Button(action: {
-                        let company = Company(name: name, employees: [])
+                        let company = Company(id: UUID().uuidString, name: name, employees: [])
                         self.companies.items.append(company)
                         self.presentationMode.wrappedValue.dismiss()
                     }) {
