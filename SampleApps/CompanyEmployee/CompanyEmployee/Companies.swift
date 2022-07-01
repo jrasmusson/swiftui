@@ -20,6 +20,13 @@ let company1 = Company(id: "1", name: "Apple", employees: employees)
 let company2 = Company(id: "2", name: "IBM", employees: employees)
 let company3 = Company(id: "3", name: "Microsoft", employees: employees)
 
+
+//
+// Source of truth
+//
+// This is where you can setup fake data for local development, or add in real
+// data fetched via network calls.
+//
 class Companies: ObservableObject {
 //    @Published var items: [Company] = [company1, company2, company3] // fake
     @Published var items: [Company] = []
