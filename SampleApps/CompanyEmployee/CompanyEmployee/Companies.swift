@@ -24,7 +24,7 @@ class Companies: ObservableObject {
 //    @Published var items: [Company] = [company1, company2, company3] // fake
     @Published var items: [Company] = []
 
-    func fetchCompanies() {
+    func fetchCompanies() async {
             guard let url = URL(string: "https://fierce-retreat-36855.herokuapp.com/company") else { fatalError("Missing URL") }
 
             let urlRequest = URLRequest(url: url)
