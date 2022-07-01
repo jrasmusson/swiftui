@@ -1,8 +1,11 @@
-# Simple Networking
+# Simple
 
-For simple networking you can fetch your results in your data model object:
+What we really want is something that combines:
 
-**Network**
+- Simple, with
+- Async/Await
+
+Define your `Observable` and fetch asynchronously:
 
 ```swift
 import SwiftUI
@@ -10,52 +13,38 @@ import SwiftUI
 class Network: ObservableObject {
     @Published var users: [User] = []
 
-    func getUsers() {
-        guard let url = URL(string: "https://jsonplaceholder.typicode.com/users") else { fatalError("Missing URL") }
-		...
+    func fetchUsers() async {
     }
 }
 ```
 
-And then load it in the `View` via `.onAppear`:
-
-**ContentView**
+And then load it via an awaiting `task` in your view:
 
 ```swift
-import SwiftUI
-
 struct ContentView: View {
     @EnvironmentObject var network: Network
 
     var body: some View {
         ScrollView {
-			...
         }
-        .onAppear {
-            network.getUsers()
+        .task {
+            await network.fetchUsers()
         }
     }
 }
 ```
 
-## Full Source
+## Full source
 
 **Network**
 
 ```swift
-//
-//  Network.swift
-//  Networking1
-//
-//  Created by jrasmusson on 2022-07-01.
-//
-
 import SwiftUI
 
 class Network: ObservableObject {
     @Published var users: [User] = []
 
-    func getUsers() {
+    func fetchUsers() async {
         guard let url = URL(string: "https://jsonplaceholder.typicode.com/users") else { fatalError("Missing URL") }
 
         let urlRequest = URLRequest(url: url)
@@ -123,8 +112,8 @@ struct ContentView: View {
 
         }
         .padding(.vertical)
-        .onAppear {
-            network.getUsers()
+        .task {
+            await network.fetchUsers()
         }
     }
 }
@@ -176,8 +165,6 @@ struct User: Identifiable, Decodable {
 **App**
 
 ```swift
-import SwiftUI
-
 @main
 struct Networking1App: App {
     var network = Network()
@@ -194,4 +181,7 @@ struct Networking1App: App {
 ![](images/1.png)
 
 ### Links that help
+
 - [Example](https://designcode.io/swiftui-advanced-handbook-http-request)
+- [Hacking in Swift](https://www.hackingwithswift.com/books/ios-swiftui/sending-and-receiving-codable-data-with-urlsession-and-swiftui)
+

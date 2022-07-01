@@ -6,9 +6,20 @@ Deliberate practice with SwiftUI.
 
 - [Load data](HowTo/LoadData/README.md)
 
-## Learnings 🎓
+## Networking
 
-- [Learnings](Learnings/README.md)
+- [Simple](Networking/Simple/README.md)
+
+## Navigation
+
+- [NavigationStack](Controls/NavigationStack/README.md)
+- [Link](Controls/Link/README.md)
+- [Menu](Controls/Menu/README.md)
+- [Toolbar](Controls/Toolbar/README.md)
+- [Onboarding](NavigationFlow/Onboarding/README.md)
+
+
+
 
 ## Controls 🕹
 
@@ -27,14 +38,6 @@ Deliberate practice with SwiftUI.
 - [Button](Controls/Button/README.md)
 - [EditButton](Controls/EditButton/README.md)
 - [ConfirmationDialog](Controls/ConfirmationDialog/README.md)
-
-### Navigation
-
-- [NavigationView - Deprecated](Controls/NavigationView/README.md)
-- [NavigationStack](Controls/NavigationStack/README.md)
-- [Link](Controls/Link/README.md)
-- [Menu](Controls/Menu/README.md)
-- [Toolbar](Controls/Toolbar/README.md)
 
 ### Containers
 
@@ -95,17 +98,11 @@ SwiftUI by [example](https://www.hackingwithswift.com/quick-start/swiftui).
 - [How it works](Dataflow/HowItWorks/README.md)
 - [Examples](Dataflow/zExamples.md)
 
-## Navigation Flow ⚓️
-- [Onboarding](NavigationFlow/Onboarding/README.md)
 
 ## Layout ↔️
 - [How it works](Layout/HowItWorks/README.md)
 - [ViewBuilder](Layout/ViewBuilder/README.md)
 
-## Networking
-
-- [Simple](Networking/Simple/README.md)
-- [Async Await](Networking/AsyncAwait/README.md)
 
 ## Combine ➡️
 - [Getting Started](Combine/GettingStarted/README.md)
