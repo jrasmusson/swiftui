@@ -25,6 +25,9 @@ struct ContentView: View {
             .sheet(isPresented: $showingAddCompany) {
                 AddCompany(companies: self.companies)
             }
+            .onAppear {
+                companies.fetchCompanies()
+            }
         }
     }
 }
