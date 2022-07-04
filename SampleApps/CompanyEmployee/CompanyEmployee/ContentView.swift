@@ -6,7 +6,7 @@ struct ContentView: View {
 
     var body: some View {
         NavigationStack {
-            List(companyVM.items) { company in
+            List(companyVM.companies) { company in
                 NavigationLink(value: company) {
                     Text(company.name)
                 }

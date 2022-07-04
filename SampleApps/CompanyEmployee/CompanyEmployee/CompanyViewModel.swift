@@ -28,7 +28,7 @@ class CompanyViewModel: ObservableObject {
 
     /// Fake data
     // @Published var items: [Company] = [company1, company2, company3]
-    @Published var items: [Company] = []
+    @Published var companies: [Company] = []
 
     /// Real thing
 //    func fetchCompanies() async {
@@ -75,7 +75,7 @@ class CompanyViewModel: ObservableObject {
 
         switch result {
             case .success(let companies):
-            self.items = companies
+            self.companies = companies
             case .failure(let error):
             _ = "Error: \(error.localizedDescription)"
         }

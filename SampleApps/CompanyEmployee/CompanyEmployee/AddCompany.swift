@@ -12,7 +12,7 @@ struct AddCompany: View {
                     Button(action: {
                         let company = Company(id: UUID().uuidString, name: name, employees: [])
                         // 1. Update the local model
-                        self.companyVM.items.append(company)
+                        self.companyVM.companies.append(company)
                         // 2. Network call to save to backend
                         self.presentationMode.wrappedValue.dismiss()
                     }) {
