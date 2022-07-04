@@ -31,7 +31,7 @@ Deliberate practice with SwiftUI.
 
 ### Images
 
-- [Image](Controls/Image/README.md)
+
 
 ### Buttons
 
@@ -64,6 +64,8 @@ Deliberate practice with SwiftUI.
 
 ### Misc 
 
+- [Alert](Controls/Alert/README.md)
+- [Image](Controls/Image/README.md)
 - [Badges](Controls/Badges/README.md)
 - [Color](Controls/Color/README.md)
 - [ContextMenu](Controls/ContextMenu/README.md)
