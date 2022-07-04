@@ -179,4 +179,5 @@ struct Networking1App: App {
 
 - [Example](https://designcode.io/swiftui-advanced-handbook-http-request)
 - [Hacking in Swift](https://www.hackingwithswift.com/books/ios-swiftui/sending-and-receiving-codable-data-with-urlsession-and-swiftui)
+- [Understanding Result](https://www.hackingwithswift.com/books/ios-swiftui/understanding-swifts-result-type)
 
