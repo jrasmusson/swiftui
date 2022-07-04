@@ -3,7 +3,6 @@ import SwiftUI
 struct ContentView: View {
     @StateObject var companyVM: CompanyViewModel
     @State private var showingAddCompany = false
-//    @State private var showingError = true
 
     var body: some View {
         NavigationStack {
@@ -29,17 +28,10 @@ struct ContentView: View {
             .task {
                 await companyVM.fetchCompanies()
             }
-            .alert("Important message", isPresented: $companyVM.showingError) {
+            .alert(companyVM.errorMessage, isPresented: $companyVM.showingError) {
                 Button("OK", role: .cancel) { }
             }
         }
-
-//        if let error = companyVM.error {
-//            showingAlert = true
-//                .alert("Important message", isPresented: $showingAlert) {
-//                    Button("OK", role: .cancel) { }
-//                }
-//        }
     }
 }
 

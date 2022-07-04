@@ -20,29 +20,53 @@ let company1 = Company(id: "1", name: "Apple", employees: employees)
 let company2 = Company(id: "2", name: "IBM", employees: employees)
 let company3 = Company(id: "3", name: "Microsoft", employees: employees)
 
+enum LoadError: Error {
+    case networkFailed, decodeFailed
+}
+
 @MainActor
 class CompanyViewModel: ObservableObject {
 
     @Published var companies: [Company] = []
     @Published var showingError = false
+    var errorMessage = ""
 
     func fetchCompanies() async {
         let fetchTask = Task { () -> [Company] in
             let url = URL(string: "https://fierce-retreat-36855.herokuapp.com/company")!
-            let (data, _) = try await URLSession.shared.data(from: url) // (data, response)
-            let companies = try JSONDecoder().decode([Company].self, from: data)
-            return companies
+            let data: Data
+
+            do {
+                (data, _) = try await URLSession.shared.data(from: url)
+            } catch {
+                throw LoadError.networkFailed
+            }
+
+            if let companies = try JSONDecoder().decode([Company].self, from: data) {
+                return companies
+            } else {
+                throw LoadError.decodeFailed
+            }
+
         }
 
         let result = await fetchTask.result
 
-        switch result {
-            case .success(let companies):
-            self.companies = companies
-            self.showingError = false
-            case .failure(let error):
-            self.showingError = true
-        }
+//        do {
+//            self.companies = try result.get()
+//            self.showingError = false
+//        } catch LoadError.fetchFailed {
+            showError("Unable to fetch the quotes.")
+//        } catch LoadError.decodeFailed {
+//            showError("Unable to convert quotes to text.")
+//        } catch {
+//            showError("Unknown error.")
+//        }
+    }
+
+    private func showError(_ message: String) {
+        self.showingError = true
+        self.errorMessage = message
     }
 }
 
