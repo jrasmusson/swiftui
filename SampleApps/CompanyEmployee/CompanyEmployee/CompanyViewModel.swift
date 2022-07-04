@@ -32,36 +32,29 @@ class CompanyViewModel: ObservableObject {
     var errorMessage = ""
 
     func fetchCompanies() async {
+
         let fetchTask = Task { () -> [Company] in
             let url = URL(string: "https://fierce-retreat-36855.herokuapp.com/company")!
-            let data: Data
+            let (data, _) = try await URLSession.shared.data(from: url)
 
             do {
-                (data, _) = try await URLSession.shared.data(from: url)
-            } catch {
-                throw CompanyError.networkFailed
-            }
-
-            if let companies = try JSONDecoder().decode([Company].self, from: data) {
+                let companies = try JSONDecoder().decode([Company].self, from: data)
                 return companies
-            } else {
+            } catch {
                 throw CompanyError.decodeFailed
             }
-
         }
 
         let result = await fetchTask.result
 
-//        do {
-//            self.companies = try result.get()
-//            self.showingError = false
-//        } catch LoadError.fetchFailed {
-            showError("Unable to fetch the quotes.")
-//        } catch LoadError.decodeFailed {
-//            showError("Unable to convert quotes to text.")
-//        } catch {
-//            showError("Unknown error.")
-//        }
+        do {
+            self.companies = try result.get()
+            self.showingError = false
+        } catch CompanyError.decodeFailed {
+            showError("JSON decoding error occurred.")
+        } catch {
+            showError("Unknown error occurred.")
+        }
     }
 
     private func showError(_ message: String) {
@@ -69,34 +62,3 @@ class CompanyViewModel: ObservableObject {
         self.errorMessage = message
     }
 }
-
-
-/// Real thing
-//    func fetchCompanies() async {
-//        guard let url = URL(string: "https://fierce-retreat-36855.herokuapp.com/company") else { fatalError("Missing URL") }
-//
-//        let urlRequest = URLRequest(url: url)
-//
-//        let dataTask = URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
-//            if let error = error {
-//                print("Request error: ", error)
-//                return
-//            }
-//
-//            guard let response = response as? HTTPURLResponse else { return }
-//
-//            if response.statusCode == 200 {
-//                guard let data = data else { return }
-//                DispatchQueue.main.async {
-//                    do {
-//                        let decodedCompanies = try JSONDecoder().decode([Company].self, from: data)
-//                        self.items = decodedCompanies
-//                    } catch let error {
-//                        print("Error decoding: ", error)
-//                    }
-//                }
-//            }
-//        }
-//
-//        dataTask.resume()
-//    }

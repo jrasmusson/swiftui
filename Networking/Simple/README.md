@@ -1,29 +1,166 @@
-# Simple
+# Task / Result
 
-Define:
+If you want to use a `Result` with your fetch you need to do something like this:
+
+**CompanyModel**
 
 ```swift
-import SwiftUI
+enum CompanyError: Error {
+    case networkFailed, decodeFailed
+}
 
-class Network: ObservableObject {
-    @Published var users: [User] = []
+@MainActor
+class CompanyViewModel: ObservableObject {
 
-    func fetchUsers() async {
+    @Published var companies: [Company] = []
+    @Published var showingError = false
+    var errorMessage = ""
+
+    func fetchCompanies() async {
+
+        let fetchTask = Task { () -> [Company] in
+            let url = URL(string: "https://fierce-retreat-36855.herokuapp.com/company")!
+            let (data, _) = try await URLSession.shared.data(from: url)
+            let companies = try JSONDecoder().decode([Double].self, from: data)
+            return companies
+        }
+
+        let result = await fetchTask.result
+
+        switch result {
+        case .success(let companies):
+            self.companies = companies
+        case .failure(let error):
+            showError("An error occurred.")
+        }
+    }
+
+    private func showError(_ message: String) {
+        self.showingError = true
+        self.errorMessage = message
     }
 }
 ```
 
-Fetch:
+## How to throw an error
+
+The problem with this is you have no way to set the error in the result.
+
+One way to get around this is to `throw` errors instead of passing them in the `Result`:
+
+```swift
+func fetchCompanies() async {
+
+    let fetchTask = Task { () -> [Company] in
+        let url = URL(string: "https://fierce-retreat-36855.herokuapp.com/company")!
+        let (data, _) = try await URLSession.shared.data(from: url)
+
+        do {
+            let companies = try JSONDecoder().decode([Company].self, from: data)
+            return companies
+        } catch {
+            throw CompanyError.decodeFailed
+        }
+    }
+
+    let result = await fetchTask.result
+
+    do {
+        self.companies = try result.get()
+        self.showingError = false
+    } catch CompanyError.decodeFailed {
+        showError("JSON decoding error occurred.")
+    } catch {
+        showError("Unknown error occurred.")
+    }
+}
+```
+
+### How to deal with response code
+
+```swift
+func fetchCompanies() async {
+    let fetchTask = Task { () -> [Company] in
+        let url = URL(string: "https://fierce-retreat-36855.herokuapp.com/company")!
+        let data: Data
+        let urlResponse: URLResponse
+
+        do {
+            (data, urlResponse) = try await URLSession.shared.data(from: url)
+            guard let response = urlResponse as? HTTPURLResponse else { return [Company]() }
+
+            if response.statusCode == 200 {
+                if let companies = try JSONDecoder().decode([Company].self, from: data) {
+                    return companies
+                } else {
+                    throw CompanyError.decodeFailed
+                }
+            }
+            else {
+                throw CompanyError.invalidResponse
+            }
+        } catch {
+            throw CompanyError.networkFailed
+        }
+    }
+
+    let result = await fetchTask.result
+
+    do {
+        self.companies = try result.get()
+        self.showingError = false
+    } catch CompanyError.networkFailed {
+        showError("Unable to fetch the quotes.")
+    } catch CompanyError.decodeFailed {
+        showError("Unable to convert quotes to text.")
+    } catch CompanyError.invalidResponse {
+            showError("Invalid HTTP response.")
+    } catch {
+        showError("Unknown error.")
+    }
+}
+```
+
+### Everthing is state driven
+
+And of course everthing is state driven. So if we want to display an alert in the UI, we need a change of state - in this case from the `ViewModel`:
+
+**CompanyViewModel**
+
+```swift
+@MainActor
+class CompanyViewModel: ObservableObject {
+
+    @Published var companies: [Company] = []
+    @Published var showingError = false
+    var errorMessage = ""
+    
+    func fetchCompanies() async {
+	// Change the state
+    do {
+        self.companies = try result.get()
+        self.showingError = false
+    } catch CompanyError.decodeFailed {
+        showError("JSON decoding error occurred.")
+    }
+```
+
+**ContentView**
 
 ```swift
 struct ContentView: View {
-    @EnvironmentObject var network: Network
+    @StateObject var companyVM: CompanyViewModel
+    @State private var showingAddCompany = false
 
     var body: some View {
-        ScrollView {
-        }
-        .task {
-            await network.fetchUsers()
+        NavigationStack {
+            .task {
+                await companyVM.fetchCompanies()
+            }
+            // Update the display
+            .alert(companyVM.errorMessage, isPresented: $companyVM.showingError) {
+                Button("OK", role: .cancel) { }
+            }
         }
     }
 }
@@ -31,41 +168,71 @@ struct ContentView: View {
 
 ## Full source
 
-**Network**
+**CompanyViewModel**
 
 ```swift
-import SwiftUI
+import Foundation
 
-class Network: ObservableObject {
-    @Published var users: [User] = []
+struct Company: Codable, Identifiable, Hashable {
+    let id: String
+    let name: String
+    let employees: [Employee]
+}
 
-    func fetchUsers() async {
-        guard let url = URL(string: "https://jsonplaceholder.typicode.com/users") else { fatalError("Missing URL") }
+struct Employee: Codable, Identifiable, Hashable {
+    let id: String
+    let name: String
+}
 
-        let urlRequest = URLRequest(url: url)
+let employee1 = Employee(id: "1", name: "Jobs")
+let employee2 = Employee(id: "2", name: "Watson")
+let employee3 = Employee(id: "3", name: "Gates")
+let employees = [employee1, employee2, employee3]
 
-        let dataTask = URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
-            if let error = error {
-                print("Request error: ", error)
-                return
-            }
+let company1 = Company(id: "1", name: "Apple", employees: employees)
+let company2 = Company(id: "2", name: "IBM", employees: employees)
+let company3 = Company(id: "3", name: "Microsoft", employees: employees)
 
-            guard let response = response as? HTTPURLResponse else { return }
+enum CompanyError: Error {
+    case networkFailed, decodeFailed
+}
 
-            if response.statusCode == 200 {
-                guard let data = data else { return }
-                DispatchQueue.main.async {
-                    do {
-                        let decodedUsers = try JSONDecoder().decode([User].self, from: data)
-                        self.users = decodedUsers
-                    } catch let error {
-                        print("Error decoding: ", error)
-                    }
-                }
+@MainActor
+class CompanyViewModel: ObservableObject {
+
+    @Published var companies: [Company] = []
+    @Published var showingError = false
+    var errorMessage = ""
+
+    func fetchCompanies() async {
+
+        let fetchTask = Task { () -> [Company] in
+            let url = URL(string: "https://fierce-retreat-36855.herokuapp.com/company")!
+            let (data, _) = try await URLSession.shared.data(from: url)
+
+            do {
+                let companies = try JSONDecoder().decode([Company].self, from: data)
+                return companies
+            } catch {
+                throw CompanyError.decodeFailed
             }
         }
 
-        dataTask.resume()
+        let result = await fetchTask.result
+
+        do {
+            self.companies = try result.get()
+            self.showingError = false
+        } catch CompanyError.decodeFailed {
+            showError("JSON decoding error occurred.")
+        } catch {
+            showError("Unknown error occurred.")
+        }
+    }
+
+    private func showError(_ message: String) {
+        self.showingError = true
+        self.errorMessage = message
     }
 }
 ```
@@ -76,104 +243,47 @@ class Network: ObservableObject {
 import SwiftUI
 
 struct ContentView: View {
-    @EnvironmentObject var network: Network
+    @StateObject var companyVM: CompanyViewModel
+    @State private var showingAddCompany = false
 
     var body: some View {
-        ScrollView {
-            Text("All users")
-                .font(.title)
-                .bold()
-
-            VStack(alignment: .leading) {
-                ForEach(network.users) { user in
-                    HStack(alignment:.top) {
-                        Text("\(user.id)")
-
-                        VStack(alignment: .leading) {
-                            Text(user.name)
-                                .bold()
-
-                            Text(user.email.lowercased())
-
-                            Text(user.phone)
-                        }
-                    }
-                    .frame(width: 300, alignment: .leading)
-                    .padding()
-                    .background(.secondary)
-                    .cornerRadius(10)
+        NavigationStack {
+            List(companyVM.companies) { company in
+                NavigationLink(value: company) {
+                    Text(company.name)
                 }
             }
-
-        }
-        .padding(.vertical)
-        .task {
-            await network.fetchUsers()
+            .navigationTitle("Companies")
+            .navigationDestination(for: Company.self) { company in
+                CompanyView(company: company)
+            }
+            .toolbar {
+                Button(action: {
+                    self.showingAddCompany.toggle()
+                }) {
+                    Image(systemName: "plus")
+                }
+            }
+            .sheet(isPresented: $showingAddCompany) {
+                AddCompany(companyVM: self.companyVM)
+            }
+            .task {
+                await companyVM.fetchCompanies()
+            }
+            .alert(companyVM.errorMessage, isPresented: $companyVM.showingError) {
+                Button("OK", role: .cancel) { }
+            }
         }
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
-            .environmentObject(Network())
+        ContentView(companyVM: CompanyViewModel())
+            .preferredColorScheme(.dark)
     }
 }
 ```
-
-**User**
-
-```swift
-import Foundation
-
-struct User: Identifiable, Decodable {
-    var id: Int
-    var name: String
-    var username: String
-    var email: String
-    var address: Address
-    var phone: String
-    var website: String
-    var company: Company
-
-    struct Address: Decodable {
-        var street: String
-        var suite: String
-        var city: String
-        var zipcode: String
-        var geo: Geo
-
-        struct Geo: Decodable {
-            var lat: String
-            var lng: String
-        }
-    }
-
-    struct Company: Decodable {
-        var name: String
-        var catchPhrase: String
-        var bs: String
-    }
-}
-```
-
-**App**
-
-```swift
-@main
-struct Networking1App: App {
-    var network = Network()
-
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-                .environmentObject(network)
-        }
-    }
-}
-```
-
-![](images/1.png)
 
 ### Links that help
 
