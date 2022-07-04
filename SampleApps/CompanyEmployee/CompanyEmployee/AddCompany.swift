@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct AddCompany: View {
-    @StateObject var companies: Companies
+    @StateObject var companies: CompanyViewModel
     @State var name = ""
     @Environment(\.presentationMode) var presentationMode
 
@@ -26,6 +26,6 @@ struct AddCompany: View {
 
 struct AddCompany_Previews: PreviewProvider {
     static var previews: some View {
-        AddCompany(companies: Companies())
+        AddCompany(companies: CompanyViewModel())
     }
 }

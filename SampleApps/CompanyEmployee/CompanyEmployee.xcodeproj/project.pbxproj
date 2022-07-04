@@ -15,7 +15,7 @@
 		71924A6C286DC7D900B4DD02 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 71924A6B286DC7D900B4DD02 /* Assets.xcassets */; };
 		71924A6F286DC7D900B4DD02 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 71924A6E286DC7D900B4DD02 /* Preview Assets.xcassets */; };
 		71B7C127286F23000009106F /* Companies.json in Resources */ = {isa = PBXBuildFile; fileRef = 71B7C126286F22F10009106F /* Companies.json */; };
-		71D8EADB286DC95200470C17 /* Companies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D8EADA286DC95200470C17 /* Companies.swift */; };
+		71D8EADB286DC95200470C17 /* CompanyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D8EADA286DC95200470C17 /* CompanyViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,7 +28,7 @@
 		71924A6B286DC7D900B4DD02 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		71924A6E286DC7D900B4DD02 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		71B7C126286F22F10009106F /* Companies.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Companies.json; sourceTree = "<group>"; };
-		71D8EADA286DC95200470C17 /* Companies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Companies.swift; sourceTree = "<group>"; };
+		71D8EADA286DC95200470C17 /* CompanyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,7 +63,7 @@
 		712CA176286DDB01003CE122 /* ModelData */ = {
 			isa = PBXGroup;
 			children = (
-				71D8EADA286DC95200470C17 /* Companies.swift */,
+				71D8EADA286DC95200470C17 /* CompanyViewModel.swift */,
 				71B7C126286F22F10009106F /* Companies.json */,
 			);
 			name = ModelData;
@@ -190,7 +190,7 @@
 				71924A6A286DC7D500B4DD02 /* ContentView.swift in Sources */,
 				71924A68286DC7D500B4DD02 /* MainApp.swift in Sources */,
 				71850968286DCB6E007108C1 /* CompanyView.swift in Sources */,
-				71D8EADB286DC95200470C17 /* Companies.swift in Sources */,
+				71D8EADB286DC95200470C17 /* CompanyViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

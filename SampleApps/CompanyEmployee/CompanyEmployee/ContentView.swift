@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @StateObject var companies: Companies
+    @StateObject var companies: CompanyViewModel
     @State var showingAddCompany = false
 
     var body: some View {
@@ -34,7 +34,7 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView(companies: Companies())
+        ContentView(companies: CompanyViewModel())
             .preferredColorScheme(.dark)
     }
 }
