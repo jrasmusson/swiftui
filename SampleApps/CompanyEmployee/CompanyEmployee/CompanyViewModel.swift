@@ -29,6 +29,7 @@ class CompanyViewModel: ObservableObject {
     /// Fake data
     // @Published var items: [Company] = [company1, company2, company3]
     @Published var companies: [Company] = []
+    @Published var showingError = false
 
     /// Real thing
 //    func fetchCompanies() async {
@@ -69,17 +70,16 @@ class CompanyViewModel: ObservableObject {
             return companies
         }
 
+        // TODO: Handle response 200 set networkError
 
         let result = await fetchTask.result
-
 
         switch result {
             case .success(let companies):
             self.companies = companies
+            self.showingError = false
             case .failure(let error):
-            _ = "Error: \(error.localizedDescription)"
+            self.showingError = true
         }
     }
 }
-
-
