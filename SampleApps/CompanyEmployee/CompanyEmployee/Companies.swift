@@ -11,6 +11,9 @@ struct Employee: Codable, Identifiable, Hashable {
     let name: String
 }
 
+//
+// This is where you can add your fake data for rapid UI development
+//
 let employee1 = Employee(id: "1", name: "Jobs")
 let employee2 = Employee(id: "2", name: "Watson")
 let employee3 = Employee(id: "3", name: "Gates")
@@ -20,17 +23,13 @@ let company1 = Company(id: "1", name: "Apple", employees: employees)
 let company2 = Company(id: "2", name: "IBM", employees: employees)
 let company3 = Company(id: "3", name: "Microsoft", employees: employees)
 
-
-//
-// Source of truth
-//
-// This is where you can setup fake data for local development, or add in real
-// data fetched via network calls.
-//
 class Companies: ObservableObject {
-//    @Published var items: [Company] = [company1, company2, company3] // fake
+
+    // Comment in and add like this...
+//    @Published var items: [Company] = [company1, company2, company3] //
     @Published var items: [Company] = []
 
+    // And here is how you add fetch the real thing.
     func fetchCompanies() async {
             guard let url = URL(string: "https://fierce-retreat-36855.herokuapp.com/company") else { fatalError("Missing URL") }
 

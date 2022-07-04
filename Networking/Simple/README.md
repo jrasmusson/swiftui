@@ -1,11 +1,6 @@
 # Simple
 
-What we really want is something that combines:
-
-- Simple, with
-- Async/Await
-
-Define your `Observable` and fetch asynchronously:
+Define:
 
 ```swift
 import SwiftUI
@@ -18,7 +13,7 @@ class Network: ObservableObject {
 }
 ```
 
-And then load it via an awaiting `task` in your view:
+Fetch:
 
 ```swift
 struct ContentView: View {
