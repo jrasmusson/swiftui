@@ -2,11 +2,11 @@ import SwiftUI
 
 @main
 struct MainApp: App {
-    @StateObject private var companies = CompanyViewModel()
+    @StateObject private var companyVM = CompanyViewModel()
 
     var body: some Scene {
         WindowGroup {
-            ContentView(companies: companies)
+            ContentView(companyVM: companyVM)
         }
     }
 }

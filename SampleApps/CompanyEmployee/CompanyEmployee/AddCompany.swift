@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct AddCompany: View {
-    @StateObject var companies: CompanyViewModel
+    @StateObject var companyVM: CompanyViewModel
     @State var name = ""
     @Environment(\.presentationMode) var presentationMode
 
@@ -12,7 +12,7 @@ struct AddCompany: View {
                     Button(action: {
                         let company = Company(id: UUID().uuidString, name: name, employees: [])
                         // 1. Update the local model
-                        self.companies.items.append(company)
+                        self.companyVM.items.append(company)
                         // 2. Network call to save to backend
                         self.presentationMode.wrappedValue.dismiss()
                     }) {
@@ -26,6 +26,6 @@ struct AddCompany: View {
 
 struct AddCompany_Previews: PreviewProvider {
     static var previews: some View {
-        AddCompany(companies: CompanyViewModel())
+        AddCompany(companyVM: CompanyViewModel())
     }
 }

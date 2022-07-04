@@ -1,12 +1,12 @@
 import SwiftUI
 
 struct ContentView: View {
-    @StateObject var companies: CompanyViewModel
+    @StateObject var companyVM: CompanyViewModel
     @State var showingAddCompany = false
 
     var body: some View {
         NavigationStack {
-            List(companies.items) { company in
+            List(companyVM.items) { company in
                 NavigationLink(value: company) {
                     Text(company.name)
                 }
@@ -23,10 +23,10 @@ struct ContentView: View {
                 }
             }
             .sheet(isPresented: $showingAddCompany) {
-                AddCompany(companies: self.companies)
+                AddCompany(companyVM: self.companyVM)
             }
             .task {
-                await companies.fetchCompanies()
+                await companyVM.fetchCompanies()
             }
         }
     }
@@ -34,7 +34,7 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView(companies: CompanyViewModel())
+        ContentView(companyVM: CompanyViewModel())
             .preferredColorScheme(.dark)
     }
 }
