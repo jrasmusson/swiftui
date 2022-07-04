@@ -20,7 +20,7 @@ let company1 = Company(id: "1", name: "Apple", employees: employees)
 let company2 = Company(id: "2", name: "IBM", employees: employees)
 let company3 = Company(id: "3", name: "Microsoft", employees: employees)
 
-enum LoadError: Error {
+enum CompanyError: Error {
     case networkFailed, decodeFailed
 }
 
@@ -39,13 +39,13 @@ class CompanyViewModel: ObservableObject {
             do {
                 (data, _) = try await URLSession.shared.data(from: url)
             } catch {
-                throw LoadError.networkFailed
+                throw CompanyError.networkFailed
             }
 
             if let companies = try JSONDecoder().decode([Company].self, from: data) {
                 return companies
             } else {
-                throw LoadError.decodeFailed
+                throw CompanyError.decodeFailed
             }
 
         }
