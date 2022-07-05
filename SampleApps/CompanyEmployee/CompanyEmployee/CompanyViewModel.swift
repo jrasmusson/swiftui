@@ -36,24 +36,17 @@ class CompanyViewModel: ObservableObject {
         let fetchTask = Task { () -> [Company] in
             let url = URL(string: "https://fierce-retreat-36855.herokuapp.com/company")!
             let (data, _) = try await URLSession.shared.data(from: url)
-
-            do {
-                let companies = try JSONDecoder().decode([Company].self, from: data)
-                return companies
-            } catch {
-                throw CompanyError.decodeFailed
-            }
+            let companies = try JSONDecoder().decode([Company].self, from: data)
+            return companies
         }
 
         let result = await fetchTask.result
 
-        do {
-            self.companies = try result.get()
-            self.showingError = false
-        } catch CompanyError.decodeFailed {
-            showError("JSON decoding error occurred.")
-        } catch {
-            showError("Unknown error occurred.")
+        switch result {
+        case .success(let companies):
+            self.companies = companies
+        case .failure(let error):
+            showError("An error occurred: \(error.localizedDescription).")
         }
     }
 

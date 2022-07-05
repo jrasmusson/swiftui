@@ -5,6 +5,7 @@ If you want to use a `Result` with your fetch you need to do something like this
 **CompanyModel**
 
 ```swift
+
 enum CompanyError: Error {
     case networkFailed, decodeFailed
 }
@@ -21,7 +22,7 @@ class CompanyViewModel: ObservableObject {
         let fetchTask = Task { () -> [Company] in
             let url = URL(string: "https://fierce-retreat-36855.herokuapp.com/company")!
             let (data, _) = try await URLSession.shared.data(from: url)
-            let companies = try JSONDecoder().decode([Double].self, from: data)
+            let companies = try JSONDecoder().decode([Company].self, from: data)
             return companies
         }
 
@@ -31,7 +32,7 @@ class CompanyViewModel: ObservableObject {
         case .success(let companies):
             self.companies = companies
         case .failure(let error):
-            showError("An error occurred.")
+            showError("An error occurred: \(error.localizedDescription).")
         }
     }
 
