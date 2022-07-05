@@ -285,6 +285,8 @@ struct ContentView_Previews: PreviewProvider {
 }
 ```
 
+![](images/demo1.gif)
+
 ### Links that help
 
 - [Example](https://designcode.io/swiftui-advanced-handbook-http-request)
