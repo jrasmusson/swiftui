@@ -2,7 +2,7 @@
 
 If you want to use a `Result` with your fetch you need to do something like this:
 
-**CompanyModel**
+**CompanyViewModel**
 
 ```swift
 
