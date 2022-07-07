@@ -1,25 +1,37 @@
-//
-//  ContentView.swift
-//  Posts
-//
-//  Created by jrasmusson on 2022-07-07.
-//
-
 import SwiftUI
 
 struct ContentView: View {
+    @StateObject var vm: PostViewModel
+    @State var showingAddPost = false
+
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+        NavigationStack {
+            List(vm.posts) { post in
+                NavigationLink(value: post) {
+                    Text(post.title)
+                }
+            }
+            .navigationTitle("Posts")
+            .navigationDestination(for: Post.self) { post in
+                PostView(post: post)
+            }
+            .toolbar {
+                Button(action: {
+                    self.showingAddPost.toggle()
+                }) {
+                    Image(systemName: "plus")
+                }
+            }
+            .sheet(isPresented: $showingAddPost) {
+                Text("Add Post")
+            }
         }
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        ContentView(vm: PostViewModel())
+            .preferredColorScheme(.dark)
     }
 }
