@@ -67,29 +67,33 @@ class PostViewModel: ObservableObject {
     }
 
     func savePost(post: Post) {
-        let parameters = ["title" : post.title, "body" : post.body]
-        let url = URL(string: "https://fierce-retreat-36855.herokuapp.com/posts")!
+        guard let uploadData = try? JSONEncoder().encode(post) else {
+            return
+        }
 
+        let url = URL(string: "https://fierce-retreat-36855.herokuapp.com/posts")!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
-        request.setValue("Application/json", forHTTPHeaderField: "Content-Type")
-        guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: []) else { return }
-        request.httpBody = httpBody
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
 
-        let session = URLSession.shared
-        session.dataTask(with: request) { (data, response, error) in
-            if let response = response {
-                print(response)
+        let task = URLSession.shared.uploadTask(with: request, from: uploadData) { data, response, error in
+            if let error = error {
+                print ("error: \(error)")
+                return
             }
-            if let data = data {
-                do {
-                    let json = try JSONSerialization.jsonObject(with: data, options: [])
-                    print(json)
-                } catch {
-                    print(error)
-                }
+            guard let response = response as? HTTPURLResponse,
+                (200...299).contains(response.statusCode) else {
+                print ("server error")
+                return
             }
-        }.resume()
+            if let mimeType = response.mimeType,
+                mimeType == "application/json",
+                let data = data,
+                let dataString = String(data: data, encoding: .utf8) {
+                print ("got data: \(dataString)")
+            }
+        }
+        task.resume()
     }
 
     func showError(_ message: String) {
