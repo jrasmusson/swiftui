@@ -19,6 +19,7 @@ struct Post: Hashable, Identifiable, Codable {
 
 let post1 = Post(title: "title1", body: "body1")
 
+@MainActor
 class PostViewModel: ObservableObject {
     @Published var posts = [post1]
     @Published var showingError = false

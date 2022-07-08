@@ -43,6 +43,15 @@ class CompanyViewModel: ObservableObject {
 }
 ```
 
+If you see:
+
+![](images/1.png)
+
+add `@MainActor` to `ViewModel`:
+
+![](images/2.png)
+
+
 ## How to throw an error
 
 The problem with this is you have no way to set the error in the result.
