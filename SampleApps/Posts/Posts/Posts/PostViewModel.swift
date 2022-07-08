@@ -60,7 +60,7 @@ class PostViewModel: ObservableObject {
         } catch NetworkError.decodeFailed {
             showError("Unable to convert quotes to text.")
         } catch NetworkError.invalidResponse {
-                showError("Invalid HTTP response.")
+            showError("Invalid HTTP response.")
         } catch {
             showError("Unknown error.")
         }

@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct ContentView: View {
+struct PostsView: View {
     @StateObject var vm: PostViewModel
     @State var showingAddPost = false
 
@@ -37,7 +37,7 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView(vm: PostViewModel())
+        PostsView(vm: PostViewModel())
             .preferredColorScheme(.dark)
     }
 }

@@ -13,7 +13,7 @@ struct PostsApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView(vm: vm)
+            PostsView(vm: vm)
         }
     }
 }
