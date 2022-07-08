@@ -14,12 +14,21 @@ struct AddPost: View {
             }
             .toolbar {
                 Button(action: {
-                    let post = Post(title: title, body: bodyStr)
-                    self.vm.posts.append(post)
+                    if !title.isEmpty && !bodyStr.isEmpty {
+                        let post = Post(title: title, body: bodyStr)
+                        self.vm.posts.append(post)
+                        vm.savePost(post: post)
+                    } else {
+                        vm.showError("Title and body can't be empty.")
+                    }
+
                     self.presentationMode.wrappedValue.dismiss()
                 }) {
                     Text("Save")
                 }
+            }
+            .alert(vm.errorMessage, isPresented: $vm.showingError) {
+                Button("OK", role: .cancel) { }
             }
             .padding()
         }
