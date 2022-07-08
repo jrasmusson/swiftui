@@ -29,7 +29,7 @@ struct PostView: View {
             Button("OK", role: .cancel) {
                 let filtered = vm.posts.filter { $0.title != post.title }
                 vm.posts = filtered
-                // network call
+                vm.deleteFirstPost()
                 presentationMode.wrappedValue.dismiss()
             }
         }

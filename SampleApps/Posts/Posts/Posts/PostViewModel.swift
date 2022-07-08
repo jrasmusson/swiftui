@@ -96,10 +96,11 @@ class PostViewModel: ObservableObject {
         task.resume()
     }
 
-    func deletePost(index: Int) {
-        let url = URL(string: "https://fierce-retreat-36855.herokuapp.com/posts/\(index)")!
+    func deleteFirstPost() {
+        let url = URL(string: "https://fierce-retreat-36855.herokuapp.com/posts/1")!
         var request = URLRequest(url: url)
         request.httpMethod = "DELETE"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
 
         URLSession.shared.dataTask(with: request) { data, response, error in
             if let error = error {
@@ -110,6 +111,12 @@ class PostViewModel: ObservableObject {
                 (200...299).contains(response.statusCode) else {
                 print ("server error")
                 return
+            }
+            if let mimeType = response.mimeType,
+                mimeType == "application/json",
+                let data = data,
+                let dataString = String(data: data, encoding: .utf8) {
+                print ("got data: \(dataString)")
             }
         }.resume()
     }
