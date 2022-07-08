@@ -13,7 +13,7 @@ struct PostsView: View {
             }
             .navigationTitle("Posts")
             .navigationDestination(for: Post.self) { post in
-                PostView(post: post)
+                PostView(vm: vm, post: post)
             }
             .toolbar {
                 Button(action: {

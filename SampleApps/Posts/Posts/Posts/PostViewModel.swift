@@ -96,6 +96,24 @@ class PostViewModel: ObservableObject {
         task.resume()
     }
 
+    func deletePost(index: Int) {
+        let url = URL(string: "https://fierce-retreat-36855.herokuapp.com/posts/\(index)")!
+        var request = URLRequest(url: url)
+        request.httpMethod = "DELETE"
+
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                print ("error: \(error)")
+                return
+            }
+            guard let response = response as? HTTPURLResponse,
+                (200...299).contains(response.statusCode) else {
+                print ("server error")
+                return
+            }
+        }.resume()
+    }
+
     func showError(_ message: String) {
         self.showingError = true
         self.errorMessage = message
