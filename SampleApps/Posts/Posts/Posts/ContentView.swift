@@ -25,6 +25,12 @@ struct ContentView: View {
             .sheet(isPresented: $showingAddPost) {
                 Text("Add Post")
             }
+            .task {
+                await vm.fetchPosts()
+            }
+            .alert(vm.errorMessage, isPresented: $vm.showingError) {
+                Button("OK", role: .cancel) { }
+            }
         }
     }
 }
