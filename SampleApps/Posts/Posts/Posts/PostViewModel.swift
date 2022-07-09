@@ -96,12 +96,11 @@ class PostViewModel: ObservableObject {
         task.resume()
     }
 
-    func updateSecondPost(post: Post) {
-        guard let uploadData = try? JSONEncoder().encode(post) else {
-            return
-        }
+    func updatePost(post: Post) {
+        guard let uploadData = try? JSONEncoder().encode(post) else { return }
+        guard let id = Int(post.id) else { return }
 
-        let url = URL(string: "https://fierce-retreat-36855.herokuapp.com/posts/1")!
+        let url = URL(string: "https://fierce-retreat-36855.herokuapp.com/posts/\(id - 1)")!
         var request = URLRequest(url: url)
         request.httpMethod = "PUT"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
