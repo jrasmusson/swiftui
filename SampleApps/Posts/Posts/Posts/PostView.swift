@@ -57,6 +57,7 @@ struct PostView: View {
     func save() {
         // TODO: update model
         // Need to update Post struct in array - see Standford example
+        // Add a mutating func in viewModel to update
         vm.updatePost(post: Post(id: post.id, title: newTitle, body: newBody))
         isEditting = false
     }
