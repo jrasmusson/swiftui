@@ -23,7 +23,7 @@ struct PostsView: View {
                 }
             }
             .sheet(isPresented: $showingAddPost) {
-                AddPost(vm: vm)
+                AddPost(vm: vm, nextId: String(vm.posts.count + 1))
             }
             .task {
                 await vm.fetchPosts()

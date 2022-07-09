@@ -6,6 +6,8 @@ struct AddPost: View {
     @State var title = ""
     @State var bodyStr = ""
 
+    var nextId: String
+
     var body: some View {
         NavigationStack {
             VStack {
@@ -15,7 +17,7 @@ struct AddPost: View {
             .toolbar {
                 Button(action: {
                     if !title.isEmpty && !bodyStr.isEmpty {
-                        let post = Post(title: title, body: bodyStr)
+                        let post = Post(id: nextId, title: title, body: bodyStr)
                         self.vm.posts.append(post)
                         vm.savePost(post: post)
                     } else {
@@ -36,6 +38,6 @@ struct AddPost: View {
 
 struct AddPost_Previews: PreviewProvider {
     static var previews: some View {
-        AddPost(vm: PostViewModel())
+        AddPost(vm: PostViewModel(), nextId: "")
     }
 }

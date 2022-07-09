@@ -55,7 +55,7 @@ struct PostView: View {
     }
 
     func save() {
-        vm.updateSecondPost(post: Post(title: newTitle, body: newBody))
+        vm.updateSecondPost(post: Post(id: post.id, title: newTitle, body: newBody))
         isEditting = false
     }
 }
