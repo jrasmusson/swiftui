@@ -96,7 +96,37 @@ class PostViewModel: ObservableObject {
         task.resume()
     }
 
-    func deleteFirstPost() {
+    func updateSecondPost(post: Post) {
+        guard let uploadData = try? JSONEncoder().encode(post) else {
+            return
+        }
+
+        let url = URL(string: "https://fierce-retreat-36855.herokuapp.com/posts/1")!
+        var request = URLRequest(url: url)
+        request.httpMethod = "PUT"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+
+        let task = URLSession.shared.uploadTask(with: request, from: uploadData) { data, response, error in
+            if let error = error {
+                print ("error: \(error)")
+                return
+            }
+            guard let response = response as? HTTPURLResponse,
+                (200...299).contains(response.statusCode) else {
+                print ("server error")
+                return
+            }
+            if let mimeType = response.mimeType,
+                mimeType == "application/json",
+                let data = data,
+                let dataString = String(data: data, encoding: .utf8) {
+                print ("got data: \(dataString)")
+            }
+        }
+        task.resume()
+    }
+
+    func deleteSecondPost() {
         let url = URL(string: "https://fierce-retreat-36855.herokuapp.com/posts/1")!
         var request = URLRequest(url: url)
         request.httpMethod = "DELETE"

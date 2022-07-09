@@ -11,28 +11,52 @@ struct PostView: View {
     @Environment(\.presentationMode) var presentationMode
     @StateObject var vm: PostViewModel
     @State var showingDeleteWarning = false
+    @State var isEditting = false
+
+    @State var newTitle = ""
+    @State var newBody = ""
+
     let post: Post
 
     var body: some View {
         VStack(alignment: .leading) {
-            Text(post.title)
-            Text(post.body)
+            if isEditting {
+                TextField(post.title, text: $newTitle)
+                TextField(post.body, text: $newBody)
+                Button("Save", action: save)
+                    .buttonStyle(.bordered)
+            } else {
+                Text(post.title)
+                Text(post.body)
+            }
         }
         .toolbar {
-            Button(action: {
-                self.showingDeleteWarning.toggle()
-            }) {
-                Image(systemName: "trash")
+            ToolbarItemGroup(placement: .navigationBarTrailing) {
+                Button(action: {
+                    self.showingDeleteWarning.toggle()
+                }) {
+                    Image(systemName: "trash")
+                }
+                Button(action: {
+                    isEditting.toggle()
+                }) {
+                    Image(systemName: "pencil")
+                }
             }
         }
         .alert("Delete?", isPresented: $showingDeleteWarning) {
             Button("OK", role: .cancel) {
                 let filtered = vm.posts.filter { $0.title != post.title }
                 vm.posts = filtered
-                vm.deleteFirstPost()
+                vm.deleteSecondPost()
                 presentationMode.wrappedValue.dismiss()
             }
         }
+    }
+
+    func save() {
+        vm.updateSecondPost(post: Post(title: newTitle, body: newBody))
+        isEditting = false
     }
 }
 

@@ -21,7 +21,6 @@ struct AddPost: View {
                     } else {
                         vm.showError("Title and body can't be empty.")
                     }
-
                     self.presentationMode.wrappedValue.dismiss()
                 }) {
                     Text("Save")
