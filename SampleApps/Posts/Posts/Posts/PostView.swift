@@ -33,15 +33,20 @@ struct PostView: View {
             }
         }
         .alert("Delete?", isPresented: $showingDeleteWarning) {
-            Button("OK", role: .cancel) {
-                let filtered = vm.posts.filter { $0.title != post.title }
-                vm.posts = filtered
-                vm.deletePost()
-                presentationMode.wrappedValue.dismiss()
-            }
+            cancelButton()
         }
     }
 
+    func update() {
+        let newPost = Post(id: post.id, title: newTitle)
+        vm.updateModel(newPost)
+        vm.updatePost(newPost)
+        isEditting = false
+    }
+}
+
+// MARK: - Buttons
+extension PostView {
     private func deleteButton() -> Button<Image> {
         Button(action: {
             showingDeleteWarning.toggle()
@@ -58,11 +63,13 @@ struct PostView: View {
         }
     }
 
-    func update() {
-        let newPost = Post(id: post.id, title: newTitle)
-        vm.updateModel(newPost)
-        vm.updatePost(newPost)
-        isEditting = false
+    private func cancelButton() -> Button<Text> {
+        return Button("OK", role: .cancel) {
+            let filtered = vm.posts.filter { $0.title != post.title }
+            vm.posts = filtered
+            vm.deletePost()
+            presentationMode.wrappedValue.dismiss()
+        }
     }
 }
 
