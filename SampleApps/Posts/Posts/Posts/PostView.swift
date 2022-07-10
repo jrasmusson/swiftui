@@ -8,9 +8,10 @@
 import SwiftUI
 
 struct PostView: View {
-//    @Environment(\.presentationMode) var presentationMode
     @Environment(\.dismiss) private var dismiss
+
     @StateObject var vm: PostViewModel
+
     @State var showingDeleteWarning = false
     @State var isEditting = false
     @State var newTitle = ""
@@ -19,7 +20,7 @@ struct PostView: View {
     var body: some View {
         VStack(alignment: .leading) {
             if isEditting {
-                EditView(vm: vm, post: post, isEditting: $isEditting)
+                EditPost(vm: vm, post: post, isEditting: $isEditting)
             } else {
                 VStack(alignment: .leading) {
                     HStack {
@@ -73,31 +74,5 @@ extension PostView {
 struct PostView_Previews: PreviewProvider {
     static var previews: some View {
         PostView(vm: PostViewModel(), post: post1)
-    }
-}
-
-struct EditView: View {
-    @Environment(\.dismiss) private var dismiss
-    @StateObject var vm: PostViewModel
-    @State var newTitle = ""
-    @State var post: Post
-
-    @Binding var isEditting: Bool
-    var body: some View {
-        VStack(alignment: .leading) {
-            TextField(post.title, text: $newTitle)
-            Button("Save", action: update)
-                .buttonStyle(.bordered)
-            Spacer()
-        }
-    }
-
-    func update() {
-        let newPost = Post(id: post.id, title: newTitle)
-        post = newPost
-        vm.updateModel(newPost)
-        vm.updatePost(newPost)
-        isEditting = false
-        dismiss()
     }
 }
