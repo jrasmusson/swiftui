@@ -9,12 +9,11 @@ import SwiftUI
 
 struct PostView: View {
     @Environment(\.presentationMode) var presentationMode
-    @ObservedObject var vm: PostViewModel
+    @StateObject var vm: PostViewModel
     @State var showingDeleteWarning = false
     @State var isEditting = false
     @State var newTitle = ""
-
-    let post: Post
+    @State var post: Post
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -39,6 +38,7 @@ struct PostView: View {
 
     func update() {
         let newPost = Post(id: post.id, title: newTitle)
+        post = newPost
         vm.updateModel(newPost)
         vm.updatePost(newPost)
         isEditting = false
