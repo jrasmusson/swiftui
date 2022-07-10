@@ -14,10 +14,9 @@ enum NetworkError: Error {
 struct Post: Hashable, Identifiable, Codable {
     var id: String
     let title: String
-    let body: String
 }
 
-let post1 = Post(id: "1", title: "title1", body: "body1")
+let post1 = Post(id: "1", title: "title1")
 
 @MainActor
 class PostViewModel: ObservableObject {

@@ -4,7 +4,6 @@ struct AddPost: View {
     @Environment(\.presentationMode) var presentationMode
     @StateObject var vm: PostViewModel
     @State var title = ""
-    @State var bodyStr = ""
 
     var nextId: String
 
@@ -12,12 +11,12 @@ struct AddPost: View {
         NavigationStack {
             VStack {
                 TextField("Title", text: $title)
-                TextField("Body", text: $bodyStr)
+                Spacer()
             }
             .toolbar {
                 Button(action: {
-                    if !title.isEmpty && !bodyStr.isEmpty {
-                        let post = Post(id: nextId, title: title, body: bodyStr)
+                    if !title.isEmpty {
+                        let post = Post(id: nextId, title: title)
                         vm.posts.append(post)
                         vm.savePost(post)
                     } else {

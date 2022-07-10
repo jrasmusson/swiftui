@@ -12,9 +12,7 @@ struct PostView: View {
     @ObservedObject var vm: PostViewModel
     @State var showingDeleteWarning = false
     @State var isEditting = false
-
     @State var newTitle = ""
-    @State var newBody = ""
 
     let post: Post
 
@@ -22,12 +20,10 @@ struct PostView: View {
         VStack(alignment: .leading) {
             if isEditting {
                 TextField(post.title, text: $newTitle)
-                TextField(post.body, text: $newBody)
                 Button("Save", action: update)
                     .buttonStyle(.bordered)
             } else {
                 Text(post.title)
-                Text(post.body)
             }
         }
         .toolbar {
@@ -55,7 +51,7 @@ struct PostView: View {
     }
 
     func update() {
-        let newPost = Post(id: post.id, title: newTitle, body: newBody)
+        let newPost = Post(id: post.id, title: newTitle)
         vm.updateModel(newPost)
         vm.updatePost(newPost)
         isEditting = false
