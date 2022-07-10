@@ -15,22 +15,22 @@ struct PostsView: View {
             .navigationDestination(for: Post.self) { post in
                 PostView(vm: vm, post: post)
             }
-            .toolbar {
-                Button(action: {
-                    self.showingAddPost.toggle()
-                }) {
-                    Image(systemName: "plus")
-                }
-            }
+            .toolbar { addButton() }
             .sheet(isPresented: $showingAddPost) {
                 AddPost(vm: vm, nextId: String(vm.posts.count + 1))
-            }
-            .task {
-                await vm.fetchPosts()
             }
             .alert(vm.errorMessage, isPresented: $vm.showingError) {
                 Button("OK", role: .cancel) { }
             }
+            .task { await vm.fetchPosts() }
+        }
+    }
+
+    private func addButton() -> Button<Image> {
+        return Button(action: {
+            self.showingAddPost.toggle()
+        }) {
+            Image(systemName: "plus")
         }
     }
 }
