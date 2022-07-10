@@ -45,7 +45,7 @@ struct PostView: View {
     }
 }
 
-// MARK: - Buttons
+// MARK: - Controls
 extension PostView {
     private func deleteButton() -> Button<Image> {
         Button(action: {

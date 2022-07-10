@@ -25,10 +25,13 @@ struct PostsView: View {
             .task { await vm.fetchPosts() }
         }
     }
+}
 
+// MARK: - Controls
+extension PostsView {
     private func addButton() -> Button<Image> {
         return Button(action: {
-            self.showingAddPost.toggle()
+            showingAddPost.toggle()
         }) {
             Image(systemName: "plus")
         }
