@@ -21,8 +21,13 @@ struct PostView: View {
                 TextField(post.title, text: $newTitle)
                 Button("Save", action: update)
                     .buttonStyle(.bordered)
+                Spacer()
             } else {
-                Text(post.title)
+                HStack {
+                    Text(post.title)
+                    Spacer()
+                }
+                Spacer()
             }
         }
         .toolbar {
@@ -42,6 +47,7 @@ struct PostView: View {
         vm.updateModel(newPost)
         vm.updatePost(newPost)
         isEditting = false
+        presentationMode.wrappedValue.dismiss()
     }
 }
 
