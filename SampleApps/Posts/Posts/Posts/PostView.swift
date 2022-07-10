@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct PostView: View {
-    @Environment(\.presentationMode) var presentationMode
+//    @Environment(\.presentationMode) var presentationMode
+    @Environment(\.dismiss) private var dismiss
     @StateObject var vm: PostViewModel
     @State var showingDeleteWarning = false
     @State var isEditting = false
@@ -64,7 +65,7 @@ extension PostView {
             let filtered = vm.posts.filter { $0.title != post.title }
             vm.posts = filtered
             vm.deletePost()
-            presentationMode.wrappedValue.dismiss()
+            dismiss()
         }
     }
 }
@@ -76,7 +77,7 @@ struct PostView_Previews: PreviewProvider {
 }
 
 struct EditView: View {
-    @Environment(\.presentationMode) var presentationMode
+    @Environment(\.dismiss) private var dismiss
     @StateObject var vm: PostViewModel
     @State var newTitle = ""
     @State var post: Post
@@ -97,6 +98,6 @@ struct EditView: View {
         vm.updateModel(newPost)
         vm.updatePost(newPost)
         isEditting = false
-        presentationMode.wrappedValue.dismiss()
+        dismiss()
     }
 }
