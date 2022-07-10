@@ -22,18 +22,14 @@ struct PostView: View {
             if isEditting {
                 EditPost(vm: vm, post: post, isEditting: $isEditting)
             } else {
-                VStack(alignment: .leading) {
-                    HStack {
-                        Text(post.title)
-                        Spacer()
+                ReadPost(post: post)
+                    .onTapGesture {
+                        isEditting.toggle()
                     }
-                    Spacer()
-                }
             }
         }
         .toolbar {
             ToolbarItemGroup(placement: .navigationBarTrailing) {
-                editButton()
                 deleteButton()
             }
         }
@@ -50,14 +46,6 @@ extension PostView {
             showingDeleteWarning.toggle()
         }) {
             Image(systemName: "trash")
-        }
-    }
-
-    private func editButton() -> Button<Image> {
-        return Button(action: {
-            isEditting.toggle()
-        }) {
-            Image(systemName: "pencil")
         }
     }
 

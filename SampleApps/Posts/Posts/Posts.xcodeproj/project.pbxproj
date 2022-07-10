@@ -12,6 +12,7 @@
 		7160EEB728771602007C575E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7160EEB628771602007C575E /* Assets.xcassets */; };
 		7160EEBA28771602007C575E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7160EEB928771602007C575E /* Preview Assets.xcassets */; };
 		71619DD9287B22780020C054 /* EditPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71619DD8287B22780020C054 /* EditPost.swift */; };
+		71619DDB287B2E1C0020C054 /* ReadPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71619DDA287B2E1C0020C054 /* ReadPost.swift */; };
 		719D560528771774006E49D3 /* PostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 719D560428771774006E49D3 /* PostViewModel.swift */; };
 		719D560728771922006E49D3 /* PostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 719D560628771922006E49D3 /* PostView.swift */; };
 		71B622132878542600B7AEAC /* AddPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B622122878542600B7AEAC /* AddPost.swift */; };
@@ -24,6 +25,7 @@
 		7160EEB628771602007C575E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7160EEB928771602007C575E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		71619DD8287B22780020C054 /* EditPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPost.swift; sourceTree = "<group>"; };
+		71619DDA287B2E1C0020C054 /* ReadPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadPost.swift; sourceTree = "<group>"; };
 		719D560428771774006E49D3 /* PostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewModel.swift; sourceTree = "<group>"; };
 		719D560628771922006E49D3 /* PostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostView.swift; sourceTree = "<group>"; };
 		71B622122878542600B7AEAC /* AddPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPost.swift; sourceTree = "<group>"; };
@@ -82,6 +84,7 @@
 				719D560628771922006E49D3 /* PostView.swift */,
 				71B622122878542600B7AEAC /* AddPost.swift */,
 				71619DD8287B22780020C054 /* EditPost.swift */,
+				71619DDA287B2E1C0020C054 /* ReadPost.swift */,
 			);
 			name = PostView;
 			sourceTree = "<group>";
@@ -170,6 +173,7 @@
 				7160EEB528771601007C575E /* PostsView.swift in Sources */,
 				7160EEB328771601007C575E /* PostsApp.swift in Sources */,
 				719D560728771922006E49D3 /* PostView.swift in Sources */,
+				71619DDB287B2E1C0020C054 /* ReadPost.swift in Sources */,
 				719D560528771774006E49D3 /* PostViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
