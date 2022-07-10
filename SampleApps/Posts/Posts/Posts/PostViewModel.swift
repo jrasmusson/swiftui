@@ -25,6 +25,15 @@ class PostViewModel: ObservableObject {
     @Published var showingError = false
     var errorMessage = ""
 
+    func updateModel(_ newPost: Post) {
+        let possibleUpdateIndex = posts.firstIndex { $0.id == newPost.id }
+        guard let updateIndex = possibleUpdateIndex else { return }
+        posts[updateIndex] = newPost
+    }
+}
+
+// MARK: - Networking
+extension PostViewModel {
     func fetchPosts() async {
         let fetchTask = Task { () -> [Post] in
             let url = URL(string: "https://fierce-retreat-36855.herokuapp.com/posts")!
@@ -66,7 +75,7 @@ class PostViewModel: ObservableObject {
         }
     }
 
-    func savePost(post: Post) {
+    func savePost(_ post: Post) {
         guard let uploadData = try? JSONEncoder().encode(post) else {
             return
         }
@@ -96,7 +105,7 @@ class PostViewModel: ObservableObject {
         task.resume()
     }
 
-    func updatePost(post: Post) {
+    func updatePost(_ post: Post) {
         guard let uploadData = try? JSONEncoder().encode(post) else { return }
         guard let id = Int(post.id) else { return }
 
@@ -125,7 +134,7 @@ class PostViewModel: ObservableObject {
         task.resume()
     }
 
-    func deleteSecondPost() {
+    func deletePost() {
         let url = URL(string: "https://fierce-retreat-36855.herokuapp.com/posts/1")!
         var request = URLRequest(url: url)
         request.httpMethod = "DELETE"

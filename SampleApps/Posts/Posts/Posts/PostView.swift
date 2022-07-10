@@ -9,7 +9,7 @@ import SwiftUI
 
 struct PostView: View {
     @Environment(\.presentationMode) var presentationMode
-    @StateObject var vm: PostViewModel
+    @ObservedObject var vm: PostViewModel
     @State var showingDeleteWarning = false
     @State var isEditting = false
 
@@ -23,7 +23,7 @@ struct PostView: View {
             if isEditting {
                 TextField(post.title, text: $newTitle)
                 TextField(post.body, text: $newBody)
-                Button("Save", action: save)
+                Button("Save", action: update)
                     .buttonStyle(.bordered)
             } else {
                 Text(post.title)
@@ -48,17 +48,16 @@ struct PostView: View {
             Button("OK", role: .cancel) {
                 let filtered = vm.posts.filter { $0.title != post.title }
                 vm.posts = filtered
-                vm.deleteSecondPost()
+                vm.deletePost()
                 presentationMode.wrappedValue.dismiss()
             }
         }
     }
 
-    func save() {
-        // TODO: update model
-        // Need to update Post struct in array - see Standford example
-        // Add a mutating func in viewModel to update
-        vm.updatePost(post: Post(id: post.id, title: newTitle, body: newBody))
+    func update() {
+        let newPost = Post(id: post.id, title: newTitle, body: newBody)
+        vm.updateModel(newPost)
+        vm.updatePost(newPost)
         isEditting = false
     }
 }

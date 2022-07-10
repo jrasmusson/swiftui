@@ -18,8 +18,8 @@ struct AddPost: View {
                 Button(action: {
                     if !title.isEmpty && !bodyStr.isEmpty {
                         let post = Post(id: nextId, title: title, body: bodyStr)
-                        self.vm.posts.append(post)
-                        vm.savePost(post: post)
+                        vm.posts.append(post)
+                        vm.savePost(post)
                     } else {
                         vm.showError("Title and body can't be empty.")
                     }
