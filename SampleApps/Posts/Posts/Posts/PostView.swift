@@ -18,16 +18,15 @@ struct PostView: View {
     var body: some View {
         VStack(alignment: .leading) {
             if isEditting {
-                TextField(post.title, text: $newTitle)
-                Button("Save", action: update)
-                    .buttonStyle(.bordered)
-                Spacer()
+                EditView(vm: vm, post: post, isEditting: $isEditting)
             } else {
-                HStack {
-                    Text(post.title)
+                VStack(alignment: .leading) {
+                    HStack {
+                        Text(post.title)
+                        Spacer()
+                    }
                     Spacer()
                 }
-                Spacer()
             }
         }
         .toolbar {
@@ -39,15 +38,6 @@ struct PostView: View {
         .alert("Delete?", isPresented: $showingDeleteWarning) {
             cancelButton()
         }
-    }
-
-    func update() {
-        let newPost = Post(id: post.id, title: newTitle)
-        post = newPost
-        vm.updateModel(newPost)
-        vm.updatePost(newPost)
-        isEditting = false
-        presentationMode.wrappedValue.dismiss()
     }
 }
 
@@ -82,5 +72,31 @@ extension PostView {
 struct PostView_Previews: PreviewProvider {
     static var previews: some View {
         PostView(vm: PostViewModel(), post: post1)
+    }
+}
+
+struct EditView: View {
+    @Environment(\.presentationMode) var presentationMode
+    @StateObject var vm: PostViewModel
+    @State var newTitle = ""
+    @State var post: Post
+
+    @Binding var isEditting: Bool
+    var body: some View {
+        VStack(alignment: .leading) {
+            TextField(post.title, text: $newTitle)
+            Button("Save", action: update)
+                .buttonStyle(.bordered)
+            Spacer()
+        }
+    }
+
+    func update() {
+        let newPost = Post(id: post.id, title: newTitle)
+        post = newPost
+        vm.updateModel(newPost)
+        vm.updatePost(newPost)
+        isEditting = false
+        presentationMode.wrappedValue.dismiss()
     }
 }
