@@ -28,16 +28,8 @@ struct PostView: View {
         }
         .toolbar {
             ToolbarItemGroup(placement: .navigationBarTrailing) {
-                Button(action: {
-                    self.showingDeleteWarning.toggle()
-                }) {
-                    Image(systemName: "trash")
-                }
-                Button(action: {
-                    isEditting.toggle()
-                }) {
-                    Image(systemName: "pencil")
-                }
+                editButton()
+                deleteButton()
             }
         }
         .alert("Delete?", isPresented: $showingDeleteWarning) {
@@ -47,6 +39,22 @@ struct PostView: View {
                 vm.deletePost()
                 presentationMode.wrappedValue.dismiss()
             }
+        }
+    }
+
+    private func deleteButton() -> Button<Image> {
+        Button(action: {
+            showingDeleteWarning.toggle()
+        }) {
+            Image(systemName: "trash")
+        }
+    }
+
+    private func editButton() -> Button<Image> {
+        return Button(action: {
+            isEditting.toggle()
+        }) {
+            Image(systemName: "pencil")
         }
     }
 
