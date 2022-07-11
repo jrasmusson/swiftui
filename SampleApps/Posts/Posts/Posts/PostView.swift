@@ -27,21 +27,21 @@ struct PostView: View {
         }
         .toolbar {
             ToolbarItemGroup(placement: .navigationBarTrailing) {
-                editButton()
-                deleteButton()
+                editToolbarButton()
+                deleteToolbarButton()
             }
         }
-        .alert("Delete?", isPresented: $showDeleteWarning) {
-            OKButton()
-            Button("Cancel") { }
+        .alert("Delete this post?", isPresented: $showDeleteWarning) {
+            Button("Delete", role: .destructive) { }
+            Button("Cancel", role: .cancel) { }
         }
 
     }
 }
 
-// MARK: - Controls
+// MARK: - Toolbar buttons
 extension PostView {
-    private func deleteButton() -> Button<Image> {
+    private func deleteToolbarButton() -> Button<Image> {
         Button(action: {
             showDeleteWarning.toggle()
         }) {
@@ -49,14 +49,17 @@ extension PostView {
         }
     }
 
-    private func editButton() -> Button<Image> {
+    private func editToolbarButton() -> Button<Image> {
         return Button(action: {
             isEditting.toggle()
         }) {
             Image(systemName: "pencil")
         }
     }
+}
 
+// MARK: - Alert buttons
+extension PostView {
     private func OKButton() -> Button<Text> {
         return Button("OK", role: .cancel) {
             let filtered = vm.posts.filter { $0.title != post.title }
