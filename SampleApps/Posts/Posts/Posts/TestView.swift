@@ -7,39 +7,22 @@
 
 import SwiftUI
 
-//struct TestView: View {
-//    @State private var showingAlert = false
-//
-//    var body: some View {
-//        Button("Show Alert") {
-//            showingAlert = true
-//        }
-//        .alert("Important message", isPresented: $showingAlert) {
-//            Button("First") { }
-//            Button("Second") { }
-//            Button("Third") { }
-//        }
-//    }
-//}
-
-struct TestView: View {
+struct ContentView: View {
     @State private var showingAlert = false
+    @State var post: Post
 
     var body: some View {
-        NavigationStack {
-            Text("Hi")
+        Button("Show Alert") {
+            showingAlert = true
         }
-        .toolbar {
-            Button(action: {
-                showingAlert = true
-            }) {
-                Image(systemName: "plus")
+        .alert("Delete this post?", isPresented: $showingAlert, presenting: post) { post in
+            Button(role: .destructive) {
+            } label: {
+                Text("Delete")
             }
-        }
-        .alert("Important message", isPresented: $showingAlert) {
-            Button("First") { }
-            Button("Second") { }
-            Button("Third") { }
+            Button("Cancel", role: .cancel) {}
+        } message: { post in
+            Text("Deleting this post will permanently remove \(post.title) from our server.")
         }
     }
 }
@@ -47,7 +30,7 @@ struct TestView: View {
 struct TestView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
-            TestView()
+            ContentView(post: post1)
         }
     }
 }

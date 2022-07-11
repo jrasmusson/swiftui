@@ -31,24 +31,23 @@ struct PostView: View {
                 deleteToolbarButton()
             }
         }
-        //        .alert("Delete this post?", isPresented: $showDeleteWarning) {
-        //            Button("Delete", role: .destructive) { }
-        //            Button("Cancel", role: .cancel) { }
-        //        }
         .alert("Delete this post?", isPresented: $showDeleteWarning, presenting: post) { post in
             Button(role: .destructive) {
-                // Handle delete action.
+                deletePost()
+                dismiss()
             } label: {
-                Text("""
-                        Delete \(post.title)
-                        """)
+                Text("Delete")
             }
-            Button("Cancel", role: .cancel) {
-                // handle retry action.
-            }
+            Button("Cancel", role: .cancel) {}
         } message: { post in
-            Text("Message")
+            Text("Deleting this post will permanently remove \(post.title) from our server.")
         }
+    }
+
+    private func deletePost() {
+        let filtered = vm.posts.filter { $0.title != post.title }
+        vm.posts = filtered
+        vm.deletePost(post.id)
     }
 }
 

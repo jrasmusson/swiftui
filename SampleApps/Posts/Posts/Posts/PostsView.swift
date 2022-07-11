@@ -38,7 +38,7 @@ extension PostsView {
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
+struct PostsView_Previews: PreviewProvider {
     static var previews: some View {
         PostsView(vm: PostViewModel())
             .preferredColorScheme(.dark)
