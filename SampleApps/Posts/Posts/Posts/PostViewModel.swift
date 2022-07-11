@@ -133,8 +133,9 @@ extension PostViewModel {
         task.resume()
     }
 
-    func deletePost() {
-        let url = URL(string: "https://fierce-retreat-36855.herokuapp.com/posts/1")!
+    func deletePost(_ id: String) {
+        guard let id = Int(id) else { return }
+        let url = URL(string: "https://fierce-retreat-36855.herokuapp.com/posts/\(id - 1)")!
         var request = URLRequest(url: url)
         request.httpMethod = "DELETE"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")

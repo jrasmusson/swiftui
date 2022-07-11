@@ -23,13 +23,11 @@ struct PostView: View {
                 EditPost(vm: vm, post: post, isEditting: $isEditting)
             } else {
                 ReadPost(post: post)
-                    .onTapGesture {
-                        isEditting.toggle()
-                    }
             }
         }
         .toolbar {
             ToolbarItemGroup(placement: .navigationBarTrailing) {
+                editButton()
                 deleteButton()
             }
         }
@@ -49,11 +47,19 @@ extension PostView {
         }
     }
 
+    private func editButton() -> Button<Image> {
+        return Button(action: {
+            isEditting.toggle()
+        }) {
+            Image(systemName: "pencil")
+        }
+    }
+
     private func cancelButton() -> Button<Text> {
         return Button("OK", role: .cancel) {
             let filtered = vm.posts.filter { $0.title != post.title }
             vm.posts = filtered
-            vm.deletePost()
+            vm.deletePost(post.id)
             dismiss()
         }
     }
@@ -61,6 +67,8 @@ extension PostView {
 
 struct PostView_Previews: PreviewProvider {
     static var previews: some View {
-        PostView(vm: PostViewModel(), post: post1)
+        NavigationStack {
+            PostView(vm: PostViewModel(), post: post1)
+        }
     }
 }
