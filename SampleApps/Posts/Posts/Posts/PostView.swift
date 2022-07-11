@@ -32,8 +32,10 @@ struct PostView: View {
             }
         }
         .alert("Delete?", isPresented: $showDeleteWarning) {
-            cancelButton()
+            OKButton()
+            Button("Cancel") { }
         }
+
     }
 }
 
@@ -55,7 +57,7 @@ extension PostView {
         }
     }
 
-    private func cancelButton() -> Button<Text> {
+    private func OKButton() -> Button<Text> {
         return Button("OK", role: .cancel) {
             let filtered = vm.posts.filter { $0.title != post.title }
             vm.posts = filtered
