@@ -35,7 +35,7 @@ struct PostView: View {
         //            Button("Delete", role: .destructive) { }
         //            Button("Cancel", role: .cancel) { }
         //        }
-        .alert("Title", isPresented: $showDeleteWarning, presenting: post) { post in
+        .alert("Delete this post?", isPresented: $showDeleteWarning, presenting: post) { post in
             Button(role: .destructive) {
                 // Handle delete action.
             } label: {
