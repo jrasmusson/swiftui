@@ -12,7 +12,7 @@ struct PostView: View {
 
     @StateObject var vm: PostViewModel
 
-    @State var showingDeleteWarning = false
+    @State var showDeleteWarning = false
     @State var isEditting = false
     @State var newTitle = ""
     @State var post: Post
@@ -31,7 +31,7 @@ struct PostView: View {
                 deleteButton()
             }
         }
-        .alert("Delete?", isPresented: $showingDeleteWarning) {
+        .alert("Delete?", isPresented: $showDeleteWarning) {
             cancelButton()
         }
     }
@@ -41,7 +41,7 @@ struct PostView: View {
 extension PostView {
     private func deleteButton() -> Button<Image> {
         Button(action: {
-            showingDeleteWarning.toggle()
+            showDeleteWarning.toggle()
         }) {
             Image(systemName: "trash")
         }
