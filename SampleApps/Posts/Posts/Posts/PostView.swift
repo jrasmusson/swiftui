@@ -31,11 +31,24 @@ struct PostView: View {
                 deleteToolbarButton()
             }
         }
-        .alert("Delete this post?", isPresented: $showDeleteWarning) {
-            Button("Delete", role: .destructive) { }
-            Button("Cancel", role: .cancel) { }
+        //        .alert("Delete this post?", isPresented: $showDeleteWarning) {
+        //            Button("Delete", role: .destructive) { }
+        //            Button("Cancel", role: .cancel) { }
+        //        }
+        .alert("Title", isPresented: $showDeleteWarning, presenting: post) { post in
+            Button(role: .destructive) {
+                // Handle delete action.
+            } label: {
+                Text("""
+                        Delete \(post.title)
+                        """)
+            }
+            Button("Cancel", role: .cancel) {
+                // handle retry action.
+            }
+        } message: { post in
+            Text("Message")
         }
-
     }
 }
 
