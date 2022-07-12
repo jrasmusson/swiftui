@@ -86,10 +86,8 @@ extension PostViewModel {
         let request = makeRequest(with: url, httpMethod: "POST")
 
         let task = URLSession.shared.uploadTask(with: request, from: uploadData) { data, response, error in
-            if let error = error {
-                print ("error: \(error)")
-                return
-            }
+            if self.hasError(error) { return }
+
             guard let response = response as? HTTPURLResponse,
                 (200...299).contains(response.statusCode) else {
                 print ("server error")
@@ -113,15 +111,14 @@ extension PostViewModel {
         let request = makeRequest(with: url, httpMethod: "PUT")
 
         let task = URLSession.shared.uploadTask(with: request, from: uploadData) { data, response, error in
-            if let error = error {
-                print ("error: \(error)")
-                return
-            }
+            if self.hasError(error) { return }
+
             guard let response = response as? HTTPURLResponse,
                 (200...299).contains(response.statusCode) else {
                 print ("server error")
                 return
             }
+
             if let mimeType = response.mimeType,
                 mimeType == "application/json",
                 let data = data,
@@ -138,10 +135,8 @@ extension PostViewModel {
         let request = makeRequest(with: url, httpMethod: "DELETE")
 
         URLSession.shared.dataTask(with: request) { data, response, error in
-            if let error = error {
-                print ("error: \(error)")
-                return
-            }
+            if self.hasError(error) { return }
+            
             guard let response = response as? HTTPURLResponse,
                 (200...299).contains(response.statusCode) else {
                 print ("server error")
@@ -162,6 +157,14 @@ extension PostViewModel {
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
 
         return request
+    }
+
+    private func hasError(_ error: Error?) -> Bool {
+        if let error = error {
+            print ("error: \(error)")
+            return true
+        }
+        return false
     }
 
     func showError(_ message: String) {
