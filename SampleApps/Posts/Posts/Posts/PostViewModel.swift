@@ -83,9 +83,7 @@ extension PostViewModel {
         }
 
         let url = URL(string: urlString)!
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        let request = makeRequest(with: url, httpMethod: "POST")
 
         let task = URLSession.shared.uploadTask(with: request, from: uploadData) { data, response, error in
             if let error = error {
@@ -105,6 +103,14 @@ extension PostViewModel {
             }
         }
         task.resume()
+    }
+
+    private func makeRequest(with url: URL, httpMethod: String) -> URLRequest {
+        var request = URLRequest(url: url)
+        request.httpMethod = httpMethod
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+
+        return request
     }
 
     func updatePost(_ post: Post) {
