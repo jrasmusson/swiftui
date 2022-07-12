@@ -21,6 +21,7 @@ struct AddPost: View {
             }
             .padding()
         }
+        .navigationTitle("Create new post")
     }
 }
 

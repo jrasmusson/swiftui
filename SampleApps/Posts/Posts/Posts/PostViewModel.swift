@@ -22,7 +22,10 @@ let post1 = Post(id: "1", title: "title1")
 class PostViewModel: ObservableObject {
     @Published var posts = [post1]
     @Published var showingError = false
+
+    let urlString = "https://fierce-retreat-36855.herokuapp.com/posts"
     var errorMessage = ""
+
 
     func updateModel(_ newPost: Post) {
         let possibleUpdateIndex = posts.firstIndex { $0.id == newPost.id }
@@ -35,7 +38,7 @@ class PostViewModel: ObservableObject {
 extension PostViewModel {
     func fetchPosts() async {
         let fetchTask = Task { () -> [Post] in
-            let url = URL(string: "https://fierce-retreat-36855.herokuapp.com/posts")!
+            let url = URL(string: urlString)!
             let data: Data
             let urlResponse: URLResponse
 
@@ -79,7 +82,7 @@ extension PostViewModel {
             return
         }
 
-        let url = URL(string: "https://fierce-retreat-36855.herokuapp.com/posts")!
+        let url = URL(string: urlString)!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -108,7 +111,7 @@ extension PostViewModel {
         guard let uploadData = try? JSONEncoder().encode(post) else { return }
         guard let id = Int(post.id) else { return }
 
-        let url = URL(string: "https://fierce-retreat-36855.herokuapp.com/posts/\(id - 1)")!
+        let url = URL(string: "\(urlString)/\(id - 1)")!
         var request = URLRequest(url: url)
         request.httpMethod = "PUT"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -135,7 +138,7 @@ extension PostViewModel {
 
     func deletePost(_ id: String) {
         guard let id = Int(id) else { return }
-        let url = URL(string: "https://fierce-retreat-36855.herokuapp.com/posts/\(id - 1)")!
+        let url = URL(string: "\(urlString)/\(id - 1)")!
         var request = URLRequest(url: url)
         request.httpMethod = "DELETE"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
