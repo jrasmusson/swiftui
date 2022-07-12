@@ -87,18 +87,8 @@ extension PostViewModel {
 
         let task = URLSession.shared.uploadTask(with: request, from: uploadData) { data, response, error in
             if self.hasError(error) { return }
-
-            guard let response = response as? HTTPURLResponse,
-                (200...299).contains(response.statusCode) else {
-                print ("server error")
-                return
-            }
-            if let mimeType = response.mimeType,
-                mimeType == "application/json",
-                let data = data,
-                let dataString = String(data: data, encoding: .utf8) {
-                print ("got data: \(dataString)")
-            }
+            if self.hasServerError(response) { return }
+            self.printJSON(response, data)
         }
         task.resume()
     }
@@ -112,19 +102,8 @@ extension PostViewModel {
 
         let task = URLSession.shared.uploadTask(with: request, from: uploadData) { data, response, error in
             if self.hasError(error) { return }
-
-            guard let response = response as? HTTPURLResponse,
-                (200...299).contains(response.statusCode) else {
-                print ("server error")
-                return
-            }
-
-            if let mimeType = response.mimeType,
-                mimeType == "application/json",
-                let data = data,
-                let dataString = String(data: data, encoding: .utf8) {
-                print ("got data: \(dataString)")
-            }
+            if self.hasServerError(response) { return }
+            self.printJSON(response, data)
         }
         task.resume()
     }
@@ -136,18 +115,8 @@ extension PostViewModel {
 
         URLSession.shared.dataTask(with: request) { data, response, error in
             if self.hasError(error) { return }
-            
-            guard let response = response as? HTTPURLResponse,
-                (200...299).contains(response.statusCode) else {
-                print ("server error")
-                return
-            }
-            if let mimeType = response.mimeType,
-                mimeType == "application/json",
-                let data = data,
-                let dataString = String(data: data, encoding: .utf8) {
-                print ("got data: \(dataString)")
-            }
+            if self.hasServerError(response) { return }
+            self.printJSON(response, data)
         }.resume()
     }
 
@@ -165,6 +134,25 @@ extension PostViewModel {
             return true
         }
         return false
+    }
+
+    private func hasServerError(_ response: URLResponse?) -> Bool {
+        guard let response = response as? HTTPURLResponse,
+            (200...299).contains(response.statusCode) else {
+            print ("server error")
+            return true
+        }
+        return false
+    }
+
+    private func printJSON( _ response: URLResponse?, _ data: Data?) {
+        guard let response = response as? HTTPURLResponse else { return }
+        if let mimeType = response.mimeType,
+            mimeType == "application/json",
+            let data = data,
+            let dataString = String(data: data, encoding: .utf8) {
+            print ("got data: \(dataString)")
+        }
     }
 
     func showError(_ message: String) {
