@@ -105,22 +105,12 @@ extension PostViewModel {
         task.resume()
     }
 
-    private func makeRequest(with url: URL, httpMethod: String) -> URLRequest {
-        var request = URLRequest(url: url)
-        request.httpMethod = httpMethod
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-
-        return request
-    }
-
     func updatePost(_ post: Post) {
         guard let uploadData = try? JSONEncoder().encode(post) else { return }
         guard let id = Int(post.id) else { return }
 
         let url = URL(string: "\(urlString)/\(id - 1)")!
-        var request = URLRequest(url: url)
-        request.httpMethod = "PUT"
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        let request = makeRequest(with: url, httpMethod: "PUT")
 
         let task = URLSession.shared.uploadTask(with: request, from: uploadData) { data, response, error in
             if let error = error {
@@ -145,9 +135,7 @@ extension PostViewModel {
     func deletePost(_ id: String) {
         guard let id = Int(id) else { return }
         let url = URL(string: "\(urlString)/\(id - 1)")!
-        var request = URLRequest(url: url)
-        request.httpMethod = "DELETE"
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        let request = makeRequest(with: url, httpMethod: "DELETE")
 
         URLSession.shared.dataTask(with: request) { data, response, error in
             if let error = error {
@@ -166,6 +154,14 @@ extension PostViewModel {
                 print ("got data: \(dataString)")
             }
         }.resume()
+    }
+
+    private func makeRequest(with url: URL, httpMethod: String) -> URLRequest {
+        var request = URLRequest(url: url)
+        request.httpMethod = httpMethod
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+
+        return request
     }
 
     func showError(_ message: String) {
