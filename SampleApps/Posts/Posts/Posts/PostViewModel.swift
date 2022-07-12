@@ -67,9 +67,9 @@ extension PostViewModel {
             self.posts = try result.get()
             self.showingError = false
         } catch NetworkError.networkFailed {
-            showError("Unable to fetch the quotes.")
+            showError("Unable to fetch the posts.")
         } catch NetworkError.decodeFailed {
-            showError("Unable to convert quotes to text.")
+            showError("Unable to convert posts to text.")
         } catch NetworkError.invalidResponse {
             showError("Invalid HTTP response.")
         } catch {
@@ -78,17 +78,20 @@ extension PostViewModel {
     }
 
     func savePost(_ post: Post) {
-        guard let uploadData = try? JSONEncoder().encode(post) else {
-            return
-        }
+        guard let uploadData = try? JSONEncoder().encode(post) else { return }
 
         let url = URL(string: urlString)!
         let request = makeRequest(with: url, httpMethod: "POST")
 
         let task = URLSession.shared.uploadTask(with: request, from: uploadData) { data, response, error in
-            if self.hasError(error) { return }
-            if self.hasServerError(response) { return }
-            self.printJSON(response, data)
+            DispatchQueue.main.async {
+                if self.hasError(error) || self.hasServerError(response) {
+                    self.showError("Unable to save post.")
+                    return
+                }
+
+                self.printJSON(response, data)
+            }
         }
         task.resume()
     }
@@ -101,9 +104,14 @@ extension PostViewModel {
         let request = makeRequest(with: url, httpMethod: "PUT")
 
         let task = URLSession.shared.uploadTask(with: request, from: uploadData) { data, response, error in
-            if self.hasError(error) { return }
-            if self.hasServerError(response) { return }
-            self.printJSON(response, data)
+            DispatchQueue.main.async {
+                if self.hasError(error) || self.hasServerError(response) {
+                    self.showError("Unable to save post.")
+                    return
+                }
+
+                self.printJSON(response, data)
+            }
         }
         task.resume()
     }
@@ -114,9 +122,14 @@ extension PostViewModel {
         let request = makeRequest(with: url, httpMethod: "DELETE")
 
         URLSession.shared.dataTask(with: request) { data, response, error in
-            if self.hasError(error) { return }
-            if self.hasServerError(response) { return }
-            self.printJSON(response, data)
+            DispatchQueue.main.async {
+                if self.hasError(error) || self.hasServerError(response) {
+                    self.showError("Unable to save post.")
+                    return
+                }
+
+                self.printJSON(response, data)
+            }
         }.resume()
     }
 
