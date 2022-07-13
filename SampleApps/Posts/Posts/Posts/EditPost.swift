@@ -12,8 +12,6 @@ struct EditPost: View {
     @StateObject var vm: PostViewModel
     @State var newTitle = ""
     @State var post: Post
-    @State var draft = Post.default
-
     @Binding var isEditting: Bool
 
     var body: some View {
