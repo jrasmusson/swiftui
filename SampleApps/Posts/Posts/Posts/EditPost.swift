@@ -22,6 +22,8 @@ struct EditPost: View {
                 .buttonStyle(.bordered)
             Spacer()
         }
+        .navigationTitle("Edit")
+        .navigationBarTitleDisplayMode(.inline)
     }
 
     func update() {
@@ -38,6 +40,8 @@ struct EditPost_Previews: PreviewProvider {
     @State private var isEditting: Bool = false
 
     static var previews: some View {
-        EditPost(vm: PostViewModel(), post: post1, isEditting: .constant(false))
+        NavigationStack {
+            EditPost(vm: PostViewModel(), post: post1, isEditting: .constant(false))
+        }
     }
 }

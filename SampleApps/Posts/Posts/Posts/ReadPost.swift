@@ -18,11 +18,15 @@ struct ReadPost: View {
             }
             Spacer()
         }
+        .navigationTitle("Read")
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 
 struct ReadPost_Previews: PreviewProvider {
     static var previews: some View {
-        ReadPost(post: post1)
+        NavigationStack {
+            ReadPost(post: post1)
+        }.preferredColorScheme(.dark)
     }
 }
