@@ -87,5 +87,6 @@ struct PostView_Previews: PreviewProvider {
         NavigationStack {
             PostView(vm: PostViewModel(), post: post1)
         }
+        .preferredColorScheme(.dark)
     }
 }

@@ -15,7 +15,7 @@ struct AddPost: View {
             }
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    addButton()
+                    saveButton()
                 }
                 ToolbarItem(placement: .navigationBarLeading) {
                     cancelButton()
@@ -25,15 +25,15 @@ struct AddPost: View {
                 Button("OK", role: .cancel) { }
             }
             .padding()
+            .navigationTitle("Create new post")
+            .navigationBarTitleDisplayMode(.inline)
         }
-        .navigationTitle("Create new post")
-        .navigationBarTitleDisplayMode(.inline)
     }
 }
 
 // MARK: - Controls
 extension AddPost {
-    private func addButton() -> Button<Text> {
+    private func saveButton() -> Button<Text> {
         return Button(action: {
             if !title.isEmpty {
                 let post = Post(id: nextId, title: title)
@@ -44,7 +44,7 @@ extension AddPost {
             }
             dismiss()
         }) {
-            Text("Add")
+            Text("Save")
         }
     }
 
@@ -57,6 +57,9 @@ extension AddPost {
 
 struct AddPost_Previews: PreviewProvider {
     static var previews: some View {
-        AddPost(vm: PostViewModel(), nextId: "")
+        NavigationStack {
+            AddPost(vm: PostViewModel(), nextId: "")
+                .preferredColorScheme(.dark)
+        }
     }
 }
