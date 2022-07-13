@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct AddPost: View {
-    @Environment(\.presentationMode) var presentationMode
+    @Environment(\.dismiss) private var dismiss
     @StateObject var vm: PostViewModel
     @State var title = ""
 
@@ -18,7 +18,7 @@ struct AddPost: View {
                     addButton()
                 }
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Button("Cancel") {}
+                    cancelButton()
                 }
             }
             .alert(vm.errorMessage, isPresented: $vm.showingError) {
@@ -42,9 +42,15 @@ extension AddPost {
             } else {
                 vm.showError("Title and body can't be empty.")
             }
-            presentationMode.wrappedValue.dismiss()
+            dismiss()
         }) {
             Text("Add")
+        }
+    }
+
+    private func cancelButton() -> Button<Text> {
+        return Button("Cancel") {
+            dismiss()
         }
     }
 }
