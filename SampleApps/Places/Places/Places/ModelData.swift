@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 let appColor = Color(red: 128/255, green: 165/255, blue: 117/255)
 

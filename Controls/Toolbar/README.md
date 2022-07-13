@@ -122,29 +122,39 @@ struct ContentView_Previews: PreviewProvider {
 }
 ```
 
-## Multi Placement
-
-![](images/3.png)
+## Full screen take over
 
 ```swift
+struct ParentView: View {
+    .fullScreenCover(isPresented: $showingAddItinerary) {
+        AddItineraryView()
+    }
+}
+
 struct AddItineraryView: View {
     var body: some View {
-        Text("Hello, World!")
+        NavigationStack {
             .toolbar {
-                ToolbarItemGroup(placement: .bottomBar) {
-                    Button("First") {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button("Add") {
+                        print("Trailing")
+                    }
+                }
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button("Cancel") {
                         print("Pressed")
                     }
-
-                    Button("Second") {
-                        print("Pressed")
-                    }
-                    Spacer()
                 }
             }
+            .navigationTitle("New Itinerary")
+            .navigationBarTitleDisplayMode(.inline)
+        }
     }
 }
 ```
+
+![](images/3a.png)
+
 
 ### Links that help
 

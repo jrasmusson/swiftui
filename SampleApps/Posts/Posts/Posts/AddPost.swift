@@ -14,7 +14,12 @@ struct AddPost: View {
                 Spacer()
             }
             .toolbar {
-                saveButton()
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    addButton()
+                }
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button("Cancel") {}
+                }
             }
             .alert(vm.errorMessage, isPresented: $vm.showingError) {
                 Button("OK", role: .cancel) { }
@@ -22,12 +27,13 @@ struct AddPost: View {
             .padding()
         }
         .navigationTitle("Create new post")
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 
 // MARK: - Controls
 extension AddPost {
-    private func saveButton() -> Button<Text> {
+    private func addButton() -> Button<Text> {
         return Button(action: {
             if !title.isEmpty {
                 let post = Post(id: nextId, title: title)
@@ -38,7 +44,7 @@ extension AddPost {
             }
             presentationMode.wrappedValue.dismiss()
         }) {
-            Text("Save")
+            Text("Add")
         }
     }
 }

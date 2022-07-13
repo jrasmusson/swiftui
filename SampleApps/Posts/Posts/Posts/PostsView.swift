@@ -16,7 +16,7 @@ struct PostsView: View {
                 PostView(vm: vm, post: post)
             }
             .toolbar { addButton() }
-            .sheet(isPresented: $showingAddPost) {
+            .fullScreenCover(isPresented: $showingAddPost) {
                 AddPost(vm: vm, nextId: String(vm.posts.count + 1))
             }
             .alert(vm.errorMessage, isPresented: $vm.showingError) {

@@ -17,20 +17,20 @@ struct AddItineraryView: View {
                     .frame(width: .infinity, height: 200)
                 Spacer()
             }
-                .toolbar {
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        Button("Add") {
-                            print("Trailing")
-                        }.foregroundColor(appColor)
-                    }
-                    ToolbarItem(placement: .navigationBarLeading) {
-                        Button("Cancel") {
-                            print("Pressed")
-                        }.foregroundColor(appColor)
-                    }
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button("Add") {
+                        print("Trailing")
+                    }.foregroundColor(appColor)
                 }
-                .navigationTitle("New Itinerary")
-                .navigationBarTitleDisplayMode(.inline)
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button("Cancel") {
+                        print("Pressed")
+                    }.foregroundColor(appColor)
+                }
+            }
+            .navigationTitle("New Itinerary")
+            .navigationBarTitleDisplayMode(.inline)
         }
     }
 }
