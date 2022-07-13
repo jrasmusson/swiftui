@@ -12,16 +12,24 @@ struct EditPost: View {
     @StateObject var vm: PostViewModel
     @State var newTitle = ""
     @State var post: Post
+    @State var draft = Post.default
 
     @Binding var isEditting: Bool
 
     var body: some View {
         VStack(alignment: .leading) {
-            TextField(post.title, text: $newTitle)
-            Button("Save", action: update)
-                .buttonStyle(.bordered)
+            HStack {
+                Text("Title:")
+                TextField(post.title, text: $newTitle)
+            }
+            HStack {
+                Button("Save", action: update)
+                Button("Cancel", action: cancel)
+            }
             Spacer()
+
         }
+        .buttonStyle(.bordered)
         .navigationTitle("Edit")
         .navigationBarTitleDisplayMode(.inline)
     }
@@ -34,6 +42,10 @@ struct EditPost: View {
         isEditting = false
         dismiss()
     }
+
+    func cancel() {
+        isEditting = false
+    }
 }
 
 struct EditPost_Previews: PreviewProvider {
@@ -43,5 +55,6 @@ struct EditPost_Previews: PreviewProvider {
         NavigationStack {
             EditPost(vm: PostViewModel(), post: post1, isEditting: .constant(false))
         }
+        .preferredColorScheme(.dark)
     }
 }

@@ -13,7 +13,9 @@ struct ReadPost: View {
     var body: some View {
         VStack(alignment: .leading) {
             HStack {
+                Text("Title:")
                 Text(post.title)
+                    .foregroundColor(.gray)
                 Spacer()
             }
             Spacer()

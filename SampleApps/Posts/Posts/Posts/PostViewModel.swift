@@ -14,6 +14,8 @@ enum NetworkError: Error {
 struct Post: Hashable, Identifiable, Codable {
     var id: String
     let title: String
+
+    static let `default` = Post(id: "NA", title: "Default")
 }
 
 let post1 = Post(id: "1", title: "title1")
