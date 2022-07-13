@@ -39,13 +39,13 @@ struct AddPost: View {
 extension AddPost {
     private func saveButton() -> Button<Text> {
         return Button(action: {
-            if !title.isEmpty {
+            if title.isEmpty {
+                showError("Title can't be empty.")
+            } else {
                 let post = Post(id: nextId, title: title)
                 vm.posts.append(post)
                 vm.savePost(post)
                 dismiss()
-            } else {
-                showError("Title can't be empty.")
             }
         }) {
             Text("Save")
