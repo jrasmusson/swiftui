@@ -38,6 +38,7 @@ struct EditPost: View {
         } else {
             let newPost = Post(id: post.id, title: newTitle)
             post = newPost
+            vm.updateModel(newPost)
             vm.updatePost(newPost)
             isEditting = false
             dismiss()

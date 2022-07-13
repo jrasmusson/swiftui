@@ -7,12 +7,6 @@
 
 import Foundation
 
-enum Runtime {
-    case development, production
-}
-
-let runtime: Runtime = .production
-
 struct Post: Hashable, Identifiable, Codable {
     var id: String
     let title: String
@@ -105,9 +99,6 @@ extension PostViewModel {
     }
 
     func updatePost(_ post: Post) {
-        updateModel(post)
-        if runtime == .development { return }
-
         guard let uploadData = try? JSONEncoder().encode(post) else { return }
         guard let id = Int(post.id) else { return }
 
