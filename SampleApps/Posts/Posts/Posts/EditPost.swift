@@ -21,7 +21,7 @@ struct EditPost: View {
                 TextField(post.title, text: $newTitle)
             }
             HStack {
-                Button("Save", action: update)
+                Button("Save", action: save)
                 Button("Cancel", action: cancel)
             }
             Spacer()
@@ -32,7 +32,9 @@ struct EditPost: View {
         .navigationBarTitleDisplayMode(.inline)
     }
 
-    func update() {
+    func save() {
+        // display alert if error
+//        if newTitle.isEmpty 
         let newPost = Post(id: post.id, title: newTitle)
         post = newPost
         vm.updateModel(newPost)
