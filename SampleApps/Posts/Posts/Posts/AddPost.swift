@@ -5,6 +5,10 @@ struct AddPost: View {
     @StateObject var vm: PostViewModel
     @State var title = ""
 
+    // Errors
+    @State var showingError = false
+    @State var errorMessage = ""
+
     var nextId: String
 
     var body: some View {
@@ -21,7 +25,7 @@ struct AddPost: View {
                     cancelButton()
                 }
             }
-            .alert(vm.errorMessage, isPresented: $vm.showingError) {
+            .alert(errorMessage, isPresented: $showingError) {
                 Button("OK", role: .cancel) { }
             }
             .padding()
@@ -39,10 +43,10 @@ extension AddPost {
                 let post = Post(id: nextId, title: title)
                 vm.posts.append(post)
                 vm.savePost(post)
+                dismiss()
             } else {
-                vm.showError("Title and body can't be empty.")
+                showError("Title can't be empty.")
             }
-            dismiss()
         }) {
             Text("Save")
         }
@@ -52,6 +56,11 @@ extension AddPost {
         return Button("Cancel") {
             dismiss()
         }
+    }
+
+    func showError(_ message: String) {
+        showingError = true
+        errorMessage = message
     }
 }
 
