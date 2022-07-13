@@ -42,13 +42,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		7156C6EE287F4AAD00F685A4 /* EditMode */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = EditMode;
-			sourceTree = "<group>";
-		};
 		7160EEA628771601007C575E = {
 			isa = PBXGroup;
 			children = (
@@ -72,8 +65,7 @@
 				719D560428771774006E49D3 /* PostViewModel.swift */,
 				7160EEB228771601007C575E /* PostsApp.swift */,
 				7160EEB428771601007C575E /* PostsView.swift */,
-				71619DD7287B15540020C054 /* NonEditMode */,
-				7156C6EE287F4AAD00F685A4 /* EditMode */,
+				71619DD7287B15540020C054 /* Post */,
 			);
 			path = Posts;
 			sourceTree = "<group>";
@@ -86,7 +78,7 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		71619DD7287B15540020C054 /* NonEditMode */ = {
+		71619DD7287B15540020C054 /* Post */ = {
 			isa = PBXGroup;
 			children = (
 				719D560628771922006E49D3 /* PostView.swift */,
@@ -94,7 +86,7 @@
 				71619DD8287B22780020C054 /* EditPost.swift */,
 				71B622122878542600B7AEAC /* AddPost.swift */,
 			);
-			name = NonEditMode;
+			name = Post;
 			sourceTree = "<group>";
 		};
 		719D560328771753006E49D3 /* Files */ = {

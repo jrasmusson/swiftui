@@ -4,6 +4,10 @@ struct PostsView: View {
     @StateObject var vm: PostViewModel
     @State var showingAddPost = false
 
+    //
+    @State var showingPost = false
+    //
+
     var body: some View {
         NavigationStack {
             List(vm.posts) { post in

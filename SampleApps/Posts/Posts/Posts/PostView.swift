@@ -9,7 +9,6 @@ import SwiftUI
 
 struct PostView: View {
     @Environment(\.dismiss) private var dismiss
-
     @StateObject var vm: PostViewModel
 
     @State var showDeleteWarning = false

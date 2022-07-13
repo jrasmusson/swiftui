@@ -1713,4 +1713,23 @@ Then use the `onAppear` `onDisappear` to load the profile to edit and save the c
 
 ![](images/62.png)
 
+### Discussion
+
+This style of editting works best with full screen sheet take overs:
+
+```swift
+.sheet(isPresented: $showingProfile) {
+    ProfileHost()
+        .environmentObject(modelData)
+}
+```
+
+![](images/63.png)
+
+You need the navigation space at the top to dynamically alter which buttons appear, and it doesn't work when combined with `NavigationLink`:
+
+![](images/64.png)
+
+Here you are competing with the `navBar` for real-estate and it just gets messing. Best to use another paradigm here.
+
 
