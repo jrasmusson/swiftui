@@ -7,9 +7,11 @@
 
 import Foundation
 
-enum NetworkError: Error {
-    case networkFailed, invalidResponse, decodeFailed
+enum Runtime {
+    case development, production
 }
+
+let runtime: Runtime = .production
 
 struct Post: Hashable, Identifiable, Codable {
     var id: String
@@ -17,8 +19,6 @@ struct Post: Hashable, Identifiable, Codable {
 
     static let `default` = Post(id: "NA", title: "Default")
 }
-
-let post1 = Post(id: "1", title: "title1")
 
 @MainActor
 class PostViewModel: ObservableObject {
@@ -28,7 +28,6 @@ class PostViewModel: ObservableObject {
     let urlString = "https://fierce-retreat-36855.herokuapp.com/posts"
     var errorMessage = ""
 
-
     func updateModel(_ newPost: Post) {
         let possibleUpdateIndex = posts.firstIndex { $0.id == newPost.id }
         guard let updateIndex = possibleUpdateIndex else { return }
@@ -36,7 +35,14 @@ class PostViewModel: ObservableObject {
     }
 }
 
+// MARK: - Development
+let post1 = Post(id: "1", title: "title1")
+
 // MARK: - Networking
+enum NetworkError: Error {
+    case networkFailed, invalidResponse, decodeFailed
+}
+
 extension PostViewModel {
     func fetchPosts() async {
         let fetchTask = Task { () -> [Post] in
@@ -99,6 +105,9 @@ extension PostViewModel {
     }
 
     func updatePost(_ post: Post) {
+        updateModel(post)
+        if runtime == .development { return }
+
         guard let uploadData = try? JSONEncoder().encode(post) else { return }
         guard let id = Int(post.id) else { return }
 

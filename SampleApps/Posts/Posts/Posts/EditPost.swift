@@ -33,13 +33,11 @@ struct EditPost: View {
     }
 
     func save() {
-        // display alert if error
         if newTitle.isEmpty {
             vm.showError("Title can not be empty")
         } else {
             let newPost = Post(id: post.id, title: newTitle)
             post = newPost
-            vm.updateModel(newPost)
             vm.updatePost(newPost)
             isEditting = false
             dismiss()
