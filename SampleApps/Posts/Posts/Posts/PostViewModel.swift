@@ -49,7 +49,7 @@ class PostViewModel: ObservableObject {
     }
 }
 
-// MARK: - Development
+// MARK: - Inmemory
 let post1 = Post(id: "1", title: "title1")
 
 // MARK: - Networking
