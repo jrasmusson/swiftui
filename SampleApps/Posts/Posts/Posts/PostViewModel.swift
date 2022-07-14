@@ -54,7 +54,7 @@ let post1 = Post(id: "1", title: "title1")
 
 // MARK: - Networking
 enum NetworkError: Error {
-    case networkFailed, invalidResponse, decodeFailed
+    case networkFailed, badStatusCode, decodeFailed
 }
 
 extension PostViewModel {
@@ -79,7 +79,7 @@ extension PostViewModel {
                     }
                 }
                 else {
-                    throw NetworkError.invalidResponse
+                    throw NetworkError.badStatusCode
                 }
             } catch {
                 throw NetworkError.networkFailed
@@ -95,7 +95,7 @@ extension PostViewModel {
             showError("Unable to fetch the posts.")
         } catch NetworkError.decodeFailed {
             showError("Unable to convert posts to text.")
-        } catch NetworkError.invalidResponse {
+        } catch NetworkError.badStatusCode {
             showError("Invalid HTTP response.")
         } catch {
             showError("Unknown error.")
