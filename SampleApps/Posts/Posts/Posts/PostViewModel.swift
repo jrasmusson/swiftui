@@ -102,16 +102,16 @@ extension PostViewModel {
         }
     }
 
-    func savePost(_ newPost: Post) {
+    func savePost(_ newPost: Post) async {
         switch runtime {
         case .inmemory:
             saveModel(newPost)
         case .network:
-            saveNetwork(newPost)
+            await saveNetwork(newPost)
         }
     }
 
-    func saveNetwork(_ newPost: Post) {
+    func saveNetwork(_ newPost: Post) async {
         guard let uploadData = try? JSONEncoder().encode(newPost) else { return }
 
         let url = URL(string: urlString)!

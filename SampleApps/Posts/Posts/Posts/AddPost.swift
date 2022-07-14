@@ -42,9 +42,12 @@ extension AddPost {
             if title.isEmpty {
                 showError("Title can't be empty.")
             } else {
-                let post = Post(id: nextId, title: title)
-                vm.savePost(post)
-                dismiss()
+                Task {
+                    let post = Post(id: nextId, title: title)
+                    await vm.savePost(post)
+                    await vm.fetchPosts()
+                    dismiss()
+                }
             }
         }) {
             Text("Save")
