@@ -93,28 +93,47 @@ extension PostViewModel {
         case .inmemory:
             saveModel(newPost)
         case .network:
-            await saveNetwork(newPost)
+            do {
+                try await saveNetwork(newPost)
+            } catch NetworkError.invalidServerResponse {
+                showError("Invalid HTTP response.")
+            } catch {
+                showError("Unknown error.")
+            }
         }
     }
 
-    func saveNetwork(_ newPost: Post) async {
-        guard let uploadData = try? JSONEncoder().encode(newPost) else { return }
+    func saveNetwork(_ post: Post) async throws {
+        guard let uploadData = try? JSONEncoder().encode(post) else { return }
 
         let url = URL(string: urlString)!
         let request = makeRequest(with: url, httpMethod: "POST")
 
-        let task = URLSession.shared.uploadTask(with: request, from: uploadData) { data, response, error in
-            DispatchQueue.main.async {
-                if self.hasError(error) || self.hasServerError(response) {
-                    self.showError("Unable to save post.")
-                    return
-                }
+        let (_, response) = try await URLSession.shared.upload(for: request, from: uploadData)
 
-                self.printJSON(data, response)
-            }
+        guard (response as? HTTPURLResponse)?.statusCode == 200 /* or Created 201 */ else {
+            throw NetworkError.invalidServerResponse
         }
-        task.resume()
     }
+
+//    func saveNetwork(_ newPost: Post) async {
+//        guard let uploadData = try? JSONEncoder().encode(newPost) else { return }
+//
+//        let url = URL(string: urlString)!
+//        let request = makeRequest(with: url, httpMethod: "POST")
+//
+//        let task = URLSession.shared.uploadTask(with: request, from: uploadData) { data, response, error in
+//            DispatchQueue.main.async {
+//                if self.hasError(error) || self.hasServerError(response) {
+//                    self.showError("Unable to save post.")
+//                    return
+//                }
+//
+//                self.printJSON(data, response)
+//            }
+//        }
+//        task.resume()
+//    }
 
     func updatePost(_ post: Post) async {
         switch runtime {
@@ -171,6 +190,7 @@ extension PostViewModel {
         }.resume()
     }
 
+    // TODO: Delete me
     private func makeRequest(with url: URL, httpMethod: String) -> URLRequest {
         var request = URLRequest(url: url)
         request.httpMethod = httpMethod
