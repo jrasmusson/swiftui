@@ -38,11 +38,9 @@ class PostViewModel: ObservableObject {
     }
 
     func deleteModel(_ id: String) {
-        let possibleDeleteIndex = posts.firstIndex { $0.id == newPost.id }
+        let possibleDeleteIndex = posts.firstIndex { $0.id == id }
         guard let deleteIndex = possibleDeleteIndex else { return }
-
-        guard let id = Int(id) else { return }
-        posts.remove(at: id - 1)
+        posts.remove(at: deleteIndex)
     }
 
     func showError(_ message: String) {
