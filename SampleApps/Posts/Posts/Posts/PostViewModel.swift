@@ -54,7 +54,7 @@ let post1 = Post(id: "1", title: "title1")
 
 // MARK: - Networking
 enum NetworkError: Error {
-    case networkFailed, statusCodeFailed, decodeFailed
+    case networkFailed, invalidServerResponse, decodeFailed
 }
 
 extension PostViewModel {
@@ -62,37 +62,30 @@ extension PostViewModel {
     func fetchPosts() async {
         if runtime == .inmemory { return }
 
-        let fetchTask = Task { () -> [Post] in
-            let url = URL(string: urlString)!
-
-            do {
-                let (data, response) = try await URLSession.shared.data(from: url)
-                guard (response as? HTTPURLResponse)?.statusCode == 200 else { throw NetworkError.statusCodeFailed }
-
-                if let companies = try JSONDecoder().decode([Post].self, from: data) {
-                    return companies
-                } else {
-                    throw NetworkError.decodeFailed
-                }
-            } catch {
-                throw NetworkError.networkFailed
-            }
-        }
-
-        let result = await fetchTask.result
-
         do {
-            self.posts = try result.get()
-            self.showingError = false
-        } catch NetworkError.networkFailed {
-            showError("Unable to fetch the posts.")
+            posts = try await fetchNetwork()
+        } catch NetworkError.invalidServerResponse {
+            showError("Invalid HTTP response.")
         } catch NetworkError.decodeFailed {
             showError("Unable to convert posts to text.")
-        } catch NetworkError.statusCodeFailed {
-            showError("Invalid HTTP response.")
         } catch {
             showError("Unknown error.")
         }
+    }
+
+    func fetchNetwork() async throws -> [Post] {
+        let url = URL(string: urlString)!
+        let (data, response) = try await URLSession.shared.data(from: url)
+
+        guard (response as? HTTPURLResponse)?.statusCode == 200 else {
+            throw NetworkError.invalidServerResponse
+        }
+
+        guard let posts = try? JSONDecoder().decode([Post].self, from: data) else {
+            throw NetworkError.decodeFailed
+        }
+
+        return posts
     }
 
     func savePost(_ newPost: Post) async {
