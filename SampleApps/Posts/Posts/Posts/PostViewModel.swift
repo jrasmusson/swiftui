@@ -77,7 +77,7 @@ extension PostViewModel {
         let url = URL(string: urlString)!
         let (data, response) = try await URLSession.shared.data(from: url)
 
-        guard (response as? HTTPURLResponse)?.statusCode == 200 else {
+        guard (response as? HTTPURLResponse)?.statusCode == 200 /* OK */ else {
             throw NetworkError.invalidServerResponse
         }
 
@@ -110,39 +110,39 @@ extension PostViewModel {
                     return
                 }
 
-                self.printJSON(response, data)
+                self.printJSON(data, response)
             }
         }
         task.resume()
     }
 
-    func updatePost(_ post: Post) {
+    func updatePost(_ post: Post) async {
         switch runtime {
         case .inmemory:
             updateModel(post)
         case .network:
-            updateNetwork(post)
+            do {
+                try await updateNetwork(post)
+            } catch NetworkError.invalidServerResponse {
+                showError("Invalid HTTP response.")
+            } catch {
+                showError("Unknown error.")
+            }
         }
     }
 
-    func updateNetwork(_ post: Post) {
-        guard let uploadData = try? JSONEncoder().encode(post) else { return }
+    func updateNetwork(_ post: Post) async throws {
         guard let id = Int(post.id) else { return }
+        guard let uploadData = try? JSONEncoder().encode(post) else { return }
 
         let url = URL(string: "\(urlString)/\(id - 1)")!
         let request = makeRequest(with: url, httpMethod: "PUT")
 
-        let task = URLSession.shared.uploadTask(with: request, from: uploadData) { data, response, error in
-            DispatchQueue.main.async {
-                if self.hasError(error) || self.hasServerError(response) {
-                    self.showError("Unable to save post.")
-                    return
-                }
+        let (_, response) = try await URLSession.shared.upload(for: request, from: uploadData)
 
-                self.printJSON(response, data)
-            }
+        guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
+            throw NetworkError.invalidServerResponse
         }
-        task.resume()
     }
 
     func deletePost(_ id: String) {
@@ -166,7 +166,7 @@ extension PostViewModel {
                     return
                 }
 
-                self.printJSON(response, data)
+                self.printJSON(data, response)
             }
         }.resume()
     }
@@ -196,7 +196,7 @@ extension PostViewModel {
         return false
     }
 
-    private func printJSON( _ response: URLResponse?, _ data: Data?) {
+    private func printJSON(_ data: Data?, _ response: URLResponse?) {
         guard let response = response as? HTTPURLResponse else { return }
         if let mimeType = response.mimeType,
             mimeType == "application/json",

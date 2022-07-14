@@ -37,10 +37,12 @@ struct EditPost: View {
         if newTitle.isEmpty {
             vm.showError("Title can not be empty")
         } else {
-            let newPost = Post(id: post.id, title: newTitle)
-            vm.updatePost(newPost)
-            isEditting = false
-            dismiss()
+            Task {
+                let newPost = Post(id: post.id, title: newTitle)
+                await vm.updatePost(newPost)
+                isEditting = false
+                dismiss()
+            }
         }
     }
 
