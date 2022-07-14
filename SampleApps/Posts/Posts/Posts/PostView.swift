@@ -44,9 +44,12 @@ struct PostView: View {
     }
 
     private func deletePost() {
-        let filtered = vm.posts.filter { $0.title != post.title }
-        vm.posts = filtered
-        vm.deletePost(post.id)
+        // network
+//        let filtered = vm.posts.filter { $0.title != post.title }
+//        vm.posts = filtered
+//        vm.deletePost(post.id)
+        // inmemory
+        vm.deleteModel(post.id)
     }
 }
 
@@ -65,18 +68,6 @@ extension PostView {
             isEditting.toggle()
         }) {
             Image(systemName: "pencil")
-        }
-    }
-}
-
-// MARK: - Alert buttons
-extension PostView {
-    private func OKButton() -> Button<Text> {
-        return Button("OK", role: .cancel) {
-            let filtered = vm.posts.filter { $0.title != post.title }
-            vm.posts = filtered
-            vm.deletePost(post.id)
-            dismiss()
         }
     }
 }

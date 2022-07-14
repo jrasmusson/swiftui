@@ -22,10 +22,24 @@ class PostViewModel: ObservableObject {
     let urlString = "https://fierce-retreat-36855.herokuapp.com/posts"
     var errorMessage = ""
 
+    func saveModel(_ newPost: Post) {
+        posts.append(newPost)
+    }
+
     func updateModel(_ newPost: Post) {
         let possibleUpdateIndex = posts.firstIndex { $0.id == newPost.id }
         guard let updateIndex = possibleUpdateIndex else { return }
         posts[updateIndex] = newPost
+    }
+
+    func deleteModel(_ id: String) {
+        guard let id = Int(id) else { return }
+        posts.remove(at: id - 1)
+    }
+
+    func showError(_ message: String) {
+        self.showingError = true
+        self.errorMessage = message
     }
 }
 
@@ -168,10 +182,5 @@ extension PostViewModel {
             let dataString = String(data: data, encoding: .utf8) {
             print ("got data: \(dataString)")
         }
-    }
-
-    func showError(_ message: String) {
-        self.showingError = true
-        self.errorMessage = message
     }
 }

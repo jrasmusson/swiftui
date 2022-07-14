@@ -4,10 +4,6 @@ struct PostsView: View {
     @StateObject var vm: PostViewModel
     @State var showingAddPost = false
 
-    //
-    @State var showingPost = false
-    //
-
     var body: some View {
         NavigationStack {
             List(vm.posts) { post in
@@ -26,7 +22,9 @@ struct PostsView: View {
             .alert(vm.errorMessage, isPresented: $vm.showingError) {
                 Button("OK", role: .cancel) { }
             }
-            .task { await vm.fetchPosts() }
+            .task {
+//                await vm.fetchPosts()
+            }
         }
     }
 }

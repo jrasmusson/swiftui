@@ -43,8 +43,8 @@ extension AddPost {
                 showError("Title can't be empty.")
             } else {
                 let post = Post(id: nextId, title: title)
-                vm.posts.append(post)
-                vm.savePost(post)
+                vm.saveModel(post)
+//                vm.savePost(post)
                 dismiss()
             }
         }) {

@@ -20,6 +20,7 @@ struct ReadPost: View {
             }
             Spacer()
         }
+        .padding()
         .navigationTitle("Read")
         .navigationBarTitleDisplayMode(.inline)
     }

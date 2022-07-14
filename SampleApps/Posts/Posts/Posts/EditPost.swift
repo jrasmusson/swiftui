@@ -27,6 +27,7 @@ struct EditPost: View {
             Spacer()
 
         }
+        .padding()
         .buttonStyle(.bordered)
         .navigationTitle("Edit")
         .navigationBarTitleDisplayMode(.inline)
@@ -36,10 +37,13 @@ struct EditPost: View {
         if newTitle.isEmpty {
             vm.showError("Title can not be empty")
         } else {
+
             let newPost = Post(id: post.id, title: newTitle)
             post = newPost
+            // Network
+//            vm.updatePost(newPost)
+            // Inmemory
             vm.updateModel(newPost)
-            vm.updatePost(newPost)
             isEditting = false
             dismiss()
         }
