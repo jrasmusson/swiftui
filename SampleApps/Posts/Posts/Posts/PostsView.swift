@@ -2,29 +2,57 @@ import SwiftUI
 
 struct PostsView: View {
     @StateObject var vm: PostViewModel
-    @State var showingAddPost = false
+    @State var isLoading = false
+    @State var showAddPost = false
 
     var body: some View {
-        NavigationStack {
-            List(vm.posts) { post in
-                NavigationLink(value: post) {
-                    Text(post.title)
+        ZStack {
+            NavigationStack {
+                List(vm.posts) { post in
+                    NavigationLink(value: post) {
+                        Text(post.title)
+                    }
+                }
+                .navigationTitle("Posts")
+                .navigationDestination(for: Post.self) { post in
+                    PostView(vm: vm, post: post)
+                }
+                .toolbar { addButton() }
+                .fullScreenCover(isPresented: $showAddPost) {
+                    AddPost(vm: vm, nextId: String(vm.posts.count + 1))
+                }
+                .alert(vm.errorMessage, isPresented: $vm.showingError) {
+                    Button("OK", role: .cancel) { }
+                }
+                .task {
+                    startFakeNetworkCall()
+                    await vm.fetchPosts()
                 }
             }
-            .navigationTitle("Posts")
-            .navigationDestination(for: Post.self) { post in
-                PostView(vm: vm, post: post)
+            if isLoading {
+                LoadingView()
             }
-            .toolbar { addButton() }
-            .fullScreenCover(isPresented: $showingAddPost) {
-                AddPost(vm: vm, nextId: String(vm.posts.count + 1))
-            }
-            .alert(vm.errorMessage, isPresented: $vm.showingError) {
-                Button("OK", role: .cancel) { }
-            }
-            .task {
-                await vm.fetchPosts()
-            }
+        }
+    }
+
+    func startFakeNetworkCall() {
+        isLoading = true
+        // try await Task.sleep(until: .now + .seconds(2), clock: .continuous)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            isLoading = false
+        }
+    }
+}
+
+struct LoadingView: View {
+    var body: some View {
+        ZStack {
+            Color(.systemBackground)
+                .ignoresSafeArea()
+                .opacity(0.8)
+            ProgressView()
+                .progressViewStyle(.circular)
+                .scaleEffect(3)
         }
     }
 }
@@ -33,7 +61,7 @@ struct PostsView: View {
 extension PostsView {
     private func addButton() -> Button<Image> {
         return Button(action: {
-            showingAddPost.toggle()
+            showAddPost.toggle()
         }) {
             Image(systemName: "plus")
         }
