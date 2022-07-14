@@ -54,7 +54,7 @@ let post1 = Post(id: "1", title: "title1")
 
 // MARK: - Networking
 enum NetworkError: Error {
-    case networkFailed, badStatusCode, decodeFailed
+    case networkFailed, statusCodeFailed, decodeFailed
 }
 
 extension PostViewModel {
@@ -64,22 +64,15 @@ extension PostViewModel {
 
         let fetchTask = Task { () -> [Post] in
             let url = URL(string: urlString)!
-            let data: Data
-            let urlResponse: URLResponse
 
             do {
-                (data, urlResponse) = try await URLSession.shared.data(from: url)
-                guard let response = urlResponse as? HTTPURLResponse else { return [Post]() }
+                let (data, response) = try await URLSession.shared.data(from: url)
+                guard (response as? HTTPURLResponse)?.statusCode == 200 else { throw NetworkError.statusCodeFailed }
 
-                if response.statusCode == 200 {
-                    if let companies = try JSONDecoder().decode([Post].self, from: data) {
-                        return companies
-                    } else {
-                        throw NetworkError.decodeFailed
-                    }
-                }
-                else {
-                    throw NetworkError.badStatusCode
+                if let companies = try JSONDecoder().decode([Post].self, from: data) {
+                    return companies
+                } else {
+                    throw NetworkError.decodeFailed
                 }
             } catch {
                 throw NetworkError.networkFailed
@@ -95,7 +88,7 @@ extension PostViewModel {
             showError("Unable to fetch the posts.")
         } catch NetworkError.decodeFailed {
             showError("Unable to convert posts to text.")
-        } catch NetworkError.badStatusCode {
+        } catch NetworkError.statusCodeFailed {
             showError("Invalid HTTP response.")
         } catch {
             showError("Unknown error.")
