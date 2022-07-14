@@ -107,7 +107,8 @@ extension PostViewModel {
         guard let uploadData = try? JSONEncoder().encode(post) else { return }
 
         let url = URL(string: urlString)!
-        let request = makeRequest(with: url, httpMethod: "POST")
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
 
         let (_, response) = try await URLSession.shared.upload(for: request, from: uploadData)
 
@@ -115,25 +116,6 @@ extension PostViewModel {
             throw NetworkError.invalidServerResponse
         }
     }
-
-//    func saveNetwork(_ newPost: Post) async {
-//        guard let uploadData = try? JSONEncoder().encode(newPost) else { return }
-//
-//        let url = URL(string: urlString)!
-//        let request = makeRequest(with: url, httpMethod: "POST")
-//
-//        let task = URLSession.shared.uploadTask(with: request, from: uploadData) { data, response, error in
-//            DispatchQueue.main.async {
-//                if self.hasError(error) || self.hasServerError(response) {
-//                    self.showError("Unable to save post.")
-//                    return
-//                }
-//
-//                self.printJSON(data, response)
-//            }
-//        }
-//        task.resume()
-//    }
 
     func updatePost(_ post: Post) async {
         switch runtime {
@@ -155,7 +137,8 @@ extension PostViewModel {
         guard let uploadData = try? JSONEncoder().encode(post) else { return }
 
         let url = URL(string: "\(urlString)/\(id - 1)")!
-        let request = makeRequest(with: url, httpMethod: "PUT")
+        var request = URLRequest(url: url)
+        request.httpMethod = "PUT"
 
         let (_, response) = try await URLSession.shared.upload(for: request, from: uploadData)
 
@@ -176,7 +159,8 @@ extension PostViewModel {
     func deleteNetwork(_ id: String) {
         guard let id = Int(id) else { return }
         let url = URL(string: "\(urlString)/\(id - 1)")!
-        let request = makeRequest(with: url, httpMethod: "DELETE")
+        var request = URLRequest(url: url)
+        request.httpMethod = "DELETE"
 
         URLSession.shared.dataTask(with: request) { data, response, error in
             DispatchQueue.main.async {
@@ -188,15 +172,6 @@ extension PostViewModel {
                 self.printJSON(data, response)
             }
         }.resume()
-    }
-
-    // TODO: Delete me
-    private func makeRequest(with url: URL, httpMethod: String) -> URLRequest {
-        var request = URLRequest(url: url)
-        request.httpMethod = httpMethod
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-
-        return request
     }
 
     private func hasError(_ error: Error?) -> Bool {
