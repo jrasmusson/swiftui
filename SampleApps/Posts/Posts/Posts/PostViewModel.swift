@@ -7,7 +7,7 @@
 
 import Foundation
 
-let runtime: Runtime = .inmemory
+let runtime: Runtime = .network
 
 enum Runtime {
     case inmemory
