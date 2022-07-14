@@ -169,7 +169,7 @@ extension PostViewModel {
         var request = URLRequest(url: url)
         request.httpMethod = "DELETE"
 
-        let (_, response) = try await URLSession.shared.data(from: url)
+        let (_, response) = try await URLSession.shared.data(for: request)
 
         guard (response as? HTTPURLResponse)?.statusCode == 200 /* OK */ else {
             throw NetworkError.invalidServerResponse
