@@ -147,32 +147,52 @@ extension PostViewModel {
         }
     }
 
-    func deletePost(_ id: String) {
+    func deletePost(_ id: String) async {
         switch runtime {
         case .inmemory:
             deleteModel(id)
         case .network:
-            deleteNetwork(id)
+            do {
+                try await deleteNetwork(id)
+            } catch NetworkError.invalidServerResponse {
+                showError("Invalid HTTP response.")
+            } catch {
+                showError("Unknown error.")
+            }
         }
     }
 
-    func deleteNetwork(_ id: String) {
+    func deleteNetwork(_ id: String) async throws {
         guard let id = Int(id) else { return }
         let url = URL(string: "\(urlString)/\(id - 1)")!
+
         var request = URLRequest(url: url)
         request.httpMethod = "DELETE"
 
-        URLSession.shared.dataTask(with: request) { data, response, error in
-            DispatchQueue.main.async {
-                if self.hasError(error) || self.hasServerError(response) {
-                    self.showError("Unable to save post.")
-                    return
-                }
+        let (_, response) = try await URLSession.shared.data(from: url)
 
-                self.printJSON(data, response)
-            }
-        }.resume()
+        guard (response as? HTTPURLResponse)?.statusCode == 200 /* OK */ else {
+            throw NetworkError.invalidServerResponse
+        }
     }
+
+//    func deleteNetwork(_ id: String) {
+//        guard let id = Int(id) else { return }
+//        let url = URL(string: "\(urlString)/\(id - 1)")!
+//        var request = URLRequest(url: url)
+//        request.httpMethod = "DELETE"
+//
+//        URLSession.shared.dataTask(with: request) { data, response, error in
+//            DispatchQueue.main.async {
+//                if self.hasError(error) || self.hasServerError(response) {
+//                    self.showError("Unable to save post.")
+//                    return
+//                }
+//
+//                self.printJSON(data, response)
+//            }
+//        }.resume()
+//    }
 
     private func hasError(_ error: Error?) -> Bool {
         if let error = error {

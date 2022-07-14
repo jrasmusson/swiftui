@@ -32,8 +32,10 @@ struct PostView: View {
         }
         .alert("Delete this post?", isPresented: $showDeleteWarning, presenting: post) { post in
             Button(role: .destructive) {
-                deletePost()
-                dismiss()
+                Task {
+                    await vm.deletePost(post.id)
+                    dismiss()
+                }
             } label: {
                 Text("Delete")
             }
@@ -41,10 +43,6 @@ struct PostView: View {
         } message: { post in
             Text("Deleting this post will permanently remove \(post.title) from our server.")
         }
-    }
-
-    private func deletePost() {
-        vm.deletePost(post.id)
     }
 }
 
