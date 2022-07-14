@@ -44,12 +44,7 @@ struct PostView: View {
     }
 
     private func deletePost() {
-        // network
-//        let filtered = vm.posts.filter { $0.title != post.title }
-//        vm.posts = filtered
-//        vm.deletePost(post.id)
-        // inmemory
-        vm.deleteModel(post.id)
+        vm.deletePost(post.id)
     }
 }
 

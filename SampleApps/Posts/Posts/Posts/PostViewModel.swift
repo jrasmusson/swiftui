@@ -7,11 +7,16 @@
 
 import Foundation
 
+let runtime: Runtime = .inmemory
+
+enum Runtime {
+    case inmemory
+    case network
+}
+
 struct Post: Hashable, Identifiable, Codable {
     var id: String
     let title: String
-
-    static let `default` = Post(id: "NA", title: "Default")
 }
 
 @MainActor
@@ -33,6 +38,9 @@ class PostViewModel: ObservableObject {
     }
 
     func deleteModel(_ id: String) {
+        let possibleDeleteIndex = posts.firstIndex { $0.id == newPost.id }
+        guard let deleteIndex = possibleDeleteIndex else { return }
+
         guard let id = Int(id) else { return }
         posts.remove(at: id - 1)
     }
@@ -52,7 +60,10 @@ enum NetworkError: Error {
 }
 
 extension PostViewModel {
+
     func fetchPosts() async {
+        if runtime == .inmemory { return }
+
         let fetchTask = Task { () -> [Post] in
             let url = URL(string: urlString)!
             let data: Data
@@ -93,8 +104,17 @@ extension PostViewModel {
         }
     }
 
-    func savePost(_ post: Post) {
-        guard let uploadData = try? JSONEncoder().encode(post) else { return }
+    func savePost(_ newPost: Post) {
+        switch runtime {
+        case .inmemory:
+            saveModel(newPost)
+        case .network:
+            saveNetwork(newPost)
+        }
+    }
+
+    func saveNetwork(_ newPost: Post) {
+        guard let uploadData = try? JSONEncoder().encode(newPost) else { return }
 
         let url = URL(string: urlString)!
         let request = makeRequest(with: url, httpMethod: "POST")
@@ -113,6 +133,15 @@ extension PostViewModel {
     }
 
     func updatePost(_ post: Post) {
+        switch runtime {
+        case .inmemory:
+            updateModel(post)
+        case .network:
+            updateNetwork(post)
+        }
+    }
+
+    func updateNetwork(_ post: Post) {
         guard let uploadData = try? JSONEncoder().encode(post) else { return }
         guard let id = Int(post.id) else { return }
 
@@ -133,6 +162,15 @@ extension PostViewModel {
     }
 
     func deletePost(_ id: String) {
+        switch runtime {
+        case .inmemory:
+            deleteModel(id)
+        case .network:
+            deleteNetwork(id)
+        }
+    }
+
+    func deleteNetwork(_ id: String) {
         guard let id = Int(id) else { return }
         let url = URL(string: "\(urlString)/\(id - 1)")!
         let request = makeRequest(with: url, httpMethod: "DELETE")

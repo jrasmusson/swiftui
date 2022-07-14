@@ -23,7 +23,7 @@ struct PostsView: View {
                 Button("OK", role: .cancel) { }
             }
             .task {
-//                await vm.fetchPosts()
+                await vm.fetchPosts()
             }
         }
     }
