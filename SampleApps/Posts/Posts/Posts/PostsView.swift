@@ -40,6 +40,12 @@ struct PostsView: View {
         await vm.fetchPosts()
         isLoading = false
     }
+
+    func addButton() -> Button<Image> {
+        Button(action: { showAddPost.toggle() }) {
+            Image(systemName: "plus")
+        }
+    }
 }
 
 struct LoadingView: View {
@@ -51,17 +57,6 @@ struct LoadingView: View {
             ProgressView()
                 .progressViewStyle(.circular)
                 .scaleEffect(3)
-        }
-    }
-}
-
-// MARK: - Controls
-extension PostsView {
-    private func addButton() -> Button<Image> {
-        return Button(action: {
-            showAddPost.toggle()
-        }) {
-            Image(systemName: "plus")
         }
     }
 }
