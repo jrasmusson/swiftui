@@ -25,8 +25,7 @@ struct PostsView: View {
                     Button("OK", role: .cancel) { }
                 }
                 .task {
-                    startFakeNetworkCall()
-                    await vm.fetchPosts()
+                    await fetch()
                 }
             }
             if isLoading {
@@ -35,12 +34,11 @@ struct PostsView: View {
         }
     }
 
-    func startFakeNetworkCall() {
+    func fetch() async {
         isLoading = true
-        // try await Task.sleep(until: .now + .seconds(2), clock: .continuous)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-            isLoading = false
-        }
+        try? await Task.sleep(nanoseconds: 1_000_000_000)
+        await vm.fetchPosts()
+        isLoading = false
     }
 }
 
