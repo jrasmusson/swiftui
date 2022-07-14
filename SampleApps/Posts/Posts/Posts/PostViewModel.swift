@@ -176,24 +176,6 @@ extension PostViewModel {
         }
     }
 
-//    func deleteNetwork(_ id: String) {
-//        guard let id = Int(id) else { return }
-//        let url = URL(string: "\(urlString)/\(id - 1)")!
-//        var request = URLRequest(url: url)
-//        request.httpMethod = "DELETE"
-//
-//        URLSession.shared.dataTask(with: request) { data, response, error in
-//            DispatchQueue.main.async {
-//                if self.hasError(error) || self.hasServerError(response) {
-//                    self.showError("Unable to save post.")
-//                    return
-//                }
-//
-//                self.printJSON(data, response)
-//            }
-//        }.resume()
-//    }
-
     private func hasError(_ error: Error?) -> Bool {
         if let error = error {
             print ("error: \(error)")
