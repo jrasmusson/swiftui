@@ -1,5 +1,58 @@
 # ProgressView
 
+## Circular
+
+![](images/demo1.gif)
+
+```swift
+struct ContentView: View {
+    @State var isLoading = false
+
+    var body: some View {
+        ZStack {
+            Color(.red)
+                .ignoresSafeArea()
+            Text("Example Screen")
+                .bold()
+                .foregroundColor(.white)
+
+            if isLoading {
+                LoadingView()
+            }
+        }
+        .onAppear {
+            startFakeNetworkCall()
+        }
+    }
+
+    func startFakeNetworkCall() {
+        isLoading = true
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            isLoading = false
+        }
+    }
+}
+
+struct LoadingView: View {
+    var body: some View {
+        ZStack {
+            Color(.systemBackground)
+                .ignoresSafeArea()
+                .opacity(0.8)
+            ProgressView()
+                .progressViewStyle(.circular)
+                .scaleEffect(3)
+        }
+    }
+}
+```
+
+
+
+
+
+## Bar
+
 A view that shows the progress towards completion of a task.
 
 ![](images/1.png)
