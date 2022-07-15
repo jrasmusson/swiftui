@@ -176,23 +176,6 @@ extension PostViewModel {
         }
     }
 
-    private func hasError(_ error: Error?) -> Bool {
-        if let error = error {
-            print ("error: \(error)")
-            return true
-        }
-        return false
-    }
-
-    private func hasServerError(_ response: URLResponse?) -> Bool {
-        guard let response = response as? HTTPURLResponse,
-            (200...299).contains(response.statusCode) else {
-            print ("server error")
-            return true
-        }
-        return false
-    }
-
     private func printJSON(_ data: Data?, _ response: URLResponse?) {
         guard let response = response as? HTTPURLResponse else { return }
         if let mimeType = response.mimeType,

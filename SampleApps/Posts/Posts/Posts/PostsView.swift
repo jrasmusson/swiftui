@@ -28,6 +28,7 @@ struct PostsView: View {
                     await fetch()
                 }
             }
+
             if isLoading {
                 LoadingView()
             }

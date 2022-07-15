@@ -12,6 +12,8 @@ struct EditPost: View {
     @StateObject var vm: PostViewModel
     @State var newTitle = ""
     @State var post: Post
+    @State var isSaving = false
+
     @Binding var isEditting: Bool
 
     var body: some View {
@@ -21,7 +23,18 @@ struct EditPost: View {
                 TextField(post.title, text: $newTitle)
             }
             HStack {
-                Button("Save", action: save)
+                Button {
+                    save()
+                } label: {
+                    Text("Save")
+                        .opacity(isSaving ? 0 : 1)
+                        .overlay {
+                            if isSaving {
+                                ProgressView()
+                            }
+                        }
+                }
+                .disabled(isSaving)
                 Button("Cancel", action: cancel)
             }
             Spacer()
@@ -38,8 +51,11 @@ struct EditPost: View {
             vm.showError("Title can not be empty")
         } else {
             Task {
+                isSaving = true
+                try? await Task.sleep(nanoseconds: 1_000_000_000)
                 let newPost = Post(id: post.id, title: newTitle)
                 await vm.updatePost(newPost)
+                isSaving = false
                 isEditting = false
                 dismiss()
             }

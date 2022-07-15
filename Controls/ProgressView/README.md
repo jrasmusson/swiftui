@@ -1,5 +1,38 @@
 # ProgressView
 
+## Saving Button
+
+![](images/demo2.gif)
+
+```swift
+struct EditPost: View {
+    @State var isSaving = false
+
+    var body: some View {
+        Button {
+            save()
+        } label: {
+            Text("Save")
+                .opacity(isSaving ? 0 : 1)
+                .overlay {
+                    if isSaving {
+                        ProgressView()
+                    }
+                }
+        }
+        .disabled(isSaving)
+    }
+
+    func save() {
+        Task {
+            isSaving = true
+            await vm.updatePost(Post(...)
+            isSaving = false
+        }
+    }
+}
+```
+
 ## Circular
 
 ![](images/demo1.gif)
