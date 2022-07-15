@@ -19,7 +19,7 @@ struct PostsView: View {
                 }
                 .toolbar { addButton() }
                 .fullScreenCover(isPresented: $showAddPost) {
-                    AddPost(vm: vm, nextId: String(vm.posts.count + 1))
+                    AddPost(vm: vm, nextId: vm.posts.count + 1)
                 }
                 .alert(vm.errorMessage, isPresented: $vm.showingError) {
                     Button("OK", role: .cancel) { }

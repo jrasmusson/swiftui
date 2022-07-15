@@ -15,7 +15,7 @@ enum Runtime {
 }
 
 struct Post: Hashable, Identifiable, Codable {
-    var id: String
+    var id: Int
     let title: String
 }
 
@@ -24,7 +24,8 @@ class PostViewModel: ObservableObject {
     @Published var posts = [post1]
     @Published var showingError = false
 
-    let urlString = "https://fierce-retreat-36855.herokuapp.com/posts"
+//    let urlString = "https://fierce-retreat-36855.herokuapp.com/posts" // sinatra
+    let urlString = "http://127.0.0.1:3000/posts" // rails
     var errorMessage = ""
 
     func saveModel(_ newPost: Post) {
@@ -37,7 +38,7 @@ class PostViewModel: ObservableObject {
         posts[updateIndex] = newPost
     }
 
-    func deleteModel(_ id: String) {
+    func deleteModel(_ id: Int) {
         let possibleDeleteIndex = posts.firstIndex { $0.id == id }
         guard let deleteIndex = possibleDeleteIndex else { return }
         posts.remove(at: deleteIndex)
@@ -50,11 +51,11 @@ class PostViewModel: ObservableObject {
 }
 
 // MARK: - Inmemory
-let post1 = Post(id: "1", title: "title1")
+let post1 = Post(id: 1, title: "title1")
 
 // MARK: - Networking
 enum NetworkError: Error {
-    case networkFailed, invalidServerResponse, decodeFailed
+    case networkFailed, invalidServerResponse, decodeFailed, encodeFailed
 }
 
 extension PostViewModel {
@@ -74,10 +75,10 @@ extension PostViewModel {
     }
 
     func fetchNetwork() async throws -> [Post] {
-        let url = URL(string: urlString)!
+        let url = URL(string: "http://127.0.0.1:3000/posts.json")!
         let (data, response) = try await URLSession.shared.data(from: url)
 
-        guard (response as? HTTPURLResponse)?.statusCode == 200 /* OK */ else {
+        guard (response as? HTTPURLResponse)?.statusCode == 200 else {
             throw NetworkError.invalidServerResponse
         }
 
@@ -97,6 +98,8 @@ extension PostViewModel {
                 try await saveNetwork(newPost)
             } catch NetworkError.invalidServerResponse {
                 showError("Invalid HTTP response.")
+            } catch NetworkError.encodeFailed {
+                showError("Unable to encode post.")
             } catch {
                 showError("Unknown error.")
             }
@@ -104,15 +107,18 @@ extension PostViewModel {
     }
 
     func saveNetwork(_ post: Post) async throws {
-        guard let uploadData = try? JSONEncoder().encode(post) else { return }
+        guard let uploadData = try? JSONEncoder().encode(post) else {
+            throw NetworkError.encodeFailed
+        }
 
         let url = URL(string: urlString)!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
 
         let (_, response) = try await URLSession.shared.upload(for: request, from: uploadData)
 
-        guard (response as? HTTPURLResponse)?.statusCode == 200 /* or Created 201 */ else {
+        guard (response as? HTTPURLResponse)?.statusCode == 200 else {
             throw NetworkError.invalidServerResponse
         }
     }
@@ -124,30 +130,32 @@ extension PostViewModel {
         case .network:
             do {
                 try await updateNetwork(post)
-            } catch NetworkError.invalidServerResponse {
-                showError("Invalid HTTP response.")
+            } catch NetworkError.encodeFailed {
+                showError("Unable to encode post.")
             } catch {
-                showError("Unknown error.")
+                // OK - Rails too many HTTP redirects
             }
         }
     }
 
     func updateNetwork(_ post: Post) async throws {
-        guard let id = Int(post.id) else { return }
-        guard let uploadData = try? JSONEncoder().encode(post) else { return }
+        guard let uploadData = try? JSONEncoder().encode(post) else {
+            throw NetworkError.encodeFailed
+        }
 
-        let url = URL(string: "\(urlString)/\(id - 1)")!
+        let url = URL(string: "\(urlString)/\(post.id)")!
         var request = URLRequest(url: url)
         request.httpMethod = "PUT"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
 
         let (_, response) = try await URLSession.shared.upload(for: request, from: uploadData)
 
-        guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
+        guard (response as? HTTPURLResponse)?.statusCode == 404 else {
             throw NetworkError.invalidServerResponse
         }
     }
 
-    func deletePost(_ id: String) async {
+    func deletePost(_ id: Int) async {
         switch runtime {
         case .inmemory:
             deleteModel(id)
@@ -162,16 +170,16 @@ extension PostViewModel {
         }
     }
 
-    func deleteNetwork(_ id: String) async throws {
-        guard let id = Int(id) else { return }
-        let url = URL(string: "\(urlString)/\(id - 1)")!
+    func deleteNetwork(_ id: Int) async throws {
+        let url = URL(string: "\(urlString)/\(id)")!
 
         var request = URLRequest(url: url)
         request.httpMethod = "DELETE"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
 
         let (_, response) = try await URLSession.shared.data(for: request)
 
-        guard (response as? HTTPURLResponse)?.statusCode == 200 /* OK */ else {
+        guard (response as? HTTPURLResponse)?.statusCode == 404 else {
             throw NetworkError.invalidServerResponse
         }
     }

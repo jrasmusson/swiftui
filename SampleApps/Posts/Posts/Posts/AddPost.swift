@@ -9,7 +9,7 @@ struct AddPost: View {
     @State var showingError = false
     @State var errorMessage = ""
 
-    var nextId: String
+    var nextId: Int
 
     var body: some View {
         NavigationStack {
@@ -69,7 +69,7 @@ extension AddPost {
 struct AddPost_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
-            AddPost(vm: PostViewModel(), nextId: "")
+            AddPost(vm: PostViewModel(), nextId: 0)
                 .preferredColorScheme(.dark)
         }
     }
