@@ -1,5 +1,20 @@
 # ProgressView
 
+## Pull to refresh
+
+![](images/demo3.gif)
+
+```swift
+List(vm.posts) { post in
+    NavigationLink(value: post) {
+        Text(post.title)
+    }
+}
+.refreshable {
+    Task { await fetch() }
+}
+```
+
 ## Saving Button
 
 ![](images/demo2.gif)

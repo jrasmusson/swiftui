@@ -24,6 +24,9 @@ struct PostsView: View {
                 .alert(vm.errorMessage, isPresented: $vm.showingError) {
                     Button("OK", role: .cancel) { }
                 }
+                .refreshable {
+                    Task { await fetch() }
+                }
                 .task {
                     await fetch()
                 }
