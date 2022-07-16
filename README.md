@@ -95,6 +95,7 @@ SwiftUI by [example](https://www.hackingwithswift.com/quick-start/swiftui).
 
 - [Intro](Animations/Intro/README.md)
 - [Card Flip](Animations/CardFlip/README.md)
+- [Examples](Animations/Examples/README.md)
 
 ## Data Flow 🔁
 - [How it works](Dataflow/HowItWorks/README.md)
