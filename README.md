@@ -19,8 +19,6 @@ Deliberate practice with SwiftUI.
 - [Onboarding](NavigationFlow/Onboarding/README.md)
 
 
-
-
 ## Controls 🕹
 
 ### Text
@@ -93,9 +91,9 @@ SwiftUI by [example](https://www.hackingwithswift.com/quick-start/swiftui).
 
 ## Animations 🍒
 
+- [How do they work?](Animations/HowWorks/README.md)
 - [Intro](Animations/Intro/README.md)
 - [Card Flip](Animations/CardFlip/README.md)
-- [Examples](Animations/Examples/README.md)
 
 ## Data Flow 🔁
 - [How it works](Dataflow/HowItWorks/README.md)
