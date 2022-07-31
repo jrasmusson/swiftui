@@ -2,15 +2,15 @@
 
 Deliberate practice with SwiftUI. 
 
-## New project
+## New project 🖼
 
 - [Load data](HowTo/LoadData/README.md)
 
-## Networking
+## Networking 📲
 
 - [Simple](Networking/Simple/README.md)
 
-## Navigation
+## Navigation ⚓️
 
 - [NavigationStack](Controls/NavigationStack/README.md)
 - [Link](Controls/Link/README.md)
@@ -21,23 +21,19 @@ Deliberate practice with SwiftUI.
 
 ## Controls 🕹
 
-### Text
+### Text 🔤
 
 - [Text](Controls/Text/README.md)
 - [TextField](Controls/TextField/README.md)
 - [SecureField](Controls/SecureField/README.md)
 
-### Images
-
-
-
-### Buttons
+### Buttons ▶️
 
 - [Button](Controls/Button/README.md)
 - [EditButton](Controls/EditButton/README.md)
 - [ConfirmationDialog](Controls/ConfirmationDialog/README.md)
 
-### Containers
+### Containers 🛳
 
 - [Form](Controls/Form/README.md)
 - [Group](Controls/Group/README.md)
@@ -45,7 +41,7 @@ Deliberate practice with SwiftUI.
 - [TabView](Controls/TabView/README.md)
 
 
-### Value Selectors
+### Value Selectors 🎯
 
 - [Toggle](Controls/Toggle/README.md)
 - [Slider](Controls/Slider/README.md)
@@ -54,13 +50,13 @@ Deliberate practice with SwiftUI.
 - [DatePicker](Controls/DatePicker/README.md)
 - [Disclousure Group](Controls/DisclosureGroup/README.md)
 
-### Value Indicators
+### Value Indicators ◎
 
 - [Label](Controls/Label/README.md)
 - [ProgressView](Controls/ProgressView/README.md)
 
 
-### Misc 
+### Misc 🖌
 
 - [Alert](Controls/Alert/README.md)
 - [Image](Controls/Image/README.md)
