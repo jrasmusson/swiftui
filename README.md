@@ -171,7 +171,7 @@ SwiftUI by [example](https://www.hackingwithswift.com/quick-start/swiftui).
 
 ### 2021
 
-- [Discoverable Design](WWDC/2021/DiscoverableDesign/README.md)
+- [Discoverable Design - Toasty](WWDC/2021/DiscoverableDesign/README.md)
 
 ### 2022
 
