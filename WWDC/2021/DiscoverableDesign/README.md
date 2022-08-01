@@ -21,7 +21,7 @@ Except people often skip onboarding altogether.
 Instead let's see if we can create an interface that:
 
 - stands on its own
-- doens't require onboarding/tutorials
+- doesn't require onboarding/tutorials
 
 And instead lets them
 
@@ -29,7 +29,7 @@ And instead lets them
 
 ## Five things to make your app more discoverable
 
-1. Priortize importand features
+1. Priortize important features
 
 2. Provide visual clues
 
