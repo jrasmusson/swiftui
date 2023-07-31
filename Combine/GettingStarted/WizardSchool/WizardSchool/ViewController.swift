@@ -41,7 +41,7 @@ class ViewController: UIViewController {
     }
 
     func usernameAvailable(_ username: String, completion: (Bool) -> Void) {
-        completion(true) // Our fake asynchronous backend service
+        completion(!username.isEmpty) // Our fake asynchronous backend service
     }
 
     var validatedPassword: AnyPublisher<String?, Never> {
